@@ -1,0 +1,126 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[british]{babel}
+\usepackage[nottoc]{tocbibind}
+\usepackage[utf8]{inputenc}
+\usepackage[top=2cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+\usepackage{csquotes}
+\usepackage[colorlinks=true,
+            linkcolor=blue,
+            urlcolor=blue,
+            citecolor=black]{hyperref}
+
+\begin{document}
+
+\begin{center}
+\Large \textbf{Project Plan for Degree Projects} \\
+\large \textbf{Department of Computer Science}
+\end{center}
+
+\section*{General Information}
+\begin{tabular} {|p{3.8cm}|p{10.3cm}|} \hline
+Title: & Evaluation of improvement measures of DNS privacy towards Web filters \\ \hline
+\end{tabular}
+
+\section*{Persons involved}
+\begin{tabular} {|p{3.8cm}|p{10.3cm}|} \hline
+Student: & Songho Lee \href {mailto:songho.lee@posteo.se}{(songho.lee@posteo.se)} \\ \hline
+\end{tabular}
+\\ \vspace*{0.2cm} \\
+\begin{tabular} {|p{3.8cm}|p{10.3cm}|} \hline
+Supervisor: & Ola Flygt \href {mailto:ola.flygt@lnu.se}{(ola.flygt@lnu.se)} \\ \hline
+\end{tabular}
+
+\section*{Background}
+``Pervasive Monitoring is a widespread attack on privacy\cite{rfc7258}.'' Information collected in such action could lead to a breach of users’ privacy, by re-identifying users based on traffic\cite{herrmann2010analyzing}, or could become aids for launching an active form of attacks, such as masquerade and denial of service.
+
+A commonly found practical example of the large scale monitoring is a web filter\cite{murdoch2008tools}. Wazen et. al categorise legacy web-filtering techniques as following: (a) Port-based, (b) DNS, (c) IP Address, (d) Certificate, (e) Payload-based (f) HTTP proxy filtering techniques\cite{shbair2015efficiently}.
+
+Among the various types of filtering techniques mentioned above, methods (a) and (c) are considered less efficient due to changes in the Internet ecosystem in recent decennial;
+Internet firms such as Google, Facebook and Amazon show strong presence\cite{haucap2014google}, and the phenomenon may have reduced the diversity of traffic endpoint's IP addresses.
+Moreover, it has become more common to have web services deployed in cloud environments\cite{clouds2018stat}, and IaaS providers extensively use ``Virtual Host\cite{virtual24host}'', which means various Web servers correspond to the same IP address.
+It also eliminates the need for utilising different ports to co-host services. Thus, port usages are normalised.
+
+Also, another notable change of the Internet is that adoption of HTTPS on the web has increased significantly\cite{felt2017measuring}.
+The change has increased costs of performing technique (e) and brought challenges in payload-based traffic classification \cite{xue2013traffic}.
+Also, it has made (f) less applicable, as a proxy does not directly processes encrypted traffics\cite{shbair2015efficiently}.
+Furthermore, the combination of wide deployment of HTTPS and Virtual Hosting has made technique (e) inefficient, because ``many companies share the same certificate across different services and domain names\cite{shbair2015efficiently}''.
+
+However, the trend change of Internet has not brought additional challenges to Domain Name System (DNS) filtering. Currently, almost all DNS traffic is sent in clear text \cite{rfc7626} over the UDP protocol \cite{tcp2014analysis}, and it makes DNS queries vulnerable to being hijacked and filter users' traffic.
+%The centralised Internet brings more challenges to the traditional form of traffic monitoring. Such as, following by source and destination of IP traffics may not be applicable for many cases anymore, as more servers are co-hosted in diverse IaaS providers.
+
+\section*{Problem formulation}
+S. Bortzmeyer has claimed in RFC 7626, the informational note on DNS privacy\cite{rfc7626}, that particular fields in DNS packet\cite{rfc1035} such as Query name  (QNAME) and Source IP address reveal ``communication relationships''. By enumerating the DNS query process, we identify risks of such information leakage in following places: (1) tapping on the wire, ``between the stub resolvers and the recursive resolvers'', and (2) information leaks in the servers, such as in Recursive resolvers, Authoritative name servers and Rogue recursive resolvers. This project aims to answer the following research questions.
+\\\\
+\begin{tabular} {|p{1.2cm}|p{12.9cm}|} \hline
+  \textbf{RQ1} & What methods exist to enhance DNS Privacy? \\ \hline
+  \textbf{RQ2} & How does DNS Privacy improvement benefit users from being blocked by web filters?\\ \hline
+  \textbf{RQ3} & What would be possible disadvantages or overheads with DNS Privacy enrichment? \\ \hline
+  \end{tabular}
+%Monitoring traffics based on domain queries, however, could be circumvented by securing clients' DNS queries, and one of the methods to secure DNS queries is to use DNS-over-HTTPS (RFC 8484) or DNS-over-TLS (RFC 8310).
+
+
+\section*{Motivation}
+Most of the internet activities begin with DNS query, hence DNS is vital. Notwithstanding the importance of DNS, designers of the current DNS protocol have not taken consideration of ``confidentiality of protocol metadata''. Therefore DNS queries reveal communication flows, and this property of DNS protocol is used in different contexts by different actors. Examples of usages are traffic monitoring for network management or limiting the influence of malicious websites by DNS Footprinting of malware\cite{stoner2010dns}, or detecting malware infections\cite{lemos2013got}.
+
+Other exemplary usages of this property of DNS are nation-state surveillance, privacy-unfriendly activities of commercial sectors\cite{weaver2011redirecting}, and illegal actions by criminals. Surveillance affects individuals to possess stress and anxiety\cite{oulasvirta2012long}, and behavioural changes like self-censorship \cite{rfc6973}. RFC 6973 connotes that Privacy harms involve ``harms to financial standing, reputation, solitude, autonomy, and safety\cite{rfc6973}''.
+
+S. Farrell et al. state in RFC 7258 that allowing monitoring by benevolent actors and defending privacy against nefarious actors do not hold hand in hand, as the actions required to achieve both, regardless of the motivations, are indistinguishable\cite{rfc7258}.
+Disadvantages incurred by lack of DNS privacy significantly overweight advantages, and therefore DNS privacy should be mitigated in any feasible practices.
+
+\section*{Objectives}
+%The project aims to apply one of DNS encryption protocols as described above as a method of securing DNS queries, and test whether it helps bypassing firewall or other traffic monitoring solutions’ web filtering.
+%The ambition is to demonstrate that applying DNS encryption together with currently used HTTPS overcomes web filters. However, in case of not managing it, it is anticipated to analyse which other weakness could be identified.
+
+
+Following objectives are aimed to be achieved by this project.
+\\\\
+\begin{tabular} {|p{1.2cm}|p{12.9cm}|} \hline
+\textbf{O1} & Explore the state of arts in mitigative methods to enhance DNS Privacy \\ \hline
+\textbf{O2} & Verify application of DNS privacy-enhancing methods complicates DNS eavesdropping\\ \hline
+\textbf{O3} & Identify areas which the selected methods could not address. \\ \hline
+\textbf{O4} & Estimate factors that may lead to a load increase on recursive DNS resolvers by improving DNS Privacy.\\ \hline
+\end{tabular}
+
+\section*{Method}
+The project is anticipated to be done in following scientific methods.
+\begin{itemize}
+\item Literature Review
+\item Controlled Experiment
+\end{itemize}
+There is a need for performing a systematic literature review to accomplish \textbf{O1}. As RFC 7626\cite{rfc7626} provides a clear insight of DNS privacy issues and as around four years have passed since its publication, it is anticipated that fellow researchers have tried to solve or list risks identified in the article. Therefore, search criterium is to list articles that cite RFC 7626 from a database Google Scholar. Once articles are identified, these will fall into categories and selected by exclusion criteria.
+%If the results based on the criteria is insufficient, inclusive criteria will be applied using search term such as DNS Privacy and DNS Security will be used. Exclusive criteria must be applied as well to limit the contents of the articles to be relevant to the defined problem. Therefore, any solving other security aspects of DNS, such as availability or integrity will be excluded.
+The expected outcome of \textbf{O1} is a set of measurements to enhance DNS privacy.
+
+\textbf{O2} is accomplished by selecting securing methods that are near or already in practice and reproduce these in a controlled environment. Due to this reason, it may exclude some of the areas from \textbf{O1}. Verification, as defined in \textbf{O2}, is done by Examining DNS query and response packets between stub resolver and recursive resolver, after having applied privacy enhancive methods under the controlled environment. If the time allows, Deep Packet Inspection(DPI) middleware could optionally be deployed in the environment and see results of analysis of the secured DNS query process.
+
+\textbf{O3} is achieved by studying surveys from \textbf{O1} and empirical results from \textbf{O2}. \textbf{O4} is evaluated based on outcome of \textbf{O1} and \textbf{O2}.
+
+\section*{Time plan}
+To achieve the degree project, following milestones have been identified.
+\\
+\begin{tabular} {|p{2.6cm}|p{11.6cm}|} \hline
+\textbf{Date} & \textbf{Milestone} \\ \hline
+2019-Feb-19 & Submit Degree project plan \\ \hline
+2019-Feb-24 & Finish categorising articles from the backward citation search of RFC 7626, solely based on their title and three lines of descriptions (iteration a1)\\ \hline
+2019-Mar-03 & Perform secondary review of the selected articles from the previous step, by examining their abstract, methods and conclusion (iteration a2)\\ \hline
+2019-Mar-07 & Prepare criterium of focus area, as all problems cannot be addressed. \\ \hline
+2019-Mar-10 & Finish describing the refined criterium. \\ \hline
+2019-Mar-13 & Evaluate whether number the articles after exclusion criteria is sufficient to study. \\ \hline
+2019-Mar-17 & Finish briefly reading the articles which match the search criteria. \\ \hline
+2019-Mar-24 & Prepare draft summary of the read papers. \\ \hline
+2019-Mar-27 & If articles are not sufficient, Prepare inclusion criteria (iteration a3). \\ \hline
+2019-Apr-03 & Try out (lightly) solutions that adress confidentiality part of DNS Security\\ \hline
+2019-Apr-17 & Produce a draft of formalised conditions for controlled experiment (iteration b1)\\ \hline
+2019-Apr-21 & Start to investigate Deep Packet Inspection or IPS/Firewall web filtering solultions, if applicable\\ \hline
+2019-Apr-28 & Execute the controlled experiment\\ \hline
+2019-May-05 & Describe DNS Query sequence, prior to any improvement, in the introduction section preferrably using UML sequence diagram.\\ \hline
+2019-May-12 & Stop the experiment, to prepare to make sure I have time to structure the report\\ \hline
+2019-May-15 & Describe open specifications of the chosen methods and allign with sequences\\ \hline
+2019-May-19 & Review language of the report\\ \hline
+2019-May-28 & Submit the Final report\\ \hline
+\end{tabular}
+\newpage
+\bibliographystyle{plain}
+\bibliography{./references}
+
+\end{document}}
