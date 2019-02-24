@@ -176,7 +176,9 @@ Furthermore, the combination of wide deployment of HTTPS and Virtual Hosting has
 However, the trend change of Internet has not brought additional challenges to Domain Name System (DNS) filtering. Currently, almost all DNS traffic is sent in clear text \cite{rfc7626} over the UDP protocol \cite{tcp2014analysis}, and it makes DNS queries vulnerable to being hijacked and filter users' traffic.
 
 \subsection{Related work}
-Here you briefly describe what others have done in the field of study or how others have attempted to explain or solve the same or similar problem as you are investigating. It is okay to refer to tech articles and online blogs and portals, but you must also refer to published articles. To find articles, use the search tools listed \href{https://coursepress.lnu.se/subject/thesis-projects/tools/}{here}.
+The project accredits pioneer researches which has provided thorough evaluation of options to improve DNS Privacy. 
+Patrick Werneck evaluated approaches to improve privacy of DNS and stated limitations of identified approaches\cite{werneck2014dns} in 2014.
+J.H.C. van Heugten evaluated exisiting solutions to ehnance DNS Privacy in 2018 in his study \cite{van2018privacy}. As standariseation of DNS-over-HTTPS is recently finalised\cite{rfc8484}, study from van Heugten reflects more recent changes.
 
 \subsection{Problem formulation}
 S. Bortzmeyer has claimed in RFC 7626, the informational note on DNS privacy\cite{rfc7626}, that particular fields in DNS packet\cite{rfc1035} such as Query name  (QNAME) and Source IP address reveal ``communication relationships''. By enumerating the DNS query process, we identify risks of such information leakage in following places: (1) tapping on the wire, ``between the stub resolvers and the recursive resolvers'', and (2) information leaks in the servers, such as in Recursive resolvers, Authoritative name servers and Rogue recursive resolvers. This project aims to answer the following research questions.
@@ -206,7 +208,7 @@ Present a list of the objectives to do in your project. An objective shall be un
 \end{tabular}\\
 
 \subsection{Scope/Limitation}
-The project has a focus on improving privacy part, utifran other security perspectives. From CIA triad, enhancing Integrity and availability perspective will be less priortised.
+The project has a focus on improving privacy part, from the security perspectives. In other words, reflected to a CIA triad, enhancing Integrity and availability perspective is not priortised in the current project. Issues and challenges of DNS security as whole may be found in other studies, such as one conducted by Ning Hu et. al.\cite{ning2017dnssecurity}. 
 
 You cannot solve everything. Here you describe what you do, and what you don't do, in your project. Limitations can for example be that you only compare some frameworks of all frameworks available on the market, that you only suggest an architecture for a specific software product and not a general architecture, or that you only include university students in a study and not a broader population sample.
 
