@@ -156,24 +156,16 @@ From reading the abstract the reader should clearly understand what the report i
 %----------------------------------------------------------------------------------------
 
 \section{Introduction}
-In this chapter you shall give an introduction to your degree project. It shall start with a broad overview of what your project is all about. Similar to the abstract, the introduction shall make the reader interested in continue reading your report. Don't be too detailed here; there are plenty of opportunities to add details in later chapters.
+This chapter decribes what Doname Name System (DNS) is, and how its legacy design became a privacy threat. 
 
 \subsection{Background}
-``Pervasive Monitoring is a widespread attack on privacy\cite{rfc7258}.'' Information collected in such action could lead to a breach of users’ privacy, by re-identifying users based on traffic\cite{herrmann2010analyzing}, or could become aids for launching an active form of attacks, such as masquerade and denial of service.
+Digital transformation has brought things used to be done in real life decades ago to the online. At work, people have a video conference call instead of a business trip if not necessary. For shopping goods, people fill in credit card numbers for cross-border payments rather than visiting a bank branch to issue paychecks. In other words, the stage where people work now has been shifted to cyberspace in recent decades, and the Internet has become an essential part of the people.
 
-A commonly found practical example of the large scale monitoring is a web filter\cite{murdoch2008tools}. Wazen et. al categorise legacy web-filtering techniques as following: (a) Port-based, (b) DNS, (c) IP Address, (d) Certificate, (e) Payload-based (f) HTTP proxy filtering techniques\cite{shbair2015efficiently}.
+Despite the ubiquitousness of the Internet, users' activities online are under pervasive monitoring by different actors.
+Pervasive Monitoring means ``widespread attack on privacy\cite{rfc7258}.'' Information collected in such action could lead to a breach of users’ privacy, by re-identifying users based on traffic\cite{herrmann2010analyzing}, or could become aids for launching an active form of attacks, such as masquerade and denial of service.
 
-Among the various types of filtering techniques mentioned above, methods (a) and (c) are considered less efficient due to changes in the Internet ecosystem in recent decennial;
-Internet firms such as Google, Facebook and Amazon show strong presence\cite{haucap2014google}, and the phenomenon may have reduced the diversity of traffic endpoint's IP addresses.
-Moreover, it has become more common to have web services deployed in cloud environments\cite{clouds2018stat}, and IaaS providers extensively use ``Virtual Host\cite{virtual24host}'', which means various Web servers correspond to the same IP address.
-It also eliminates the need for utilising different ports to co-host services. Thus, port usages are normalised.
-
-Also, another notable change of the Internet is that adoption of HTTPS on the web has increased significantly\cite{felt2017measuring}.
-The change has increased costs of performing technique (e) and brought challenges in payload-based traffic classification \cite{xue2013traffic}.
-Also, it has made (f) less applicable, as a proxy does not directly processes encrypted traffics\cite{shbair2015efficiently}.
-Furthermore, the combination of wide deployment of HTTPS and Virtual Hosting has made technique (e) inefficient, because ``many companies share the same certificate across different services and domain names\cite{shbair2015efficiently}''.
-
-However, the trend change of Internet has not brought additional challenges to Domain Name System (DNS) filtering. Currently, almost all DNS traffic is sent in clear text \cite{rfc7626} over the UDP protocol \cite{tcp2014analysis}, and it makes DNS queries vulnerable to being hijacked and filter users' traffic.
+\subsubsection{DNS}
+Every activity on the web most likely begins with entering a human-friendly domain name in the web-browser. Once we enter a domain name for visiting a website, DNS resolves the address to an actual Internet Protocol Address of a web server which hosts the website. In case multiple websites are hosted on a single server, the entered fully qualified domain name(FQDN) is used to differentiate virtual hosts on a web server\cite{virtual24host}. Therefore, DNS is a critical component of the Internet.
 
 \subsection{Related work}
 The project accredits pioneer researches which has provided thorough evaluation of options to improve DNS Privacy. 
@@ -219,7 +211,7 @@ The project aims to provide insight on DNS Privacy for Internet users and recurs
 Here you outline which target group that might be interested in your work. If you, for example, do a project about software architectures, a target group can be professional developers and architects that work with similar software systems as the system you investigated.
 
 \subsection{Outline}
-Here you outline the rest of the report. It shall contain which chapters that will follow, and what each of them is about.
+The report follows in IMRaD pattern.
 
 \newpage
 \
@@ -305,11 +297,26 @@ Here you give meaning to and your own opinions of the results. What conclusions 
 \newpage
 	
 \section{Discussion}
-Here you discuss your findings and if your problem has been answered. Think of the project as a feedback loop. You define a problem, find a method of approaching it, conduct the study or experiment, and gather data. The data is then used to answer your problem, thus creating the loop.
+The project intensively examines securing Domain Name queries as a method of enhancing end-users' privacy towards pervasive monitoring.
+A Question may arise why it mainly focuses on securing DNS although there exist other factors which disclose users' privacy.
+To answer the question, let us have an example of a web filter, as it is a commonly found practical example of the large scale monitoring\cite{murdoch2008tools}.
+%As web filters require monitoring of users' traffic to enforce its policy of restrictions, understanding the mechanisms of the web filter suits this context.
 
-You shall also discuss how your findings relate to what others have done in the field of study. Are your results similar to the findings in the related work you described in the Related work section?
+Web filter, also known as content-control software, is software that restricts access to a content that is delivered on the Web.
+Wazen et. al categorise mechanisms of legacy web-filtering into five techniques: (a) Port-based, (b) DNS, (c) IP Address, (d) Certificate, (e) Payload-based (f) HTTP proxy filtering techniques\cite{shbair2015efficiently}.
+Except for the technique based on DNS filtering, the rest methods are regarded as well-mitigated due to recent developments of the web environment. 
 
-This chapter is typically written in the present tense, while the previous chapters typically are written in past tense.
+Among the various types of filtering techniques mentioned above, methods (a) and (c) are considered less efficient due to changes in the Internet ecosystem in recent decennial;
+Internet firms such as Google, Facebook and Amazon show strong presence\cite{haucap2014google}, and the phenomenon may have reduced the diversity of traffic endpoint's IP addresses.
+Moreover, it has become more common to have web services deployed in cloud environments\cite{clouds2018stat}, and IaaS providers extensively use ``Virtual Host\cite{virtual24host}'', which means various Web servers correspond to the same IP address.
+It also eliminates the need for utilising different ports to co-host services. Thus, port usages are normalised.
+
+Also, another notable change of the Internet is that adoption of HTTPS on the web has increased significantly\cite{felt2017measuring}.
+The change has increased costs of performing technique (e) and brought challenges in payload-based traffic classification \cite{xue2013traffic}.
+Also, it has made (f) less applicable, as a proxy does not directly process encrypted traffics\cite{shbair2015efficiently}.
+Furthermore, the combination of wide deployment of HTTPS and Virtual Hosting has made technique (e) inefficient, because ``many companies share the same certificate across different services and domain names\cite{shbair2015efficiently}''.
+
+However, the trend change of Internet has not brought additional challenges to Domain Name System (DNS) filtering. Currently, almost all DNS traffic is sent in clear text \cite{rfc7626} over the UDP protocol \cite{tcp2014analysis}, and it makes DNS queries vulnerable to being hijacked and filter users' traffic. Therefore, the project studies to remedy the weakest point towards users' privacy, which in this case is DNS.
 
 \newpage
 		
