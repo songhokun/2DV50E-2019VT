@@ -36,7 +36,7 @@
 \sectionfont{\fontsize{14}{15}\selectfont}
 \subsectionfont{\fontsize{12}{15}\selectfont}
 \subsubsectionfont{\fontsize{12}{15}\selectfont}
-
+\usepackage{placeins}
 \usepackage{csquotes} % Used to handle citations
 
 \renewcommand{\thetable}{\arabic{section}.\arabic{table}}  
@@ -167,11 +167,76 @@ Pervasive Monitoring means ``widespread attack on privacy\cite{rfc7258}.'' Infor
 \subsubsection{DNS}
 Every activity on the web most likely begins with entering a human-friendly domain name in the web-browser. Once we enter a domain name for visiting a website, DNS resolves the address to an actual Internet Protocol Address of a web server which hosts the website. In case multiple websites are hosted on a single server, the entered fully qualified domain name(FQDN) is used to differentiate virtual hosts on a web server\cite{virtual24host}. Therefore, DNS is a critical component of the Internet.
 
+%Component of DNS
+DNS servers consist of four types: Stub resolver, Recursive resolver, Authoritative server, and Forwarding DNS server. Resolvers refer to programmes that obtain information from name servers upon clients' requests\cite{rfc1034}.
+
+Stub resolver is a resolver that serves as an entry-point of querying DNS from applications and directs search request to the nearest recursive resolver\cite{rfc1123}. As it cannot complete domain name resolution by itself, stub resolver is dependant on a recursive resolver\cite{rfc8499}.
+
+Recursive resolver is 
 \subsection{Related work}
 The project accredits pioneer researches which has provided thorough evaluation of options to improve DNS Privacy. 
 Patrick Werneck evaluated approaches to improve privacy of DNS and stated limitations of identified approaches\cite{werneck2014dns} in 2014.
 J.H.C. van Heugten evaluated exisiting solutions to ehnance DNS Privacy in 2018 in his study \cite{van2018privacy}. As standariseation of DNS-over-HTTPS is recently finalised\cite{rfc8484}, study from van Heugten reflects more recent changes.
 
+\begin{table}[h!]
+    \begin{tabular}{ | l | p{9cm} | l | l | l | }
+        \hline
+            ID & Title & Year & Cites & Category 2 \\ \hline
+            \cite{ambrosin2018security} & Security and privacy analysis of national science foundation future internet architectures & 2018 & 3 & Improvement \\ \hline
+            \cite{ambrosin2016security} & Security and Privacy Analysis of NSF Future Internet Architectures & 2016 & 1 & Overview \\ \hline
+            \cite{grothoff2017gnunet} & The GNUnet System & 2017 & 1 & Invention \\ \hline
+        \end{tabular}
+        \caption{Literatures categorised as Architectural improvement}
+\label{architectures}
+\end{table}
+\begin{table}[h!]
+    \begin{tabular}{ | l | p{9cm} | l | l | l | }
+        \hline
+            ID & Title & Year & Cites & Category 2 \\ \hline
+            \cite{hu2016specification} & Specification for dns over transport layer security (tls) & 2016 & 27 & Improvement \\ \hline
+            \cite{rfc8484} & Dns queries over https (doh) & 2018 & 5 & Improvement \\ \hline
+            \cite{reddy2017dns} & Dns over datagram transport layer security (dtls) & 2017 & 3 & Improvement \\ \hline
+            \cite{bucuti2015opportunistic} & An opportunistic encryption extension for the DNS protocol & 2015 & 2 & Improvement \\ \hline
+            \cite{dickinson2018usage} & Usage profiles for dns over tls and dns over dtls & 2018 & 1 & Improvement \\ \hline
+            \cite{bucuti2014encrypted} & Encrypted DNS & 2014 & 0 & Improvement \\ \hline
+            \cite{saraj2017design} & Design and implementation of a lightweight privacy extension of DNSSEC protocol & 2017 & 0 & Improvement \\ \hline
+            \cite{van2018privacy} & Privacy analysis of DNS resolver solutions & 2018 & 0 & Overview \\ \hline
+            \cite{werneck2014dns} & DNS Privacy & 2014 & 0 & Overview \\ \hline
+        \end{tabular}
+        \caption{Literatures categorised as securing communication channel}
+\label{channel}
+\end{table}
+\begin{table}[h!]
+    \begin{tabular}{ | l | p{9cm} | l | l | l | }
+        \hline
+            ID & Title & Year & Cites & Category 2 \\ \hline
+            \cite{bortzmeyer2016dns} & DNS query name minimisation to improve privacy & 2016 & 33 & Improvement \\ \hline
+            \cite{kintis2016understanding} & Understanding the privacy implications of ecs & 2016 & 8 & In-depth study \\ \hline
+            \cite{mohaisen2018look} & Look-aside At Your Own Risk: Privacy Implications of DNSSEC Look-aside Validation & 2018 & 0 & In-depth study \\ \hline
+            \cite{annee-dprive-oblivious-dns-00} & Oblivious DNS - Strong Privacy for DNS Queries & 2019 & 0 & Improvement \\ \hline
+            \cite{pan2018mitigating} & Mitigating Client Subnet Leakage in DNS Queries & 2018 & 0 & Improvement \\ \hline
+            1 & Enumerating Privacy Leaks in DNS Data Collected above the Recursive & 2018 & 0 & In-depth study \\ \hline
+            \cite{bradshaw2019privacy} & Privacy by Infrastructure: The Unresolved Case of the Domain Name System & 2019 & 0 & Overview \\ \hline
+            \cite{wang2018understanding} & Understanding the Performance and Challenges of DNS Query Name Minimization & 2018 & 0 & In-depth study \\ \hline
+            \cite{werneck2014dns} & DNS Privacy & 2014 & 0 & Overview \\ \hline
+        \end{tabular}
+        \caption{Literatures categorised as securing content}
+\label{content}
+\end{table}
+\begin{table}[h!]
+    \begin{tabular}{ | l | p{9cm} | l | l | l | }
+        \hline
+            ID & Title & Year & Cites & Category 2 \\ \hline
+            \cite{barnes2015confidentiality} & Confidentiality in the face of pervasive surveillance: A threat model and problem statement & 2015 & 18 & Overview \\ \hline
+            \cite{kirchler2016tracked} & Tracked without a trace: linking sessions of users by unsupervised learning of patterns in their DNS traffic & 2016 & 10 & Reidentification \\ \hline
+            \cite{mohaisen2017leakage} & Leakage of. onion at the DNS Root: Measurements, Causes, and Countermeasures & 2017 & 3 & Case study \\ \hline
+            \cite{grothoff2017nsa} & NSA's MORECOWBELL: knell for DNS & 2017 & 3 & Case study \\ \hline
+            \cite{spaulding2018d} & D-FENS: DNS filtering \& extraction network system for malicious domain names & 2018 & 1 & Invention \\ \hline
+            \cite{kelpen2018privacy} & Privacy and Data Protection in the Domain Name System & 2018 & 0 & Overview \\ \hline
+        \end{tabular}
+        \caption{Literatures categorised as demonstrating attack scenarios by exploiting the lack of DNS privacy}
+\end{table}
+\FloatBarrier
 \subsection{Problem formulation}
 S. Bortzmeyer has claimed in RFC 7626, the informational note on DNS privacy\cite{rfc7626}, that particular fields in DNS packet\cite{rfc1035} such as Query name  (QNAME) and Source IP address reveal ``communication relationships''. By enumerating the DNS query process, we identify risks of such information leakage in following places: (1) tapping on the wire, ``between the stub resolvers and the recursive resolvers'', and (2) information leaks in the servers, such as in Recursive resolvers, Authoritative name servers and Rogue recursive resolvers. This project aims to answer the following research questions.
 \\\\
@@ -253,6 +318,8 @@ In some projects you don't develop anything, for example if you do a systematic 
 
 \section{Results}
 In this chapter you show and describe your results. You shall only show the raw results without any analysis, and you shall not put any conclusions or opinions in the description of the results. Try to be as objective as possible. An example of results from an experiment comparing five sorting algorithms is shown in Table \ref{results} below.\\
+
+
 
 \begin{center}
 \begin{table}[ht]
