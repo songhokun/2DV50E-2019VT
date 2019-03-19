@@ -1,0 +1,20 @@
+@startuml
+title DNS Query example
+participant "Stub resolver" as Stub
+participant "Recursive resolver" as Recursive
+participant "[a-m].root-servers.net" as Root
+participant "[a-m].gtld-servers.net" as Tld
+participant "[a-m].ns.se" as se
+participant "ns[1-2].umu.se" as umu
+autonumber
+Stub -> Recursive : QNAME saimei.ftp.acc.umu.se. A
+Recursive -> Root : QNAME saimei.ftp.acc.umu.se. A
+Root -> Recursive : NS [a-m].gtld-servers.net
+Recursive -> Tld : QNAME saimei.ftp.acc.umu.se. A
+Tld -> Recursive : NS [a-m].ns.se
+Recursive -> se : QNAME saimei.ftp.acc.umu.se. A
+se -> Recursive : NS ns[1-2].umu.se
+Recursive -> umu : QNAME saimei.ftp.acc.umu.se. A
+se -> Recursive : 194.71.11.138
+Recursive -> Stub: 194.71.11.138
+@enduml

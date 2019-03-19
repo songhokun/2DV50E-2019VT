@@ -161,18 +161,37 @@ This chapter decribes what Doname Name System (DNS) is, and how its legacy desig
 \subsection{Background}
 Digital transformation has brought things used to be done in real life decades ago to the online. At work, people have a video conference call instead of a business trip if not necessary. For shopping goods, people fill in credit card numbers for cross-border payments rather than visiting a bank branch to issue paychecks. In other words, the stage where people work now has been shifted to cyberspace in recent decades, and the Internet has become an essential part of the people.
 
-Despite the ubiquitousness of the Internet, users' activities online are under pervasive monitoring by different actors.
+Despite the ubiquitousness of the Internet, users' activities online are collected under pervasive monitoring by different actors.
 Pervasive Monitoring means ``widespread attack on privacy\cite{rfc7258}.'' Information collected in such action could lead to a breach of users’ privacy, by re-identifying users based on traffic\cite{herrmann2010analyzing}, or could become aids for launching an active form of attacks, such as masquerade and denial of service.
+Unfortunately, insecure architecture of Domain Name System allows the pervasive monitoring, and thus it should be mitigated. Before discussing the privacy problems of DNS, we introduce DNS and its components which are important to adress.
 
 \subsubsection{DNS}
 Every activity on the web most likely begins with entering a human-friendly domain name in the web-browser. Once we enter a domain name for visiting a website, DNS resolves the address to an actual Internet Protocol Address of a web server which hosts the website. In case multiple websites are hosted on a single server, the entered fully qualified domain name(FQDN) is used to differentiate virtual hosts on a web server\cite{virtual24host}. Therefore, DNS is a critical component of the Internet.
 
-%Component of DNS
+\subsubsection{DNS Servers}
 DNS servers consist of four types: Stub resolver, Recursive resolver, Authoritative server, and Forwarding DNS server. Resolvers refer to programmes that obtain information from name servers upon clients' requests\cite{rfc1034}.
 
 Stub resolver is a resolver that serves as an entry-point of querying DNS from applications and directs search request to the nearest recursive resolver\cite{rfc1123}. As it cannot complete domain name resolution by itself, stub resolver is dependant on a recursive resolver\cite{rfc8499}.
 
-Recursive resolver is 
+Recursive resolver is a server which receives a DNS query from a stub resolver and gets the final answer to the query, by (1) answering from its local cache or (2) sending queries to other DNS servers\cite{rfc8499}. After a recursive resolver has sent query request to other authoritative name servers, it is expected for the resolver to store the answer as a local cache. It is the first server in DNS query flow that contacts other servers to get the answer for the client. 
+
+Authoritative (name) server is a server that has ``authority over one or more DNS zones\cite{rfc8499}'' and ``can answer queries without needing to query on other servers as it knows the content of the queried DNS zone by local knowledge\cite{rfc2182}.''
+
+DNS forwarding server is a server that forwards queries to recursive resolver or other forwarding server. It does not perform query process for the stub resolver.
+\subsubsection{DNS Query process}
+Due to the hierarchical structure of the Domain Name System with delegations of authorities \cite{rfc1591}, getting the exact IP address of a given domain name involves several DNS servers. Figure \ref{queryprocess} shows an example of querying ``saimei.ftp.acc.umu.se.''. 
+\begin{figure}[ht!]
+    \begin{center}
+        \includegraphics*[width=\columnwidth]{img/dnsquery}
+    \end{center}
+    \caption{DNS Query sequence diagram}
+    \label{queryprocess}
+\end{figure}
+In the diagram, steps 2 and 3 returns top-level-domain(TLD) from the root servers. the steps 4 and 5 obtain the Authoritative name server of Swedish TLD. The .SE TLD returns name server of Ume\aa University in steps 6 and 7. In the last, the name server of umu returns IPv4 address (A record) of the given address, so that recursive resolver can provide the answer to the stub resolver. These steps are performed under the assumption that none of the queries is cached. 
+\subsubsection{EDNS(0)}
+EDNS stands for the extension mechanisms for DNS as specified in RFC 6891. EDNS allows both DNS servers and client to send ``larger DNS packet than the original 512 octet limit \cite{rfc6891}'', so that it fits sending long IPv6 address and possible DNSSEC signatures. As of February 2019, major DNS resolver operators have started not to support non-EDNS compliant servers. 
+\subsubsection{Server architecture}
+One to many
 \subsection{Related work}
 The project accredits pioneer researches which has provided thorough evaluation of options to improve DNS Privacy. 
 Patrick Werneck evaluated approaches to improve privacy of DNS and stated limitations of identified approaches\cite{werneck2014dns} in 2014.
@@ -228,13 +247,14 @@ J.H.C. van Heugten evaluated exisiting solutions to ehnance DNS Privacy in 2018 
         \hline
             ID & Title & Year & Cites & Category 2 \\ \hline
             \cite{barnes2015confidentiality} & Confidentiality in the face of pervasive surveillance: A threat model and problem statement & 2015 & 18 & Overview \\ \hline
-            \cite{kirchler2016tracked} & Tracked without a trace: linking sessions of users by unsupervised learning of patterns in their DNS traffic & 2016 & 10 & Reidentification \\ \hline
+            \cite{kirchler2016tracked} & Tracked without a trace: linking sessions of users by unsupervised learning of patterns in their DNS traffic & 2016 & 10 & Case study \\ \hline
             \cite{mohaisen2017leakage} & Leakage of. onion at the DNS Root: Measurements, Causes, and Countermeasures & 2017 & 3 & Case study \\ \hline
             \cite{grothoff2017nsa} & NSA's MORECOWBELL: knell for DNS & 2017 & 3 & Case study \\ \hline
             \cite{spaulding2018d} & D-FENS: DNS filtering \& extraction network system for malicious domain names & 2018 & 1 & Invention \\ \hline
             \cite{kelpen2018privacy} & Privacy and Data Protection in the Domain Name System & 2018 & 0 & Overview \\ \hline
         \end{tabular}
         \caption{Literatures categorised as demonstrating attack scenarios by exploiting the lack of DNS privacy}
+\label{attacks}
 \end{table}
 \FloatBarrier
 \subsection{Problem formulation}
