@@ -226,7 +226,7 @@ Other exemplary usages of this property of DNS are nation-state surveillance, pr
 S. Farrell et al. state in RFC 7258 that allowing monitoring by benevolent actors and defending privacy against nefarious actors do not hold hand in hand, as the actions required to achieve both, regardless of the motivations, are indistinguishable\cite{rfc7258}.
 Disadvantages incurred by lack of DNS privacy significantly overweight advantages, and therefore DNS privacy should be mitigated in any feasible practices.
 \subsection{Objectives}
-% Present a list of the objectives to do in your project. An objective shall be understandable, not too small or too large, and possible to define when it is completed or not. You have already defined objectives in your project plan. Copy and paste them here. You can read more about objectives \href{https://coursepress.lnu.se/subject/thesis-projects/objectives/}{here}.\\
+The following objectives are set to answer the research questions and transform the tasks into the smaller pieces. Hereafter we denote Objective as O and research questions as RQ, and Table \ref{objectives} shows the objectives which we will discuss.
 \begin{table}[h!]
     \begin{tabular} {|p{1.2cm}|p{12.8cm}|} \hline
         \textbf{O1} & Explore the state of arts in mitigative methods to enhance DNS Privacy \\ \hline
@@ -237,7 +237,9 @@ Disadvantages incurred by lack of DNS privacy significantly overweight advantage
     \caption{Objectives}
     \label{objectives}
 \end{table}
-\FloatBarrier
+
+RQ1 derives O1; mitigative methods need to be studied to see which methods exist.
+O2 and O3 are set to answer RQ2; to see whether the methods we find by performing O1 helps to secure the privacy or not will prove any possible benefits of the Internet users. O4 aims to answer RQ3.
 \subsection{Scope/Limitation}
 The project has a focus on improving privacy part, from the security perspectives. In other words, reflected to a CIA triad, enhancing Integrity and availability perspective is not priortised in the current project. Issues and challenges of DNS security as whole may be found in other studies, such as one conducted by Ning Hu et. al.\cite{ning2017dnssecurity}. 
 
@@ -248,18 +250,21 @@ The project aims to provide insight on DNS Privacy for Internet users and recurs
 %Here you outline which target group that might be interested in your work. If you, for example, do a project about software architectures, a target group can be professional developers and architects that work with similar software systems as the system you investigated.
 
 \subsection{Outline}
-The report follows in IMRaD pattern.
+The report follows in Introduction, Methods, Results, and Discussion(IMRaD) pattern. However, as several scientific methods are chosen, which is described in the next chapter, the result and analysis parts are extended for each chosen scientific method. 
 
 \newpage
 \
 \section{Method}
 \label{Method}
+This chapter describes the chosen scientific methods to answer the research questions (see Table \ref{researchquestions}) and meet the objectives (see Table \ref{objectives}).
 The project is anticipated to be done in following scientific methods.
 \begin{itemize}
-\item Literature Review
+\item Systematic Literature Review
 \item Controlled Experiment
+\item Verification and Validation
 \end{itemize}
-There is a need for performing a systematic literature review to accomplish \textbf{O1}. As RFC 7626\cite{rfc7626} provides a clear insight of DNS privacy issues and as around four years have passed since its publication, it is anticipated that fellow researchers have tried to solve or list risks identified in the article. Therefore, search criterium is to list articles that cite RFC 7626 from a database Google Scholar. Once articles are identified, these will fall into categories and selected by exclusion criteria.
+There is a need for performing a systematic literature review to accomplish \textbf{O1}. As RFC 7626\cite{rfc7626} has provided a clear insight of DNS privacy issues and as around four years have passed since its publication, it is anticipated that fellow researchers have tried to solve or list risks identified in the article.
+Therefore, search criterium is to list articles that cite RFC 7626 from a database Google Scholar. Once articles are identified, these will fall into categories and selected by exclusion criteria.
 %If the results based on the criteria is insufficient, inclusive criteria will be applied using search term such as DNS Privacy and DNS Security will be used. Exclusive criteria must be applied as well to limit the contents of the articles to be relevant to the defined problem. Therefore, any solving other security aspects of DNS, such as availability or integrity will be excluded.
 The expected outcome of \textbf{O1} is a set of measurements to enhance DNS privacy.
 
