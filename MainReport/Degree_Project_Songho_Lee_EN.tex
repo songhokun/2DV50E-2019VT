@@ -156,7 +156,7 @@ From reading the abstract the reader should clearly understand what the report i
 %----------------------------------------------------------------------------------------
 
 \section{Introduction}
-This chapter decribes what Doname Name System (DNS) is, and how its legacy design became a privacy threat. 
+This chapter describes what Doname Name System (DNS) is, and how the legacy design of DNS has become a privacy threat. Before diving into the privacy risks of DNS, the background section introduces relevant structure and mechanisms. Knowledgable readers in DNS and Client subnet function may leap to section \ref{problemformulation}.
 
 \subsection{Background}
 Digital transformation has brought things used to be done in real life decades ago to the online. At work, people have a video conference call instead of a business trip if not necessary. For shopping goods, people fill in credit card numbers for cross-border payments rather than visiting a bank branch to issue paychecks. In other words, the stage where people work now has been shifted to cyberspace in recent decades, and the Internet has become an essential part of the people.
@@ -199,7 +199,7 @@ As of 2019, there are number of studies are presented to mitigate privacy issues
 
 Survey of DNS privacy enhancing methods are presented by P. Werneck and J.H.C. van Heugten. P. Werneck evaluated approaches to improve privacy of DNS and stated limitations of identified approaches\cite{werneck2014dns} in 2014. J. Heugten evaluated exisiting solutions to ehnance DNS Privacy in 2018 in his study \cite{van2018privacy}. As standariseation of DNS-over-HTTPS is recently finalised\cite{rfc8484}, study from van Heugten reflects more recent changes.
 
-\subsection{Problem formulation}
+\subsection{Problem formulation}\label{problemformulation}
 Currently, almost all DNS traffic is sent in clear text \cite{rfc7626} over the UDP protocol \cite{tcp2014analysis}, and it makes DNS queries vulnerable to being hijacked or used to filter users' traffic.
 All participants of the DNS query process, as illustrated in Figure \ref{queryprocess}, transmit messages intensively, and these are in plaintext.
 It is also noteworthy that all participating authoritative name servers receive the same questions, although it is not necessary for Authoritative servers in higher hierarchies in the process to know all the complete domain address in question.
@@ -214,6 +214,8 @@ The following research questions are formulated having regards to the privacy br
         \textbf{RQ2} & How does DNS Privacy improvement benefit users from being blocked by web filters?\\ \hline
         \textbf{RQ3} & What would be possible disadvantages or overheads with DNS Privacy enrichment? \\ \hline
     \end{tabular}
+    \caption{Research questions}
+\label{researchquestions}
 \end{table}
 
 \subsection{Motivation}
@@ -223,17 +225,19 @@ Other exemplary usages of this property of DNS are nation-state surveillance, pr
 
 S. Farrell et al. state in RFC 7258 that allowing monitoring by benevolent actors and defending privacy against nefarious actors do not hold hand in hand, as the actions required to achieve both, regardless of the motivations, are indistinguishable\cite{rfc7258}.
 Disadvantages incurred by lack of DNS privacy significantly overweight advantages, and therefore DNS privacy should be mitigated in any feasible practices.
-
 \subsection{Objectives}
 % Present a list of the objectives to do in your project. An objective shall be understandable, not too small or too large, and possible to define when it is completed or not. You have already defined objectives in your project plan. Copy and paste them here. You can read more about objectives \href{https://coursepress.lnu.se/subject/thesis-projects/objectives/}{here}.\\
-
-\begin{tabular} {|p{1.2cm}|p{11.6cm}|} \hline
-    \textbf{O1} & Explore the state of arts in mitigative methods to enhance DNS Privacy \\ \hline
-    \textbf{O2} & Verify application of DNS privacy-enhancing methods complicates DNS eavesdropping\\ \hline
-    \textbf{O3} & Identify areas which the selected methods could not address. \\ \hline
-    \textbf{O4} & Estimate factors that may lead to a load increase on recursive DNS resolvers by improving DNS Privacy.\\ \hline
-\end{tabular}\\
-
+\begin{table}[h!]
+    \begin{tabular} {|p{1.2cm}|p{12.8cm}|} \hline
+        \textbf{O1} & Explore the state of arts in mitigative methods to enhance DNS Privacy \\ \hline
+        \textbf{O2} & Verify application of DNS privacy-enhancing methods complicates DNS eavesdropping\\ \hline
+        \textbf{O3} & Identify areas which the selected methods could not address. \\ \hline
+        \textbf{O4} & Estimate factors that may lead to a load increase on recursive DNS resolvers by improving DNS Privacy.\\ \hline
+    \end{tabular}
+    \caption{Objectives}
+    \label{objectives}
+\end{table}
+\FloatBarrier
 \subsection{Scope/Limitation}
 The project has a focus on improving privacy part, from the security perspectives. In other words, reflected to a CIA triad, enhancing Integrity and availability perspective is not priortised in the current project. Issues and challenges of DNS security as whole may be found in other studies, such as one conducted by Ning Hu et. al.\cite{ning2017dnssecurity}. 
 
