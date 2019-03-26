@@ -225,6 +225,7 @@ Other exemplary usages of this property of DNS are nation-state surveillance, pr
 
 S. Farrell et al. state in RFC 7258 that allowing monitoring by benevolent actors and defending privacy against nefarious actors do not hold hand in hand, as the actions required to achieve both, regardless of the motivations, are indistinguishable\cite{rfc7258}.
 Disadvantages incurred by lack of DNS privacy significantly overweight advantages, and therefore DNS privacy should be mitigated in any feasible practices.
+
 \subsection{Objectives}
 The following objectives are set to answer the research questions and transform the tasks into the smaller pieces. Hereafter we denote Objective as O and research questions as RQ, and Table \ref{objectives} shows the objectives which we will discuss.
 \begin{table}[h!]
@@ -253,7 +254,6 @@ The project aims to provide insight on DNS Privacy for Internet users and recurs
 The report follows in Introduction, Methods, Results, and Discussion(IMRaD) pattern. However, as several scientific methods are chosen, which is described in the next chapter, the result and analysis parts are extended for each chosen scientific method. 
 
 \newpage
-\
 \section{Method}
 \label{Method}
 This chapter describes the chosen scientific methods to answer the research questions (see Table \ref{researchquestions}) and meet the objectives (see Table \ref{objectives}).
@@ -263,12 +263,14 @@ The project is anticipated to be done in following scientific methods.
 \item Controlled Experiment
 \item Verification and Validation
 \end{itemize}
-There is a need for performing a systematic literature review to accomplish \textbf{O1}. As RFC 7626\cite{rfc7626} has provided a clear insight of DNS privacy issues and as around four years have passed since its publication, it is anticipated that fellow researchers have tried to solve or list risks identified in the article.
-Therefore, search criterium is to list articles that cite RFC 7626 from a database Google Scholar. Once articles are identified, these will fall into categories and selected by exclusion criteria.
+\subsection{Literature review}
+A systematic literature review was performed to accomplish \textbf{O1}; to study mitigative methods of DNS privacy. 
+A search criterium was set to list articles that cited RFC 7626 from a database Google Scholar, as the analysis had provided a clear insight of DNS privacy issues\cite{rfc7626}.
+Since around four years had passed after its publication, it was anticipated that fellow researchers have tried to solve or list risks identified in the article.
 %If the results based on the criteria is insufficient, inclusive criteria will be applied using search term such as DNS Privacy and DNS Security will be used. Exclusive criteria must be applied as well to limit the contents of the articles to be relevant to the defined problem. Therefore, any solving other security aspects of DNS, such as availability or integrity will be excluded.
-The expected outcome of \textbf{O1} is a set of measurements to enhance DNS privacy.
-
-\textbf{O2} is accomplished by selecting securing methods that are near or already in practice and reproduce these in a controlled environment. Due to this reason, it may exclude some of the areas from \textbf{O1}. Verification, as defined in \textbf{O2}, is done by Examining DNS query and response packets between stub resolver and recursive resolver, after having applied privacy enhancive methods under the controlled environment. If the time allows, Deep Packet Inspection(DPI) middleware could optionally be deployed in the environment and see results of analysis of the secured DNS query process.
+\subsection{Controlled Experiment and Verification}
+\textbf{O2} is accomplished by selecting securing methods that are near or already in practice and reproduce these in a controlled environment.
+Due to this reason, it may exclude some of the areas from \textbf{O1}. Verification, as defined in \textbf{O2}, is done by Examining DNS query and response packets between stub resolver and recursive resolver, after having applied privacy enhancive methods under the controlled environment. If the time allows, Deep Packet Inspection(DPI) middleware could optionally be deployed in the environment and see results of analysis of the secured DNS query process.
 
 \textbf{O3} is achieved by studying surveys from \textbf{O1} and empirical results from \textbf{O2}. \textbf{O4} is evaluated based on outcome of \textbf{O1} and \textbf{O2}.
 
@@ -282,7 +284,12 @@ You are required to discuss any ethical considerations (if any) in your project.
 
 \newpage
 \section{Survey of DNS Privacy enhancing methods}
-This chapter presents the result of a systematic literature review on studies related to DNS Privacy. The raw search results are categorised into the following fields: studies that suggest improving the security breach and investigations that demonstrate the security vulnerabilities. Improvement suggestions are further classified into ones securing the content and others enhancing the channel.
+This chapter presents the result of a systematic literature review on studies related to DNS Privacy.
+Afterwards, the analysis of the result follows.
+As the raw data from the Google scholar had contained several duplicated entries, duplicated studies were excluded. Series or revisions of the same article are marked as duplicated. For such cases the proceeding study was chosen to present.
+
+The refined search results were categorised into the following fields: studies that suggested improving the security breach and investigations that demonstrated the security vulnerabilities.
+Improvement suggestions were further classified into ones securing the content and others enhancing the channel.
 \subsection{Improvement suggestions}
 Studies shown in Table \ref{channel} attempted to secure the communication channel of the DNS query. In other words, these studies suggested applying Encipherment mechanism to deliver Connection Confidentiality as X.800 defines.
 
@@ -295,16 +302,14 @@ Studies shown in Table \ref{channel} attempted to secure the communication chann
             \cite{reddy2017dns} & Dns over datagram transport layer security (dtls) & 2017 & 3 & Improvement \\ \hline
             \cite{bucuti2015opportunistic} & An opportunistic encryption extension for the DNS protocol & 2015 & 2 & Improvement \\ \hline
             \cite{dickinson2018usage} & Usage profiles for dns over tls and dns over dtls & 2018 & 1 & Improvement \\ \hline
-            \cite{bucuti2014encrypted} & Encrypted DNS & 2014 & 0 & Improvement \\ \hline
             \cite{saraj2017design} & Design and implementation of a lightweight privacy extension of DNSSEC protocol & 2017 & 0 & Improvement \\ \hline
-            \cite{van2018privacy} & Privacy analysis of DNS resolver solutions & 2018 & 0 & Overview \\ \hline
-            \cite{werneck2014dns} & DNS Privacy & 2014 & 0 & Overview \\ \hline
         \end{tabular}
         \caption{Literatures categorised as securing communication channel}
 \label{channel}
 \end{table}
 
-Table \ref{content} summaries studies on minimising privacy breaching information in the content of packets generated in the DNS query process. The approach can be seen as metaphors of Least common mechanism and Isolation as described in security design principles. 
+Table \ref{content} summaried studies on minimising privacy breaching information in the content of packets generated in the DNS query process.
+%The approach can be seen as metaphors of Least common mechanism and Isolation as described in security design principles. 
 
 
 \begin{table}[h!]
