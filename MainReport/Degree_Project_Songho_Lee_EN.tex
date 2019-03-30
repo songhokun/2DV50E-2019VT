@@ -286,41 +286,41 @@ You are required to discuss any ethical considerations (if any) in your project.
 \section{Survey of DNS Privacy enhancing methods}
 This chapter presents the result of a systematic literature review on studies related to DNS Privacy.
 Afterwards, the analysis of the result follows.
-As the raw data from the Google scholar had contained several duplicated entries, duplicated studies were excluded. Series or revisions of the same article are marked as duplicated. For such cases the proceeding study was chosen to present.
+As the raw data from the Google scholar had contained several duplicated entries, duplicated studies were excluded. Series or revisions of the same article are marked as duplicated. For such cases, the proceeding study was chosen to present.
 
 The refined search results were categorised into the following fields: studies that suggested improving the security breach and investigations that demonstrated the security vulnerabilities.
 Improvement suggestions were further classified into ones securing the content and others enhancing the channel.
+
 \subsection{Improvement suggestions}
 Studies shown in Table \ref{channel} attempted to secure the communication channel of the DNS query. In other words, these studies suggested applying Encipherment mechanism to deliver Connection Confidentiality as X.800 defines.
 
 \begin{table}[h!]
-    \begin{tabular}{ | l | p{9cm} | l | l | l | }
+    \begin{tabular}{ | l | p{10.5cm} | l | l | }
         \hline
-            ID & Title & Year & Cites & Category 2 \\ \hline
-            \cite{hu2016specification} & Specification for dns over transport layer security (tls) & 2016 & 27 & Improvement \\ \hline
-            \cite{rfc8484} & Dns queries over https (doh) & 2018 & 5 & Improvement \\ \hline
-            \cite{reddy2017dns} & Dns over datagram transport layer security (dtls) & 2017 & 3 & Improvement \\ \hline
-            \cite{bucuti2015opportunistic} & An opportunistic encryption extension for the DNS protocol & 2015 & 2 & Improvement \\ \hline
-            \cite{dickinson2018usage} & Usage profiles for dns over tls and dns over dtls & 2018 & 1 & Improvement \\ \hline
-            \cite{saraj2017design} & Design and implementation of a lightweight privacy extension of DNSSEC protocol & 2017 & 0 & Improvement \\ \hline
+            ID & Title & Year & Cites  \\ \hline
+            \cite{hu2016specification} & Specification for dns over transport layer security (tls) & 2016 & 27 \\ \hline
+            \cite{rfc8484} & Dns queries over https (doh) & 2018 & 5\\ \hline
+            \cite{reddy2017dns} & Dns over datagram transport layer security (dtls) & 2017 & 3\\ \hline
+            \cite{bucuti2015opportunistic} & An opportunistic encryption extension for the DNS protocol & 2015 & 2 \\ \hline
+            \cite{dickinson2018usage} & Usage profiles for dns over tls and dns over dtls & 2018 & 1 \\ \hline
+            \cite{saraj2017design} & Design and implementation of a lightweight privacy extension of DNSSEC protocol & 2017 & 0 \\ \hline
         \end{tabular}
         \caption{Literatures categorised as securing communication channel}
 \label{channel}
 \end{table}
 
-Table \ref{content} summaried studies on minimising privacy breaching information in the content of packets generated in the DNS query process.
+Table \ref{content} summarised studies on minimising privacy breaching information in the content of packets generated in the DNS query process.
 %The approach can be seen as metaphors of Least common mechanism and Isolation as described in security design principles. 
-
 
 \begin{table}[h!]
     \begin{tabular}{ | l | p{9cm} | l | l | l | }
         \hline
             ID & Title & Year & Cites & Category 2 \\ \hline
             \cite{bortzmeyer2016dns} & DNS query name minimisation to improve privacy & 2016 & 33 & Improvement \\ \hline
-            \cite{kintis2016understanding} & Understanding the privacy implications of ecs & 2016 & 8 & In-depth study \\ \hline
-            \cite{mohaisen2018look} & Look-aside At Your Own Risk: Privacy Implications of DNSSEC Look-aside Validation & 2018 & 0 & In-depth study \\ \hline
             \cite{annee-dprive-oblivious-dns-00} & Oblivious DNS - Strong Privacy for DNS Queries & 2019 & 0 & Improvement \\ \hline
             \cite{pan2018mitigating} & Mitigating Client Subnet Leakage in DNS Queries & 2018 & 0 & Improvement \\ \hline
+            \cite{kintis2016understanding} & Understanding the privacy implications of ecs & 2016 & 8 & In-depth study \\ \hline
+            \cite{mohaisen2018look} & Look-aside At Your Own Risk: Privacy Implications of DNSSEC Look-aside Validation & 2018 & 0 & In-depth study \\ \hline
             1 & Enumerating Privacy Leaks in DNS Data Collected above the Recursive & 2018 & 0 & In-depth study \\ \hline
             \cite{bradshaw2019privacy} & Privacy by Infrastructure: The Unresolved Case of the Domain Name System & 2019 & 0 & Overview \\ \hline
             \cite{wang2018understanding} & Understanding the Performance and Challenges of DNS Query Name Minimization & 2018 & 0 & In-depth study \\ \hline
@@ -345,7 +345,18 @@ Table \ref{content} summaried studies on minimising privacy breaching informatio
 \label{attacks}
 \end{table}
 \FloatBarrier
-\section{Implementation}
+\subsection{Analysis}
+RFC 7626 identified risk area of DNS privacy as the followings\cite{rfc7626}: 
+\begin{enumerate}
+    \item Data in the DNS request
+    \item On the wire
+    \item In the servers
+    \item Re-identification and other Interferences
+\end{enumerate}
+We found many studies and standardisations which attempt to alleviate risks on the wire (2), as we denoted securing communication channel in Table \ref{content}. Securing the channel also partially addresses risks of (4) re-identification depends on who the subject of the attacker is. 
+
+The term we used "securing content" includes reduction of the risks (1) Data in the DNS request and (3) In the servers.
+\section{Design of controlled experiment}
 It is common that you will develop something in your project. It can be a mobile app, a stand-alone application, a website, a game, etc. In this chapter you describe the software you have implemented. 
 
 In some projects you don't develop anything, for example if you do a systematic literature review. In this case you remove this chapter.
@@ -401,6 +412,7 @@ Here you give meaning to and your own opinions of the results. What conclusions 
 	
 \section{Discussion}
 The project intensively examines securing Domain Name queries as a method of enhancing end-users' privacy towards pervasive monitoring.
+\subsection{Why securing DNS when vulnerabilities from other compartment exist?}
 A Question may arise why it mainly focuses on securing DNS although there exist other factors which disclose users' privacy.
 To answer the question, let us have an example of a web filter, as it is a commonly found practical example of the large scale monitoring\cite{murdoch2008tools}.
 %As web filters require monitoring of users' traffic to enforce its policy of restrictions, understanding the mechanisms of the web filter suits this context.
