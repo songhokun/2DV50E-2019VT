@@ -117,30 +117,21 @@
 %----------------------------------------------------------------------------------------
 \selectlanguage{english}
 \begin{abstract}
-\noindent The report shall begin with a summary, called abstract. The abstract shall not be longer than a paragraph, and is not divided into more than one piece. It shall contain:
-
-\begin {itemize}
-\item A short background description to the area of your project
-\item A description of the problem you investigate
-\item A motivation why this problem is interesting to investigate
-\item What you have done to answer the problem
-\item A short summary of your results
-\end {itemize}
-
-From reading the abstract the reader should clearly understand what the report is all about. The purpose of the abstract is to make the reader interested in continue reading the report, if it covers something that the reader wants to know more about.
-\newline
-\newline
+\noindent Current usage of the DNS system is the most significant loophole of Internet users' privacy, as all queries and answers for resolving web address are not protected in most cases. % Thesis statement, background description
+Lack of confidentiality in the DNS system enables everyone who has control of the path between a user and DNS resolver can collect someone's usage pattern and fingerprint him and filter his access to specific websites. % Motivation
+Despite a single solution for addressing privacy risks in all stages of the DNS query process does not exist, the report acquaints several Internet standardisations for DNS privacy that are complementary to the existing DNS system and verifies that implementation of these brings significant enhancement of users' privacy.
+%The report explores existing methods to enhance DNS Privacy and sets up a series of experiments to verify implementations of such methods for privacy enhancement. % Description of problem explored
+\\\\
 \textbf{Keywords: DNS, DNS-over-https, DNS-over-TLS, Privacy}
 \end{abstract}
 
-\newpage
 %----------------------------------------------------------------------------------------
 %	Preface
 %----------------------------------------------------------------------------------------
+%\newpage
+%\textbf {\large{Preface}}\\
 
-\textbf {\large{Preface}}\\
-
-\noindent You can have a preface in the report if you want, but it is not necessary. In this you can write more personal reflections on your degree project. In the preface you can also take the opportunity to thank the people who have been particularly helpful during the report writing, for example if you had any contact with a company that helped with the project, people that guided or helped you during the project, or your family and friends that supported you during the project. The preface shall not be longer than half a page.
+%\noindent You can have a preface in the report if you want, but it is not necessary. In this you can write more personal reflections on your degree project. In the preface you can also take the opportunity to thank the people who have been particularly helpful during the report writing, for example if you had any contact with a company that helped with the project, people that guided or helped you during the project, or your family and friends that supported you during the project. The preface shall not be longer than half a page.
 
 %----------------------------------------------------------------------------------------
 \newpage
@@ -345,7 +336,7 @@ Table \ref{content} summarised studies on minimising privacy breaching informati
 \label{attacks}
 \end{table}
 \FloatBarrier
-\subsection{Analysis}
+\section{Analysis}
 RFC 7626 identified risk area of DNS privacy as the followings\cite{rfc7626}: 
 \begin{enumerate}
     \item Data in the DNS request
