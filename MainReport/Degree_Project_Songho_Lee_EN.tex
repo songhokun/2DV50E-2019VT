@@ -212,7 +212,7 @@ The following research questions are formulated having regards to the privacy br
 \subsection{Motivation}
 Most of the internet activities begin with DNS query, hence DNS is vital. Notwithstanding the importance of DNS, designers of the current DNS protocol have not taken consideration of ``confidentiality of protocol metadata''. Therefore DNS queries reveal communication flows, and this property of DNS protocol is used in different contexts by different actors. Examples of usages are traffic monitoring for network management or limiting the influence of malicious websites by DNS Footprinting of malware\cite{stoner2010dns}, or detecting malware infections\cite{lemos2013got}.
 
-Other exemplary usages of this property of DNS are nation-state surveillance, privacy-unfriendly activities of commercial sectors\cite{weaver2011redirecting}, and illegal actions by criminals. Surveillance affects individuals to possess stress and anxiety\cite{oulasvirta2012long}, and behavioural changes like self-censorship \cite{rfc6973}. RFC 6973 connotes that Privacy harms involve ``harms to financial standing, reputation, solitude, autonomy, and safety\cite{rfc6973}''.
+Other exemplary usages of this property of DNS are nation-state surveillance, privacy-unfriendly activities of commercial sectors\cite{weaver2011redirecting}, and illegal actions by criminals. Surveillance affects individuals to possess stress and anxiety\cite{oulasvirta2012long}, and behavioural changes like self-censorship \cite{rfc6973}. RFC 6973 connotes that Privacy harms involve ``harms to financial standing, reputation, solitude, autonomy, and safety\cite{rfc6973}'' of individuals.
 
 S. Farrell et al. state in RFC 7258 that allowing monitoring by benevolent actors and defending privacy against nefarious actors do not hold hand in hand, as the actions required to achieve both, regardless of the motivations, are indistinguishable\cite{rfc7258}.
 Disadvantages incurred by lack of DNS privacy significantly overweight advantages, and therefore DNS privacy should be mitigated in any feasible practices.
@@ -256,10 +256,10 @@ Exploring the existing design suggestions or implementation for improving the co
 A search criterium was set to list articles that cited RFC 7626 from a database Google Scholar, as the analysis had provided a clear insight of DNS privacy issues\cite{rfc7626}, and since around four years had passed after its publication, it was anticipated that fellow researchers have tried to solve or list risks identified in the article.
 %If the results based on the criteria is insufficient, inclusive criteria will be applied using search term such as DNS Privacy and DNS Security will be used. Exclusive criteria must be applied as well to limit the contents of the articles to be relevant to the defined problem. Therefore, any solving other security aspects of DNS, such as availability or integrity will be excluded.
 \subsection{Controlled Experiment and Verification}
-\textbf{O2} is accomplished by selecting securing methods that are near or already in practice and reproduce these in a controlled environment.
-Due to this reason, it may exclude some of the areas from \textbf{O1}. Verification, as defined in \textbf{O2}, is done by Examining DNS query and response packets between stub resolver and recursive resolver, after having applied privacy enhancive methods under the controlled environment. If the time allows, Deep Packet Inspection(DPI) middleware could optionally be deployed in the environment and see results of analysis of the secured DNS query process.
+\textbf{O2} was accomplished by selecting securing methods that are near or already in practice and reproduce these in a controlled environment.
+Due to this reason, it may have excluded some of the areas from \textbf{O1}. Verification, as defined in \textbf{O2}, was done by Examining DNS query and response packets between stub resolver and recursive resolver, after having applied privacy enhancive methods under the controlled environment.
 
-\textbf{O3} is achieved by studying surveys from \textbf{O1} and empirical results from \textbf{O2}. \textbf{O4} is evaluated based on outcome of \textbf{O1} and \textbf{O2}.
+\textbf{O3} was achieved by studying surveys from \textbf{O1} and empirical results from \textbf{O2}. \textbf{O4} was evaluated based on outcome of \textbf{O1} and \textbf{O2}.
 
 \subsection{Reliability and Validity}
 The study is seen to have reliability on the results of the literature review, as the same effect will be derived by performing a search as described in the previous section. As Appendix A includes the source code of the experiment scripts, a similar result is expected to be derived by other researchers as well. 
@@ -267,16 +267,14 @@ The study is seen to have reliability on the results of the literature review, a
 The project deployed its experiments in a virtualised environment to minimise unforeseen factors that would impact performance measurements.
 
 \subsection{Ethical considerations}
-You are required to discuss any ethical considerations (if any) in your project. If you do an experiment you will most likely not have any ethical considerations, but in a survey ethical considerations can for example be how you make sure that the privacy of the people participating in the study is not violated (by for example removing names from the gathered data). 
+The project performed experiments in a controlled environment to eliminate other affecting factors. It means that no real data of legal representatives are collected without his/her consent. 
 
 \newpage
 \section{Survey of DNS Privacy enhancing methods}
 This chapter presents the result of a systematic literature review on studies related to DNS Privacy.
-Afterwards, the analysis of the result follows.
+%Afterwards, the analysis of the result follows.
 As the raw data from the Google scholar had contained several duplicated entries, duplicated studies were excluded. Series or revisions of the same article are marked as duplicated. For such cases, the proceeding study was chosen to present.
-
-The refined search results were categorised into the following fields: studies that suggested improving the security breach and investigations that demonstrated the security vulnerabilities.
-Improvement suggestions were further classified into ones securing the content and others enhancing the channel.
+The analysis section which follows after this chapter motivates strategies for categorisation of raw search results.
 
 \subsection{Improvement suggestions}
 Studies shown in Table \ref{channel} attempted to secure the communication channel of the DNS query. In other words, these studies suggested applying Encipherment mechanism to deliver Connection Confidentiality as X.800 defines \cite{x800}.
@@ -322,39 +320,52 @@ There are several pieces of research and design proposals of new architecture wh
             ID & Title & Year & Cites \\ \hline
             \cite{ambrosin2018security} & Security and privacy analysis of national science foundation future internet architectures & 2018 & 3 \\ \hline
             \cite{grothoff2017gnunet} & The GNUnet System & 2017 & 1 \\ \hline
+            \cite{asoni2017paged} & A Paged Domain Name System for Query Privacy & 2017 & 0 \\ \hline
             \cite{loibl2014namecoin} & Namecoin & 2014 & 12 \\ \hline
         \end{tabular}
         \caption{Literatures categorised as Architectural proposal}
     \label{architectures}
 \end{table}
-
+\FloatBarrier
 \subsection{Case studies on attack scenarios}
+Several studies demonstrated privacy risks of the current DNS standard and proposed mitigative methods which we had introduced in the previous section. 
+
 \begin{table}[h!]
-    \begin{tabular}{ | l | p{9cm} | l | l | l | }
+    \begin{tabular}{ | l | p{10.5cm} | l | l | }
         \hline
-            ID & Title & Year & Cites & Category 2 \\ \hline
-            \cite{barnes2015confidentiality} & Confidentiality in the face of pervasive surveillance: A threat model and problem statement & 2015 & 18 & Overview \\ \hline
-            \cite{kirchler2016tracked} & Tracked without a trace: linking sessions of users by unsupervised learning of patterns in their DNS traffic & 2016 & 10 & Case study \\ \hline
-            \cite{mohaisen2017leakage} & Leakage of. onion at the DNS Root: Measurements, Causes, and Countermeasures & 2017 & 3 & Case study \\ \hline
-            \cite{grothoff2017nsa} & NSA's MORECOWBELL: knell for DNS & 2017 & 3 & Case study \\ \hline
-            \cite{spaulding2018d} & D-FENS: DNS filtering \& extraction network system for malicious domain names & 2018 & 1 & Invention \\ \hline
-            \cite{kelpen2018privacy} & Privacy and Data Protection in the Domain Name System & 2018 & 0 & Overview \\ \hline
+            ID & Title & Year & Cites \\ \hline
+            \cite{kirchler2016tracked} & Tracked without a trace: linking sessions of users by unsupervised learning of patterns in their DNS traffic & 2016 & 10 \\ \hline
+            \cite{mohaisen2017leakage} & Leakage of. onion at the DNS Root: Measurements, Causes, and Countermeasures & 2017 & 3 \\ \hline
+            \cite{grothoff2017nsa} & NSA's MORECOWBELL: knell for DNS & 2017 & 3 \\ \hline
+            \cite{spaulding2018d} & D-FENS: DNS filtering \& extraction network system for malicious domain names & 2018 & 1 \\ \hline
         \end{tabular}
         \caption{Literatures categorised as demonstrating attack scenarios by exploiting the lack of DNS privacy}
 \label{attacks}
 \end{table}
-\FloatBarrier
-\section{Analysis}
-RFC 7626 identified risk area of DNS privacy as the followings\cite{rfc7626}: 
+%\subsection{Evaluation of the improvement suggestions by other researchers}
+
+\section{Analysis of the survey result}
+This section provides an analysis of the survey results.
+The refined search results were categorised into the following fields: studies that suggested improving the security breach and investigations that demonstrated the security vulnerabilities.
+We have further classified the privacy improving studies into ones securing the content and others enhancing the channel, based on the privacy risk analysis of RFC 7626.
+S. Bortzmeyer, who is the author of RFC 7626 identified risk area of DNS privacy as the followings\cite{rfc7626}: 
 \begin{enumerate}
     \item Data in the DNS request
     \item On the wire
     \item In the servers
     \item Re-identification and other Interferences
 \end{enumerate}
-We found many studies and standardisations which attempt to alleviate risks on the wire (2), as we denoted securing communication channel in Table \ref{content}. Securing the channel also partially addresses risks of (4) re-identification depends on who the subject of the attacker is. 
 
-The term we used "securing content" includes reduction of the risks (1) Data in the DNS request and (3) In the servers.
+\subsection{Securing the communication channel}
+Communication channel encirpher methods, as we presented in Table \ref{content}, attempt to alleviate risks (2) on the wire. It also partially addresses risks of (4) re-identification depends on who the subject of the attacker is. 
+However, we did not find the one simple solution for securing all communication paths of all involved parties of the DNS resolving. Therefore, it is noteworthy to consider the location of the DNS resolver and limitations of each suggested methods.
+
+\subsubsection{Location of Recursive DNS resolvers}
+Recursive DNS Resolvers can be on a local machine, one provided by the Internet Service Providers (ISP) and Public DNS servers. 
+
+\subsection{Securing content}
+The term we used ``securing content'' includes reduction of the risks (1) Data in the DNS request and (3) In the servers. 
+
 \section{Design of controlled experiment}
 It is common that you will develop something in your project. It can be a mobile app, a stand-alone application, a website, a game, etc. In this chapter you describe the software you have implemented. 
 
@@ -411,7 +422,7 @@ Here you give meaning to and your own opinions of the results. What conclusions 
 	
 \section{Discussion}
 The project intensively examines securing Domain Name queries as a method of enhancing end-users' privacy towards pervasive monitoring.
-\subsection{Why securing DNS when vulnerabilities from other compartment exist?}
+\subsection{Is securing DNS enough to protect users' privacy?}
 A Question may arise why it mainly focuses on securing DNS although there exist other factors which disclose users' privacy.
 To answer the question, let us have an example of a web filter, as it is a commonly found practical example of the large scale monitoring\cite{murdoch2008tools}.
 %As web filters require monitoring of users' traffic to enforce its policy of restrictions, understanding the mechanisms of the web filter suits this context.
@@ -432,6 +443,7 @@ Furthermore, the combination of wide deployment of HTTPS and Virtual Hosting has
 
 However, the trend change of Internet has not brought additional challenges to Domain Name System (DNS) filtering. Therefore, the project studies to remedy the weakest point towards users' privacy, which in this case is DNS.
 
+\subsection{Ethical dilemma of privacy enhancement; Liberation of illegal crimes?}
 \newpage
 		
 \section{Conclusion}
