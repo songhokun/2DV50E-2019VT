@@ -348,7 +348,7 @@ Several studies demonstrated privacy risks of the current DNS standard and propo
 This section provides an analysis of the survey results.
 The refined search results were categorised into the following fields: studies that suggested improving the security breach and investigations that demonstrated the security vulnerabilities.
 We have further classified the privacy improving studies into ones securing the content and others enhancing the channel, based on the privacy risk analysis of RFC 7626.
-S. Bortzmeyer, who is the author of RFC 7626 identified risk area of DNS privacy as the followings\cite{rfc7626}: 
+S. Bortzmeyer, who is the author of RFC 7626, identified risk area of DNS privacy as the followings\cite{rfc7626}: 
 \begin{enumerate}
     \item Data in the DNS request
     \item On the wire
@@ -363,14 +363,45 @@ However, we did not find the one simple solution for securing all communication 
 \subsubsection{Location of Recursive DNS resolvers}
 Recursive DNS Resolvers can be on a local machine, one provided by the Internet Service Providers (ISP) and Public DNS servers. 
 
+TODO: Describe attack surfaces. Include figures.
+
 \subsection{Securing content}
-The term we used ``securing content'' includes reduction of the risks (1) Data in the DNS request and (3) In the servers. 
+While applying the encipherment mechanism on the communications among DNS servers has a criticism that it only had only shifted the trust towards the Recursive resolver, applying design enhancements of packets' content brings significantly reduces the risks of (1) Data in the DNS request and data leaks in (3) the servers.
+
+TODO: Describe attack surfaces. Include figures.
 
 \section{Design of controlled experiment}
-It is common that you will develop something in your project. It can be a mobile app, a stand-alone application, a website, a game, etc. In this chapter you describe the software you have implemented. 
+This section describes the experimental setups, which consists of a choice of privacy enhancement methods to verify, and the way we verified these.
 
-In some projects you don't develop anything, for example if you do a systematic literature review. In this case you remove this chapter.
+The survey presented in the previous section resulted in fruitful alternatives.
+However, not all of them were in practical uses, with a reasonable amount of implementation on the server side.
+As we analysed privacy impacts on the location of recursive resolvers, conducting experiments that cover several scenarios would be adequate. Thus, it is crucial to choose the solutions which both server and client implementation are available to test.
+We reduced the scope of technologies to test to the followings implementations: DNS-over-HTTPS\cite{rfc8484}, DNS-over-TLS\cite{hu2016specification} and QName minimisation\cite{bortzmeyer2016dns}.
 
+\subsection{Experiment scenarios}
+Identifying incoming and outgoing traffics around a recursive resolver is our interest, as recursive DNS resolver knows about stub resolver's information and its query.
+We previously mentioned that user can choose to use its own client to be a recursive resolver, or use the one operated by other providers. Therefore, we placed of recursive resolvers on a local network and used a public recursive resolver to compare with.
+
+\subsubsection{Verifying channel encipherment solutions}
+We chose to use the remote recursive resolver (i.e. public DNS server) as the focus of the experiment laid on observing (2) on the wire traffic between the stub client and the resolver.
+For this verification, the control group is a Firefox web browser 66.0.2 (64-bit) on a Ubuntu PC without any manual intervention, except that DNS server is changed to a specific recursive resolver on OS-level. The experiment groups are Firefox browser configured to send all DNS queries using DNS-over-HTTPS, and DNS-over-TLS. The acts performed on each experimental setup are described in Section \ref{simulation}.
+
+\subsubsection{Verifying content enhancement solutions}
+We deployed local recursive resolver since the focus of the test was to verify how securing contents of DNS queries contribute to enhancing end users' privacy. That will say, the experiment focused on analysing outgoing traffics from the recursive resolver to other authoritative DNS nameservers. 
+
+The recursive resolver was set with a software BIND 9.14.0, as it is the most commonly deployed software for DNS servers and its latest version supports QNAME minimisation by default\cite{bind9qname}.
+For this experiments, a controlled case is running DNS queries towards a BIND server which is configured to disable QNAME minimisation feature using, and an experiment case is performing the same steps to the server with QNAME minimisation enabled.
+
+
+
+\subsection{Simulation of address resolution}\label{simulation}
+Using BIND9 tools such as nslookup or dig a client is sufficient if we would focus on a DNS resolution of an entered URL address. However, using these tools does not represent actual use cases on the user-side. In the modern Internet, a website consists of embedded Cascading Style Sheets (CSS), static contents such as images which Content Delivery Networks (CDN) host, and advertisements and analytic scripts. The additional materials embedded on a website incurs follow up address resolutions, and it is relevant to simulate browsing experiences.
+Therefore, we have chosen to use a tool called selenium. 
+
+Selenium is the web automation test tool\cite{holmes2006automating}, which is typically used to test web applications. However, in our experiments, we utilised Selenium to visit a list of websites for simulating DNS queries. As we intended to use Firefox for DoH simulation, Selenium was incorporated with Firefox Gecko driver to control the web browser. Additionally, a Python script to operate Selenium
+
+\subsection{Tool to analyse the traffics}
+We used Network traffic analytic tool, Wireshark to filter traffics based on the Port, and we abstract contents of the application layer and Internet Protocol layer to link clients' identities and their DNS transactions.
 \newpage
 
 \section{Results}
