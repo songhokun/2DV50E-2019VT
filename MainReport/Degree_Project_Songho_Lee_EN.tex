@@ -233,7 +233,7 @@ The following objectives are set to answer the research questions and transform 
 RQ1 derives O1; mitigative methods need to be studied to see which methods exist.
 O2 and O3 are set to answer RQ2; to see whether the methods we find by performing O1 helps to secure the privacy or not will prove any possible benefits of the Internet users. O4 aims to answer RQ3.
 \subsection{Scope/Limitation}
-The project has a focus on improving privacy part, from the security perspectives. In other words, reflected to a CIA triad, enhancing Integrity and availability perspective is not priortised in the current project. Issues and challenges of DNS security as whole may be found in other studies, such as one conducted by Ning Hu et. al.\cite{ning2017dnssecurity}. 
+The project has a focus on improving privacy part, from the security perspectives. In other words, reflected to a Confidentiality, Integrity, Availability(CIA) triad, enhancing Integrity and availability perspective is not priortised in the current project. Issues and challenges of DNS security as whole may be found in other studies, such as one conducted by Ning Hu et. al.\cite{ning2017dnssecurity}. 
 
 %You cannot solve everything. Here you describe what you do, and what you don't do, in your project. Limitations can for example be that you only compare some frameworks of all frameworks available on the market, that you only suggest an architecture for a specific software product and not a general architecture, or that you only include university students in a study and not a broader population sample.
 
@@ -248,16 +248,12 @@ The report follows in Introduction, Methods, Results, and Discussion(IMRaD) patt
 \section{Method}
 \label{Method}
 This chapter describes the chosen scientific methods to answer the research questions (see Table \ref{researchquestions}) and meet the objectives (see Table \ref{objectives}).
-The project is anticipated to be done in following scientific methods.
-\begin{itemize}
-\item Systematic Literature Review
-\item Controlled Experiment
-\item Verification and Validation
-\end{itemize}
+The study was conducted by systematic literature review and controlled experiment, and the following sections motivate the choice of a scientific method for meeting objectives. 
 \subsection{Literature review}
-A systematic literature review was performed to accomplish \textbf{O1}; to study mitigative methods of DNS privacy. 
-A search criterium was set to list articles that cited RFC 7626 from a database Google Scholar, as the analysis had provided a clear insight of DNS privacy issues\cite{rfc7626}.
-Since around four years had passed after its publication, it was anticipated that fellow researchers have tried to solve or list risks identified in the article.
+A systematic literature review was performed to accomplish \textbf{O1} and \textbf{O3}; to study mitigative methods of DNS privacy and identify areas of limitations.
+Exploring the existing design suggestions or implementation for improving the confidentiality of DNS transactions needed to be done systematically, to eradicate biases and to minimise opportunities for not obtaining suitable solutions.
+
+A search criterium was set to list articles that cited RFC 7626 from a database Google Scholar, as the analysis had provided a clear insight of DNS privacy issues\cite{rfc7626}, and since around four years had passed after its publication, it was anticipated that fellow researchers have tried to solve or list risks identified in the article.
 %If the results based on the criteria is insufficient, inclusive criteria will be applied using search term such as DNS Privacy and DNS Security will be used. Exclusive criteria must be applied as well to limit the contents of the articles to be relevant to the defined problem. Therefore, any solving other security aspects of DNS, such as availability or integrity will be excluded.
 \subsection{Controlled Experiment and Verification}
 \textbf{O2} is accomplished by selecting securing methods that are near or already in practice and reproduce these in a controlled environment.
@@ -283,7 +279,7 @@ The refined search results were categorised into the following fields: studies t
 Improvement suggestions were further classified into ones securing the content and others enhancing the channel.
 
 \subsection{Improvement suggestions}
-Studies shown in Table \ref{channel} attempted to secure the communication channel of the DNS query. In other words, these studies suggested applying Encipherment mechanism to deliver Connection Confidentiality as X.800 defines.
+Studies shown in Table \ref{channel} attempted to secure the communication channel of the DNS query. In other words, these studies suggested applying Encipherment mechanism to deliver Connection Confidentiality as X.800 defines \cite{x800}.
 
 \begin{table}[h!]
     \begin{tabular}{ | l | p{10.5cm} | l | l | }
@@ -295,6 +291,9 @@ Studies shown in Table \ref{channel} attempted to secure the communication chann
             \cite{bucuti2015opportunistic} & An opportunistic encryption extension for the DNS protocol & 2015 & 2 \\ \hline
             \cite{dickinson2018usage} & Usage profiles for dns over tls and dns over dtls & 2018 & 1 \\ \hline
             \cite{saraj2017design} & Design and implementation of a lightweight privacy extension of DNSSEC protocol & 2017 & 0 \\ \hline
+            \cite{dnsoquic} & Specification of DNS over Dedicated QUIC Connections & 2019 & 0 \\ \hline
+            \cite{denis2015dnscrypt} & DNSCrypt & 2015 & 0 \\ \hline
+            \cite{dempsky2010dnscurve} & DNSCurve & 2009 & 0 \\ \hline
         \end{tabular}
         \caption{Literatures categorised as securing communication channel}
 \label{channel}
@@ -304,22 +303,31 @@ Table \ref{content} summarised studies on minimising privacy breaching informati
 %The approach can be seen as metaphors of Least common mechanism and Isolation as described in security design principles. 
 
 \begin{table}[h!]
-    \begin{tabular}{ | l | p{9cm} | l | l | l | }
+    \begin{tabular}{ | l | p{10.5cm} | l | l |}
         \hline
-            ID & Title & Year & Cites & Category 2 \\ \hline
-            \cite{bortzmeyer2016dns} & DNS query name minimisation to improve privacy & 2016 & 33 & Improvement \\ \hline
-            \cite{annee-dprive-oblivious-dns-00} & Oblivious DNS - Strong Privacy for DNS Queries & 2019 & 0 & Improvement \\ \hline
-            \cite{pan2018mitigating} & Mitigating Client Subnet Leakage in DNS Queries & 2018 & 0 & Improvement \\ \hline
-            \cite{kintis2016understanding} & Understanding the privacy implications of ecs & 2016 & 8 & In-depth study \\ \hline
-            \cite{mohaisen2018look} & Look-aside At Your Own Risk: Privacy Implications of DNSSEC Look-aside Validation & 2018 & 0 & In-depth study \\ \hline
-            1 & Enumerating Privacy Leaks in DNS Data Collected above the Recursive & 2018 & 0 & In-depth study \\ \hline
-            \cite{bradshaw2019privacy} & Privacy by Infrastructure: The Unresolved Case of the Domain Name System & 2019 & 0 & Overview \\ \hline
-            \cite{wang2018understanding} & Understanding the Performance and Challenges of DNS Query Name Minimization & 2018 & 0 & In-depth study \\ \hline
-            \cite{werneck2014dns} & DNS Privacy & 2014 & 0 & Overview \\ \hline
+            ID & Title & Year & Cites \\ \hline
+            \cite{bortzmeyer2016dns} & DNS query name minimisation to improve privacy & 2016 & 33 \\ \hline
+            \cite{annee-dprive-oblivious-dns-00} & Oblivious DNS - Strong Privacy for DNS Queries & 2019 & 0 \\ \hline
+            \cite{pan2018mitigating} & Mitigating Client Subnet Leakage in DNS Queries & 2018 & 0 \\ \hline
         \end{tabular}
         \caption{Literatures categorised as securing content}
 \label{content}
 \end{table}
+
+There are several pieces of research and design proposals of new architecture which would replace the current DNS system. These are found in Table \ref{architectures}
+
+\begin{table}[h!]
+    \begin{tabular}{ | l | p{10.5cm} | l | l | }
+        \hline
+            ID & Title & Year & Cites \\ \hline
+            \cite{ambrosin2018security} & Security and privacy analysis of national science foundation future internet architectures & 2018 & 3 \\ \hline
+            \cite{grothoff2017gnunet} & The GNUnet System & 2017 & 1 \\ \hline
+            \cite{loibl2014namecoin} & Namecoin & 2014 & 12 \\ \hline
+        \end{tabular}
+        \caption{Literatures categorised as Architectural proposal}
+    \label{architectures}
+\end{table}
+
 \subsection{Case studies on attack scenarios}
 \begin{table}[h!]
     \begin{tabular}{ | l | p{9cm} | l | l | l | }
