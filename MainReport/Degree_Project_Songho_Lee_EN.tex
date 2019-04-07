@@ -358,7 +358,10 @@ S. Bortzmeyer, who is the author of RFC 7626, identified risk area of DNS privac
 
 \subsection{Securing the communication channel}
 Communication channel encirpher methods, as we presented in Table \ref{content}, attempt to alleviate risks (2) on the wire. It also partially addresses risks of (4) re-identification depends on who the subject of the attacker is. 
-However, we did not find the one simple solution for securing all communication paths of all involved parties of the DNS resolving. Therefore, it is noteworthy to consider the location of the DNS resolver and limitations of each suggested methods.
+However, we did not find the one simple solution for securing all communication paths of all involved parties of the DNS resolving. Therefore, the location of the DNS resolver needs to be considered when to mention the limitations of each suggested methods.
+
+Before analysing the privacy impact of DNS Recursive resolver's location, let us abstract DNS query process into two phases, similar to van Heugten's approach\cite{van2018privacy}.
+For ease of analysis, step 1 and 10 of Figure \ref{queryprocess} where stub resolver queries a domain name to the recursive resolver and the recursive resolver replies to the stub resolver is defined as Phase 1. Phase 2 denotes the rest of the steps which the recursive resolver resolves the queried address to concerning authoritative servers.
 
 \subsubsection{Location of Recursive DNS resolvers}
 Recursive DNS Resolvers can be on a local machine, one provided by the Internet Service Providers (ISP) and Public DNS servers. 
@@ -369,7 +372,7 @@ TODO: Describe attack surfaces. Include figures.
 While applying the encipherment mechanism on the communications among DNS servers has a criticism that it only had only shifted the trust towards the Recursive resolver, applying design enhancements of packets' content brings significantly reduces the risks of (1) Data in the DNS request and data leaks in (3) the servers.
 
 TODO: Describe attack surfaces. Include figures.
-
+\newpage
 \section{Design of controlled experiment}
 This section describes the experimental setups, which consists of a choice of privacy enhancement methods to verify, and the way we verified these.
 
