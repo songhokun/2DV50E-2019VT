@@ -360,13 +360,43 @@ S. Bortzmeyer, who is the author of RFC 7626, identified risk area of DNS privac
 Communication channel encirpher methods, as we presented in Table \ref{content}, attempt to alleviate risks (2) on the wire. It also partially addresses risks of (4) re-identification depends on who the subject of the attacker is. 
 However, we did not find the one simple solution for securing all communication paths of all involved parties of the DNS resolving. Therefore, the location of the DNS resolver needs to be considered when to mention the limitations of each suggested methods.
 
-Before analysing the privacy impact of DNS Recursive resolver's location, let us abstract DNS query process into two phases, similar to van Heugten's approach\cite{van2018privacy}.
-For ease of analysis, step 1 and 10 of Figure \ref{queryprocess} where stub resolver queries a domain name to the recursive resolver and the recursive resolver replies to the stub resolver is defined as Phase 1. Phase 2 denotes the rest of the steps which the recursive resolver resolves the queried address to concerning authoritative servers.
+Let us abstract DNS query process into two phases, similar to van Heugten's approach \cite{van2018privacy}.
+For ease of analysis, step 1 and 10 of Figure \ref{queryprocess} where stub resolver queries a domain name to the recursive resolver and the recursive resolver replies to the stub resolver (i.e. stub-to-resolver link) is defined as Phase 1.
+Phase 2 denotes the rest of the steps which the recursive resolver resolves the queried address to concerning authoritative servers (i.e. recursive-to-auth link).
+
+Common problems exist in channel encipher methods.
+Most of the methods we found often do not encrypt communications on Phase 2 in contrast to Phase 1.
+Furthermore, authentication mechanisms are missing on Phase 2 \cite{I-D.bortzmeyer-dprive-step-2}, and the lack of authentication of the authoritative server may potentially enable a Man-in-the-middle attack.
+
+The fact that an authoritative server having a one-to-many server-client relationship from the recursive resolvers is the major obstacle of applying encryption on Phase 2.
+As DoH\cite{rfc8484} and DoT\cite{hu2016specification} use TLS protocol for encryption, an authoritative server processing multiple TLS session is likely to end up exhausting its computational resources, similar to a Denial-of-service attack situation \cite{bhople2012server}. The issues are well discussed in the internet draft "Next step for DPRIVE: resolver-to-auth link \cite{I-D.bortzmeyer-dprive-step-2}."
 
 \subsubsection{Location of Recursive DNS resolvers}
-Recursive DNS Resolvers can be on a local machine, one provided by the Internet Service Providers (ISP) and Public DNS servers. 
+From the end user's point of view, recursive DNS Resolvers can be on a local machine, one provided by the Internet Service Providers (ISP) and Public DNS servers \cite{van2018privacy}. 
 
-TODO: Describe attack surfaces. Include figures.
+\begin{figure}[ht!]
+    \begin{center}
+    \includegraphics*[width=0.6\columnwidth]{img/local-recursive}
+    \end{center}
+    \caption{A simplified network map when using local resursive resolver server.}
+    \label{localrecursive}
+\end{figure}
+
+\begin{figure}[ht!]
+    \begin{center}
+    \includegraphics*[width=0.6\columnwidth]{img/isp-recursive}
+    \end{center}
+    \caption{A simplified network map when using ISP-provided resursive resolver server.}
+    \label{isprecursive}
+\end{figure}
+
+\begin{figure}[ht!]
+    \begin{center}
+    \includegraphics*[width=0.6\columnwidth]{img/public-recursive}
+    \end{center}
+    \caption{A simplified network map when using public resursive resolver server.}
+    \label{publicrecursive}
+\end{figure}
 
 \subsection{Securing content}
 While applying the encipherment mechanism on the communications among DNS servers has a criticism that it only had only shifted the trust towards the Recursive resolver, applying design enhancements of packets' content brings significantly reduces the risks of (1) Data in the DNS request and data leaks in (3) the servers.
@@ -478,6 +508,7 @@ Furthermore, the combination of wide deployment of HTTPS and Virtual Hosting has
 However, the trend change of Internet has not brought additional challenges to Domain Name System (DNS) filtering. Therefore, the project studies to remedy the weakest point towards users' privacy, which in this case is DNS.
 
 \subsection{Ethical dilemma of privacy enhancement; Liberation of illegal crimes?}
+\subsection{Choice of Public DNS server and impact on CDN}
 \newpage
 		
 \section{Conclusion}
