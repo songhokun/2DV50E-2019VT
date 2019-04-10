@@ -153,13 +153,13 @@ This chapter describes what Doname Name System (DNS) is, and how the legacy desi
 Digital transformation has brought things used to be done in real life decades ago to the online. At work, people have a video conference call instead of a business trip if not necessary. For shopping goods, people fill in credit card numbers for cross-border payments rather than visiting a bank branch to issue paychecks. In other words, the stage where people work now has been shifted to cyberspace in recent decades, and the Internet has become an essential part of the people.
 
 Despite the ubiquitousness of the Internet, users' activities online are collected under pervasive monitoring by different actors.
-Pervasive Monitoring means ``widespread attack on privacy\cite{rfc7258}.'' Information collected in such action could lead to a breach of users’ privacy, by re-identifying users based on traffic\cite{herrmann2010analyzing}, or could become aids for launching an active form of attacks, such as masquerade and denial of service.
+Pervasive Monitoring means ``widespread attack on privacy\cite{rfc7258}.'' Information collected in such action could lead to a breach of users’ privacy, by re-identifying users based on traffic\cite{herrmann2010analyzing}, or could become aids for launching an active form of attacks, such as masquerade and Denial of Service (DoS).
 Unfortunately, insecure architecture of Domain Name System allows the pervasive monitoring, and thus it should be mitigated. Before discussing the privacy problems of DNS, we introduce DNS and its components which are important to adress.
 
 \subsubsection{DNS}
 Every activity on the web most likely begins with entering a human-friendly domain name in the web-browser. Once we enter a domain name for visiting a website, DNS resolves the address to an actual Internet Protocol Address of a web server which hosts the website. In case multiple websites are hosted on a single server, the entered fully qualified domain name(FQDN) is used to differentiate virtual hosts on a web server\cite{virtual24host}. Therefore, DNS is a critical component of the Internet.
 %What about describing hjierarchical structure of Domain Name System here?
-\subsubsection{DNS Servers}
+\subsubsection{DNS Servers}\label{dnsservers}
 DNS servers consist of four types: Stub resolver, Recursive resolver, Authoritative server, and Forwarding DNS server. Resolvers refer to programmes that obtain information from name servers upon clients' requests\cite{rfc1034}.
 
 Stub resolver is a resolver that serves as an entry-point of querying DNS from applications and directs search request to the nearest recursive resolver\cite{rfc1123}. As it cannot complete domain name resolution by itself, stub resolver is dependant on a recursive resolver\cite{rfc8499}.
@@ -366,13 +366,14 @@ Phase 2 denotes the rest of the steps which the recursive resolver resolves the 
 
 Common problems exist in channel encipher methods.
 Most of the methods we found often do not encrypt communications on Phase 2 in contrast to Phase 1.
-Furthermore, authentication mechanisms are missing on Phase 2 \cite{I-D.bortzmeyer-dprive-step-2}, and the lack of authentication of the authoritative server may potentially enable a Man-in-the-middle attack.
+Furthermore, authentication mechanisms are missing on Phase 2 \cite{I-D.bortzmeyer-dprive-step-2}, and the lack of authentication of the authoritative server may potentially enable a Man-in-the-middle attack (MITM).
 
 The fact that an authoritative server having a one-to-many server-client relationship from the recursive resolvers is the major obstacle of applying encryption on Phase 2.
-As DoH\cite{rfc8484} and DoT\cite{hu2016specification} use TLS protocol for encryption, an authoritative server processing multiple TLS session is likely to end up exhausting its computational resources, similar to a Denial-of-service attack situation \cite{bhople2012server}. The issues are well discussed in the internet draft "Next step for DPRIVE: resolver-to-auth link \cite{I-D.bortzmeyer-dprive-step-2}."
+As DoH \cite{rfc8484} and DoT \cite{hu2016specification} use Transport Layer Security (TLS) protocol \cite{rfc7858} for encryption, an authoritative server processing multiple TLS session is likely to end up exhausting its computational resources \cite{bhople2012server}, similar to a Distributed DoS (DDoS) attack situation. The issues are well discussed in the internet draft ``Next step for DPRIVE: resolver-to-auth link \cite{I-D.bortzmeyer-dprive-step-2}.''
 
 \subsubsection{Location of Recursive DNS resolvers}
-From the end user's point of view, recursive DNS Resolvers can be on a local machine, one provided by the Internet Service Providers (ISP) and Public DNS servers \cite{van2018privacy}. 
+From the end user's point of view, recursive DNS Resolvers can be on a local machine, one provided by the Internet Service Providers (ISP) and Public DNS servers \cite{van2018privacy}.
+Selection of the location of recursive DNS resolvers leads to different impacts on the user's privacy, in terms of cache and obfuscation and logging. Section \ref{dnsservers} described caching on recursive resolvers.
 
 \begin{figure}[ht!]
     \begin{center}
@@ -381,6 +382,11 @@ From the end user's point of view, recursive DNS Resolvers can be on a local mac
     \caption{A simplified network map when using local resursive resolver server.}
     \label{localrecursive}
 \end{figure}
+When a user utilises a local recursive resolver as illustrated in Figure \ref{localrecursive}, channel encipher methods do not add value to users' privacy considering that operations of phase two are often not encrypted.
+Supposing that the user does not share local recursive resolver among the others, DNS queries which the user makes will not be fetched from a cache but all involved authoritative NS.
+Sending queries in clear text on phase 2 leaves a possibility for all parties who are involved in the network packet transmission to monitor QNAME, query type and source IP of the traffic towards authoritative NS.
+Referring to the assumption that local recursive resolver is unique for a person, there is no space for obfuscation since no one else is querying from the IP address of the recursive resolver.
+
 
 \begin{figure}[ht!]
     \begin{center}
