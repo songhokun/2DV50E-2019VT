@@ -344,7 +344,7 @@ Several studies demonstrated privacy risks of the current DNS standard and propo
 \end{table}
 %\subsection{Evaluation of the improvement suggestions by other researchers}
 
-\section{Analysis of the survey result}
+\section{Theoretical Analysis of DNS Privacy enhancing methods}
 This section provides an analysis of the survey results.
 The refined search results were categorised into the following fields: studies that suggested improving the security breach and investigations that demonstrated the security vulnerabilities.
 We have further classified the privacy improving studies into ones securing the content and others enhancing the channel, based on the privacy risk analysis of RFC 7626.
@@ -399,7 +399,7 @@ However, utilising the local recursive resolver eliminates the risks of queries 
 \end{figure}
 Using ISP provided Recursive resolver is the most common scenario, as most ISP offer DNS resolver to their users over Dynamic Host Configuration Protocol (DHCP).
 The resolver from ISP is shared with other subscribers of the network, and it increases more chance of having queries cached by another user who acquired the address previously.
-Reusing cache reduces the need of Phase 2 in its response process and thus generates less often-insecure traffics towards authoritative NS. 
+Reusing cache reduces the need of Phase 2 in its response process \cite{wang2013analysis} and thus generates less often-insecure traffics towards authoritative NS. 
 Authoritative name servers see the source IP address of ISP's resolver in Phase 2 of DNS resolving, but not IP of the individuals, in case E-DNS Client Subset(ECS) is not in place.
 When ECS is used, the authoritative NS may see truncated IP of clients\cite{kintis2016understanding}, but the IP address does not present additional privacy harm as ISP's recursive resolver is often in the same subnet IP range, and authoritative NS already acquaints source IP of the recursive DNS resolver. 
 Privacy risks incurred by logging exist in ISP provided resolver, as ISPs may be obliged for log retentions due to legal requirements of the countries they operate in.
@@ -421,8 +421,21 @@ This scenario benefits users the most when channel encipherment is applied becau
 \FloatBarrier
 \subsection{Securing content}
 While applying the encipherment mechanism on the communications among DNS servers has a criticism that it only had only shifted the trust towards the Recursive resolver, applying design enhancements of packets' content brings significantly reduces the risks of (1) Data in the DNS request and data leaks in (3) the servers.
+Query Name (QNAME) minimisation \cite{bortzmeyer2016dns} and Oblivious DNS \cite{annee-dprive-oblivious-dns-00} are the techniques of this category.
 
-TODO: Describe attack surfaces. Include figures.
+QNAME minimisation reduces the query leaks on higher authoritative name server chains, by presenting only relevant part of a domain name for an authoritative server to answer, instead of querying with FQDN.
+It makes only relevant name server to acquire the full QNAME and query type. Therefore it reduces privacy risks on Phase 2.
+Although the risk of data leaks still present in the last chain of the authoritative NS, this is less likely to happen unless a domain name owner has a malicious intent to exploit users' privacy.
+
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics*[width=0.9\columnwidth]{img/ODNSoverview}
+    \end{center}
+    \caption{An overview of Oblivious DNS \cite{ODNSwebsite}}
+    \label{odnsoverview}
+\end{figure}
+Oblivious DNS (ODNS) aims to decouple any association of a client IP address and DNS query content and no single party should be able to see both \cite{annee-dprive-oblivious-dns-00}. For this to work, it requires a special stub resolver and an ODNS authoritative resolver where the client creates a unique session key on each session to encrypt its DNS query and append 'odns' TLD. 
+
 \newpage
 \section{Design of controlled experiment}
 This section describes the experimental setups, which consists of a choice of privacy enhancement methods to verify, and the way we verified these.
