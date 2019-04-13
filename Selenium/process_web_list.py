@@ -70,7 +70,7 @@ def __fetch_alexa_list(websites_dir):
     with zipfile.ZipFile(filename, 'r') as alexa_zipfile:
         alexa_zipfile.extractall(websites_dir)
 
-    return glob(os.path.join(websites_dir), '*.csv')
+    return glob(os.path.join(websites_dir, '*.csv'))
 
 
 if __name__ == "__main__":
