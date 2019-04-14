@@ -129,8 +129,8 @@ Despite a single solution for addressing privacy risks in all stages of the DNS 
 %----------------------------------------------------------------------------------------
 %	Preface
 %----------------------------------------------------------------------------------------
-%\newpage
-%\textbf {\large{Preface}}\\
+\newpage
+\textbf {\large{Revision history for the seminar}}\\
 
 %\noindent You can have a preface in the report if you want, but it is not necessary. In this you can write more personal reflections on your degree project. In the preface you can also take the opportunity to thank the people who have been particularly helpful during the report writing, for example if you had any contact with a company that helped with the project, people that guided or helped you during the project, or your family and friends that supported you during the project. The preface shall not be longer than half a page.
 
@@ -448,32 +448,45 @@ We reduced the scope of technologies to test to the followings implementations: 
 
 \subsection{Experiment scenarios}
 Identifying incoming and outgoing traffics around a recursive resolver is our interest, as recursive DNS resolver knows about stub resolver's information and its query.
-We previously mentioned that user can choose to use its own client to be a recursive resolver, or use the one operated by other providers. Therefore, we placed of recursive resolvers on a local network and used a public recursive resolver to compare with.
+We previously analysed that the location choice of a recursive resolver leads to different value addition of privacy enhancement.
+Scenarios where theoretically proven to have less value addition are not of our interest.
+Therefore, in each experiment, we aim to verify situations where we anticipate privacy enhancement. 
 
-\subsubsection{Verifying channel encipherment solutions}
+\subsection{Verifying channel encipherment solutions}
 We chose to use the remote recursive resolver (i.e. public DNS server) as the focus of the experiment laid on observing (2) on the wire traffic between the stub client and the resolver.
-For this verification, the control group is a Firefox web browser 66.0.2 (64-bit) on a Ubuntu PC without any manual intervention, except that DNS server is changed to a specific recursive resolver on OS-level. The experiment groups are Firefox browser configured to send all DNS queries using DNS-over-HTTPS, and DNS-over-TLS. The acts performed on each experimental setup are described in Section \ref{simulation}.
 
-\subsubsection{Verifying content enhancement solutions}
+\subsubsection{DNS-over-HTTPS}
+DoH clients that are available to test are Firefox web browsers later than version 62 \cite{FirefoxDoH}, curl later than 7.62 \cite{CurlDoH} and DNSCrypt-proxy. We apply each DoH client and generate DNS traffics as described in the Section \ref{simulation}. Afterwards, captured packets are analysed to see whether DNS queries of a client can be derived without putting efforts on intercepting encrypted traffics. Then captured packets are compared with the scenario where DoH client is not used.
+
+\subsubsection{DNS-over-TLS}
+
+\subsection{Verifying content enhancement solutions}
 We deployed local recursive resolver since the focus of the test was to verify how securing contents of DNS queries contribute to enhancing end users' privacy. That will say, the experiment focused on analysing outgoing traffics from the recursive resolver to other authoritative DNS nameservers. 
 
 The recursive resolver was set with a software BIND 9.14.0, as it is the most commonly deployed software for DNS servers and its latest version supports QNAME minimisation by default\cite{bind9qname}.
 For this experiments, a controlled case is running DNS queries towards a BIND server which is configured to disable QNAME minimisation feature using, and an experiment case is performing the same steps to the server with QNAME minimisation enabled.
 
-
-
 \subsection{Simulation of address resolution}\label{simulation}
-Using BIND9 tools such as nslookup or dig a client is sufficient if we would focus on a DNS resolution of an entered URL address. However, using these tools does not represent actual use cases on the user-side. In the modern Internet, a website consists of embedded Cascading Style Sheets (CSS), static contents such as images which Content Delivery Networks (CDN) host, and advertisements and analytic scripts. The additional materials embedded on a website incurs follow up address resolutions, and it is relevant to simulate browsing experiences.
-Therefore, we have chosen to use a tool called selenium. 
-
-Selenium is the web automation test tool\cite{holmes2006automating}, which is typically used to test web applications. However, in our experiments, we utilised Selenium to visit a list of websites for simulating DNS queries. As we intended to use Firefox for DoH simulation, Selenium was incorporated with Firefox Gecko driver to control the web browser. Additionally, a Python script to operate Selenium
+We fetched a URL list of frequently visited websites as described in Appendix \ref{processweblist} and generated web traffic as described in Appendix \ref{visitwebsites}.
 
 \subsection{Tool to analyse the traffics}
 We used Network traffic analytic tool, Wireshark to filter traffics based on the Port, and we abstract contents of the application layer and Internet Protocol layer to link clients' identities and their DNS transactions.
 \newpage
 
 \section{Results}
-In this chapter you show and describe your results. You shall only show the raw results without any analysis, and you shall not put any conclusions or opinions in the description of the results. Try to be as objective as possible. An example of results from an experiment comparing five sorting algorithms is shown in Table \ref{results} below.\\
+This chapter shows the result of verifying DNS Privacy solutions.
+\subsection{DNS-over-HTTPS}
+Figure \ref{mode2packets} shows a result of packet captures filtered with DNS (port 53) of a Firefox (66.0.2) simulation which network.trr.mode is set as 2 and executed top 10 websites of 'de' domain.
+
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics*[width=0.9\columnwidth]{img/firefox-mode2/wireshark}
+    \end{center}
+    \caption{Packet captures of Firefox where trust recursive resolver mode is enabled in mode 2}
+    \label{mode2packets}
+\end{figure}
+
+%In this chapter you show and describe your results. You shall only show the raw results without any analysis, and you shall not put any conclusions or opinions in the description of the results. Try to be as objective as possible. An example of results from an experiment comparing five sorting algorithms is shown in Table \ref{results} below.\\
 
 
 
@@ -574,10 +587,15 @@ You cannot do everything within the limited scope of a degree project. Here you 
 \setcounter{page}{1} % Reset page numbering for Appendix
 \appendix
 
-\section{Appendix 1}
-Gecko driver needs to be reachable in PATH environment. List of websites are fetched from alexa \url{http://s3.amazonaws.com/alexa-static/top-1m.csv.zip}
-In the appendix you can put details that does not fit into the main report. Examples are source code, long tables with raw data and questionnaires.
+\section{Appendix 1}\label{processweblist}
+This section describes the list of websites we simulated. The website list is fetched from Alexa top one million global chart and further classified depends on Top-Level-Domains (TLDs).
+\inputpython{../Selenium/process_web_list.py}{1}{72}
 
-\inputpython{../Selenium/visitwebsites.py}{1}{70}
+\section{Appendix 2}\label{visitwebsites}
+This section includes a Python script for visiting websites using Selenium.
+Selenium is the web automation test tool\cite{holmes2006automating}, which is typically used to test web applications. However, in our experiments, we utilised Selenium to visit a list of websites for simulating DNS queries. As we intended to use Firefox for DoH simulation, Selenium was incorporated with Firefox Gecko driver to control the web browser. Additionally, a Python script to operate Selenium.
+
+Python 3.5 and higher, Pip3 is required. It is anticipated that Python packages such as selenium and json are also installed on the system. A Gecko driver needs to be reachable in OS' PATH environment. This code assumes that Firefox browser is installd on the local PC.
+
 \inputpython{../Selenium/visitwebsites.py}{1}{70}
 \end{document}

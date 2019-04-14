@@ -242,6 +242,6 @@ TSWLatexianTemp*
 *.spl
 
 *.pdf
-
+# Website data source which can be fetched by running the script.
 ./.DAV/*
 ./Selenium/websites/*
