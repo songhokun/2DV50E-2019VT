@@ -3,6 +3,7 @@
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import WebDriverException
 from collections import defaultdict
 import time
 import os
@@ -35,11 +36,12 @@ def main():
 def advanced_main():
     doh_profile = __get_dns_over_https_profile()
     driver = webdriver.Firefox(firefox_profile=doh_profile)
-    driver.close()
-    driver.get("about:networking")
-    time.sleep(10)
-    for alexawebsite in load_website_dict()['se']:
-        driver.get("http://" + alexawebsite)
+  
+    for alexawebsite in load_website_dict()['de']:
+        try:
+            driver.get("http://" + alexawebsite)
+        except WebDriverException as identifier:
+            print(alexawebsite + " was not accessible! \n" + identifier)
         time.sleep(3)
 
     driver.close()
