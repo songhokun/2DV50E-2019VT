@@ -2,19 +2,21 @@
 #!/usr/bin/python3
 
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException
-from collections import defaultdict
 import time
-import os
-import json
+import util
 
 
-def advanced_main():
+def main():
     doh_profile = __get_dns_over_https_profile()
     driver = webdriver.Firefox(firefox_profile=doh_profile)
-  
-    for alexawebsite in load_website_dict()['de']:
+
+    website_dict = util.read_json_to_dict()
+    if not website_dict:
+        print("Dictionary could not be loaded! ")
+        exit(1)
+
+    for alexawebsite in website_dict['de']:
         try:
             driver.get("http://" + alexawebsite)
         except WebDriverException as identifier:
@@ -32,18 +34,5 @@ def __get_dns_over_https_profile():
     return firefox_profile
 
 
-def load_website_dict():
-    dir_name, _ = os.path.split(os.path.abspath(__file__))
-    websites_dir = os.path.join(dir_name, 'websites')
-    json_filepath = os.path.join(websites_dir, 'web_dic.json')
-    website_dic = defaultdict(list)
-
-    if os.path.exists(json_filepath):
-        with open(json_filepath, 'r') as file_reader:
-            website_dic = json.load(file_reader)
-
-    return website_dic
-
-
 if __name__ == "__main__":
-    advanced_main()
+    main()
