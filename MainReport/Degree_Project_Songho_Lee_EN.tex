@@ -345,7 +345,7 @@ Several studies demonstrated privacy risks of the current DNS standard and propo
 \end{table}
 %\subsection{Evaluation of the improvement suggestions by other researchers}
 
-\section{Theoretical Analysis of DNS Privacy enhancing methods}
+\section{Overview of DNS Privacy enhancing methods}
 This section provides an analysis of the survey results.
 The refined search results were categorised into the following fields: studies that suggested improving the security breach and investigations that demonstrated the security vulnerabilities.
 We have further classified the privacy improving studies into ones securing the content and others enhancing the channel, based on the privacy risk analysis of RFC 7626.
@@ -467,7 +467,16 @@ The recursive resolver was set with a software BIND 9.14.0, as it is the most co
 For this experiments, a controlled case is running DNS queries towards a BIND server which is configured to disable QNAME minimisation feature using, and an experiment case is performing the same steps to the server with QNAME minimisation enabled.
 
 \subsection{Simulation of address resolution}\label{simulation}
-We fetched a URL list of frequently visited websites as described in Appendix \ref{processweblist} and generated web traffic as described in Appendix \ref{visitwebsites}.
+We fetched a URL list of frequently visited websites as described in Appendix \ref{processweblist}.
+We attempted to generate web traffic using a web automation tool as described in Appendix \ref{visitwebsites}.
+However, since additional software is envolved for a traffics simulation, there is a chance that an error in the automation tool may lead to misleading results.
+Therefore, we created a set of bookmarks from the method Appendix \ref{processweblist}, and visited the websites manually as well.
+
+\begin{lstlisting}
+    # sudo systemd-resolve --flush-caches
+    # sudo systemd-resolve --statistics
+    $ wireshark -i enp4s0 -k & python3 visitwebsites.py
+\end{lstlisting}
 
 \subsection{Tool to analyse the traffics}
 We used Network traffic analytic tool, Wireshark to filter traffics based on the Port, and we abstract contents of the application layer and Internet Protocol layer to link clients' identities and their DNS transactions.
@@ -476,65 +485,32 @@ We used Network traffic analytic tool, Wireshark to filter traffics based on the
 \section{Results}
 This chapter shows the result of verifying DNS Privacy solutions.
 \subsection{DNS-over-HTTPS}
-Figure \ref{mode2packets} shows a result of packet captures filtered with DNS (port 53) of a Firefox (66.0.2) simulation which network.trr.mode is set as 2 and executed top 10 websites of 'de' domain.
+Figure \ref{selenium-mode2packets} shows a result of packet captures filtered with DNS (port 53) of a Firefox (66.0.2) simulation with Selenium which network.trr.mode is set as 2 and executed top 10 websites of 'de' domain.
 
 \begin{figure}[h!]
     \begin{center}
-    \includegraphics*[width=0.9\columnwidth]{img/firefox-mode2/wireshark}
+    \includegraphics*[width=0.9\columnwidth]{img/selenium-firefox-mode2/wireshark}
     \end{center}
     \caption{Packet captures of Firefox where trust recursive resolver mode is enabled in mode 2}
-    \label{mode2packets}
+    \label{selenium-mode2packets}
 \end{figure}
 
 %In this chapter you show and describe your results. You shall only show the raw results without any analysis, and you shall not put any conclusions or opinions in the description of the results. Try to be as objective as possible. An example of results from an experiment comparing five sorting algorithms is shown in Table \ref{results} below.\\
 
 
-
-\begin{center}
-\begin{table}[ht]
-\begin{center}
-\begin{tabular}{ccccccc}
-\hline
-Run & Bubble & Quick & Selection & Insertion & Merge \\
-\hline
-1 & 17384 & 24 & 3258 & 3 & 30 \\
-2 & 17559 & 21 & 3386 & 3 & 27 \\
-3 & 17795 & 19 & 3344 & 4 & 28 \\
-4 & 17484 & 20 & 3417 & 3 & 28 \\
-5 & 17642 & 19 & 3358 & 3 & 30 \\
-\hline
-Average & 17572.8 & 20.6 & 3352.6 & 3.2 & 28.6 \\
-\hline
-%
-\end{tabular}
-\end{center}
-\caption{Execution times for the five sorting algorithms on 100 000 random numbers between 0 and 10 000.}
-\label{results}
-\end{table}
-\end{center}
-
-What you show heavily depends on the type of method you use and what type of data you collect. Numerical data can for example be shown in both tables and graphs. A complementary graph for the sorting algorithms example is shown in Figure \ref{graph}. For a questionnaire you can show the frequency (how many participants that selected the same answer) of each possible answer to a question.
-
-\begin{figure}[ht!]
-\begin{center}
-\includegraphics*[width=0.6\columnwidth]{img/graph}
-\end{center}
-\caption{Execution times for the five sorting algorithms shown as a graph.}
-\label{graph}
-\end{figure}
-
-Note that Tables and Figures shall be labeled with chapter.number, for example Table 4.1 and Figure 1.6.
-
 \newpage
-	
+
 \section{Analysis}
-Here you give meaning to and your own opinions of the results. What conclusions can you draw from the results? It is important that you don't draw any conclusions that cannot be backed up by your data. Consider using statistical tests to back up your claims. You can read about statistical testing \href{https://coursepress.lnu.se/subject/thesis-projects/statistical-testing/}{here}. 
+Results from Figure \ref{selenium-mode2packets} illustrates that none of the DNS queries is encrypted by using DNS-over-HTTPS when traffics are simulated using Selenium. This is suspected that Selenium simulation does utilise Firefox configuration profile that is applied to utilise DoH.
+
+	
 	
 \newpage
 	
 \section{Discussion}
 The project intensively examines securing Domain Name queries as a method of enhancing end-users' privacy towards pervasive monitoring.
-\subsection{Is securing DNS enough to protect users' privacy?}
+
+\subsection{Why is DNS pointed out as a privacy leaking component apart from others?}
 A Question may arise why it mainly focuses on securing DNS although there exist other factors which disclose users' privacy.
 To answer the question, let us have an example of a web filter, as it is a commonly found practical example of the large scale monitoring\cite{murdoch2008tools}.
 %As web filters require monitoring of users' traffic to enforce its policy of restrictions, understanding the mechanisms of the web filter suits this context.
@@ -555,8 +531,10 @@ Furthermore, the combination of wide deployment of HTTPS and Virtual Hosting has
 
 However, the trend change of Internet has not brought additional challenges to Domain Name System (DNS) filtering. Therefore, the project studies to remedy the weakest point towards users' privacy, which in this case is DNS.
 
-\subsection{Ethical dilemma of privacy enhancement; Liberation of illegal crimes?}
-\subsection{Choice of Public DNS server and impact on CDN}
+%\subsection{Ethical dilemma of privacy enhancement; Liberation of illegal crimes?}
+\subsection{Should end-users' IP considered as a person identifying information?}
+People against of using ECS often argue that ECS may reveal an IP address of the end-user behind the DNS query, and therefore has a chacne of revealing the person's privacy.
+However, it is doubted whether IP address itself should be seen as person identifiable factor, if subscription information is not linked by Internet Access Provider(IAP).
 \newpage
 		
 \section{Conclusion}
@@ -589,7 +567,8 @@ You cannot do everything within the limited scope of a degree project. Here you 
 
 \section{Appendix 1}\label{processweblist}
 This section describes the list of websites we simulated. The website list is fetched from Alexa top one million global chart and further classified depends on Top-Level-Domains (TLDs).
-\inputpython{../Selenium/process_web_list.py}{1}{72}
+Below is code for a script to convert the Alexa list into a dictionary format.
+\inputpython{../Selenium/process_web_list.py}{1}{30}
 
 \section{Appendix 2}\label{visitwebsites}
 This section includes a Python script for visiting websites using Selenium.
@@ -598,4 +577,7 @@ Selenium is the web automation test tool\cite{holmes2006automating}, which is ty
 Python 3.5 and higher, Pip3 is required. It is anticipated that Python packages such as selenium and json are also installed on the system. A Gecko driver needs to be reachable in OS' PATH environment. This code assumes that Firefox browser is installd on the local PC.
 
 \inputpython{../Selenium/visitwebsites.py}{1}{70}
+\section{Appendix 3}
+Below is code for util.py which is a common base script.
+\inputpython{../Selenium/util.py}{1}{110}
 \end{document}
