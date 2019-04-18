@@ -1,0 +1,72 @@
+This chapter presents the result of a systematic literature review on studies related to DNS Privacy.
+%Afterwards, the analysis of the result follows.
+As the raw data from the Google scholar had contained several duplicated entries, duplicated studies were excluded. Series or revisions of the same article are marked as duplicated. For such cases, the proceeding study was chosen to present.
+The analysis section which follows after this chapter motivates strategies for categorisation of raw search results.
+
+\subsection{Improvement suggestions}
+Studies shown in Table \ref{channel} attempted to secure the communication channel of the DNS query. In other words, these studies suggested applying Encipherment mechanism to deliver Connection Confidentiality as X.800 defines \cite{x800}.
+
+\begin{table}[h!]
+    \begin{tabular}{ | l | p{10.5cm} | l | l | }
+        \hline
+            ID & Title & Year & Cites  \\ \hline
+            \cite{hu2016specification} & Specification for dns over transport layer security (tls) & 2016 & 27 \\ \hline
+            \cite{rfc8484} & Dns queries over https (doh) & 2018 & 5\\ \hline
+            \cite{reddy2017dns} & Dns over datagram transport layer security (dtls) & 2017 & 3\\ \hline
+            \cite{bucuti2015opportunistic} & An opportunistic encryption extension for the DNS protocol & 2015 & 2 \\ \hline
+            \cite{dickinson2018usage} & Usage profiles for dns over tls and dns over dtls & 2018 & 1 \\ \hline
+            \cite{saraj2017design} & Design and implementation of a lightweight privacy extension of DNSSEC protocol & 2017 & 0 \\ \hline
+            \cite{dnsoquic} & Specification of DNS over Dedicated QUIC Connections & 2019 & 0 \\ \hline
+            \cite{denis2015dnscrypt} & DNSCrypt & 2015 & 0 \\ \hline
+            \cite{dempsky2010dnscurve} & DNSCurve & 2009 & 0 \\ \hline
+        \end{tabular}
+        \caption{Literatures categorised as securing communication channel}
+\label{channel}
+\end{table}
+
+Table \ref{content} summarised studies on minimising privacy breaching information in the content of packets generated in the DNS query process.
+%The approach can be seen as metaphors of Least common mechanism and Isolation as described in security design principles. 
+
+\begin{table}[h!]
+    \begin{tabular}{ | l | p{10.5cm} | l | l |}
+        \hline
+            ID & Title & Year & Cites \\ \hline
+            \cite{bortzmeyer2016dns} & DNS query name minimisation to improve privacy & 2016 & 33 \\ \hline
+            \cite{annee-dprive-oblivious-dns-00} & Oblivious DNS - Strong Privacy for DNS Queries & 2019 & 0 \\ \hline
+            \cite{pan2018mitigating} & Mitigating Client Subnet Leakage in DNS Queries & 2018 & 0 \\ \hline
+        \end{tabular}
+        \caption{Literatures categorised as securing content}
+\label{content}
+\end{table}
+
+There are several pieces of research and design proposals of new architecture which would replace the current DNS system. These are found in Table \ref{architectures}
+
+\begin{table}[h!]
+    \begin{tabular}{ | l | p{10.5cm} | l | l | }
+        \hline
+            ID & Title & Year & Cites \\ \hline
+            \cite{ambrosin2018security} & Security and privacy analysis of national science foundation future internet architectures & 2018 & 3 \\ \hline
+            \cite{grothoff2017gnunet} & The GNUnet System & 2017 & 1 \\ \hline
+            \cite{asoni2017paged} & A Paged Domain Name System for Query Privacy & 2017 & 0 \\ \hline
+            \cite{loibl2014namecoin} & Namecoin & 2014 & 12 \\ \hline
+        \end{tabular}
+        \caption{Literatures categorised as Architectural proposal}
+    \label{architectures}
+\end{table}
+\FloatBarrier
+\subsection{Case studies on attack scenarios}
+Several studies demonstrated privacy risks of the current DNS standard and proposed mitigative methods which we had introduced in the previous section. 
+
+\begin{table}[h!]
+    \begin{tabular}{ | l | p{10.5cm} | l | l | }
+        \hline
+            ID & Title & Year & Cites \\ \hline
+            \cite{kirchler2016tracked} & Tracked without a trace: linking sessions of users by unsupervised learning of patterns in their DNS traffic & 2016 & 10 \\ \hline
+            \cite{mohaisen2017leakage} & Leakage of. onion at the DNS Root: Measurements, Causes, and Countermeasures & 2017 & 3 \\ \hline
+            \cite{grothoff2017nsa} & NSA's MORECOWBELL: knell for DNS & 2017 & 3 \\ \hline
+            \cite{spaulding2018d} & D-FENS: DNS filtering \& extraction network system for malicious domain names & 2018 & 1 \\ \hline
+        \end{tabular}
+        \caption{Literatures categorised as demonstrating attack scenarios by exploiting the lack of DNS privacy}
+\label{attacks}
+\end{table}
+%\subsection{Evaluation of the improvement suggestions by other researchers}

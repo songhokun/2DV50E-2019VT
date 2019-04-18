@@ -1,0 +1,41 @@
+This section describes the experimental setups, which consists of a choice of privacy enhancement methods to verify, and the way we verified these.
+
+The survey presented in the previous section resulted in fruitful alternatives.
+However, not all of them were in practical uses, with a reasonable amount of implementation on the server side.
+As we analysed privacy impacts on the location of recursive resolvers, conducting experiments that cover several scenarios would be adequate. Thus, it is crucial to choose the solutions which both server and client implementation are available to test.
+We reduced the scope of technologies to test to the followings implementations: DNS-over-HTTPS\cite{rfc8484}, DNS-over-TLS\cite{hu2016specification} and QName minimisation\cite{bortzmeyer2016dns}.
+
+\subsection{Experiment scenarios}
+Identifying incoming and outgoing traffics around a recursive resolver is our interest, as recursive DNS resolver knows about stub resolver's information and its query.
+We previously analysed that the location choice of a recursive resolver leads to different value addition of privacy enhancement.
+Scenarios where theoretically proven to have less value addition are not of our interest.
+Therefore, in each experiment, we aim to verify situations where we anticipate privacy enhancement. 
+
+\subsection{Verifying channel encipherment solutions}
+We chose to use the remote recursive resolver (i.e. public DNS server) as the focus of the experiment laid on observing (2) on the wire traffic between the stub client and the resolver.
+
+\subsubsection{DNS-over-HTTPS}
+DoH clients that are available to test are Firefox web browsers later than version 62 \cite{FirefoxDoH}, curl later than 7.62 \cite{CurlDoH} and DNSCrypt-proxy. We apply each DoH client and generate DNS traffics as described in the Section \ref{simulation}. Afterwards, captured packets are analysed to see whether DNS queries of a client can be derived without putting efforts on intercepting encrypted traffics. Then captured packets are compared with the scenario where DoH client is not used.
+
+\subsubsection{DNS-over-TLS}
+
+\subsection{Verifying content enhancement solutions}
+We deployed local recursive resolver since the focus of the test was to verify how securing contents of DNS queries contribute to enhancing end users' privacy. That will say, the experiment focused on analysing outgoing traffics from the recursive resolver to other authoritative DNS nameservers. 
+
+The recursive resolver was set with a software BIND 9.14.0, as it is the most commonly deployed software for DNS servers and its latest version supports QNAME minimisation by default\cite{bind9qname}.
+For this experiments, a controlled case is running DNS queries towards a BIND server which is configured to disable QNAME minimisation feature using, and an experiment case is performing the same steps to the server with QNAME minimisation enabled.
+
+\subsection{Simulation of address resolution}\label{simulation}
+We fetched a URL list of frequently visited websites as described in Appendix \ref{processweblist}.
+We attempted to generate web traffic using a web automation tool as described in Appendix \ref{visitwebsites}.
+However, since additional software is envolved for a traffics simulation, there is a chance that an error in the automation tool may lead to misleading results.
+Therefore, we created a set of bookmarks from the method Appendix \ref{processweblist}, and visited the websites manually as well.
+
+\begin{lstlisting}
+    # sudo systemd-resolve --flush-caches
+    # sudo systemd-resolve --statistics
+    $ wireshark -i enp4s0 -k & python3 visitwebsites.py
+\end{lstlisting}
+
+\subsection{Tool to analyse the traffics}
+We used Network traffic analytic tool, Wireshark to filter traffics based on the Port, and we abstract contents of the application layer and Internet Protocol layer to link clients' identities and their DNS transactions.

@@ -157,33 +157,7 @@ Despite the ubiquitousness of the Internet, users' activities online are collect
 Pervasive Monitoring means ``widespread attack on privacy\cite{rfc7258}.'' Information collected in such action could lead to a breach of users’ privacy, by re-identifying users based on traffic\cite{herrmann2010analyzing}, or could become aids for launching an active form of attacks, such as masquerade and Denial of Service (DoS).
 Unfortunately, insecure architecture of Domain Name System allows the pervasive monitoring, and thus it should be mitigated. Before discussing the privacy problems of DNS, we introduce DNS and its components which are important to adress.
 
-\subsubsection{DNS}
-Every activity on the web most likely begins with entering a human-friendly domain name in the web-browser. Once we enter a domain name for visiting a website, DNS resolves the address to an actual Internet Protocol Address of a web server which hosts the website. In case multiple websites are hosted on a single server, the entered fully qualified domain name(FQDN) is used to differentiate virtual hosts on a web server\cite{virtual24host}. Therefore, DNS is a critical component of the Internet.
-%What about describing hjierarchical structure of Domain Name System here?
-\subsubsection{DNS Servers}\label{dnsservers}
-DNS servers consist of four types: Stub resolver, Recursive resolver, Authoritative server, and Forwarding DNS server. Resolvers refer to programmes that obtain information from name servers upon clients' requests\cite{rfc1034}.
-
-Stub resolver is a resolver that serves as an entry-point of querying DNS from applications and directs search request to the nearest recursive resolver\cite{rfc1123}. As it cannot complete domain name resolution by itself, stub resolver is dependant on a recursive resolver\cite{rfc8499}.
-
-Recursive resolver is a server which receives a DNS query from a stub resolver and gets the final answer to the query, by (1) answering from its local cache or (2) sending queries to other DNS servers\cite{rfc8499}. After a recursive resolver has sent query request to other authoritative name servers, it is expected for the resolver to store the answer as a local cache. It is the first server in DNS query flow that contacts other servers to get the answer for the client. 
-
-Authoritative (name) server is a server that has ``authority over one or more DNS zones\cite{rfc8499}'' and ``can answer queries without needing to query on other servers as it knows the content of the queried DNS zone by local knowledge\cite{rfc2182}.''
-
-DNS forwarding server is a server that forwards queries to recursive resolver or other forwarding server. It does not perform query process for the stub resolver.
-\subsubsection{DNS Query process}
-Due to the hierarchical structure of the Domain Name System with delegations of authorities \cite{rfc1591}, getting the exact IP address of a given domain name involves several DNS servers. Figure \ref{queryprocess} shows an example of querying ``saimei.ftp.acc.umu.se.''. 
-\begin{figure}[ht!]
-    \begin{center}
-        \includegraphics*[width=\columnwidth]{img/dnsquery}
-    \end{center}
-    \caption{DNS Query sequence diagram}
-    \label{queryprocess}
-\end{figure}
-In the diagram, steps 2 and 3 returns top-level-domain(TLD) from the root servers. the steps 4 and 5 obtain the Authoritative name server of Swedish TLD. The .SE TLD returns name server of Ume\aa\ University in steps 6 and 7. In the last, the name server of umu returns IPv4 address (A record) of the given address, so that recursive resolver can provide the answer to the stub resolver. These steps are performed under the assumption that none of the queries is cached. 
-\subsubsection{EDNS(0) and Client Subnet}
-The extension mechanisms for DNS (EDNS) is specified in RFC 6891. EDNS allows both DNS servers and client to send ``larger DNS packet than the original 512 octet limit \cite{rfc6891}'', so that it benefits of utilising larger size. It makes sending long IPv6 address and possible DNSSEC signatures. As of February 2019, major DNS resolver operators have started not to support non-EDNS compliant servers. 
-
-EDNS(0) provides several options, and one of the option is Client Subnet(ECS) feature, as described in RFC 7831 \cite{rfc7871}. When ECS is used, recursive DNS servers provide a truncated client IP address in its DNS queries to the upstream authorities to permit "topologically localised answers for Content Delivery Networks (CDN)\cite{kintis2016understanding}".
+\input{tex/introduction_of_dns.tex}
 
 \subsection{Related work}
 The project accredits pioneer research of "DNS Privacy Considerations (RFC 7626) \cite{rfc7626}" which has provided theoretical foundations in analysis of DNS privacy. 
@@ -272,79 +246,7 @@ The project performed experiments in a controlled environment to eliminate other
 
 \newpage
 \section{Survey of DNS Privacy enhancing methods}
-This chapter presents the result of a systematic literature review on studies related to DNS Privacy.
-%Afterwards, the analysis of the result follows.
-As the raw data from the Google scholar had contained several duplicated entries, duplicated studies were excluded. Series or revisions of the same article are marked as duplicated. For such cases, the proceeding study was chosen to present.
-The analysis section which follows after this chapter motivates strategies for categorisation of raw search results.
-
-\subsection{Improvement suggestions}
-Studies shown in Table \ref{channel} attempted to secure the communication channel of the DNS query. In other words, these studies suggested applying Encipherment mechanism to deliver Connection Confidentiality as X.800 defines \cite{x800}.
-
-\begin{table}[h!]
-    \begin{tabular}{ | l | p{10.5cm} | l | l | }
-        \hline
-            ID & Title & Year & Cites  \\ \hline
-            \cite{hu2016specification} & Specification for dns over transport layer security (tls) & 2016 & 27 \\ \hline
-            \cite{rfc8484} & Dns queries over https (doh) & 2018 & 5\\ \hline
-            \cite{reddy2017dns} & Dns over datagram transport layer security (dtls) & 2017 & 3\\ \hline
-            \cite{bucuti2015opportunistic} & An opportunistic encryption extension for the DNS protocol & 2015 & 2 \\ \hline
-            \cite{dickinson2018usage} & Usage profiles for dns over tls and dns over dtls & 2018 & 1 \\ \hline
-            \cite{saraj2017design} & Design and implementation of a lightweight privacy extension of DNSSEC protocol & 2017 & 0 \\ \hline
-            \cite{dnsoquic} & Specification of DNS over Dedicated QUIC Connections & 2019 & 0 \\ \hline
-            \cite{denis2015dnscrypt} & DNSCrypt & 2015 & 0 \\ \hline
-            \cite{dempsky2010dnscurve} & DNSCurve & 2009 & 0 \\ \hline
-        \end{tabular}
-        \caption{Literatures categorised as securing communication channel}
-\label{channel}
-\end{table}
-
-Table \ref{content} summarised studies on minimising privacy breaching information in the content of packets generated in the DNS query process.
-%The approach can be seen as metaphors of Least common mechanism and Isolation as described in security design principles. 
-
-\begin{table}[h!]
-    \begin{tabular}{ | l | p{10.5cm} | l | l |}
-        \hline
-            ID & Title & Year & Cites \\ \hline
-            \cite{bortzmeyer2016dns} & DNS query name minimisation to improve privacy & 2016 & 33 \\ \hline
-            \cite{annee-dprive-oblivious-dns-00} & Oblivious DNS - Strong Privacy for DNS Queries & 2019 & 0 \\ \hline
-            \cite{pan2018mitigating} & Mitigating Client Subnet Leakage in DNS Queries & 2018 & 0 \\ \hline
-        \end{tabular}
-        \caption{Literatures categorised as securing content}
-\label{content}
-\end{table}
-
-There are several pieces of research and design proposals of new architecture which would replace the current DNS system. These are found in Table \ref{architectures}
-
-\begin{table}[h!]
-    \begin{tabular}{ | l | p{10.5cm} | l | l | }
-        \hline
-            ID & Title & Year & Cites \\ \hline
-            \cite{ambrosin2018security} & Security and privacy analysis of national science foundation future internet architectures & 2018 & 3 \\ \hline
-            \cite{grothoff2017gnunet} & The GNUnet System & 2017 & 1 \\ \hline
-            \cite{asoni2017paged} & A Paged Domain Name System for Query Privacy & 2017 & 0 \\ \hline
-            \cite{loibl2014namecoin} & Namecoin & 2014 & 12 \\ \hline
-        \end{tabular}
-        \caption{Literatures categorised as Architectural proposal}
-    \label{architectures}
-\end{table}
-\FloatBarrier
-\subsection{Case studies on attack scenarios}
-Several studies demonstrated privacy risks of the current DNS standard and proposed mitigative methods which we had introduced in the previous section. 
-
-\begin{table}[h!]
-    \begin{tabular}{ | l | p{10.5cm} | l | l | }
-        \hline
-            ID & Title & Year & Cites \\ \hline
-            \cite{kirchler2016tracked} & Tracked without a trace: linking sessions of users by unsupervised learning of patterns in their DNS traffic & 2016 & 10 \\ \hline
-            \cite{mohaisen2017leakage} & Leakage of. onion at the DNS Root: Measurements, Causes, and Countermeasures & 2017 & 3 \\ \hline
-            \cite{grothoff2017nsa} & NSA's MORECOWBELL: knell for DNS & 2017 & 3 \\ \hline
-            \cite{spaulding2018d} & D-FENS: DNS filtering \& extraction network system for malicious domain names & 2018 & 1 \\ \hline
-        \end{tabular}
-        \caption{Literatures categorised as demonstrating attack scenarios by exploiting the lack of DNS privacy}
-\label{attacks}
-\end{table}
-%\subsection{Evaluation of the improvement suggestions by other researchers}
-
+\input{tex/survey_of_methods.tex}
 \section{Overview of DNS Privacy enhancing methods}
 This section provides an analysis of the survey results.
 The refined search results were categorised into the following fields: studies that suggested improving the security breach and investigations that demonstrated the security vulnerabilities.
@@ -439,47 +341,7 @@ Oblivious DNS (ODNS) aims to decouple any association of a client IP address and
 
 \newpage
 \section{Design of controlled experiment}
-This section describes the experimental setups, which consists of a choice of privacy enhancement methods to verify, and the way we verified these.
-
-The survey presented in the previous section resulted in fruitful alternatives.
-However, not all of them were in practical uses, with a reasonable amount of implementation on the server side.
-As we analysed privacy impacts on the location of recursive resolvers, conducting experiments that cover several scenarios would be adequate. Thus, it is crucial to choose the solutions which both server and client implementation are available to test.
-We reduced the scope of technologies to test to the followings implementations: DNS-over-HTTPS\cite{rfc8484}, DNS-over-TLS\cite{hu2016specification} and QName minimisation\cite{bortzmeyer2016dns}.
-
-\subsection{Experiment scenarios}
-Identifying incoming and outgoing traffics around a recursive resolver is our interest, as recursive DNS resolver knows about stub resolver's information and its query.
-We previously analysed that the location choice of a recursive resolver leads to different value addition of privacy enhancement.
-Scenarios where theoretically proven to have less value addition are not of our interest.
-Therefore, in each experiment, we aim to verify situations where we anticipate privacy enhancement. 
-
-\subsection{Verifying channel encipherment solutions}
-We chose to use the remote recursive resolver (i.e. public DNS server) as the focus of the experiment laid on observing (2) on the wire traffic between the stub client and the resolver.
-
-\subsubsection{DNS-over-HTTPS}
-DoH clients that are available to test are Firefox web browsers later than version 62 \cite{FirefoxDoH}, curl later than 7.62 \cite{CurlDoH} and DNSCrypt-proxy. We apply each DoH client and generate DNS traffics as described in the Section \ref{simulation}. Afterwards, captured packets are analysed to see whether DNS queries of a client can be derived without putting efforts on intercepting encrypted traffics. Then captured packets are compared with the scenario where DoH client is not used.
-
-\subsubsection{DNS-over-TLS}
-
-\subsection{Verifying content enhancement solutions}
-We deployed local recursive resolver since the focus of the test was to verify how securing contents of DNS queries contribute to enhancing end users' privacy. That will say, the experiment focused on analysing outgoing traffics from the recursive resolver to other authoritative DNS nameservers. 
-
-The recursive resolver was set with a software BIND 9.14.0, as it is the most commonly deployed software for DNS servers and its latest version supports QNAME minimisation by default\cite{bind9qname}.
-For this experiments, a controlled case is running DNS queries towards a BIND server which is configured to disable QNAME minimisation feature using, and an experiment case is performing the same steps to the server with QNAME minimisation enabled.
-
-\subsection{Simulation of address resolution}\label{simulation}
-We fetched a URL list of frequently visited websites as described in Appendix \ref{processweblist}.
-We attempted to generate web traffic using a web automation tool as described in Appendix \ref{visitwebsites}.
-However, since additional software is envolved for a traffics simulation, there is a chance that an error in the automation tool may lead to misleading results.
-Therefore, we created a set of bookmarks from the method Appendix \ref{processweblist}, and visited the websites manually as well.
-
-\begin{lstlisting}
-    # sudo systemd-resolve --flush-caches
-    # sudo systemd-resolve --statistics
-    $ wireshark -i enp4s0 -k & python3 visitwebsites.py
-\end{lstlisting}
-
-\subsection{Tool to analyse the traffics}
-We used Network traffic analytic tool, Wireshark to filter traffics based on the Port, and we abstract contents of the application layer and Internet Protocol layer to link clients' identities and their DNS transactions.
+\input{tex/design_of_protocol_verification.tex}
 \newpage
 
 \section{Results}
