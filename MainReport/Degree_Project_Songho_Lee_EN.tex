@@ -176,8 +176,8 @@ The following research questions are formulated having regards to the privacy br
 
 \begin{table}[h!]
     \begin{tabular} {|p{1.2cm}|p{12.8cm}|} \hline
-        \textbf{RQ1} & What methods exist to enhance DNS Privacy? \\ \hline
-        \textbf{RQ2} & How does DNS Privacy improvement benefit users from being blocked by web filters?\\ \hline
+        \textbf{RQ1} & Which are the use cases that the exisiting DNS Privacy enhancement methods could not address? \\ \hline
+        \textbf{RQ2} & Which combination of different technologies would be suitable to address the limitation of the current status?\\ \hline
         \textbf{RQ3} & What would be possible disadvantages or overheads with DNS Privacy enrichment? \\ \hline
     \end{tabular}
     \caption{Research questions}
@@ -197,8 +197,8 @@ The following objectives are set to answer the research questions and transform 
 \begin{table}[h!]
     \begin{tabular} {|p{1.2cm}|p{12.8cm}|} \hline
         \textbf{O1} & Explore the state of arts in mitigative methods to enhance DNS Privacy \\ \hline
-        \textbf{O2} & Verify application of DNS privacy-enhancing methods complicates DNS eavesdropping\\ \hline
         \textbf{O3} & Identify areas which the selected methods could not address. \\ \hline
+        \textbf{O2} & Verify application of DNS privacy-enhancing methods complicates DNS eavesdropping\\ \hline
         \textbf{O4} & Estimate factors that may lead to a load increase on recursive DNS resolvers by improving DNS Privacy.\\ \hline
     \end{tabular}
     \caption{Objectives}
@@ -247,7 +247,7 @@ The project performed experiments in a controlled environment to eliminate other
 \newpage
 \section{Survey of DNS Privacy enhancing methods}
 \input{tex/survey_of_methods.tex}
-\section{Overview of DNS Privacy enhancing methods}
+\section{Analysis of DNS Privacy enhancing methods}
 This section provides an analysis of the survey results.
 The refined search results were categorised into the following fields: studies that suggested improving the security breach and investigations that demonstrated the security vulnerabilities.
 We have further classified the privacy improving studies into ones securing the content and others enhancing the channel, based on the privacy risk analysis of RFC 7626.
@@ -339,6 +339,12 @@ Although the risk of data leaks still present in the last chain of the authorita
 \end{figure}
 Oblivious DNS (ODNS) aims to decouple any association of a client IP address and DNS query content and no single party should be able to see both \cite{annee-dprive-oblivious-dns-00}. For this to work, it requires a special stub resolver and an ODNS authoritative resolver where the client creates a unique session key on each session to encrypt its DNS query and append 'odns' TLD. 
 
+\newpage
+\section{Privacy profiles}
+\input{tex/privacy.tex}
+\newpage
+\section{Design Constraints}
+Applying channel encipherment methods for securing DNS queries such as using DNS-over-HTTPS or DNS-over-TLS implies that end-client gives trust in the chosen resolver. 
 \newpage
 \section{Design of controlled experiment}
 \input{tex/design_of_protocol_verification.tex}
