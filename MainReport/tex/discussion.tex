@@ -1,0 +1,40 @@
+The project intensively examines securing Domain Name queries as a method of enhancing end-users' privacy towards pervasive monitoring.
+
+\subsection{Why is DNS pointed out as a privacy leaking component apart from others?}
+A Question may arise why it mainly focuses on securing DNS although there exist other factors which disclose users' privacy.
+To answer the question, let us have an example of a web filter, as it is a commonly found practical example of the large scale monitoring\cite{murdoch2008tools}.
+%As web filters require monitoring of users' traffic to enforce its policy of restrictions, understanding the mechanisms of the web filter suits this context.
+
+Web filter, also known as content-control software, is software that restricts access to a content that is delivered on the Web.
+Wazen et. al categorise mechanisms of legacy web-filtering into five techniques: (a) Port-based, (b) DNS, (c) IP Address, (d) Certificate, (e) Payload-based (f) HTTP proxy filtering techniques\cite{shbair2015efficiently}.
+Except for the technique based on DNS filtering, the rest methods are regarded as well-mitigated due to recent developments of the web environment. 
+
+Among the various types of filtering techniques mentioned above, methods (a) and (c) are considered less efficient due to changes in the Internet ecosystem in recent decennial;
+Internet firms such as Google, Facebook and Amazon show strong presence\cite{haucap2014google}, and the phenomenon may have reduced the diversity of traffic endpoint's IP addresses.
+Moreover, it has become more common to have web services deployed in cloud environments\cite{clouds2018stat}, and IaaS providers extensively use ``Virtual Host\cite{virtual24host}'', which means various Web servers correspond to the same IP address.
+It also eliminates the need for utilising different ports to co-host services. Thus, port usages are normalised.
+
+Also, another notable change of the Internet is that adoption of HTTPS on the web has increased significantly\cite{felt2017measuring}.
+The change has increased costs of performing technique (e) and brought challenges in payload-based traffic classification \cite{xue2013traffic}.
+Also, it has made (f) less applicable, as a proxy does not directly process encrypted traffics\cite{shbair2015efficiently}.
+Furthermore, the combination of wide deployment of HTTPS and Virtual Hosting has made technique (e) inefficient, because ``many companies share the same certificate across different services and domain names\cite{shbair2015efficiently}''.
+
+However, the trend change of Internet has not brought additional challenges to Domain Name System (DNS) filtering. Therefore, the project studies to remedy the weakest point towards users' privacy, which in this case is DNS.
+
+%\subsection{Ethical dilemma of privacy enhancement; Liberation of illegal crimes?}
+\subsection{IP as a human identificable information}
+People against using ECS often argue that ECS may reveal an IP address of the end-user behind the DNS query, and therefore has a chance of revealing the person's privacy.
+However, it is doubted whether the truncated IP address itself should be seen as a person identifiable factor.
+
+Clent's IP address has a potential to be privacy harm, but main factors that contribute to the privacy infringement may be associated with the distinctness (uniqueness) of the address and whether the IP can be linked with other identifiers.
+
+\subsection{Obstruction of justice}
+At the beginning of the report, the thesis motivated that securing DNS in its architecture is necessary, as the vulnerability cannot only be exploited by the right hand but could also be misused by a malevolent party.
+Let us assume that the perpetrators may use DNS Privacy enhancement methods to hide their activities, and DNS Privacy is in good practice that makes it difficult for investigators to eavesdrop the queries.
+
+
+%Make it difficult for legal enformcement side to gain information
+%It may mean violation of the law in some area
+%However, 
+In the U.S. or common law jurisdictions, hindering lawful enforcement may be seen as ``Obstruction of justice''.
+In this perspective, hiding DNS query may be claimed as \textit{concealing} or \textit{covering up} with intent to \textit{impede} or \textit{obstruct} the investigation or proper administration as 18 U.S. Code \S 1591 states \cite{Obstructionofjustice}.

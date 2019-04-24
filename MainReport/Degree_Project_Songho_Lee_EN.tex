@@ -245,6 +245,9 @@ The project deployed its experiments in a virtualised environment to minimise un
 The project performed experiments in a controlled environment to eliminate other affecting factors. It means that no real data of legal representatives are collected without his/her consent. 
 
 \newpage
+\section{Privacy profiles}
+\input{tex/privacy.tex}
+\newpage
 \section{Survey of DNS Privacy enhancing methods}
 \input{tex/survey_of_methods.tex}
 \section{Analysis of DNS Privacy enhancing methods}
@@ -340,15 +343,13 @@ Although the risk of data leaks still present in the last chain of the authorita
 Oblivious DNS (ODNS) aims to decouple any association of a client IP address and DNS query content and no single party should be able to see both \cite{annee-dprive-oblivious-dns-00}. For this to work, it requires a special stub resolver and an ODNS authoritative resolver where the client creates a unique session key on each session to encrypt its DNS query and append 'odns' TLD. 
 
 \newpage
-\section{Privacy profiles}
-\input{tex/privacy.tex}
-\newpage
+
 \section{Design Constraints}
 Applying channel encipherment methods for securing DNS queries such as using DNS-over-HTTPS or DNS-over-TLS implies that end-client gives trust in the chosen resolver. 
 \newpage
-\section{Design of controlled experiment}
-\input{tex/design_of_protocol_verification.tex}
-\newpage
+%\section{Design of controlled experiment}
+%\input{tex/design_of_protocol_verification.tex}
+%\newpage
 
 \section{Results}
 This chapter shows the result of verifying DNS Privacy solutions.
@@ -376,33 +377,7 @@ Results from Figure \ref{selenium-mode2packets} illustrates that none of the DNS
 \newpage
 	
 \section{Discussion}
-The project intensively examines securing Domain Name queries as a method of enhancing end-users' privacy towards pervasive monitoring.
-
-\subsection{Why is DNS pointed out as a privacy leaking component apart from others?}
-A Question may arise why it mainly focuses on securing DNS although there exist other factors which disclose users' privacy.
-To answer the question, let us have an example of a web filter, as it is a commonly found practical example of the large scale monitoring\cite{murdoch2008tools}.
-%As web filters require monitoring of users' traffic to enforce its policy of restrictions, understanding the mechanisms of the web filter suits this context.
-
-Web filter, also known as content-control software, is software that restricts access to a content that is delivered on the Web.
-Wazen et. al categorise mechanisms of legacy web-filtering into five techniques: (a) Port-based, (b) DNS, (c) IP Address, (d) Certificate, (e) Payload-based (f) HTTP proxy filtering techniques\cite{shbair2015efficiently}.
-Except for the technique based on DNS filtering, the rest methods are regarded as well-mitigated due to recent developments of the web environment. 
-
-Among the various types of filtering techniques mentioned above, methods (a) and (c) are considered less efficient due to changes in the Internet ecosystem in recent decennial;
-Internet firms such as Google, Facebook and Amazon show strong presence\cite{haucap2014google}, and the phenomenon may have reduced the diversity of traffic endpoint's IP addresses.
-Moreover, it has become more common to have web services deployed in cloud environments\cite{clouds2018stat}, and IaaS providers extensively use ``Virtual Host\cite{virtual24host}'', which means various Web servers correspond to the same IP address.
-It also eliminates the need for utilising different ports to co-host services. Thus, port usages are normalised.
-
-Also, another notable change of the Internet is that adoption of HTTPS on the web has increased significantly\cite{felt2017measuring}.
-The change has increased costs of performing technique (e) and brought challenges in payload-based traffic classification \cite{xue2013traffic}.
-Also, it has made (f) less applicable, as a proxy does not directly process encrypted traffics\cite{shbair2015efficiently}.
-Furthermore, the combination of wide deployment of HTTPS and Virtual Hosting has made technique (e) inefficient, because ``many companies share the same certificate across different services and domain names\cite{shbair2015efficiently}''.
-
-However, the trend change of Internet has not brought additional challenges to Domain Name System (DNS) filtering. Therefore, the project studies to remedy the weakest point towards users' privacy, which in this case is DNS.
-
-%\subsection{Ethical dilemma of privacy enhancement; Liberation of illegal crimes?}
-\subsection{Should end-users' IP considered as a person identifying information?}
-People against of using ECS often argue that ECS may reveal an IP address of the end-user behind the DNS query, and therefore has a chacne of revealing the person's privacy.
-However, it is doubted whether IP address itself should be seen as person identifiable factor, if subscription information is not linked by Internet Access Provider(IAP).
+\input{tex/discussion.tex}
 \newpage
 		
 \section{Conclusion}
@@ -433,19 +408,19 @@ You cannot do everything within the limited scope of a degree project. Here you 
 \setcounter{page}{1} % Reset page numbering for Appendix
 \appendix
 
-\section{Appendix 1}\label{processweblist}
-This section describes the list of websites we simulated. The website list is fetched from Alexa top one million global chart and further classified depends on Top-Level-Domains (TLDs).
-Below is code for a script to convert the Alexa list into a dictionary format.
-\inputpython{../Selenium/process_web_list.py}{1}{30}
+%\section{Appendix 1}\label{processweblist}
+%This section describes the list of websites we simulated. The website list is fetched from Alexa top one million global chart and further classified depends on Top-Level-Domains (TLDs).
+%Below is code for a script to convert the Alexa list into a dictionary format.
+%\inputpython{../Selenium/process_web_list.py}{1}{30}
 
-\section{Appendix 2}\label{visitwebsites}
-This section includes a Python script for visiting websites using Selenium.
-Selenium is the web automation test tool\cite{holmes2006automating}, which is typically used to test web applications. However, in our experiments, we utilised Selenium to visit a list of websites for simulating DNS queries. As we intended to use Firefox for DoH simulation, Selenium was incorporated with Firefox Gecko driver to control the web browser. Additionally, a Python script to operate Selenium.
+%\section{Appendix 2}\label{visitwebsites}
+%This section includes a Python script for visiting websites using Selenium.
+%Selenium is the web automation test tool\cite{holmes2006automating}, which is typically used to test web applications. However, in our experiments, we utilised Selenium to visit a list of websites for simulating DNS queries. As we intended to use Firefox for DoH simulation, Selenium was incorporated with Firefox Gecko driver to control the web browser. Additionally, a Python script to operate Selenium.
 
-Python 3.5 and higher, Pip3 is required. It is anticipated that Python packages such as selenium and json are also installed on the system. A Gecko driver needs to be reachable in OS' PATH environment. This code assumes that Firefox browser is installd on the local PC.
+%Python 3.5 and higher, Pip3 is required. It is anticipated that Python packages such as selenium and json are also installed on the system. A Gecko driver needs to be reachable in OS' PATH environment. This code assumes that Firefox browser is installd on the local PC.
 
-\inputpython{../Selenium/visitwebsites.py}{1}{70}
-\section{Appendix 3}
-Below is code for util.py which is a common base script.
-\inputpython{../Selenium/util.py}{1}{110}
+%\inputpython{../Selenium/visitwebsites.py}{1}{70}
+%\section{Appendix 3}
+%Below is code for util.py which is a common base script.
+%\inputpython{../Selenium/util.py}{1}{110}
 \end{document}
