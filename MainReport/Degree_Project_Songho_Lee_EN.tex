@@ -148,10 +148,10 @@ Despite a single solution for addressing privacy risks in all stages of the DNS 
 %----------------------------------------------------------------------------------------
 
 \section{Introduction}
-This chapter describes what Doname Name System (DNS) is, and how the legacy design of DNS has become a privacy threat. Before diving into the privacy risks of DNS, the background section introduces relevant structure and mechanisms. Knowledgable readers in DNS and Client subnet function may leap to section \ref{problemformulation}.
+This chapter describes what Doname Name System (DNS) is, and how the legacy design of DNS has become a privacy threat. Before discussing the privacy risks of DNS, the background section introduces relevant structure and mechanisms. Knowledgable readers in DNS and Client subnet function may go to section \ref{problemformulation}.
 
 \subsection{Background}
-Digital transformation has brought things used to be done in real life decades ago to the online. At work, people have a video conference call instead of a business trip if not necessary. For shopping goods, people fill in credit card numbers for cross-border payments rather than visiting a bank branch to issue paychecks. In other words, the stage where people work now has been shifted to cyberspace in recent decades, and the Internet has become an essential part of the people.
+Digital transformation has brought things used to be done in real life decades ago to the online. At work, people have a video conference call instead of a business trip if not necessary. For shopping goods, people fill in credit card numbers for cross-border payments rather than visiting a bank branch to issue paychecks. In other words, the stage where people work now has been shifted to cyberspace in recent decades, and the Internet has become an essential part of everyday life.
 
 Despite the ubiquitousness of the Internet, users' activities online are collected under pervasive monitoring by different actors.
 Pervasive Monitoring means ``widespread attack on privacy\cite{rfc7258}.'' Information collected in such action could lead to a breach of users’ privacy, by re-identifying users based on traffic\cite{herrmann2010analyzing}, or could become aids for launching an active form of attacks, such as masquerade and Denial of Service (DoS).
@@ -263,12 +263,12 @@ S. Bortzmeyer, who is the author of RFC 7626, identified risk area of DNS privac
 \end{enumerate}
 
 \subsection{Securing the communication channel}
-Communication channel encirpher methods, as we presented in Table \ref{content}, attempt to alleviate risks (2) on the wire. It also partially addresses risks of (4) re-identification depends on who the subject of the attacker is. 
+Communication channel encirpher methods, as presented in Table \ref{content}, attempt to alleviate risks on the wire. The methods also partially address risks of re-identification depends on who the subject of the attacker is. 
 However, we did not find the one simple solution for securing all communication paths of all involved parties of the DNS resolving. Therefore, the location of the DNS resolver needs to be considered when to mention the limitations of each suggested methods.
 
-Let us abstract DNS query process into two phases, similar to van Heugten's approach \cite{van2018privacy}.
+DNS query process can be abstracted into two phases, similar to van Heugten's approach \cite{van2018privacy}.
 For ease of analysis, step 1 and 10 of Figure \ref{queryprocess} where stub resolver queries a domain name to the recursive resolver and the recursive resolver replies to the stub resolver (i.e. stub-to-resolver link) is defined as Phase 1.
-Phase 2 denotes the rest of the steps which the recursive resolver resolves the queried address to concerning authoritative servers (i.e. recursive-to-auth link).
+Phase 2 denotes the steps where a recursive resolver finds the final answer to the queried address, by recursively reaching to concerning authoritative servers (i.e. recursive-to-auth link).
 
 Common problems exist in channel encipher methods.
 Most of the methods we found often do not encrypt communications on Phase 2 in contrast to Phase 1.
@@ -322,11 +322,11 @@ Channel encipherment on Phase 1 adds a value of users' privacy to a limited exte
 Figure \ref{publicrecursive} briefly shows a scenario of using a public recursive resolver (as known as Public DNS resolver).
 A public DNS server has more possibilities of being shared by a broader public compared to the ISP provided resolvers, and it increases the chances of queries being already cached. Authoritative servers see requests from the IP address of the public resolver, instead of stub resolvers' when ECS is not applied.
 
-This scenario benefits users the most when channel encipherment is applied because DNS query contents in Phase 1 is not visible for parties in the middle of the networking path. It brings significant obfuscation in tracking down the end-user by analysing the network traffics. However, Public DNS servers may log the DNS queries and its client and therefore privacy risk that can occur (3) in-the-servers remains.
+This scenario benefits users the most when channel encipherment is applied because DNS query contents in Phase 1 is not visible for parties in the middle of the networking path. It brings significant obfuscation in tracking down the end-user by analysing the network traffics. However, Public DNS servers may log the DNS queries and information of the client. Therefore, privacy risk in-the-servers remains.
 
 \FloatBarrier
 \subsection{Securing content}
-While applying the encipherment mechanism on the communications among DNS servers has a criticism that it only had only shifted the trust towards the Recursive resolver, applying design enhancements of packets' content brings significantly reduces the risks of (1) Data in the DNS request and data leaks in (3) the servers.
+While applying the encipherment mechanism on the communications among DNS servers has a criticism that it only had only shifted the trust towards the Recursive resolver, applying design enhancements of packets' content significantly reduces the risks of Data in the DNS request and data leaks in the servers.
 Query Name (QNAME) minimisation \cite{bortzmeyer2016dns} and Oblivious DNS \cite{annee-dprive-oblivious-dns-00} are the techniques of this category.
 
 QNAME minimisation reduces the query leaks on higher authoritative name server chains, by presenting only relevant part of a domain name for an authoritative server to answer, instead of querying with FQDN.
@@ -345,7 +345,15 @@ Oblivious DNS (ODNS) aims to decouple any association of a client IP address and
 \newpage
 
 \section{Design Constraints}
-Applying channel encipherment methods for securing DNS queries such as using DNS-over-HTTPS or DNS-over-TLS implies that end-client gives trust in the chosen resolver. 
+Applying channel encipherment methods for securing DNS queries such as using DNS-over-HTTPS or DNS-over-TLS implies that end-client gives trust in the chosen resolver.
+
+Applying traffic anonymisation technologies such as FreeNet\cite{clarke2001freenet} or GNUNet\cite{grothoff2017gnunet} result in having high delays \cite{anonymousoverdns}.
+Utilising Distributed Hash Table (DHT) may not necessarily solve the problem of lack of confidentiality. Eventually it has a potential of harming the Integrity of the DNS records.
+
+\subsection{Integrity and Availability}
+Achieving every aspects of CIA-triad often are not feasible, as enhancing one dimension may interfere the other dimensions.
+In this regards, radical protocol design proposals may harm the integrity of the DNS records, as everyone can claim the legitimicy or ownership of the specific domain.
+In the decentralised design, interventing the malevoneous records are more challenging than the hierarchial structure of the current DNS system. 
 \newpage
 %\section{Design of controlled experiment}
 %\input{tex/design_of_protocol_verification.tex}
