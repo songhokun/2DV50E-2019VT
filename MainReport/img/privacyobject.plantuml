@@ -1,9 +1,12 @@
 @startuml
-
+skinparam dpi 400
 object User {
     IP address = "194.47.111.x"
 }
 
+object Resolver {
+    Cached = "False"
+}
 object WHOIS {
     country = "SE"
     netname = "VAXJO-NET"
@@ -12,16 +15,19 @@ object WHOIS {
 }
 
 object DNSquery {
-    Query Name = "generate-spam.kr"
-    Query Type = "MX record"
+    Request Name = "generate-spam.kr"
+    Request Type = "MX record"
 }
 
 object circumstance {
-    time = ""
+    time = "YY-MM-DD HH:MM (TZ)"
+    frequency = "First time"
+
 }
 
 User <|-- WHOIS
 DNSquery -left- User
-
+DNSquery -down- Resolver
+Resolver <|-right- circumstance
 
 @enduml
