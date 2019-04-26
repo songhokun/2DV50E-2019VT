@@ -1,0 +1,27 @@
+@startuml
+
+object User {
+    IP address = "194.47.111.x"
+}
+
+object WHOIS {
+    country = "SE"
+    netname = "VAXJO-NET"
+    descr = "Linnaeus University"
+    mnt-lower = "SUNET-MNT"
+}
+
+object DNSquery {
+    Query Name = "generate-spam.kr"
+    Query Type = "MX record"
+}
+
+object circumstance {
+    time = ""
+}
+
+User <|-- WHOIS
+DNSquery -left- User
+
+
+@enduml

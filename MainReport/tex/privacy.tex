@@ -7,15 +7,17 @@ Pfleeger introduces three aspects of Information security: sensitive data, affec
 We will discuss privacy issues related to the DNS on different subjects.
 
 \subsection{Affected subjects}
-We classify subjects as private persons, and organisations. Organisations are further divided into a large organisation which operates own directory server with DNS, and the smaller organisations that do not operate DNS resolvers in its network.
+We classify subjects as private persons, and organisations. Organisations are further divided into large organisations that operate own directory server with DNS, and the smaller organisations that do not operate DNS resolvers in its network.
 
 \subsection{Sensitive information}
 Defining what sensitive information is in subjective area.
 Therefore, sensitiveness of the information cannot be measured in an absolute scale. However, several common area of sensitive information follows.
 
-For natural persons, legally defined sensitive information are personal data revealing ``(1) ethnic origin, religious or philosophical beliefs, (2) trade-union membership, (3) health-related data, and (4) data concerning a person's sex life \cite{GDPR}''.
+For natural persons, EU has defined sensitive information as the following: personal data revealing ``(1) ethnic origin, religious or philosophical beliefs, (2) trade-union membership, (3) health-related data, and (4) data concerning a person's sex life \cite{GDPR}''.
 
-For organisations, of their information assets especially copyright (expression of the idea), trade secret, and privileged information may be seen as sensitive information \cite{securityincomputing}.
+For organisations, of their information, assets especially copyright (expression of the idea), trade secret, and privileged information may be seen as sensitive information \cite{securityincomputing}.
 
 \subsection{Scenarios}
-If a subject and its geographical location Frequencey of visit
+This section provides analysis of the privacy breaching circumstances per affected subjects by observing DNS.
+Bortzmeyer highighted that ``DNS data itself and a particular transaction'' should be confidential and emphasised that the transaction should not be public \cite{rfc7626}. In this context, the transaction refers to the DNS lookup.
+
