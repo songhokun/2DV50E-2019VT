@@ -1,10 +1,7 @@
 Privacy is seen as having an access control in confidentiality in a security domain.
 In everyday language, Privacy means ``the right to control who knows certain things about you \cite{securityincomputing}''.
-When it comes to information security, the special characteristic of information makes a ``propagation problem''.
-It means that affected subjects lose control of the information about themselves after being disclosed.
-
 Pfleeger introduces three aspects of Information security: sensitive data, affected parties, and controlled disclosure.
-We will discuss privacy issues related to the DNS on different subjects.
+Privacy issues related to the DNS on different subjects will be analysied in this chapter.
 
 \subsection{Affected subjects}
 We classify subjects as private persons, and organisations. Organisations are further divided into large organisations that operate own directory server with DNS, and the smaller organisations that do not operate DNS resolvers in its network.
@@ -15,15 +12,23 @@ Therefore, sensitiveness of the information cannot be measured in an absolute sc
 
 For natural persons, EU has defined sensitive information as the following: personal data revealing ``(1) ethnic origin, religious or philosophical beliefs, (2) trade-union membership, (3) health-related data, and (4) data concerning a person's sex life \cite{GDPR}''.
 
-For organisations, of their information, assets especially copyright (expression of the idea), trade secret, and privileged information may be seen as sensitive information \cite{securityincomputing}.
+For organisations, of their information, assets especially copyright (expression of the idea), trade secret, and privileged information are examples of sensitive information \cite{securityincomputing}.
 
-\subsection{Scenarios}
-This section provides analysis of the privacy breaching circumstances per affected subjects by observing DNS.
-Bortzmeyer highighted that ``DNS data itself and a particular transaction'' should be confidential and emphasised that the transaction should not be public \cite{rfc7626}. In this context, the transaction refers to the DNS lookup.
+\subsection{Controlled disclosure}
+Information has a different characteristic compared to any physical asset; it can be duplicated to infinite amount at relatively low cost, without harming the asset.
+This special characteristic of information makes a ``propagation problem''.
+Affected subjects lose control of the information about themselves after being disclosed.
+
 \begin{figure}[ht!]
     \begin{center}
         \includegraphics*[width=\columnwidth]{img/privacyobject}
     \end{center}
-    \caption{DNS Query sequence diagram}
+    \caption{Privacy related components on DNS transaction}
     \label{privacyobject}
 \end{figure}
+
+\subsection{Scenarios}
+This section provides analysis of the privacy breaching circumstances per affected subjects by observing DNS. Before focusing impacts on the each subjects, common impacts are instroduced.
+
+Bortzmeyer highighted that ``DNS data itself and a particular transaction'' should be confidential and transaction should not be public \cite{rfc7626}. The transaction refers to the DNS lookup in this context.
+Figure \ref{privacyobject} identifies relevant metadata created on DNS transaction. 
