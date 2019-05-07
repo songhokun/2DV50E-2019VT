@@ -1,12 +1,12 @@
 Privacy is seen as having an access control in confidentiality in a security domain.
 In everyday language, Privacy means ``the right to control who knows certain things about you \cite{securityincomputing}''.
 Pfleeger introduces three aspects of Information security: sensitive data, affected parties, and controlled disclosure.
-Privacy issues related to the DNS on different subjects will be analysied in this chapter.
+Privacy issues related to the DNS on different subjects are analysied in this chapter.
 
 \subsection{Affected subjects}
 We classify subjects as private persons, and organisations. Organisations are further divided into large organisations that operate own directory server with DNS, and the smaller organisations that do not operate DNS resolvers in its network.
 
-\subsection{Sensitive information}
+\subsection{Sensitive information}\label{sensitiveinformation}
 Defining what sensitive information is in subjective area.
 Therefore, sensitiveness of the information cannot be measured in an absolute scale. However, several common area of sensitive information follows.
 
@@ -19,6 +19,10 @@ Information has a different characteristic compared to any physical asset; it ca
 This special characteristic of information makes a ``propagation problem''.
 Affected subjects lose control of the information about themselves after being disclosed.
 
+\subsection{Scenarios}
+This section provides analysis of the privacy breaching circumstances per affected subjects by observing DNS. Before focusing impacts on the each subjects, common privacy impacts are instroduced by ellaborating the privacy-related metadata.
+Bortzmeyer highighted that ``DNS data itself and a particular transaction'' should be confidential and transaction should not be public \cite{rfc7626}. The transaction refers to the DNS lookup in this context.
+
 \begin{figure}[ht!]
     \begin{center}
         \includegraphics*[width=\columnwidth]{img/privacyobject}
@@ -27,8 +31,30 @@ Affected subjects lose control of the information about themselves after being d
     \label{privacyobject}
 \end{figure}
 
-\subsection{Scenarios}
-This section provides analysis of the privacy breaching circumstances per affected subjects by observing DNS. Before focusing impacts on the each subjects, common impacts are instroduced.
+\subsubsection{Metadata in DNS query}\label{dnsmetadata}
+Figure \ref{privacyobject} identifies relevant metadata created on DNS transaction.
+The metadata created when looking up DNS record includes Query Name (QNAME or Request Name), Query type and client's IP address.
+The aforementioned metadata is the minimum of the data. The client IP address can be linked with WHOIS \cite{whois-icann}, and geographical information of the client and affiliate of the organisation can be derived.
 
-Bortzmeyer highighted that ``DNS data itself and a particular transaction'' should be confidential and transaction should not be public \cite{rfc7626}. The transaction refers to the DNS lookup in this context.
-Figure \ref{privacyobject} identifies relevant metadata created on DNS transaction. 
+The recursive resolver can see whether the query is answered from its cache or not, and this information provides an insight of the client's behaviour.
+Given sufficient number of clients sharing the same recursive resolver, ``DNS queries on Chinese Top-Level-Domains(TLD) server had Zipf-like distribution \cite{wang2013analysis}''. If this phenonemon also applies to the rest of the TLDs, administrators of the recursive DNS resolver could infer that a user attempts to visit not-so-frequently-visited web server.
+
+\subsubsection{Individual}
+The Sensitive information related to the individuals can be drived by observing metadata created on DNS look-up process. The example scenarios are given in the order of information defined in section \ref{sensitiveinformation}.
+
+There may be a domain shared mainly by people with shared philosophical beliefs, if people are situated in countiries with legislation of censorsing obligatgion on websites' administrators.
+It is likely that people that shares certain philosophical or political beliefs would host a dedicated website for holding a community rather than utilising censorship-enabled large social platforms.
+In such case, when a person visits such website, it may provide sufficient signal of the user's philosophical beliefs to those who can eavedropp the traffic, although the detailed activities on such website are protected by encryption.
+
+An employee visiting a certain trade-union's website frequently in a corporative network may indicate to an IT-department that either the person is a member of the union or has a sympathy with the organisation. 
+
+Observing DNS query enables deriving health-condition of a user. If a person with a chronic disease bears a smart sensor (such as Continuous Glucose Monitoring) that securely sends the measurement data to medical institutes, observing her DNS traffics may infer her health condition.
+If someone activly visits diverse clinics that specialise in a certain disease and relevant medical insurance company's website, consequent DNS queries provide meaningful insight on the person's health status.
+
+If a person creates DNS queries related to online dating such as Tinder, it may provide a hint on the person's sexual life. If temporal contexts such as frequency of the queries and time (in the evening or middnight) are correlated, it provides information whether the person is sexually active or not.
+In case the queried address are mainly visited among the sexual minorities, even the sexual orientation could be induced.
+
+
+\subsubsection{Corporate} 
+Information on intranet structure. Enables sophisicated attacks.
+New product developement, using new technology. 
