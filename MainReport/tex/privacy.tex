@@ -19,7 +19,7 @@ Information has a different characteristic compared to any physical asset; it ca
 This special characteristic of information makes a ``propagation problem''.
 Affected subjects lose control of the information about themselves after being disclosed.
 
-\subsection{Scenarios}
+\subsection{Privacy breaching Scenarios}
 This section provides analysis of the privacy breaching circumstances per affected subjects by observing DNS. Before focusing impacts on the each subjects, common privacy impacts are instroduced by ellaborating the privacy-related metadata.
 Bortzmeyer highighted that ``DNS data itself and a particular transaction'' should be confidential and transaction should not be public \cite{rfc7626}. The transaction refers to the DNS lookup in this context.
 
@@ -39,22 +39,24 @@ The aforementioned metadata is the minimum of the data. The client IP address ca
 The recursive resolver can see whether the query is answered from its cache or not, and this information provides an insight of the client's behaviour.
 Given sufficient number of clients sharing the same recursive resolver, ``DNS queries on Chinese Top-Level-Domains(TLD) server had Zipf-like distribution \cite{wang2013analysis}''. If this phenonemon also applies to the rest of the TLDs, administrators of the recursive DNS resolver could infer that a user attempts to visit not-so-frequently-visited web server.
 
-\subsubsection{Individual}
+\subsubsection{Impact on individuals}
 The Sensitive information related to the individuals can be drived by observing metadata created on DNS look-up process. The example scenarios are given in the order of information defined in section \ref{sensitiveinformation}.
 
 There may be a domain shared mainly by people with shared philosophical beliefs, if people are situated in countiries with legislation of censorsing obligatgion on websites' administrators.
-It is likely that people that shares certain philosophical or political beliefs would host a dedicated website for holding a community rather than utilising censorship-enabled large social platforms.
+It is likely that people that shares certain philosophical or political beliefs would host a dedicated website for holding a community rather than utilising censorship-enabled large social platforms \cite{mackinnon2009china}.
 In such case, when a person visits such website, it may provide sufficient signal of the user's philosophical beliefs to those who can eavedropp the traffic, although the detailed activities on such website are protected by encryption.
 
 An employee visiting a certain trade-union's website frequently in a corporative network may indicate to an IT-department that either the person is a member of the union or has a sympathy with the organisation. 
 
-Observing DNS query enables deriving health-condition of a user. If a person with a chronic disease bears a smart sensor (such as Continuous Glucose Monitoring) that securely sends the measurement data to medical institutes, observing her DNS traffics may infer her health condition.
+Observing DNS query enables deriving health-condition of a user. If a chronic disease patient bears a smart sensor (such as Continuous Glucose Monitoring) that securely sends the measurement data to medical institutes \cite{carelink-uploading, medtronic-watson}, observing her DNS traffics may infer his health condition.
 If someone activly visits diverse clinics that specialise in a certain disease and relevant medical insurance company's website, consequent DNS queries provide meaningful insight on the person's health status.
 
-If a person creates DNS queries related to online dating such as Tinder, it may provide a hint on the person's sexual life. If temporal contexts such as frequency of the queries and time (in the evening or middnight) are correlated, it provides information whether the person is sexually active or not.
+If a person creates DNS queries related to online dating such as Tinder, it has a chance to provide a hint on the person's sexual life, although a conclusion on indiviudal's sexual activity shall not be drawn without considering its sociosexuality \cite{sevi2018exploring}. Still, if temporal contexts such as frequency of the queries and time (in the evening or middnight) are correlated, it could provide more better understranding on the person's sexual activity.
 In case the queried address are mainly visited among the sexual minorities, even the sexual orientation could be induced.
 
+\subsubsection{Impacat on corporates / organisations}
+The section illustrates privacy breaching scenarios for corporates' interest. First, scenarios of large organisation are described. Common scenario regardless of the size of the organisations follows afterwards.
 
-\subsubsection{Corporate} 
-Information on intranet structure. Enables sophisicated attacks.
-New product developement, using new technology. 
+Assuming that large-scale enterprises have sophisicated intranet and employees are assigned with managed work laptops, employee would utilise a web browser's bookmark to add company specific websites on his work computer. In this case, although users do not necessarily visit the corporative intranet sites, web browser may prefetch the bookmarks \cite{firefox-autocomplete-url, chrome-dns-prefectching}, which in its turn leaks the DNS queries. If the employee was travelling, the leaked domain names have potentials to reveal employee's identity in public places by any observers, and the domain names can be collected to facilitate sophisicated active attacks in the future.
+
+Activities on new product developement or sensitive assignment may be derived from the DNS query activites originated from the corporative IP address. Section \ref{dnsmetadata} mentioned about WHOIS record of IP addresses. Information on Autonomous System (AS) - administrative entity - might have havier impact on identity linking on corporates compared to the individuals, once the information is correlated with content of DNS Queries and frequency of the queries. Exchanging e-mails among various organisations or clients also involves DNS resolution and in this case Query type matters, since mail exchange server information is fetched by MX record of the DNS.
