@@ -154,7 +154,7 @@ This chapter describes what Doname Name System (DNS) is, and how the legacy desi
 Digital transformation has brought things used to be done in real life decades ago to the online. At work, people have a video conference call instead of a business trip if not necessary. For shopping goods, people fill in credit card numbers for cross-border payments rather than visiting a bank branch to issue paychecks. In other words, the stage where people work now has been shifted to cyberspace in recent decades, and the Internet has become an essential part of everyday life.
 
 Despite the ubiquitousness of the Internet, users' activities online are collected under pervasive monitoring by different actors.
-Pervasive Monitoring means ``widespread attack on privacy\cite{rfc7258}.'' Information collected in such action could lead to a breach of users’ privacy, by re-identifying users based on traffic\cite{herrmann2010analyzing}, or could become aids for launching an active form of attacks, such as masquerade and Denial of Service (DoS).
+Pervasive Monitoring means ``widespread attack on privacy \cite{rfc7258}.'' Information collected in such action could lead to a breach of users’ privacy, by re-identifying users based on traffic \cite{herrmann2010analyzing}, or could become aids for launching an active form of attacks, such as masquerade and Denial of Service (DoS).
 Unfortunately, insecure architecture of Domain Name System allows the pervasive monitoring, and thus it should be mitigated. Before discussing the privacy problems of DNS, we introduce DNS and its components which are important to adress.
 
 \input{tex/introduction_of_dns.tex}
@@ -163,14 +163,14 @@ Unfortunately, insecure architecture of Domain Name System allows the pervasive 
 The project accredits pioneer research of "DNS Privacy Considerations (RFC 7626) \cite{rfc7626}" which has provided theoretical foundations in analysis of DNS privacy. 
 As of 2019, there are number of studies are presented to mitigate privacy issues based on the analysis. These studies are later presented in Chapter 3.
 
-Survey of DNS privacy enhancing methods are presented by P. Werneck and J.H.C. van Heugten. P. Werneck evaluated approaches to improve privacy of DNS and stated limitations of identified approaches\cite{werneck2014dns} in 2014. J. Heugten evaluated exisiting solutions to ehnance DNS Privacy in 2018 in his study \cite{van2018privacy}. As standariseation of DNS-over-HTTPS is recently finalised\cite{rfc8484}, study from van Heugten reflects more recent changes.
+Survey of DNS privacy enhancing methods are presented by P. Werneck and J.H.C. van Heugten. P. Werneck evaluated approaches to improve privacy of DNS and stated limitations of identified approaches \cite{werneck2014dns} in 2014. J. Heugten evaluated exisiting solutions to ehnance DNS Privacy in 2018 in his study \cite{van2018privacy}. As standariseation of DNS-over-HTTPS is recently finalised \cite{rfc8484}, study from van Heugten reflects more recent changes.
 
 \subsection{Problem formulation}\label{problemformulation}
 Currently, almost all DNS traffic is sent in clear text \cite{rfc7626} over the UDP protocol \cite{tcp2014analysis}, and it makes DNS queries vulnerable to being hijacked or used to filter users' traffic.
 All participants of the DNS query process, as illustrated in Figure \ref{queryprocess}, transmit messages intensively, and these are in plaintext.
 It is also noteworthy that all participating authoritative name servers receive the same questions, although it is not necessary for Authoritative servers in higher hierarchies in the process to know all the complete domain address in question.
 
-S. Bortzmeyer has analysed that particular fields in DNS packet\cite{rfc1035} such as Query name (QNAME) and Source IP address reveal ``communication relationships\cite{rfc7626}''.
+S. Bortzmeyer has analysed that particular fields in DNS packet \cite{rfc1035} such as Query name (QNAME) and Source IP address reveal ``communication relationships \cite{rfc7626}''.
 These series of observations indicate that there are risks of information leakage in following places: (1) tapping on the wire ``between the stub resolvers and the recursive resolvers'', and (2) information leaks in the servers.
 The following research questions are formulated having regards to the privacy breaching circumstances.
 
@@ -185,30 +185,35 @@ The following research questions are formulated having regards to the privacy br
 \end{table}
 
 \subsection{Motivation}
-Most of the internet activities begin with DNS query, hence DNS is vital. Notwithstanding the importance of DNS, designers of the current DNS protocol have not taken consideration of ``confidentiality of protocol metadata''. Therefore DNS queries reveal communication flows, and this property of DNS protocol is used in different contexts by different actors. Examples of usages are traffic monitoring for network management or limiting the influence of malicious websites by DNS Footprinting of malware\cite{stoner2010dns}, or detecting malware infections\cite{lemos2013got}.
+Most of the internet activities begin with DNS query, hence DNS is vital. Notwithstanding the importance of DNS, designers of the current DNS protocol have not taken consideration of ``confidentiality of protocol metadata''. Therefore DNS queries reveal communication flows, and this property of DNS protocol is used in different contexts by different actors. Examples of usages are traffic monitoring for network management or limiting the influence of malicious websites by DNS Footprinting of malware \cite{stoner2010dns}, or detecting malware infections \cite{lemos2013got}.
 
-Other exemplary usages of this property of DNS are nation-state surveillance, privacy-unfriendly activities of commercial sectors\cite{weaver2011redirecting}, and illegal actions by criminals. Surveillance affects individuals to possess stress and anxiety\cite{oulasvirta2012long}, and behavioural changes like self-censorship \cite{rfc6973}. RFC 6973 connotes that Privacy harms involve ``harms to financial standing, reputation, solitude, autonomy, and safety\cite{rfc6973}'' of individuals.
+Other exemplary usages of this property of DNS are nation-state surveillance, privacy-unfriendly activities of commercial sectors \cite{weaver2011redirecting}, and illegal actions by criminals. Surveillance affects individuals to possess stress and anxiety \cite{oulasvirta2012long}, and behavioural changes like self-censorship \cite{rfc6973}. RFC 6973 connotes that Privacy harms involve ``harms to financial standing, reputation, solitude, autonomy, and safety \cite{rfc6973}'' of individuals.
 
-S. Farrell et al. state in RFC 7258 that allowing monitoring by benevolent actors and defending privacy against nefarious actors do not hold hand in hand, as the actions required to achieve both, regardless of the motivations, are indistinguishable\cite{rfc7258}.
+S. Farrell et al. state in RFC 7258 that allowing monitoring by benevolent actors and defending privacy against nefarious actors do not hold hand in hand, as the actions required to achieve both, regardless of the motivations, are indistinguishable \cite{rfc7258}.
 Disadvantages incurred by lack of DNS privacy significantly overweight advantages, and therefore DNS privacy should be mitigated in any feasible practices.
 
 \subsection{Objectives}
-The following objectives are set to answer the research questions and transform the tasks into the smaller pieces. Hereafter we denote Objective as O and research questions as RQ, and Table \ref{objectives} shows the objectives which we will discuss.
+The following objectives are set to answer the research questions and transform the tasks into the smaller pieces, and reasonings on each objectives follow below. Hereafter several words are shorten for the ease of denotation, such as an objective as O and a research question as RQ. Table \ref{objectives} summarises the objectives.
 \begin{table}[h!]
     \begin{tabular} {|p{1.2cm}|p{12.8cm}|} \hline
-        \textbf{O1} & Analyse different end-user interests concerning DNS Privacy\\ \hline
+        \textbf{O1} & Analyse different end-users' privacy infringements when not having DNS Privacy\\ \hline
         \textbf{O2} & Explore the state of arts in mitigative methods to enhance DNS Privacy \\ \hline
         \textbf{O3} & Identify areas which the selected methods could not address. \\ \hline
-        \textbf{O4} & Discuss alternative approaches to mitigate the current limitations.\\ \hline
+        \textbf{O4} & Analyse alternative approaches to mitigate the current limitations.\\ \hline
     \end{tabular}
     \caption{Objectives}
     \label{objectives}
 \end{table}
 
-RQ1 derives O1; mitigative methods need to be studied to see which methods exist.
-O2 and O3 are set to answer RQ2; to see whether the methods we find by performing O1 helps to secure the privacy or not will prove any possible benefits of the Internet users. O4 aims to answer RQ3.
+RQ1 aims to explore benefits by having DNS privacy on different group of people.
+As it could be challenging to motivate benefits of having privacy when obscurity prevails, O1 is defined to analyse scenarios when the privacy is violated caused by having insecure or exposed DNS queries.
+
+RQ2 is to find use cases of the exisiting DNS privacy mitigative methods. However, in order to discuss use cases, the state of these methods need to be examined. Therefore, O2 is set to explore the state of arts of the methods and O3 is set to identify areas for  improvements.
+
+At the last, RQ3 attempts to provide useful interventions for the reader of the current report, by finding combination of technologies to overcome the possible limitation of the current practices of DNS Privacy enhancement. For serving the purpose, O4 discuesses possible approaches of using the other technologies.
+
 \subsection{Scope/Limitation}
-The project has a focus on improving privacy part, from the security perspectives. In other words, reflected to a Confidentiality, Integrity, Availability(CIA) triad, enhancing Integrity and availability perspective is not priortised in the current project. Issues and challenges of DNS security as whole may be found in other studies, such as one conducted by Ning Hu et. al.\cite{ning2017dnssecurity}. 
+The project has a focus on improving privacy part, from the security perspectives. In other words, reflected to a Confidentiality, Integrity, Availability(CIA) triad, enhancing Integrity and availability perspectives are less priortised in the current project. Issues and challenges of DNS security as whole may be found in other studies, such as one conducted by Ning Hu et. al.\cite{ning2017dnssecurity}. 
 
 %You cannot solve everything. Here you describe what you do, and what you don't do, in your project. Limitations can for example be that you only compare some frameworks of all frameworks available on the market, that you only suggest an architecture for a specific software product and not a general architecture, or that you only include university students in a study and not a broader population sample.
 
@@ -220,16 +225,19 @@ The project aims to provide insight on DNS Privacy for Internet users and recurs
 The report follows in Introduction, Methods, Results, and Discussion(IMRaD) pattern. However, as several scientific methods are chosen, which is described in the next chapter, the result and analysis parts are extended for each chosen scientific method. 
 
 \newpage
-\section{Method}
-\label{Method}
+\section{Method}\label{Method}
 This chapter describes the chosen scientific methods to answer the research questions (see Table \ref{researchquestions}) and meet the objectives (see Table \ref{objectives}).
-The study was conducted by systematic literature review and controlled experiment, and the following sections motivate the choice of a scientific method for meeting objectives. 
+The study used scientific methods of systematic literature review and design science. Controlled expeiments were also partially used to verify several statements made in the study. Sections follow to motivate the choice of a scientific method for meeting objectives.
 \subsection{Literature review}
-A systematic literature review was performed to accomplish \textbf{O1} and \textbf{O3}; to study mitigative methods of DNS privacy and identify areas of limitations.
-Exploring the existing design suggestions or implementation for improving the confidentiality of DNS transactions needed to be done systematically, to eradicate biases and to minimise opportunities for not obtaining suitable solutions.
+A systematic literature review was performed to accomplish O2, which is to study mitigative methods of DNS privacy. Although a recently published article provied an overview of DNS Priavcy enhanceing methods \cite{van2018privacy}, performing systematic literature review was necessary to eradicate possible biases and to minimise opportunities of missing suitable solutions.
 
-A search criterium was set to list articles that cited RFC 7626 from a database Google Scholar, as the analysis had provided a clear insight of DNS privacy issues\cite{rfc7626}, and since around four years had passed after its publication, it was anticipated that fellow researchers have tried to solve or list risks identified in the article.
-%If the results based on the criteria is insufficient, inclusive criteria will be applied using search term such as DNS Privacy and DNS Security will be used. Exclusive criteria must be applied as well to limit the contents of the articles to be relevant to the defined problem. Therefore, any solving other security aspects of DNS, such as availability or integrity will be excluded.
+To make the review process systematic, a search criterium was set to list articles that cited RFC 7626 from a database Google Scholar, as the analysis had provided a clear insight of DNS privacy issues \cite{rfc7626}, and since around four years had passed after its publication, it was anticipated that fellow researchers have tried to solve or list risks identified in the article.
+
+For inclusion criterium, references of the found articles were further examined, as there were chances of missing to address well-established solutions possibly because the methods had been introcued before publishment of RFC 7626.
+
+Exclusive criteria was set to have the contents of the articles to be relevant to the defined problem. Therefore, any solving other security aspects of DNS, such as availability but not addressing the privacy problems were excluded.
+\subsection{Design Science}
+
 \subsection{Controlled Experiment and Verification}
 \textbf{O2} was accomplished by selecting securing methods that are near or already in practice and reproduce these in a controlled environment.
 Due to this reason, it may have excluded some of the areas from \textbf{O1}. Verification, as defined in \textbf{O2}, was done by Examining DNS query and response packets between stub resolver and recursive resolver, after having applied privacy enhancive methods under the controlled environment.
@@ -254,7 +262,7 @@ The project performed experiments in a controlled environment to eliminate other
 This section provides an analysis of the survey results.
 The refined search results were categorised into the following fields: studies that suggested improving the security breach and investigations that demonstrated the security vulnerabilities.
 We have further classified the privacy improving studies into ones securing the content and others enhancing the channel, based on the privacy risk analysis of RFC 7626.
-S. Bortzmeyer, who is the author of RFC 7626, identified risk area of DNS privacy as the followings\cite{rfc7626}: 
+S. Bortzmeyer, who is the author of RFC 7626, identified risk area of DNS privacy as the followings \cite{rfc7626}: 
 \begin{enumerate}
     \item Data in the DNS request
     \item On the wire
@@ -307,7 +315,7 @@ Using ISP provided Recursive resolver is the most common scenario, as most ISP o
 The resolver from ISP is shared with other subscribers of the network, and it increases more chance of having queries cached by another user who acquired the address previously.
 Reusing cache reduces the need of Phase 2 in its response process \cite{wang2013analysis} and thus generates less often-insecure traffics towards authoritative NS. 
 Authoritative name servers see the source IP address of ISP's resolver in Phase 2 of DNS resolving, but not IP of the individuals, in case E-DNS Client Subset(ECS) is not in place.
-When ECS is used, the authoritative NS may see truncated IP of clients\cite{kintis2016understanding}, but the IP address does not present additional privacy harm as ISP's recursive resolver is often in the same subnet IP range, and authoritative NS already acquaints source IP of the recursive DNS resolver. 
+When ECS is used, the authoritative NS may see truncated IP of clients \cite{kintis2016understanding}, but the IP address does not present additional privacy harm as ISP's recursive resolver is often in the same subnet IP range, and authoritative NS already acquaints source IP of the recursive DNS resolver. 
 Privacy risks incurred by logging exist in ISP provided resolver, as ISPs may be obliged for log retentions due to legal requirements of the countries they operate in.
 
 Channel encipherment on Phase 1 adds a value of users' privacy to a limited extent, tapping on the wire between the ISP's recursive resolver and a stub resolver is often feasible for ISP itself rather than third parties.
@@ -347,9 +355,11 @@ Oblivious DNS (ODNS) aims to decouple any association of a client IP address and
 \section{Design Constraints}
 Applying channel encipherment methods for securing DNS queries such as using DNS-over-HTTPS or DNS-over-TLS implies that end-client gives trust in the chosen resolver.
 
-Applying traffic anonymisation technologies such as FreeNet\cite{clarke2001freenet} or GNUNet\cite{grothoff2017gnunet} result in having high delays \cite{anonymousoverdns}.
+Applying traffic anonymisation technologies such as FreeNet \cite{clarke2001freenet} or GNUNet\cite{grothoff2017gnunet} result in having high delays \cite{anonymousoverdns}.
 Utilising Distributed Hash Table (DHT) may not necessarily solve the problem of lack of confidentiality. Eventually it has a potential of harming the Integrity of the DNS records.
 
+\subsection{To be or not to be hierarchial}
+Refer to the \url{https://blogs.akamai.com/2018/10/architectural-paths-for-evolving-the-dns.html}
 \subsection{Integrity and Availability}
 Achieving every aspects of CIA-triad often are not feasible, as enhancing one dimension may interfere the other dimensions.
 In this regards, radical protocol design proposals may harm the integrity of the DNS records, as everyone can claim the legitimicy or ownership of the specific domain.
