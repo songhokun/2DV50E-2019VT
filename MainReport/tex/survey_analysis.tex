@@ -1,0 +1,98 @@
+This section provides an analysis of the survey results.
+The refined search results were categorised into the following fields: studies that suggested improving the security breach and investigations that demonstrated the security vulnerabilities.
+
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics*[width=0.9\columnwidth]{img/dnsprivacy-classification}
+    \end{center}
+    \caption{Categorisation of DNS Privacy methods based on the approach}
+    \label{dns-methods-classification}
+\end{figure}
+
+Studies with Privacy improving method were further classified based on the which privacy risk they address. S. Bortzmeyer identified risk area of DNS privacy in RFC 7626 as the followings \cite{rfc7626}: 
+\begin{enumerate}
+    \item Data in the DNS request
+    \item On the wire
+    \item In the servers
+    \item Re-identification and other Interferences
+\end{enumerate}
+
+\subsection{Securing the communication channel}
+Communication channel encirpher methods, as presented in Table \ref{content}, attempt to alleviate risks on the wire. The methods also partially address risks of re-identification depends on who the subject of the attacker is. 
+However, we did not find the one simple solution for securing all communication paths of all involved parties of the DNS resolving. Therefore, the location of the DNS resolver needs to be considered when to mention the limitations of each suggested methods.
+
+DNS query process can be abstracted into two phases (similar to \cite{van2018privacy}).
+For ease of analysis, step 1 and 10 of Figure \ref{queryprocess} where stub resolver queries a domain name to the recursive resolver and the recursive resolver replies to the stub resolver (i.e. stub-to-resolver link) is defined as Phase 1.
+Phase 2 denotes the steps where a recursive resolver finds the final answer to the queried address, by recursively reaching to concerning authoritative servers (i.e. recursive-to-auth link).
+
+Common problems exist in channel encipher methods.
+Most of the methods we found often do not encrypt communications on Phase 2 in contrast to Phase 1.
+Furthermore, authentication mechanisms are missing on Phase 2 \cite{I-D.bortzmeyer-dprive-step-2}, and the lack of authentication of the authoritative server may potentially enable a Man-in-the-middle attack (MITM).
+
+The fact that an authoritative server having a one-to-many server-client relationship from the recursive resolvers is the major obstacle of applying encryption on Phase 2.
+As DoH \cite{rfc8484} and DoT \cite{hu2016specification} use Transport Layer Security (TLS) protocol \cite{rfc7858} for encryption, an authoritative server processing multiple TLS session is likely to end up exhausting its computational resources \cite{bhople2012server}, similar to a Distributed DoS (DDoS) attack situation. The issues are well discussed in the internet draft ``Next step for DPRIVE: resolver-to-auth link \cite{I-D.bortzmeyer-dprive-step-2}.''
+% There are proposal of utilising TLS 1.3 and 
+
+\subsubsection{Location of Recursive DNS resolvers}
+From the end user's point of view, recursive DNS Resolvers can be on a local machine, one provided by the Internet Service Providers (ISP) and Public DNS servers \cite{van2018privacy}.
+Selection of the location of recursive DNS resolvers leads to different impacts on the user's privacy, in terms of cache and obfuscation and logging. Section \ref{dnsservers} described caching on recursive resolvers.
+
+\begin{figure}[ht!]
+    \begin{center}
+    \includegraphics*[width=0.6\columnwidth]{img/local-recursive}
+    \end{center}
+    \caption{A simplified network map when using local resursive resolver server.}
+    \label{localrecursive}
+\end{figure}
+When a user utilises a local recursive resolver as illustrated in Figure \ref{localrecursive}, channel encipher methods do not add value to users' privacy considering that operations of phase two are often not encrypted.
+Supposing that the user does not share local recursive resolver among the others, DNS queries which the user makes will not be fetched from a cache but all involved authoritative NS.
+Sending queries in clear text on phase 2 leaves a possibility for all parties who are involved in the network packet transmission to monitor QNAME, query type and source IP of the traffic towards authoritative NS.
+Referring to the assumption that local recursive resolver is unique for a person, there is no space for obfuscation since no one else is querying from the IP address of the recursive resolver.
+However, utilising the local recursive resolver eliminates the risks of queries being logged (i.e. (3) risk in-the-servers) during Phase 1.
+
+
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics*[width=0.6\columnwidth]{img/isp-recursive}
+    \end{center}
+    \caption{A simplified network map when using ISP-provided resursive resolver server.}
+    \label{isprecursive}
+\end{figure}
+Using ISP provided Recursive resolver is the most common scenario, as most ISP offer DNS resolver to their users over Dynamic Host Configuration Protocol (DHCP).
+The resolver from ISP is shared with other subscribers of the network, and it increases more chance of having queries cached by another user who acquired the address previously.
+Reusing cache reduces the need of Phase 2 in its response process \cite{wang2013analysis} and thus generates less often-insecure traffics towards authoritative NS. 
+Authoritative name servers see the source IP address of ISP's resolver in Phase 2 of DNS resolving, but not IP of the individuals, in case E-DNS Client Subset(ECS) is not in place.
+When ECS is used, the authoritative NS may see truncated IP of clients \cite{kintis2016understanding}, but the IP address does not present additional privacy harm as ISP's recursive resolver is often in the same subnet IP range, and authoritative NS already acquaints source IP of the recursive DNS resolver. 
+Privacy risks incurred by logging exist in ISP provided resolver, as ISPs may be obliged for log retentions due to legal requirements of the countries they operate in.
+
+Channel encipherment on Phase 1 adds a value of users' privacy to a limited extent, tapping on the wire between the ISP's recursive resolver and a stub resolver is often feasible for ISP itself rather than third parties.
+
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics*[width=0.6\columnwidth]{img/public-recursive}
+    \end{center}
+    \caption{A simplified network map when using public resursive resolver server.}
+    \label{publicrecursive}
+\end{figure}
+Figure \ref{publicrecursive} briefly shows a scenario of using a public recursive resolver (as known as Public DNS resolver).
+A public DNS server has more possibilities of being shared by a broader public compared to the ISP provided resolvers, and it increases the chances of queries being already cached. Authoritative servers see requests from the IP address of the public resolver, instead of stub resolvers' when ECS is not applied.
+
+This scenario benefits users the most when channel encipherment is applied because DNS query contents in Phase 1 is not visible for parties in the middle of the networking path. It brings significant obfuscation in tracking down the end-user by analysing the network traffics. However, Public DNS servers may log the DNS queries and information of the client. Therefore, privacy risk in-the-servers remains.
+
+\FloatBarrier
+\subsection{Securing content}
+While applying the encipherment mechanism on the communications among DNS servers has a criticism that it only had only shifted the trust towards the Recursive resolver, applying design enhancements of packets' content significantly reduces the risks of Data in the DNS request and data leaks in the servers.
+Query Name (QNAME) minimisation \cite{bortzmeyer2016dns} and Oblivious DNS \cite{annee-dprive-oblivious-dns-00} are the techniques of this category.
+
+QNAME minimisation reduces the query leaks on higher authoritative name server chains, by presenting only relevant part of a domain name for an authoritative server to answer, instead of querying with FQDN.
+It makes only relevant name server to acquire the full QNAME and query type. Therefore it reduces privacy risks on Phase 2.
+Although the risk of data leaks still present in the last chain of the authoritative NS, this is less likely to happen unless a domain name owner has a malicious intent to exploit users' privacy.
+
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics*[width=0.9\columnwidth]{img/ODNSoverview}
+    \end{center}
+    \caption{An overview of Oblivious DNS \cite{ODNSwebsite}}
+    \label{odnsoverview}
+\end{figure}
+Oblivious DNS (ODNS) aims to decouple any association of a client IP address and DNS query content and no single party should be able to see both \cite{annee-dprive-oblivious-dns-00}. For this to work, it requires a special stub resolver and an ODNS authoritative resolver where the client creates a unique session key on each session to encrypt its DNS query and append 'odns' TLD. 

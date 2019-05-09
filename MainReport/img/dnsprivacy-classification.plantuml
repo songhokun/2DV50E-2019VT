@@ -1,0 +1,44 @@
+@startuml
+skinparam dpi 400
+object Methods {
+Set of suggestions to improve DNS Privacy
+}
+
+object Hierachial {
+    Preserving exisiting\nDNS Structure 
+}
+object Decentralised {
+    Radical DNS\narchitecture change
+}
+
+object StacksEncapsulation {
+    Reusing DNS\nover secure protocols
+}
+
+object DoT {
+    standarised = "T"
+}
+object DoH {
+    standarised = "T"
+}
+object Namecoin {
+    standarised = "F"
+}
+object GNUNet {
+    standarised = "F"
+}
+object ObliviousDNS{
+    standarised = "F"
+}
+Methods <|-- Hierachial
+Methods <|-- Decentralised
+Hierachial <|-- StacksEncapsulation
+
+StacksEncapsulation <|-- DoT
+StacksEncapsulation <|-- DoH
+Hierachial <|-- ObliviousDNS
+
+Decentralised <|-- Namecoin
+Decentralised <|-- GNUNet
+
+@enduml
