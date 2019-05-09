@@ -226,9 +226,9 @@ The report follows in Introduction, Methods, Results, and Discussion(IMRaD) patt
 
 \newpage
 \section{Method}\label{Method}
-This chapter describes the chosen scientific methods to answer the research questions (see Table \ref{researchquestions}) and meet the objectives (see Table \ref{objectives}).
+This chapter describes the chosen scientific methods to answer the research questions (Table \ref{researchquestions}) and meet the objectives (Table \ref{objectives}).
 The study used scientific methods of systematic literature review and design science. Controlled expeiments were also partially used to verify several statements made in the study. Sections follow to motivate the choice of a scientific method for meeting objectives.
-\subsection{Literature review}
+\subsection{Systematic literature review}
 A systematic literature review was performed to accomplish O2, which is to study mitigative methods of DNS privacy. Although a recently published article provied an overview of DNS Priavcy enhanceing methods \cite{van2018privacy}, performing systematic literature review was necessary to eradicate possible biases and to minimise opportunities of missing suitable solutions.
 
 To make the review process systematic, a search criterium was set to list articles that cited RFC 7626 from a database Google Scholar, as the analysis had provided a clear insight of DNS privacy issues \cite{rfc7626}, and since around four years had passed after its publication, it was anticipated that fellow researchers have tried to solve or list risks identified in the article.
@@ -236,13 +236,14 @@ To make the review process systematic, a search criterium was set to list articl
 For inclusion criterium, references of the found articles were further examined, as there were chances of missing to address well-established solutions possibly because the methods had been introcued before publishment of RFC 7626.
 
 Exclusive criteria was set to have the contents of the articles to be relevant to the defined problem. Therefore, any solving other security aspects of DNS, such as availability but not addressing the privacy problems were excluded.
+
 \subsection{Design Science}
+Design science ``creates and evaluates Information Technology artifacts to solve identified organisational problems \cite{von2004design}'', and it has a strong relevance in addressing O3 and O4 which are to identify area that studided DNS Privacy methods could not address and analyse alternative approaches to overcome the limitations.
 
-\subsection{Controlled Experiment and Verification}
-\textbf{O2} was accomplished by selecting securing methods that are near or already in practice and reproduce these in a controlled environment.
-Due to this reason, it may have excluded some of the areas from \textbf{O1}. Verification, as defined in \textbf{O2}, was done by Examining DNS query and response packets between stub resolver and recursive resolver, after having applied privacy enhancive methods under the controlled environment.
+To refine problem statements for the exisiting practice, literature review is made to analyse privacy infringement scenarios on diverse user scenarios, as defined in O1.
 
-\textbf{O3} was achieved by studying surveys from \textbf{O1} and empirical results from \textbf{O2}. \textbf{O4} was evaluated based on outcome of \textbf{O1} and \textbf{O2}.
+\subsection{Controlled Experiment}
+Controlled experiment is applied to verify whether suggested design artifact addressed the limitations of current DNS Privacy enhancing methods found in O3 or not. Conducting a controlled experiment fulfills one of the guidelines of design science which requires ``thorough evaluation of the artifact \cite{von2004design}''.
 
 \subsection{Reliability and Validity}
 The study is seen to have reliability on the results of the literature review, as the same effect will be derived by performing a search as described in the previous section. As Appendix A includes the source code of the experiment scripts, a similar result is expected to be derived by other researchers as well. 
@@ -250,7 +251,9 @@ The study is seen to have reliability on the results of the literature review, a
 The project deployed its experiments in a virtualised environment to minimise unforeseen factors that would impact performance measurements.
 
 \subsection{Ethical considerations}
-The project performed experiments in a controlled environment to eliminate other affecting factors. It means that no real data of legal representatives are collected without his/her consent. 
+Discussing ethical considerations has less significance in the chosen methods, as no real data of any physical persons is collected without the consent.
+However, it can be questioned whether it is adequate to ellaborate privacy breaching scenarios in details to use the information for formulating problems for the design science method.
+Despite of the concerns, as the project aims to improve the problematic scenarios of not having sufficient privacy enhancements, describing the problematic situations as-they-are is necessary.
 
 \newpage
 \section{Privacy profiles}
