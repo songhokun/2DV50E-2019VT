@@ -4,39 +4,74 @@ object Methods {
 Set of suggestions to improve DNS Privacy
 }
 
-object Hierachial {
+abstract Hierachial {
     Preserving exisiting\nDNS Structure 
 }
-object Decentralised {
+abstract Decentralised {
     Radical DNS\narchitecture change
 }
+abstract Encipherment {
 
-object StacksEncapsulation {
-    Reusing DNS\nover secure protocols
 }
+abstract Redaction {
+    Minimise information leaks
+}
+abstract TransportChannel {
 
-object DoT {
+}
+abstract CurrentStandards {
+    Reusing DNS\nover exisiting secure protocols
+}
+abstract NewChannelMethod {
+    Reusing DNS over\nown-implemented secure protocols
+}
+class DoT {
     standarised = "T"
 }
-object DoH {
+class DoH {
     standarised = "T"
 }
-object Namecoin {
+class Namecoin {
     standarised = "F"
 }
-object GNUNet {
+class GNUNet {
     standarised = "F"
 }
-object ObliviousDNS{
+class ObliviousDNS{
     standarised = "F"
 }
-Methods <|-- Hierachial
-Methods <|-- Decentralised
-Hierachial <|-- StacksEncapsulation
+class QNAMEMinimization{
+    standarised = "T"
+}
+class DTLS{
+    standarised = "T"
+}
+class DNSCrypt{
+    standarised = "F"
+}
+class DNSCurve{
+    standarised = "F"
+}
 
-StacksEncapsulation <|-- DoT
-StacksEncapsulation <|-- DoH
-Hierachial <|-- ObliviousDNS
+Methods -- Hierachial
+Methods -- Decentralised
+Hierachial -- Encipherment
+Hierachial -- Redaction
+
+Encipherment -- TransportChannel
+TransportChannel -- CurrentStandards
+TransportChannel -- NewChannelMethod
+
+CurrentStandards <|-- DoT
+CurrentStandards <|-- DoH
+CurrentStandards <|-- DTLS
+
+Encipherment <|-- ObliviousDNS
+Redaction <|-- ObliviousDNS
+Redaction <|-- QNAMEMinimization
+
+NewChannelMethod <|-- DNSCrypt
+NewChannelMethod <|-- DNSCurve
 
 Decentralised <|-- Namecoin
 Decentralised <|-- GNUNet
