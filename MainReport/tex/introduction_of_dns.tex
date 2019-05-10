@@ -6,7 +6,7 @@ DNS servers consist of four types: Stub resolver, Recursive resolver, Authoritat
 
 Stub resolver is a resolver that serves as an entry-point of querying DNS from applications and directs search request to the nearest recursive resolver \cite{rfc1123}. As it cannot complete domain name resolution by itself, stub resolver is dependant on a recursive resolver \cite{rfc8499}.
 
-Recursive resolver is a server which receives a DNS query from a stub resolver and gets the final answer to the query, by (1) answering from its local cache or (2) sending queries to other DNS servers \cite{rfc8499}. After a recursive resolver has sent query request to other authoritative name servers, it is expected for the resolver to store the answer as a local cache. It is the first server in DNS query flow that contacts other servers to get the answer for the client. 
+Recursive resolver is a server which receives a DNS query from a stub resolver and gets the final answer to the query, by (1) answering from its local cache or (2) sending queries to other DNS servers \cite{rfc8499}. After a recursive resolver has sent query request to other authoritative name servers, it is expected for the resolver to store the answer as a \textbf{local cache}. It is the first server in DNS query flow that contacts other servers to get the answer for the client. 
 
 Authoritative (name) server is a server that has ``authority over one or more DNS zones \cite{rfc8499}'' and ``can answer queries without needing to query on other servers as it knows the content of the queried DNS zone by local knowledge \cite{rfc2182}.''
 
