@@ -90,14 +90,17 @@ A public DNS server has more possibilities of being shared by a broader public c
 This scenario benefits users the most when channel encipherment is applied because DNS query contents in Phase 1 is not visible for parties in the middle of the networking path. It brings significant obfuscation in tracking down the end-user by analysing the network traffics. However, Public DNS servers may log the DNS queries and information of the client. Therefore, privacy risk in-the-servers remains.
 
 \FloatBarrier
-\subsection{Securing content}
-While applying the encipherment mechanism on the communications among DNS servers has a criticism that it only had only shifted the trust towards the Recursive resolver, applying design enhancements of packets' content significantly reduces the risks of Data in the DNS request and data leaks in the servers.
+\subsection{Information redactions}
+Applying the encipherment mechanism on the communications among DNS servers has limitations that these only shifted the trust towards the Recursive resolver.
+In the meanwhile, design enhancements of packets' content reduces the risks of Data in the DNS request and data leaks in the servers.
 Query Name (QNAME) minimisation \cite{bortzmeyer2016dns} and Oblivious DNS \cite{annee-dprive-oblivious-dns-00} are the techniques of this category.
 
+\subsubsection{Information leak minimisations}
 QNAME minimisation reduces the query leaks on higher authoritative name server chains, by presenting only relevant part of a domain name for an authoritative server to answer, instead of querying with FQDN.
-It makes only relevant name server to acquire the full QNAME and query type. Therefore it reduces privacy risks on Phase 2.
-Although the risk of data leaks still present in the last chain of the authoritative NS, this is less likely to happen unless a domain name owner has a malicious intent to exploit users' privacy.
+It makes only the relevant name server to acquire the full QNAME and query type. Therefore it reduces privacy risks on Phase 2.
+Although the risk of data leaks still present in the last chain of the authoritative NS, this is less likely to happen unless administrators of the domain name have a malicious intent to exploit users' privacy.
 
+\subsubsection{Decoupling user-identificable information}
 \begin{figure}[h!]
     \begin{center}
     \includegraphics*[width=0.9\columnwidth]{img/ODNSoverview}
@@ -105,7 +108,18 @@ Although the risk of data leaks still present in the last chain of the authorita
     \caption{An overview of Oblivious DNS \cite{ODNSwebsite}}
     \label{odnsoverview}
 \end{figure}
-Oblivious DNS (ODNS) aims to decouple any association of a client IP address and DNS query content and no single party should be able to see both \cite{annee-dprive-oblivious-dns-00}. For this to work, it requires a special stub resolver and an ODNS authoritative resolver where the client creates a unique session key on each session to encrypt its DNS query and append 'odns' TLD. 
+Oblivious DNS (ODNS) aims to decouple any association of a client IP address and DNS query content and no single party should be able to see both \cite{annee-dprive-oblivious-dns-00}.
+For this to work, it requires a special stub resolver and an ODNS authoritative resolver where the client creates a unique session key on each session to encrypt its DNS query and append 'odns' TLD.
+Figure \ref{odnsoverview} presents an overview of the ODNS and the illustratation is fetched from its project page \cite{ODNSwebsite}.
 
-\subsection{To be or not to be hierarchial}
+However, security concerns arise in terms of availability, as ODNS operations require ODNS-stubs and imposing such design creates a new `central point of failure \cite{minutes-102-dprive}'.
+Also, questions concerning assuring confidentiality of the keys used in ODNS and issues with fallback have not been answered \cite{minutes-102-dprive}. 
+
+\subsection{Architectural shift}
+In the pervious section, securing recursive-to-auth link is seen challenging due to the hierachial structure of the DNS.
+Studies that aim towards decentrailsed, often imposing peer-to-peer (P2P) implementation are free from the limitations cased by the hierachial structure.
+Examples of such solution are Namecoin \cite{loibl2014namecoin} and GNU Name System (GNS) \cite{grothoff2017nsa, wachs2014censorship}.
+
+Namecoin is described as ``timeline-based system that rely on a P2P network to manage updates and store the timeline \cite{grothoff2017nsa}'', and it settles down any commits related on `key-value mapping' by transactions that are published in an append-only hash chain (a.k.a. blockchain) \cite{kalodner2015empirical}.
+\subsubsection{Prevailance of hierachial DNS}
 Refer to the \url{https://blogs.akamai.com/2018/10/architectural-paths-for-evolving-the-dns.html}
