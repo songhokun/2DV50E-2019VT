@@ -1,28 +1,28 @@
 Privacy is seen as having an access control in confidentiality in a security domain.
 In everyday language, Privacy means ``the right to control who knows certain things about you \cite{securityincomputing}''.
 Pfleeger introduces three aspects of Information security: sensitive data, affected parties, and controlled disclosure.
-Privacy issues related to the DNS on different subjects are analysied in this chapter.
+Privacy issues related to the DNS on different subjects are analysed in this chapter.
 
 \subsection{Affected subjects}
 We classify subjects as private persons, and organisations. Organisations are further divided into large organisations that operate own directory server with DNS, and the smaller organisations that do not operate DNS resolvers in its network.
 
 \subsection{Sensitive information}\label{sensitiveinformation}
-Defining what sensitive information is in subjective area.
-Therefore, sensitiveness of the information cannot be measured in an absolute scale. However, several common area of sensitive information follows.
+Defining what sensitive information is in a subjective area.
+Therefore, sensitiveness of the information cannot be measured on an absolute scale. However, several common areas of sensitive information follow.
 
 For natural persons, EU has defined sensitive information as the following: personal data revealing ``(1) ethnic origin, religious or philosophical beliefs, (2) trade-union membership, (3) health-related data, and (4) data concerning a person's sex life \cite{GDPR}''.
 
 For organisations, of their information, assets especially copyright (expression of the idea), trade secret, and privileged information are examples of sensitive information \cite{securityincomputing}.
 
 \subsection{Controlled disclosure}
-Information has a different characteristic compared to any physical asset; it can be duplicated to infinite amount at relatively low cost, without harming the asset.
+The information has a different characteristic compared to any physical asset; it can be duplicated to an infinite amount at relatively low cost, without harming the asset.
 This special characteristic of information makes a ``propagation problem''.
 Affected subjects lose control of the information about themselves after being disclosed.
 
 \subsection{Privacy breaching Scenarios}
-This section provides analysis of the privacy breaching circumstances per affected subjects by observing DNS. Before focusing impacts on the each subjects, common privacy impacts are instroduced by ellaborating the privacy-related metadata.
-Bortzmeyer highighted that ``DNS data itself and a particular transaction'' should be confidential and transaction should not be public \cite{rfc7626}. The transaction refers to the DNS lookup in this context.
-The following sections demonstrate how DNS reveals sensitive information of the affected subjects.
+This section provides an analysis of the privacy breaching circumstances per affected subjects by observing DNS. Before focusing impacts on each subject, common privacy impacts are introduced by elaborating the privacy-related metadata.
+Bortzmeyer highlighted that ``DNS data itself and a particular transaction'' should be confidential and transaction should not be public \cite{rfc7626}. The transaction refers to the DNS lookup in this context.
+The following sections demonstrate how DNS reveals sensitive information about the affected subjects.
 
 \begin{figure}[ht!]
     \begin{center}
@@ -37,31 +37,31 @@ Figure \ref{privacyobject} identifies relevant metadata created on DNS transacti
 The metadata created when looking up DNS record includes Query Name (QNAME or Request Name), Query type and client's IP address.
 The aforementioned metadata is the minimum of the data. The client IP address can be linked with WHOIS \cite{whois-icann}, and geographical information of the client and affiliate of the organisation can be derived.
 
-The recursive resolver can see whether the query is answered from its cache or not, and this information provides an insight of the client's behaviour.
-Given sufficient number of clients sharing the same recursive resolver, ``DNS queries on Chinese Top-Level-Domains(TLD) server had Zipf-like distribution \cite{wang2013analysis}''. If this phenonemon also applies to the rest of the TLDs, administrators of the recursive DNS resolver could infer that a user attempts to visit not-so-frequently-visited web server.
+The recursive resolver can see whether the query is answered from its cache or not, and this information provides an insight into the client's behaviour.
+Given a sufficient number of clients sharing the same recursive resolver, ``DNS queries on Chinese Top-Level-Domains(TLD) server had Zipf-like distribution \cite{wang2013analysis}''. If this phenomenon also applies to the rest of the TLDs, administrators of the recursive DNS resolver could infer that a user attempts to visit not-so-frequently-visited web server.
 
 \subsubsection{Impact on individuals}
-The Sensitive information related to the individuals can be drived by observing metadata created on DNS look-up process. The example scenarios are given in the order of information defined in section \ref{sensitiveinformation}.
+The Sensitive information related to the individuals can be derived by observing metadata created on DNS lookup process. The example scenarios are given in the order of information defined in section \ref{sensitiveinformation}.
 
-There may be a domain shared mainly by people with shared philosophical beliefs, if people are situated in countiries with legislation of censorsing obligatgion on websites' administrators.
-It is likely that people that shares certain philosophical or political beliefs would host a dedicated website for holding a community rather than utilising censorship-enabled large social platforms \cite{mackinnon2009china}.
-In such case, when a person visits such website, it may provide sufficient signal of the user's philosophical beliefs to those who can eavedropp the traffic, although the detailed activities on such website are protected by encryption.
+There may be a domain shared mainly by people with shared philosophical beliefs if people are situated in countries with the legislation of censoring obligations on websites' administrators.
+It is likely that people that share certain philosophical or political beliefs would host a dedicated website for holding a community rather than utilising censorship-enabled large social platforms \cite{mackinnon2009china}.
+In such case, when a person visits such website, it may provide sufficient signal of the user's philosophical beliefs to those who can eavesdrop the traffic, although the detailed activities on such website are protected by encryption.
 
 An employee visiting a certain trade-union's website frequently in a corporative network may indicate to an IT-department that either the person is a member of the union or has a sympathy with the organisation. 
 
 Observing DNS query enables deriving health-condition of a user. If a chronic disease patient bears a smart sensor (such as Continuous Glucose Monitoring) that securely sends the measurement data to medical institutes \cite{carelink-uploading, medtronic-watson}, observing her DNS traffics may infer his health condition.
-If someone activly visits diverse clinics that specialise in a certain disease and relevant medical insurance company's website, consequent DNS queries provide meaningful insight on the person's health status.
+If someone actively visits diverse clinics that specialise in a certain disease and relevant medical insurance company's website, consequent DNS queries provide meaningful insight into the person's health status.
 
-If a person creates DNS queries related to online dating such as Tinder, it has a chance to provide a hint on the person's sexual life, although a conclusion on indiviudal's sexual activity shall not be drawn without considering its sociosexuality \cite{sevi2018exploring}. Still, if temporal contexts such as frequency of the queries and time (in the evening or middnight) are correlated, it could provide more better understranding on the person's sexual activity.
-In case the queried address are mainly visited among the sexual minorities, even the sexual orientation could be induced.
+If a person creates DNS queries related to online dating such as Tinder, it has a chance to provide a hint on the person's sexual life, although a conclusion on individual's sexual activity shall not be drawn without considering its sociosexuality \cite{sevi2018exploring}. Still, if temporal contexts such as the frequency of the queries and time (in the evening or midnight) are correlated, it could provide a better understanding of the person's sexual activity.
+In case the queried address is mainly visited among the sexual minorities, even the sexual orientation could be induced.
 
-\subsubsection{Impact on corporates / organisations}
-The section illustrates privacy breaching scenarios for corporates' interest. First, scenarios of large organisation are described. Common scenario regardless of the size of the organisations follows afterwards.
+\subsubsection{Impact on corporates/organisations}
+The section illustrates privacy breaching scenarios for corporates' interest. First, scenarios of a large organisation are described. Common scenario regardless of the size of the organisations follows afterwards.
 
-Assuming that large-scale enterprises have sophisicated intranet and employees are assigned with managed work laptops, employee would utilise a web browser's bookmark to add company specific websites on his work computer. In this case, although users do not necessarily visit the corporative intranet sites, web browser may prefetch the bookmarks \cite{firefox-autocomplete-url, chrome-dns-prefectching}, which in its turn leaks the DNS queries. If the employee was travelling, the leaked domain names have potentials to reveal employee's identity in public places by any observers, and the domain names can be collected to facilitate sophisicated active attacks in the future.
+Assuming that large-scale enterprises have sophisticated intranet and employees are assigned with managed work laptops, an employee would utilise a web browser's bookmark to add company specific websites on his work computer. In this case, although users do not necessarily visit the corporative intranet sites, a web browser may prefetch the bookmarks \cite{firefox-autocomplete-url, chrome-dns-prefectching}, which in its turn leaks the DNS queries. If the employee was travelling, the leaked domain names have potentials to reveal employee's identity in public places by any observers, and the domain names can be collected to facilitate sophisticated active attacks in the future.
 
-Activities on new product developement or sensitive assignment may be derived from the DNS query activites originated from the corporative IP address. Section \ref{dnsmetadata} mentioned about WHOIS record of IP addresses. Information on Autonomous System (AS) - administrative entity - might have havier impact on identity linking on corporates compared to the individuals, once the information is correlated with content of DNS Queries and frequency of the queries. Exchanging e-mails among various organisations or clients also involves DNS resolution and in this case Query type matters, since mail exchange server information is fetched by MX record of the DNS.
+Activities on new product development or sensitive assignment may be derived from the DNS query activities originated from the corporative IP address. Section \ref{dnsmetadata} mentioned about WHOIS record of IP addresses. Information on Autonomous System (AS) - administrative entity - might have a heavier impact on identity linking on corporates compared to the individuals, once the information is correlated with the content of DNS Queries and frequency of the queries. Exchanging e-mails among various organisations or clients also involves DNS resolution and in this case Query type matters, since mail exchange server information is fetched by MX record of the DNS.
 
-\subsection{DNS queries as digital fingerprint}
-Kirchler et al. discuss possible ``behaviour-based-tracking'' of linking user sessions with the help of unsupervised learning of their DNS traffic patterns \cite{kirchler2016tracked}. Potential usage of such technique may specially be alarming for members of organisation with critical missions, not only the private individuals.
-Alongside with Kirchler's study, having an assumption that users would not change their recursive DNS resolver frequently, end-user reidentification based on web browsing history patterns \cite{olejnik2012johnny} could also be applicable in the context, as observing DNS query traffic provides good representation of each client's web browing history.
+\subsection{DNS queries as a digital fingerprint}
+Kirchler et al. discuss possible ``behaviour-based-tracking'' of linking user sessions with the help of unsupervised learning of their DNS traffic patterns \cite{kirchler2016tracked}. Potential usage of such technique may especially be alarming for members of an organisation with critical missions, not only the private individuals.
+Alongside with Kirchler's study, having an assumption that users would not change their recursive DNS resolver frequently, end-user reidentification based on web browsing history patterns \cite{olejnik2012johnny} could also be applicable in the context, as observing DNS query traffic provides a good representation of each client's web browsing history.

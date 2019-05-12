@@ -9,8 +9,8 @@ The refined search results were categorised into the following fields: studies t
     \label{dns-methods-classification}
 \end{figure}
 
-Studies that suggested improving the security breach (i.e. DNS Privacy methods) could be sorted to two approaches as Figure \ref{dns-methods-classification} demonstrated: ones which preserve the current hierachial DNS structure and the other with radical approach of proposing architectural change to decentrailsed DNS.
-Methods with preserving the hierachial DNS had a tendency to priortise interoperability with the exisiting domain infrastructure. Also, it was observed that in case of applying channel encipherment solutions, methods had tendency of incapsulating DNS operations with minimal changes to the exisiting Internet protocols.
+Studies that suggested improving the security breach (i.e. DNS Privacy methods) could be sorted to two approaches as Figure \ref{dns-methods-classification} demonstrated: ones which preserve the current hierarchical DNS structure and the other with the radical approach of proposing an architectural change to decentralised DNS.
+Methods with preserving the hierarchical DNS had a tendency to prioritise interoperability with the existing domain infrastructure. Also, it was observed that in the case of applying channel encipherment solutions, methods tended to incapsulating DNS operations with minimal changes to the existing Internet protocols.
 
 Classification of DNS Privacy methods could further be analysed based on the which privacy risk these address. S. Bortzmeyer identified risk area of DNS privacy in RFC 7626 as the followings \cite{rfc7626}: 
 \begin{enumerate}
@@ -19,25 +19,25 @@ Classification of DNS Privacy methods could further be analysed based on the whi
     \item In the servers
     \item Re-identification and other Interferences
 \end{enumerate}
-Following sections analyse privacy risk mitigations based on risk area and type of the mitigation strategies as a whole. Concent, privacy and performance analysis of each mitigative method can be found in \cite{van2018privacy}.
+Following sections analyse privacy risk mitigations based on risk area and type of mitigation strategies as a whole. Concent, privacy and performance analysis of each mitigative method can be found in \cite{van2018privacy}.
 
 \subsection{Encipherment of communication channels}
-Communication channel encirpher methods, as presented in Table \ref{content}, attempt to alleviate risks on the wire. The methods also partially address risks of re-identification depends on who the subject of the attacker is. 
+Communication channel encirpher methods, as presented in Table \ref{content}, attempt to alleviate risks on the wire. The methods also partially address the risks of re-identification depends on who the subject of the attacker is. 
 
 \subsubsection{Two phases of DNS Query process}
 For the conciseness of further analysis, the communication channel (transport channel) of DNS are abstracted into two phases or paths based on the DNS Query process.
 
 \textbf{Phase 1} refers to step 1 and 10 of Figure \ref{queryprocess}. These two steps are performed in the DNS Query process when stub resolver queries a domain name to the recursive resolver and the recursive resolver replies to the stub resolver.
-Channel-wise, it is denoted as \textbf{stub-to-resolver link}.
+Channel-wise, it is denoted as a \textbf{stub-to-resolver link}.
 
-\textbf{Phase 2} refers to the steps in the Fugure \ref{queryprocess} where a recursive resolver finds the final answer to the queried address, by recursively reaching to concerning authoritative servers. In other words, the channel that the rest of the steps is performed is called \textbf{recursive-to-auth link}.
+\textbf{Phase 2} refers to the steps in the Figure \ref{queryprocess} where a recursive resolver finds the final answer to the queried address, by recursively reaching to concerning authoritative servers. In other words, the channel that the rest of the steps is performed is called \textbf{recursive-to-auth link}.
 
 \subsubsection{Insufficient measurements on recursive-to-auth link}
-Distinction of the two phases are noteworthy, as the current implementations that preserve DNS hierachial structure do not secure all communication paths towards all involved parties of the DNS resolving.
+The distinction of the two phases are noteworthy, as the current implementations that preserve DNS hierarchical structure do not secure all communication paths towards all involved parties of the DNS resolving.
 As an example, the majority of the methods do not encrypt communications on Phase 2 (recursive-to-auth link) in contrast to Phase 1 (stub-to-resolver link).
 The fact that an authoritative server having a one-to-many server-client relationship from the recursive resolvers is the major obstacle of applying encryption on Phase 2.
 
-As further explanation of one-to-many relationship being an obstacle, DoH \cite{rfc8484} and DoT \cite{hu2016specification} use Transport Layer Security (TLS) protocol \cite{rfc7858} for encryption. In the case an authoritative server process multiple TLS session, it is likely to end up exhausting its computational resources \cite{bhople2012server}, similar to a Distributed DoS (DDoS) attack situation. The internet draft ``Next step for DPRIVE: resolver-to-auth link \cite{I-D.bortzmeyer-dprive-step-2}'' discusses the aforementioned challenges.
+As a further explanation of one-to-many relationship being an obstacle, DoH \cite{rfc8484} and DoT \cite{hu2016specification} use Transport Layer Security (TLS) protocol \cite{rfc7858} for encryption. In the case an authoritative server process multiple TLS session, it is likely to end up exhausting its computational resources \cite{bhople2012server}, similar to a Distributed DoS (DDoS) attack situation. The internet draft ``Next step for DPRIVE: resolver-to-auth link \cite{I-D.bortzmeyer-dprive-step-2}'' discusses the aforementioned challenges.
 
 Furthermore, authentication mechanisms are missing on Phase 2 \cite{I-D.bortzmeyer-dprive-step-2}, and the lack of authentication of the authoritative server may potentially enable a Man-in-the-middle attack (MITM).
 Therefore, the location of the DNS resolver needs to be considered when to mention the limitations of each suggested methods.
@@ -89,13 +89,13 @@ A public DNS server has more possibilities of being shared by a broader public c
 
 This scenario benefits users the most when channel encipherment is applied because DNS query contents in Phase 1 is not visible for parties in the middle of the networking path. It brings significant obfuscation in tracking down the end-user by analysing the network traffics. However, Public DNS servers may log the DNS queries and information of the client. Therefore, privacy risk in-the-servers remains.
 
-\subsubsection{Delagation of trust}
+\subsubsection{Delegation of trust}
 Applying channel encipherment methods for securing DNS queries such as using DNS-over-HTTPS or DNS-over-TLS implies that end-client gives trust in the chosen resolver.
 
 \FloatBarrier
 \subsection{Information redactions}
 Applying the encipherment mechanism on the communications among DNS servers has limitations that these only shifted the trust towards the Recursive resolver.
-In the meanwhile, design enhancements of packets' content reduces the risks of Data in the DNS request and data leaks in the servers.
+In the meanwhile, design enhancements of packets' content reduce the risks of Data in the DNS request and data leaks in the servers.
 Query Name (QNAME) minimisation \cite{bortzmeyer2016dns} and Oblivious DNS \cite{annee-dprive-oblivious-dns-00} are the techniques of this category.
 
 \subsubsection{Information leak minimisations}
@@ -103,7 +103,7 @@ Query Name (QNAME) minimisation \cite{bortzmeyer2016dns} and Oblivious DNS \cite
 It makes only the relevant name server to acquire the full QNAME and query type. Therefore it reduces privacy risks on Phase 2.
 Although the risk of data leaks still present in the last chain of the authoritative NS, this is less likely to happen unless administrators of the domain name have a malicious intent to exploit users' privacy.
 
-\subsubsection{Decoupling user-identificable information}
+\subsubsection{Decoupling user-identifiable information}
 \begin{figure}[h!]
     \begin{center}
     \includegraphics*[width=0.9\columnwidth]{img/ODNSoverview}
@@ -113,30 +113,30 @@ Although the risk of data leaks still present in the last chain of the authorita
 \end{figure}
 \textit{Oblivious DNS (ODNS)} aims to decouple any association of a client IP address and DNS query content and no single party should be able to see both \cite{annee-dprive-oblivious-dns-00}.
 For this to work, it requires a special stub resolver and an ODNS authoritative resolver where the client creates a unique session key on each session to encrypt its DNS query and append 'odns' TLD.
-Figure \ref{odnsoverview} presents an overview of the ODNS and the illustratation is fetched from its project page \cite{ODNSwebsite}.
+Figure \ref{odnsoverview} presents an overview of the ODNS and the illustration is fetched from its project page \cite{ODNSwebsite}.
 
 However, security concerns arise in terms of availability, as ODNS operations require ODNS-stubs and imposing such design creates a new `central point of failure \cite{minutes-102-dprive}'.
 Also, questions concerning assuring confidentiality of the keys used in ODNS and issues with fallback have not been answered \cite{minutes-102-dprive}. 
 
 \subsection{Architectural shift}
-In the pervious section, securing recursive-to-auth link is seen challenging due to the hierachial structure of the DNS.
-Studies that aim towards decentrailsed, often imposing peer-to-peer (P2P) implementation are free from the limitations cased by the hierachial structure.
+In the previous section, securing recursive-to-auth link is seen challenging due to the hierarchical structure of the DNS.
+Studies that aim towards decentralised, often imposing peer-to-peer (P2P) implementation are free from the limitations caused by the hierarchical structure.
 Examples of such solution are Namecoin \cite{loibl2014namecoin} and GNU Name System (GNS) \cite{grothoff2017nsa, wachs2014censorship}.
 
 \subsubsection{Blockchain}
-\textit{Namecoin} \cite{loibl2014namecoin} is described as ``timeline-based system that rely on a P2P network to manage updates and store the timeline \cite{grothoff2017nsa}'', and it settles down any commits related on `key-value mapping' by transactions that are published in an append-only hash chain (a.k.a. blockchain) \cite{kalodner2015empirical}.
-However, preserving user privacy in Namecoin requires ``replication of the full block chain at the user's end system \cite{grothoff2017nsa}'' and performing such received a critism that it ``may be impractical for some devices \cite{grothoff2017nsa}.''
-The critism can be interpreted as applying blockchain did not add significant value, in terms of preserving the privacy of users, as privacy breaches in DNS resolving process could also be address if DNS records could be replicated on a client's system even in the exisiting hierachial system. 
+\textit{Namecoin} \cite{loibl2014namecoin} is described as ``timeline-based system that relies on a P2P network to manage updates and store the timeline \cite{grothoff2017nsa}'', and it settles down any commits related on `key-value mapping' by transactions that are published in an append-only hash chain (a.k.a. blockchain) \cite{kalodner2015empirical}.
+However, preserving user privacy in Namecoin requires ``replication of the full blockchain at the user's end system \cite{grothoff2017nsa}'' and performing such received a criticism that it ``may be impractical for some devices \cite{grothoff2017nsa}.''
+The criticism can be interpreted as applying blockchain did not add significant value, in terms of preserving the privacy of users, as privacy breaches in DNS resolving process could also be addressed if DNS records could be replicated on a client's system even in the existing hierarchical system. 
 
 \subsubsection{Distributed Hash Table}
-\textit{GNU Name system (GNS)} is `privacy-preserving' domain name look up system which takes radical deviation from the conventional domain resolvers, by utilising P2P network and Distributed Hash Table (DHT).
+\textit{GNU Name system (GNS)} is `privacy-preserving' domain name lookup system which takes a radical deviation from the conventional domain resolvers, by utilising P2P network and Distributed Hash Table (DHT).
 DHT provides ``support for an operation: given a key, it maps the key onto a node \cite{stoica2001chord}'', such property is used in GNS domain lookup (resolving) process. 
 In other words, GNS utilise ``distributed storage of DNS records in P2P overlay networks \cite{wachs2014censorship}''. In addition to the DHT, GNS is built upon a petname system \cite{stiegler2005introduction} and utilise Simple Distributed Security Infrastructure (SDSI).
 
 Authors of the GNS claim that domain resolving process of the GNS is private because ``queries and responses are encrypted \cite{grothoff2017nsa, wachs2014censorship}.''
 However, its confidentiality is vulnerable for `confirmation attack' if ``the adversary knows both the public key of the zone and the specific label \cite{wachs2014censorship}.'' Note that the label refers to an entry in a petname system. 
 
-\subsubsection{Prevailance of hierachial DNS}
+\subsubsection{Prevalence of hierarchical DNS}
 Although the primary focus of the study is made on Domain Name resolving part, DNS resolving is only a portion of the entire DNS, as there are diverse actors (such as administrators, domain owners) involved in the system.
 Figure \ref{dnsactors}, which is presented by SUNET \cite{SUNET-DNS}, illustrates the involved machines and servers of the system as a whole.
 
@@ -150,7 +150,7 @@ Figure \ref{dnsactors}, which is presented by SUNET \cite{SUNET-DNS}, illustrate
 
 In the figure, sections are vertically divided.
 The figure in the first column represents organisations or individuals that desire to acquire a new domain name.
-Third column of the figure demonstrates administrators of deligation on each autonomous domain hierarchy.
+The third column of the figure demonstrates administrators of delegation on each autonomous domain hierarchy.
 Legacy of the system are often neglected in attempts of securing the domain name resolution process, which is presented in green colour in the figure. 
 
-The naming hierarchy of the DNS ``ties into systems such as the Public Key Infrastructure (PKI) \cite{akamai-dns-architecture}'', and an architecture of decentralised DNS, such as NameCoin \cite{loibl2014namecoin}, may have not considered the PKI structure in its design.
+The naming hierarchy of the DNS ``ties into systems such as the Public Key Infrastructure (PKI) \cite{akamai-dns-architecture}'', and architecture of decentralised DNS, such as NameCoin \cite{loibl2014namecoin}, may have not considered the PKI structure in its design.

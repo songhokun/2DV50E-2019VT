@@ -154,16 +154,16 @@ This chapter describes what Doname Name System (DNS) is, and how the legacy desi
 Digital transformation has brought things used to be done in real life decades ago to the online. At work, people have a video conference call instead of a business trip if not necessary. For shopping goods, people fill in credit card numbers for cross-border payments rather than visiting a bank branch to issue paychecks. In other words, the stage where people work now has been shifted to cyberspace in recent decades, and the Internet has become an essential part of everyday life.
 
 Despite the ubiquitousness of the Internet, users' activities online are collected under pervasive monitoring by different actors.
-Pervasive Monitoring means ``widespread attack on privacy \cite{rfc7258}.'' Information collected in such action could lead to a breach of users’ privacy, by re-identifying users based on traffic \cite{herrmann2010analyzing}, or could become aids for launching an active form of attacks, such as masquerade and Denial of Service (DoS).
-Unfortunately, insecure architecture of Domain Name System allows the pervasive monitoring, and thus it should be mitigated. Before discussing the privacy problems of DNS, we introduce DNS and its components which are important to adress.
+Pervasive monitoring means ``widespread attack on privacy \cite{rfc7258}.'' Information collected in such action could lead to a breach of users’ privacy, by re-identifying users based on traffic \cite{herrmann2010analyzing}, or could become aids for launching an active form of attacks, such as masquerade and Denial of Service (DoS).
+Unfortunately, the insecure architecture of Domain Name System allows the pervasive monitoring, and thus it should be mitigated. Before discussing the privacy problems of DNS, we introduce DNS and its components which are important to address.
 
 \input{tex/introduction_of_dns.tex}
 
 \subsection{Related work}
-The project accredits pioneer research of "DNS Privacy Considerations (RFC 7626) \cite{rfc7626}" which has provided theoretical foundations in analysis of DNS privacy. 
-As of 2019, there are number of studies are presented to mitigate privacy issues based on the analysis. These studies are later presented in Chapter 3.
+The project accredits pioneer research of ``DNS Privacy Considerations (RFC 7626) \cite{rfc7626}'' which has provided theoretical foundations in analysis of DNS privacy. 
+As of 2019, there are several studies presented to mitigate privacy issues based on the analysis. These studies are later presented in Chapter \ref{surveyresults}.
 
-Survey of DNS privacy enhancing methods are presented by P. Werneck and J.H.C. van Heugten. P. Werneck evaluated approaches to improve privacy of DNS and stated limitations of identified approaches \cite{werneck2014dns} in 2014. J. Heugten evaluated exisiting solutions to ehnance DNS Privacy in 2018 in his study \cite{van2018privacy}. As standariseation of DNS-over-HTTPS is recently finalised \cite{rfc8484}, study from van Heugten reflects more recent changes.
+P. Werneck and J.H.C. van Heugten presented surveys of DNS privacy-enhancing methods. P. Werneck evaluated approaches to improve the privacy of DNS and stated the limitations of identified approaches \cite{werneck2014dns} in 2014. J. Heugten evaluated existing solutions to enhance DNS Privacy in 2018 in his study \cite{van2018privacy}. As standardisation of DNS-over-HTTPS is recently finalised \cite{rfc8484}, a study from van Heugten reflects more recent changes.
 
 \subsection{Problem formulation}\label{problemformulation}
 Currently, almost all DNS traffic is sent in clear text \cite{rfc7626} over the UDP protocol \cite{tcp2014analysis}, and it makes DNS queries vulnerable to being hijacked or used to filter users' traffic.
@@ -194,7 +194,7 @@ S. Farrell et al. state in RFC 7258 that allowing monitoring by benevolent actor
 Disadvantages incurred by lack of DNS privacy significantly overweight advantages, and therefore DNS privacy should be mitigated in any feasible practices.
 
 \subsection{Objectives}
-The following objectives are set to answer the research questions and transform the tasks into the smaller pieces, and reasonings on each objectives follow below. Hereafter several words are shorten for the ease of denotation, such as an objective as O and a research question as RQ. Table \ref{objectives} summarises the objectives.
+The following objectives are set to answer the research questions and transform the tasks into the smaller pieces, and reasonings on each objective follow below. Hereafter several words are shortened for the ease of denotation, such as an objective as O and a research question as RQ. Table \ref{objectives} summarises the objectives.
 \begin{table}[h!]
     \begin{tabular} {|p{1.2cm}|p{12.8cm}|} \hline
         \textbf{O1} & Analyse different end-users' privacy infringements when not having DNS Privacy\\ \hline
@@ -206,45 +206,43 @@ The following objectives are set to answer the research questions and transform 
     \label{objectives}
 \end{table}
 
-RQ1 aims to explore benefits by having DNS privacy on different group of people.
+RQ1 aims to explore benefits by having DNS privacy on a different group of people.
 As it could be challenging to motivate benefits of having privacy when obscurity prevails, O1 is defined to analyse scenarios when the privacy is violated caused by having insecure or exposed DNS queries.
 
-RQ2 is to find use cases of the exisiting DNS privacy mitigative methods. However, in order to discuss use cases, the state of these methods need to be examined. Therefore, O2 is set to explore the state of arts of the methods and O3 is set to identify areas for  improvements.
+RQ2 is to find use cases of the existing DNS privacy mitigative methods. However, in order to discuss use cases, the state of these methods need to be examined. Therefore, O2 is set to explore the state of arts of the methods and O3 is set to identify areas for  improvements.
 
-At the last, RQ3 attempts to provide useful interventions for the reader of the current report, by finding combination of technologies to overcome the possible limitation of the current practices of DNS Privacy enhancement. For serving the purpose, O4 discuesses possible approaches of using the other technologies.
+RQ3 attempts to provide useful interventions by finding a combination of technologies to overcome the limitation of the current DNS Privacy enhancement. For serving the purpose, O4 discusses possible approaches to using other technologies.
 
 \subsection{Scope/Limitation}
-The project has a focus on improving privacy part, from the security perspectives. In other words, reflected to a Confidentiality, Integrity, Availability(CIA) triad, enhancing Integrity and availability perspectives are less priortised in the current project. Issues and challenges of DNS security as whole may be found in other studies, such as one conducted by Ning Hu et. al.\cite{ning2017dnssecurity}. 
-
-%You cannot solve everything. Here you describe what you do, and what you don't do, in your project. Limitations can for example be that you only compare some frameworks of all frameworks available on the market, that you only suggest an architecture for a specific software product and not a general architecture, or that you only include university students in a study and not a broader population sample.
+The project has a focus on improving the privacy part, from the security perspectives. In other words, reflected to a Confidentiality, Integrity, Availability(CIA) triad, enhancing Integrity and availability perspectives are less prioritised in the current project. Issues and challenges of DNS security as a whole may be found in other studies, such as one conducted by Ning Hu et. al.\cite{ning2017dnssecurity}. 
 
 \subsection{Target group}
 The project aims to provide insight on DNS Privacy for Internet users and recursive resolver providers for improving users' privacy.
 %Here you outline which target group that might be interested in your work. If you, for example, do a project about software architectures, a target group can be professional developers and architects that work with similar software systems as the system you investigated.
 
 \subsection{Outline}
-The report follows in Introduction, Methods, Results, and Discussion(IMRaD) pattern. However, as several scientific methods are chosen, which is described in the next chapter, the result and analysis parts are extended for each chosen scientific method. 
+The majority of scientific reports follow in Introduction, Methods, Results, Analysis and Discussion(IMRaD) pattern. However, the project chose to use a design science method and therefore it has an inverted structure of results and analysis. An analysis is made first to describe the design constraints and results (or design proposal) are presented afterwards. 
 
 \newpage
 \section{Method}\label{Method}
 This chapter describes the chosen scientific methods to answer the research questions (Table \ref{researchquestions}) and meet the objectives (Table \ref{objectives}).
-The study used scientific methods of systematic literature review and design science. Controlled expeiments were also partially used to verify several statements made in the study. Sections follow to motivate the choice of a scientific method for meeting objectives.
+The study used scientific methods of systematic literature review and design science. Controlled experiments were also partially used to verify several statements made in the study. Sections follow to motivate the choice of a scientific method for meeting objectives.
 \subsection{Systematic literature review}
-A systematic literature review was performed to accomplish O2, which is to study mitigative methods of DNS privacy. Although a recently published article provied an overview of DNS Priavcy enhanceing methods \cite{van2018privacy}, performing systematic literature review was necessary to eradicate possible biases and to minimise opportunities of missing suitable solutions.
+A systematic literature review was performed to accomplish O2, which is to study mitigative methods of DNS privacy. Although a recently published article provided an overview of DNS Privacy enhancing methods \cite{van2018privacy}, performing systematic literature review was necessary to eradicate possible biases and to minimise opportunities of missing suitable solutions.
 
-To make the review process systematic, a search criterium was set to list articles that cited RFC 7626 from a database Google Scholar, as the analysis had provided a clear insight of DNS privacy issues \cite{rfc7626}, and since around four years had passed after its publication, it was anticipated that fellow researchers have tried to solve or list risks identified in the article.
+A search criterium was set to list articles that cited RFC 7626 from a database Google Scholar to make the review process systematic. RFC 7626 is chosen, as its analysis had provided a clear insight of DNS privacy issues \cite{rfc7626}, and since around four years had passed after its publication, it was anticipated that fellow researchers have tried to solve or list risks identified in the article.
 
-For inclusion criterium, references of the found articles were further examined, as there were chances of missing to address well-established solutions possibly because the methods had been introcued before publishment of RFC 7626.
+For inclusion criterium, references of the found articles were further examined, as there were chances of missing to address well-established solutions possibly because the methods had been introduced before publishment of RFC 7626.
 
-Exclusive criteria was set to have the contents of the articles to be relevant to the defined problem. Therefore, any solving other security aspects of DNS, such as availability but not addressing the privacy problems were excluded.
+Exclusive criteria were set to have the contents of the articles to be relevant to the defined problem. Therefore, any solving other security aspects of DNS, such as availability but not addressing the privacy problems were excluded.
 
 \subsection{Design Science}
-Design science ``creates and evaluates Information Technology artifacts to solve identified organisational problems \cite{von2004design}'', and it has a strong relevance in addressing O3 and O4 which are to identify area that studided DNS Privacy methods could not address and analyse alternative approaches to overcome the limitations.
+Design science ``creates and evaluates Information Technology artefacts to solve identified organisational problems \cite{von2004design}'', and it has strong relevance in addressing O3 and O4 which are to identify the area that studied DNS Privacy methods could not address and analyse alternative approaches to overcome the limitations.
 
-To refine problem statements for the exisiting practice, literature review is made to analyse privacy infringement scenarios on diverse user scenarios, as defined in O1.
+To refine problem statements for the existing practice, a literature review is made to analyse privacy infringement scenarios on diverse user scenarios, as defined in O1.
 
 \subsection{Controlled Experiment}
-Controlled experiment is applied to verify whether suggested design artifact addressed the limitations of current DNS Privacy enhancing methods found in O3 or not. Conducting a controlled experiment fulfills one of the guidelines of design science which requires ``thorough evaluation of the artifact \cite{von2004design}''.
+A controlled experiment is applied to verify whether the suggested design artefact addressed the limitations of current DNS Privacy enhancing methods found in O3 or not. Conducting a controlled experiment fulfils one of the guidelines of design science which requires ``thorough evaluation of the artefact \cite{von2004design}''.
 
 \subsection{Reliability and Validity}
 The study is seen to have reliability on the results of the literature review, as the same effect will be derived by performing a search as described in the previous section. As Appendix A includes the source code of the experiment scripts, a similar result is expected to be derived by other researchers as well. 
@@ -253,15 +251,15 @@ The project deployed its experiments in a virtualised environment to minimise un
 
 \subsection{Ethical considerations}
 Discussing ethical considerations has less significance in the chosen methods, as no real data of any physical persons is collected without the consent.
-However, it can be questioned whether it is adequate to ellaborate privacy breaching scenarios in details to use the information for formulating problems for the design science method.
-Despite of the concerns, as the project aims to improve the problematic scenarios of not having sufficient privacy enhancements, describing the problematic situations as-they-are is necessary.
+However, it can be questioned whether it is adequate to elaborate privacy breaching scenarios in details to use the information for formulating problems for the design science method.
+Despite the concerns, as the project aims to improve the problematic scenarios of not having sufficient privacy enhancements, describing the problematic situations as-they-are is necessary.
 
 \newpage
 \section{Privacy profiles}
 \input{tex/privacy.tex}
 
 \newpage
-\section{Survey of DNS Privacy enhancing methods}
+\section{Survey of DNS Privacy enhancing methods}\label{surveyresults}
 \input{tex/survey_results.tex}
 
 \newpage
