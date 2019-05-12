@@ -1,3 +1,12 @@
-This chapter describes the product of the study.
-This took condiserations of the analsys made in the previous chapters and given constraints.
+This chapter describes the product of the study, considering the analsys made in the previous chapters and given constraints.
 
+\subsection{Non-trusted recursive resolver}
+When a trustable recursive resolver does not exist, offen end-users' own computer becomes the recursive resolver. However, the earlier chapter analysed that utilising recursive resolver on a local machine barely gives any value, because many of recursive-to-auth links are unencrypted and subject to the traffic monitoring.
+
+To circumvent the situation, traffic anonymisation technologies on recursive-to auth link can be applied, and examples of such technology are  FreeNet \cite{clarke2001freenet} or GNUNet\cite{grothoff2017gnunet}, and Tor.
+However, FreeNet \cite{clarke2001freenet} or GNUNet \cite{grothoff2017gnunet} result in having high delays \cite{anonymousoverdns}.
+
+Solution: Proactive caching \cite{cohen2003proactive} over Tor for most significantly visited websites. For caching, the same tor circut can be reused but for processing individual queries, connection shall not be resued.
+
+Variation of Round Trip Time and its impact on the end-user's perseption shall be discussed. Intercoperation problem with CDN follows.
+Provide Privacy analysis on the Tor. Tor may still be subject to the confirmation attacks, similar to DHT technologies. 

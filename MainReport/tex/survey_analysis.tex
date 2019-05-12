@@ -89,6 +89,9 @@ A public DNS server has more possibilities of being shared by a broader public c
 
 This scenario benefits users the most when channel encipherment is applied because DNS query contents in Phase 1 is not visible for parties in the middle of the networking path. It brings significant obfuscation in tracking down the end-user by analysing the network traffics. However, Public DNS servers may log the DNS queries and information of the client. Therefore, privacy risk in-the-servers remains.
 
+\subsubsection{Delagation of trust}
+Applying channel encipherment methods for securing DNS queries such as using DNS-over-HTTPS or DNS-over-TLS implies that end-client gives trust in the chosen resolver.
+
 \FloatBarrier
 \subsection{Information redactions}
 Applying the encipherment mechanism on the communications among DNS servers has limitations that these only shifted the trust towards the Recursive resolver.
