@@ -286,22 +286,8 @@ In the decentralised design, interventing the malevoneous records are more chall
 %\input{tex/design_of_protocol_verification.tex}
 %\newpage
 
-\section{Results}
-This chapter shows the result of verifying DNS Privacy solutions.
-\subsection{DNS-over-HTTPS}
-Figure \ref{selenium-mode2packets} shows a result of packet captures filtered with DNS (port 53) of a Firefox (66.0.2) simulation with Selenium which network.trr.mode is set as 2 and executed top 10 websites of 'de' domain.
-
-\begin{figure}[h!]
-    \begin{center}
-    \includegraphics*[width=0.9\columnwidth]{img/selenium-firefox-mode2/wireshark}
-    \end{center}
-    \caption{Packet captures of Firefox where trust recursive resolver mode is enabled in mode 2}
-    \label{selenium-mode2packets}
-\end{figure}
-
-%In this chapter you show and describe your results. You shall only show the raw results without any analysis, and you shall not put any conclusions or opinions in the description of the results. Try to be as objective as possible. An example of results from an experiment comparing five sorting algorithms is shown in Table \ref{results} below.\\
-
-
+\section{Proposal}
+\input{tex/design_proposal.tex}
 \newpage
 	
 \section{Discussion}
@@ -314,8 +300,7 @@ In this chapter you end your report with a conclusion of your findings. What hav
 This chapter is also written in present tense.
 
 \subsection{Future work}
-You cannot do everything within the limited scope of a degree project. Here you discuss what you would do if you had continued working on your project. Are there any open questions that you discovered during the project work that you didn't have time to investigate?
-
+Due to the limitation of the time, the proof of concept proposal made in this study has not throughouly examined. Actual implementation of the proposal can be done as a future study. Appendix presents a draft version of the test code to automate the web traffic generation.
 \newpage
 
 
@@ -336,19 +321,23 @@ You cannot do everything within the limited scope of a degree project. Here you 
 \setcounter{page}{1} % Reset page numbering for Appendix
 \appendix
 
-%\section{Appendix 1}\label{processweblist}
-%This section describes the list of websites we simulated. The website list is fetched from Alexa top one million global chart and further classified depends on Top-Level-Domains (TLDs).
-%Below is code for a script to convert the Alexa list into a dictionary format.
-%\inputpython{../Selenium/process_web_list.py}{1}{30}
+\section{Appendix 1}
+The section presents a set of Python script that can potentially used in verifying the proof of concept presented in this sutdy.
+Secetions follow with code for processing a web site list, script to simulate the web traffic and the common base code for above functions to work.
+Analysing and capturing the generated web traffic is not in the scope of the section.
 
-%\section{Appendix 2}\label{visitwebsites}
-%This section includes a Python script for visiting websites using Selenium.
-%Selenium is the web automation test tool\cite{holmes2006automating}, which is typically used to test web applications. However, in our experiments, we utilised Selenium to visit a list of websites for simulating DNS queries. As we intended to use Firefox for DoH simulation, Selenium was incorporated with Firefox Gecko driver to control the web browser. Additionally, a Python script to operate Selenium.
+\subsection{Processing frequently visited web domain list} \label{processweblist}
+The website list is fetched from Alexa top one million global chart and further classified depends on Top-Level-Domains (TLDs).
+Below is code for a script to convert the Alexa list into a dictionary format.
+\inputpython{../Selenium/process_web_list.py}{1}{30}
 
-%Python 3.5 and higher, Pip3 is required. It is anticipated that Python packages such as selenium and json are also installed on the system. A Gecko driver needs to be reachable in OS' PATH environment. This code assumes that Firefox browser is installd on the local PC.
+\subsection{Script for automating the web traffic simulation}
+Selenium is the web automation test tool\cite{holmes2006automating}, which is typically used to test web applications. Selenium can be used to visit a list of websites for simulating DNS queries. In the script below, the selenium was incorporated with Firefox Gecko driver to control the web browser through a Python script.
 
-%\inputpython{../Selenium/visitwebsites.py}{1}{70}
-%\section{Appendix 3}
-%Below is code for util.py which is a common base script.
-%\inputpython{../Selenium/util.py}{1}{110}
+Python 3.5 and higher, Pip3 is required. It is anticipated that Python packages such as selenium and json are also installed on the system. A Gecko driver needs to be reachable in OS' PATH environment. This code assumes that Firefox browser is installd on the local PC.
+
+\inputpython{../Selenium/visitwebsites.py}{1}{70}
+\subsection{Common based source}
+Below is code for util.py which is a common base script.
+\inputpython{../Selenium/util.py}{1}{110}
 \end{document}
