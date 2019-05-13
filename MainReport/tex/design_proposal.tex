@@ -10,3 +10,6 @@ Solution: Proactive caching \cite{cohen2003proactive} over Tor for most signific
 
 Variation of Round Trip Time and its impact on the end-user's perseption shall be discussed. Intercoperation problem with CDN follows.
 Provide Privacy analysis on the Tor. Tor may still be subject to the confirmation attacks, similar to DHT technologies. 
+
+Tor cannot forward UDP traffic on the exit-node. (Citation needed). Therefore, it may be difficult to argure the planned idea.
+Instead, try to combine DNS-over-TLS or DNS-over-HTTPS with Tor over its proxy socket \cite{tor-socks}, and try to use a DNS resolving client such as \cite{technitium-configuration}. 
