@@ -225,34 +225,7 @@ The majority of scientific reports follow in Introduction, Methods, Results, Ana
 
 \newpage
 \section{Method}\label{Method}
-This chapter describes the chosen scientific methods to answer the research questions (Table \ref{researchquestions}) and meet the objectives (Table \ref{objectives}).
-The study used scientific methods of systematic literature review and design science. Controlled experiments were also partially used to verify several statements made in the study. Sections follow to motivate the choice of a scientific method for meeting objectives.
-\subsection{Systematic literature review}
-A systematic literature review was performed to accomplish O2, which is to study mitigative methods of DNS privacy. Although a recently published article provided an overview of DNS Privacy enhancing methods \cite{van2018privacy}, performing systematic literature review was necessary to eradicate possible biases and to minimise opportunities of missing suitable solutions.
-
-A search criterium was set to list articles that cited RFC 7626 from a database Google Scholar to make the review process systematic. RFC 7626 is chosen, as its analysis had provided a clear insight of DNS privacy issues \cite{rfc7626}, and since around four years had passed after its publication, it was anticipated that fellow researchers have tried to solve or list risks identified in the article.
-
-For inclusion criterium, references of the found articles were further examined, as there were chances of missing to address well-established solutions possibly because the methods had been introduced before publishment of RFC 7626.
-
-Exclusive criteria were set to have the contents of the articles to be relevant to the defined problem. Therefore, any solving other security aspects of DNS, such as availability but not addressing the privacy problems were excluded.
-
-\subsection{Design Science}
-Design science ``creates and evaluates Information Technology artefacts to solve identified organisational problems \cite{von2004design}'', and it has strong relevance in addressing O3 and O4 which are to identify the area that studied DNS Privacy methods could not address and analyse alternative approaches to overcome the limitations.
-
-To refine problem statements for the existing practice, a literature review is made to analyse privacy infringement scenarios on diverse user scenarios, as defined in O1.
-
-\subsection{Controlled Experiment}
-A controlled experiment is applied to verify whether the suggested design artefact addressed the limitations of current DNS Privacy enhancing methods found in O3 or not. Conducting a controlled experiment fulfils one of the guidelines of design science which requires ``thorough evaluation of the artefact \cite{von2004design}''.
-
-\subsection{Reliability and Validity}
-The study is seen to have reliability on the results of the literature review, as the same effect will be derived by performing a search as described in the previous section. As Appendix A includes the source code of the experiment scripts, a similar result is expected to be derived by other researchers as well. 
-
-The project deployed its experiments in a virtualised environment to minimise unforeseen factors that would impact performance measurements.
-
-\subsection{Ethical considerations}
-Discussing ethical considerations has less significance in the chosen methods, as no real data of any physical persons is collected without the consent.
-However, it can be questioned whether it is adequate to elaborate privacy breaching scenarios in details to use the information for formulating problems for the design science method.
-Despite the concerns, as the project aims to improve the problematic scenarios of not having sufficient privacy enhancements, describing the problematic situations as-they-are is necessary.
+\input{tex/methods.tex}
 
 \newpage
 \section{Privacy profiles}
