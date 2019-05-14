@@ -1,8 +1,21 @@
-This chapter describes the product of the study, considering the analsys made in the previous chapters and given constraints.
+The previous chapter provided a categorisation of the DNS Privacy technologies.
+Afterwards, possible shortcomings of each type of technologies were mentioned.
+
+For the designs using the channel encipherment, DNS Queries on Phase 2 were not sufficiently addressed due to the widespread authoritative name servers and resource exhaustion problem caused by many-to-one communication relationship.
+Despite many operational authoritative name servers were deployed in the load-balanced and highly available manner and term `many-to-many' shall be a more accurate description of the current practices, the number of recursive resolvers prevails load balancing of each name domain.
+
+Methods which reduced the information leak by redacting information (i.e. not showing unnecessary or irrelevant information for an authoritative server to answer) and methods with decoupling sensitive data did not have obvious limitation.
+
+Proposals with Architectural transition raised concerns of harming other aspects of security triad such as integrity of the DNS records.
+
+In the following sections, we reflect approaches to mitigate the addressed limitations. Limitations caused by architectural design is not focused. In other words, the scope lies in the approaches that preserve the current hierarchical DNS.
+
+\subsection{Trusted recursive resolver}
 
 \subsection{Non-trusted recursive resolver}
 When a trustable recursive resolver does not exist, offen end-users' own computer becomes the recursive resolver. However, the earlier chapter analysed that utilising recursive resolver on a local machine barely gives any value, because many of recursive-to-auth links are unencrypted and subject to the traffic monitoring.
 
+\subsubsection{Traffic anonymisation}
 To circumvent the situation, traffic anonymisation technologies on recursive-to auth link can be applied, and examples of such technology are  FreeNet \cite{clarke2001freenet} or GNUNet\cite{grothoff2017gnunet}, and Tor.
 However, FreeNet \cite{clarke2001freenet} or GNUNet \cite{grothoff2017gnunet} result in having high delays \cite{anonymousoverdns}.
 
