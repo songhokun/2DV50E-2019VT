@@ -84,7 +84,7 @@ Channel encipherment on Phase 1 adds a value of users' privacy to a limited exte
     \label{publicrecursive}
 \end{figure}
 
-Figure \ref{publicrecursive} briefly shows a scenario of using a \textit{public recursive resolver} (as known as Public DNS resolver).
+A scenario of using a \textit{public recursive resolver} (as known as Public DNS resolver) is represented in Figure \ref{publicrecursive}.
 A public DNS server has more possibilities of being shared by a broader public compared to the ISP provided resolvers, and it increases the chances of queries being already cached. Authoritative servers see requests from the IP address of the public resolver, instead of stub resolvers' when ECS is not applied.
 
 This scenario benefits users the most when channel encipherment is applied because DNS query contents in Phase 1 is not visible for parties in the middle of the networking path. It brings significant obfuscation in tracking down the end-user by analysing the network traffics. However, Public DNS servers may log the DNS queries and information of the client. Therefore, privacy risk in-the-servers remains.
@@ -154,3 +154,27 @@ The third column of the figure demonstrates administrators of delegation on each
 Legacy of the system are often neglected in attempts of securing the domain name resolution process, which is presented in green colour in the figure. 
 
 The naming hierarchy of the DNS ``ties into systems such as the Public Key Infrastructure (PKI) \cite{akamai-dns-architecture}'', and architecture of decentralised DNS, such as NameCoin \cite{loibl2014namecoin}, may have not considered the PKI structure in its design.
+
+\subsection{Constraints}
+Up until the previous section, privacy-enhancing studies were analysed in terms of contribution to privacy enhancements on end-users.
+The following section highlights factors other than the privacy (confidentiality) perspective.
+
+\subsubsection{CIA-triad}
+In information security discussions, threat mitigations of a system are analysed in three perspectives: confidentiality, availability and integrity. These properties as a group are denoted as CIA triad or the security triad.
+Achieving every aspect of CIA-triad often are not feasible, as enhancing one dimension may interfere with the other dimensions \cite{securityincomputing}.
+
+\subsubsection{The integrity of the DNS records}
+Ensuring the integrity of the DNS record is significant, and it is evident from `phishing attacks \cite{ariyapperuma2007security, ollmann2004phishing}'.
+Per contra, radical protocol design proposals may harm the integrity of the DNS records, as its proof-censorship or legal attack proof designs may enable everyone can claim the legitimacy of ownership of the specific domain.
+
+Solutions using DHT in its design may put the system vulnerable to possible Sybil attacks \cite{6503215, SitE2002Scfp}.
+Sybil attacks are a type of attack scenario where an attacker `subverts the reputation system by creating a considerable amount of pseudonymous identities \cite{TRIFA20141135}' `in the absence of identification authority \cite{douceur2002sybil}.'
+
+Interventing the malvaceous records are more challenging than the hierarchical structure of the current DNS system in the decentralised design, and this could lead to concerns of enabling phishing attacks.
+Enhancing confidentiality aspects of DNS security is important but it should not compromise the integrity aspect.
+
+\subsubsection{The availability of the DNS Service}
+There are several criteria to define availability. The criteria for defining availability introduced by Pfleeger are (1) having a timely response to a given request, (2) ensuring fair allocation of resources and (3) being fault-tolerant \cite{securityincomputing}.
+This report defines availability as a chosen recursive resolver to resolve the queried address and provide the correct IP address promptly.
+
+High availability of DNS is important since web activities cannot be initiated without name resolution (as mentioned in Section \ref{dns-introduction}). High performance (performance refers to having a low latency) of DNS is also an important factor to consider because DNS resolutions are a significant cause of having log Web waits \cite{cohen2003proactive, jung2002dns}, and it has a notable impact on `User-perceived latency'.
