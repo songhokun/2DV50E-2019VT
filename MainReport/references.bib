@@ -167,11 +167,18 @@ url={https://httpd.apache.org/docs/2.4/vhosts/}
   pages={2--3},
   year={2011}
 }
-%%
+
 @techreport{bortzmeyer2016dns,
-  title={DNS query name minimisation to improve privacy},
   author={Bortzmeyer, Stephane},
-  year={2016}
+  title = {DNS Query Name Minimisation to Improve Privacy},
+  howpublished = {Internet Requests for Comments},
+  type = {RFC},
+  number = {7816},
+  year = {2016},
+  month = {March},
+  issn = {2070-1721},
+  publisher = {RFC Editor},
+  institution = {RFC Editor},
 }
 @techreport{hu2016specification,
   title={Specification for dns over transport layer security (tls)},
@@ -568,7 +575,7 @@ Future Internet (FI) and Innovative Internet Technologies and Mobile Communicati
   organization={IEEE}
 }
 @electronic{bind9qname,
-title={QNAME Minimization and Your Privac},
+title={QNAME Minimization and Your Privacy},
 journal={{I}nternet {S}ystems {C}onsortium},
 author={Risk, Vicky},
 year={2019},
@@ -957,4 +964,56 @@ url = "http://www.sciencedirect.com/science/article/pii/S1877050914007443",
 author = "Zied Trifa and Maher Khemakhem",
 keywords = "Structured p2p overlay networks, Chord, Sybil Attack, Monitoring, Tracking ;",
 abstract = "Sybil attack is considered one of the most damaged attack that menace structured p2p overlay networks. It's the most sophisticated node active, used for a variety of illicit activities. A key requirement for these activities is the ability of such malicious user to generate a huge number of node identifiers and possibly choose some of them in order to disrupt availability and integrity in such systems. This paper highlights the problem of Sybil attack and presents a Sybil tracking process to deal with such problem."
+}
+@inproceedings{Shulman:2014,
+ author = {Shulman, Haya},
+ title = {Pretty Bad Privacy: Pitfalls of DNS Encryption},
+ booktitle = {Proceedings of the 13th Workshop on Privacy in the Electronic Society},
+ series = {WPES '14},
+ year = {2014},
+ isbn = {978-1-4503-3148-7},
+ location = {Scottsdale, Arizona, USA},
+ pages = {191--200},
+ numpages = {10},
+ url = {http://doi.acm.org/10.1145/2665943.2665959},
+ doi = {10.1145/2665943.2665959},
+ acmid = {2665959},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {dns, dns caching, dns encryption, dns infrastructure, dns privacy, dns security, side channel attacks, transitive trust dependencies},
+}
+@inproceedings{Ramasubramanian:2005,
+ author = {Ramasubramanian, Venugopalan and Sirer, Emin G\"{u}n},
+ title = {Perils of Transitive Trust in the Domain Name System},
+ booktitle = {Proceedings of the 5th ACM SIGCOMM Conference on Internet Measurement},
+ series = {IMC '05},
+ year = {2005},
+ location = {Berkeley, CA},
+ pages = {35--35},
+ numpages = {1},
+ url = {http://dl.acm.org/citation.cfm?id=1251086.1251121},
+ acmid = {1251121},
+ publisher = {USENIX Association},
+ address = {Berkeley, CA, USA},
+}
+@unpublished{Huque-QNAME-Min-analysis,
+  title= {Query name minimization and authoritative DNS server behavior},
+  author = {Huque, Shumon},
+  year = {2015},
+  month = {May},
+  note= {DNS-OARC 2015 Spring Workshop, Amsterdam},
+  URL= {https://indico.dns-oarc.net/event/21/contributions/298/attachments/267/487/qname-min.pdf}
+}
+@article{WANG2018235,
+  title = "Evolution and challenges of DNS-based CDNs",
+  journal = "Digital Communications and Networks",
+  volume = "4",
+  number = "4",
+  pages = "235 - 243",
+  year = "2018",
+  issn = "2352-8648",
+  doi = "https://doi.org/10.1016/j.dcan.2017.07.005",
+  url = "http://www.sciencedirect.com/science/article/pii/S2352864817300731",
+  author = "Zheng Wang and Jun Huang and Scott Rose",
+  keywords = "Content delivery network, DNS-Based server redirecting, Remote DNS, DNS privacy"
 }

@@ -1,16 +1,14 @@
-The previous chapter provided a categorisation of the DNS Privacy technologies.
-Afterwards, possible shortcomings of each type of technologies were mentioned.
+This chapter presents the limitation area of the current DNS Privacy practices.
+For the designs using the channel encipherment, the analysis from the previous chapter showed that such designs have insufficient measurements of DNS Queries on Phase 2.
+In addition to the limitations of Phase 2, there are several concerns on the measures taken on Phase 1. Following sections introduce privacy concerns on the DNS Privacy enhancing techniques.
 
-For the designs using the channel encipherment, DNS Queries on Phase 2 were not sufficiently addressed due to the widespread authoritative name servers and resource exhaustion problem caused by many-to-one communication relationship.
-Despite many operational authoritative name servers were deployed in the load-balanced and highly available manner and term `many-to-many' shall be a more accurate description of the current practices, the number of recursive resolvers prevails load balancing of each name domain.
+\subsection{Privacy leaks by Transitive trust}
+Shulman demonstrated that `straightforward application of the encryption alone may not suffice \cite{Shulman:2014}' for protecting DNS Privacy due to possible disruption of DNS Availability and privacy leaks caused by `transitive trust \cite{Ramasubramanian:2005}'.
+Shulman further analysed transtive trust as (1) \textit{fan-out} and (2) \textit{chain-length}.
+Chain-length refers to ``A number of name servers involved in a resolution of a record that initiates the chain'' and fan-out as ``number of (transitive-trust) chains involved in a resolution of a domain name'' \cite{Shulman:2014}.
 
-Methods which reduced the information leak by redacting information (i.e. not showing unnecessary or irrelevant information for an authoritative server to answer) and methods with decoupling sensitive data did not have obvious limitation.
-
-Proposals with Architectural transition raised concerns of harming other aspects of security triad such as integrity of the DNS records.
-
-In the following sections, we reflect approaches to mitigate the addressed limitations. Limitations caused by architectural design is not focused. In other words, the scope lies in the approaches that preserve the current hierarchical DNS.
-
-\subsection{Trusted recursive resolver}
+Transitive trust at authoritative servers possess a potential risk of revealing the query and client. While DNS QName minimisation \cite{bortzmeyer2016dns} limits the scope of the quername leaks, the extensified usage of DNS in Content Delivery Network (CDN) context \cite{WANG2018235} may have increased the chain-length and it leads to the intercoperation issues \cite{Huque-QNAME-Min-analysis}.
+\subsection{Observation on packets' size}
 
 \subsection{Non-trusted recursive resolver}
 When a trustable recursive resolver does not exist, offen end-users' own computer becomes the recursive resolver. However, the earlier chapter analysed that utilising recursive resolver on a local machine barely gives any value, because many of recursive-to-auth links are unencrypted and subject to the traffic monitoring.
