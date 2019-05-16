@@ -7,7 +7,8 @@ Shulman demonstrated that `straightforward application of the encryption alone m
 Shulman further analysed transtive trust as (1) \textit{fan-out} and (2) \textit{chain-length}.
 Chain-length refers to ``A number of name servers involved in a resolution of a record that initiates the chain'' and fan-out as ``number of (transitive-trust) chains involved in a resolution of a domain name'' \cite{Shulman:2014}.
 
-Transitive trust at authoritative servers possess a potential risk of revealing the query and client. While DNS QName minimisation \cite{bortzmeyer2016dns} limits the scope of the quername leaks, the extensified usage of DNS in Content Delivery Network (CDN) context \cite{WANG2018235} may have increased the chain-length and it leads to the intercoperation issues \cite{Huque-QNAME-Min-analysis}.
+Transitive trust at authoritative servers possess a potential risk of revealing the query and client. While DNS QName minimisation \cite{bortzmeyer2016dns} limits the scope of the query name leaks, the extensified usage of DNS in Content Delivery Network (CDN) context \cite{WANG2018235} may have increased the chain-length and it leads to the intercoperation issues \cite{Huque-QNAME-Min-analysis}.
+
 \subsection{Observation on packets' size}
 
 \subsection{Non-trusted recursive resolver}
