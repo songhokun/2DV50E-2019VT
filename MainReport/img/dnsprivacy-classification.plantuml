@@ -1,8 +1,5 @@
 @startuml
 skinparam dpi 400
-object Methods {
-Set of suggestions to improve DNS Privacy
-}
 
 abstract Hierachial {
     Preserving exisiting\nDNS Structure 
@@ -53,8 +50,6 @@ class DNSCurve{
     standarised = "F"
 }
 
-Methods -- Hierachial
-Methods -- Decentralised
 Hierachial -- Encipherment
 Hierachial -- Redaction
 
@@ -66,7 +61,6 @@ CurrentStandards <|-- DoT
 CurrentStandards <|-- DoH
 CurrentStandards <|-- DTLS
 
-Encipherment <|-- ObliviousDNS
 Redaction <|-- ObliviousDNS
 Redaction <|-- QNAMEMinimization
 
