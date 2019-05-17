@@ -25,3 +25,6 @@ In the diagram, steps 2 and 3 returns top-level-domain(TLD) from the root server
 The extension mechanisms for DNS (EDNS) is specified in RFC 6891. EDNS allows both DNS servers and client to send ``larger DNS packet than the original 512 octet limit \cite{rfc6891}'' so that it benefits of utilising larger size. It makes sending long IPv6 address and possible DNSSEC signatures. As of February 2019, major DNS resolver operators have started not to support non-EDNS compliant servers. 
 
 EDNS(0) provides several options, and one of the options is Client Subnet(ECS) feature, as described in RFC 7831 \cite{rfc7871}. When ECS is used, recursive DNS servers provide a truncated client IP address in its DNS queries to the upstream authorities to permit ``topologically localised answers for Content Delivery Networks (CDN) \cite{kintis2016understanding}''.
+\subsubsection{CIA-triad}
+In information security discussions, threat mitigations of a system are analysed in three perspectives: confidentiality, availability and integrity. These properties as a group are denoted as CIA triad or the security triad.
+Achieving every aspect of CIA-triad often are not feasible, as enhancing one dimension may interfere with the other dimensions \cite{securityincomputing}.

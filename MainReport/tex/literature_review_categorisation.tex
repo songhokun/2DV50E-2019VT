@@ -1,0 +1,48 @@
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics*[width=1\columnwidth]{img/dnsprivacy-classification}
+    \end{center}
+    \caption{Categorisation of DNS Privacy enhancing methods based on the approach}
+    \label{dns-methods-classification}
+\end{figure}
+
+Studies that suggested improving the security breach (i.e. DNS Privacy methods) could be sorted to two approaches as Figure \ref{dns-methods-classification} demonstrated: ones which preserve the current hierarchical DNS structure and the other with the radical approach of proposing an architectural change to decentralised DNS.
+Methods with preserving the hierarchical DNS had a tendency to prioritise interoperability with the existing domain infrastructure. Also, it was observed that in the case of applying channel encipherment solutions, methods tended to incapsulating DNS operations with minimal changes to the existing Internet protocols.
+
+\subsubsection{Encipherment of communication channels}
+Communication channel encirpher methods, as presented in Table \ref{content}, attempt to alleviate risks on the wire.
+The methods also partially address the risks of re-identification depends on who the subject of the attacker is.
+
+\subsubsection{Information redactions}
+Applying the encipherment mechanism on the communications among DNS servers has limitations that these only shifted the trust towards the Recursive resolver.
+In the meanwhile, design enhancements of packets' content reduce the risks of Data in the DNS request and data leaks in the servers.
+Query Name (QNAME) minimisation \cite{bortzmeyer2016dns} and Oblivious DNS \cite{annee-dprive-oblivious-dns-00} are the techniques of this category.
+
+\textit{QNAME minimisation} reduces the query leaks on higher authoritative name server chains, by presenting only relevant part of a domain name for an authoritative server to answer, instead of querying with FQDN.
+It makes only the relevant name server to acquire the full QNAME and query type. Therefore it reduces privacy risks on Phase 2.
+Although the risk of data leaks still present in the last chain of the authoritative NS, this is less likely to happen unless administrators of the domain name have a malicious intent to exploit users' privacy.
+
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics*[width=0.9\columnwidth]{img/ODNSoverview}
+    \end{center}
+    \caption{An overview of Oblivious DNS \cite{ODNSwebsite}}
+    \label{odnsoverview}
+\end{figure}
+\textit{Oblivious DNS (ODNS)} aims to decouple any association of a client IP address and DNS query content and no single party should be able to see both \cite{annee-dprive-oblivious-dns-00}.
+For this to work, it requires a special stub resolver and an ODNS authoritative resolver where the client creates a unique session key on each session to encrypt its DNS query and append 'odns' TLD.
+Figure \ref{odnsoverview} presents an overview of the ODNS and the illustration is fetched from its project page \cite{ODNSwebsite}.
+
+However, security concerns arise in terms of availability, as ODNS operations require ODNS-stubs and imposing such design creates a new `central point of failure \cite{minutes-102-dprive}'.
+Also, questions concerning assuring confidentiality of the keys used in ODNS and issues with fallback have not been answered \cite{minutes-102-dprive}.
+
+\subsubsection{Architectural shift}
+In the previous section, securing recursive-to-auth link is seen challenging due to the hierarchical structure of the DNS.
+Studies that aim towards decentralised, often imposing peer-to-peer (P2P) implementation are free from the limitations caused by the hierarchical structure.
+Examples of such solution are Namecoin \cite{loibl2014namecoin} and GNU Name System (GNS) \cite{grothoff2017nsa, wachs2014censorship}.
+
+\textit{Namecoin} \cite{loibl2014namecoin} is described as ``timeline-based system that relies on a P2P network to manage updates and store the timeline \cite{grothoff2017nsa}'', and it settles down any commits related on `key-value mapping' by transactions that are published in an append-only hash chain (a.k.a. blockchain) \cite{kalodner2015empirical}.
+
+\textit{GNU Name system (GNS)} is `privacy-preserving' domain name lookup system which takes a radical deviation from the conventional domain resolvers, by utilising P2P network and Distributed Hash Table (DHT).
+DHT provides ``support for an operation: given a key, it maps the key onto a node \cite{stoica2001chord}'', such property is used in GNS domain lookup (resolving) process. 
+In other words, GNS utilise ``distributed storage of DNS records in P2P overlay networks \cite{wachs2014censorship}''. In addition to the DHT, GNS is built upon a petname system \cite{stiegler2005introduction} and utilise Simple Distributed Security Infrastructure (SDSI).

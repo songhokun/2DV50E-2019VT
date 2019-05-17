@@ -3,8 +3,11 @@ This chapter presents the result of a systematic literature review on studies re
 As the raw data from the Google scholar had contained several duplicated entries, duplicated studies were excluded. Series or revisions of the same article are marked as duplicated. For such cases, the proceeding study was chosen to present.
 The analysis section which follows after this chapter motivates strategies for categorisation of raw search results.
 
+The refined search results were categorised into the following fields: studies that suggested improving the security breach and investigations that demonstrated any application (or utilisation) of the security vulnerabilities.
+
 \subsection{Improvement suggestions}
 Studies shown in Table \ref{channel} attempted to secure the communication channel of the DNS query. In other words, these studies suggested applying Encipherment mechanism to deliver Connection Confidentiality as X.800 defines \cite{x800}.
+Applying channel encipherment methods for securing DNS queries mitigates the privacy risks by giving trust to the chosen recursive resolver.
 
 \begin{table}[h!]
     \begin{tabular}{ | l | p{10.5cm} | l | l | }
@@ -54,6 +57,11 @@ There are several pieces of research and design proposals of new architecture wh
     \label{architectures}
 \end{table}
 \FloatBarrier
+
+\subsection{Categorisation of DNS Privacy enhancing methods}
+\input{tex/literature_review_categorisation.tex}
+
+
 \subsection{Case studies on attack scenarios}
 Several studies demonstrated privacy risks of the current DNS standard and proposed mitigative methods which we had introduced in the previous section. 
 

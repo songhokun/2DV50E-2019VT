@@ -1,16 +1,4 @@
 This section provides an analysis of the survey results.
-The refined search results were categorised into the following fields: studies that suggested improving the security breach and investigations that demonstrated any application (or utilisation) of the security vulnerabilities.
-
-\begin{figure}[h!]
-    \begin{center}
-    \includegraphics*[width=1\columnwidth]{img/dnsprivacy-classification}
-    \end{center}
-    \caption{Categorisation of DNS Privacy enhancing methods based on the approach}
-    \label{dns-methods-classification}
-\end{figure}
-
-Studies that suggested improving the security breach (i.e. DNS Privacy methods) could be sorted to two approaches as Figure \ref{dns-methods-classification} demonstrated: ones which preserve the current hierarchical DNS structure and the other with the radical approach of proposing an architectural change to decentralised DNS.
-Methods with preserving the hierarchical DNS had a tendency to prioritise interoperability with the existing domain infrastructure. Also, it was observed that in the case of applying channel encipherment solutions, methods tended to incapsulating DNS operations with minimal changes to the existing Internet protocols.
 
 Classification of DNS Privacy methods could further be analysed based on the which privacy risk these address. S. Bortzmeyer identified risk area of DNS privacy in RFC 7626 as the followings \cite{rfc7626}: 
 \begin{enumerate}
@@ -21,10 +9,7 @@ Classification of DNS Privacy methods could further be analysed based on the whi
 \end{enumerate}
 Following sections analyse privacy risk mitigations based on risk area and type of mitigation strategies as a whole. Concent, privacy and performance analysis of each mitigative method can be found in \cite{van2018privacy}.
 
-\subsection{Encipherment of communication channels}
-Communication channel encirpher methods, as presented in Table \ref{content}, attempt to alleviate risks on the wire. The methods also partially address the risks of re-identification depends on who the subject of the attacker is. 
-
-\subsubsection{Two phases of DNS Query process}
+\subsection{Two phases of DNS Query process}
 For the conciseness of further analysis, the communication channel (transport channel) of DNS are abstracted into two phases or paths based on the DNS Query process.
 
 \textbf{Phase 1} refers to step 1 and 10 of Figure \ref{queryprocess}. These two steps are performed in the DNS Query process when stub resolver queries a domain name to the recursive resolver and the recursive resolver replies to the stub resolver.
@@ -44,99 +29,10 @@ Therefore, the location of the DNS resolver needs to be considered when to menti
 % There are proposal of utilising TLS 1.3 and 
 
 \subsubsection{Location of Recursive DNS resolvers}
-From the end user's point of view, recursive DNS Resolvers can be on a local machine, one provided by the Internet Service Providers (ISP) and Public DNS servers \cite{van2018privacy}.
-Selection of the location of recursive DNS resolvers leads to different impacts on the user's privacy, in terms of cache-sharing\cite{van2018privacy, wang2013analysis} and obfuscation and logging. Section \ref{dnsservers} described caching on recursive resolvers.
-
-\begin{figure}[ht!]
-    \begin{center}
-    \includegraphics*[width=0.9\columnwidth]{img/local-recursive}
-    \end{center}
-    \caption{A simplified network map when using local resursive resolver server.}
-    \label{localrecursive}
-\end{figure}
-When a user utilises a \textit{local recursive resolver} as illustrated in Figure \ref{localrecursive}, channel encipher methods do not add value to users' privacy considering that operations of phase two are often not encrypted.
-Supposing that the user does not share local recursive resolver among the others, DNS queries which the user makes will not be fetched from a cache but, instead, from all involved Authoritative Name Servers (NS).
-Sending queries in clear text on phase 2 leaves a possibility for all parties who are involved in the network packet transmission to monitor QNAME, query type and source IP of the traffic towards authoritative NS.
-Referring to the assumption that local recursive resolver is unique for a person, there is no space for obfuscation since no one else is querying from the IP address of the recursive resolver.
-However, utilising the local recursive resolver eliminates the risks of queries being logged (i.e. (3) risk in-the-servers) during Phase 1.
-
-
-\begin{figure}[h!]
-    \begin{center}
-    \includegraphics*[width=0.9\columnwidth]{img/isp-recursive}
-    \end{center}
-    \caption{A simplified network map when using ISP-provided resursive resolver server.}
-    \label{isprecursive}
-\end{figure}
-Using \textit{ISP provided Recursive resolver} is the most common scenario, as most ISP offer DNS resolver to their users by Dynamic Host Configuration Protocol (DHCP).
-The resolver from ISP is shared with other subscribers of the network, and it increases more chance of having queries cached by another user who acquired the address previously.
-Reusing cache reduces the need of Phase 2 in its response process \cite{wang2013analysis} and thus generates less `often-insecure' traffics towards authoritative NS. 
-Authoritative name servers see the source IP address of ISP's resolver in Phase 2 of DNS resolving, but not IP of the individuals, in case E-DNS Client Subset(ECS) is not in place.
-When ECS is used, the authoritative NS may see truncated IP of clients \cite{kintis2016understanding}, but the IP address does not present additional privacy harm as ISP's recursive resolver is often in the same subnet IP range, and authoritative NS already acquaints source IP of the recursive DNS resolver. 
-Privacy risks incurred by logging may exist in ISP provided resolver, as ISPs may be obliged for log retentions due to legal requirements of the countries they operate in.
-Channel encipherment on Phase 1 adds a value of users' privacy to a limited extent, tapping on the wire between the ISP's recursive resolver and a stub resolver is often feasible for ISP itself rather than third parties.
-
-\begin{figure}[h!]
-    \begin{center}
-    \includegraphics*[width=0.9\columnwidth]{img/public-recursive}
-    \end{center}
-    \caption{A simplified network map when using public resursive resolver server.}
-    \label{publicrecursive}
-\end{figure}
-
-A scenario of using a \textit{public recursive resolver} (as known as Public DNS resolver) is represented in Figure \ref{publicrecursive}.
-A public DNS server has more possibilities of being shared by a broader public compared to the ISP provided resolvers, and it increases the chances of queries being already cached. Authoritative servers see requests from the IP address of the public resolver, instead of stub resolvers' when ECS is not applied.
-
-This scenario benefits users the most when channel encipherment is applied because DNS query contents in Phase 1 is not visible for parties in the middle of the networking path. It brings significant obfuscation in tracking down the end-user by analysing the network traffics. However, Public DNS servers may log the DNS queries and information of the client. Therefore, privacy risk in-the-servers remains.
-
-\subsubsection{Delegation of trust}
-Applying channel encipherment methods for securing DNS queries such as using DNS-over-HTTPS or DNS-over-TLS implies that end-client gives trust in the chosen resolver.
-
+\input{tex/analysis_RR_location.tex}
 \FloatBarrier
-\subsection{Information redactions}
-Applying the encipherment mechanism on the communications among DNS servers has limitations that these only shifted the trust towards the Recursive resolver.
-In the meanwhile, design enhancements of packets' content reduce the risks of Data in the DNS request and data leaks in the servers.
-Query Name (QNAME) minimisation \cite{bortzmeyer2016dns} and Oblivious DNS \cite{annee-dprive-oblivious-dns-00} are the techniques of this category.
 
-\subsubsection{Information leak minimisations}
-\textit{QNAME minimisation} reduces the query leaks on higher authoritative name server chains, by presenting only relevant part of a domain name for an authoritative server to answer, instead of querying with FQDN.
-It makes only the relevant name server to acquire the full QNAME and query type. Therefore it reduces privacy risks on Phase 2.
-Although the risk of data leaks still present in the last chain of the authoritative NS, this is less likely to happen unless administrators of the domain name have a malicious intent to exploit users' privacy.
-
-\subsubsection{Decoupling user-identifiable information}
-\begin{figure}[h!]
-    \begin{center}
-    \includegraphics*[width=0.9\columnwidth]{img/ODNSoverview}
-    \end{center}
-    \caption{An overview of Oblivious DNS \cite{ODNSwebsite}}
-    \label{odnsoverview}
-\end{figure}
-\textit{Oblivious DNS (ODNS)} aims to decouple any association of a client IP address and DNS query content and no single party should be able to see both \cite{annee-dprive-oblivious-dns-00}.
-For this to work, it requires a special stub resolver and an ODNS authoritative resolver where the client creates a unique session key on each session to encrypt its DNS query and append 'odns' TLD.
-Figure \ref{odnsoverview} presents an overview of the ODNS and the illustration is fetched from its project page \cite{ODNSwebsite}.
-
-However, security concerns arise in terms of availability, as ODNS operations require ODNS-stubs and imposing such design creates a new `central point of failure \cite{minutes-102-dprive}'.
-Also, questions concerning assuring confidentiality of the keys used in ODNS and issues with fallback have not been answered \cite{minutes-102-dprive}. 
-
-\subsection{Architectural shift}
-In the previous section, securing recursive-to-auth link is seen challenging due to the hierarchical structure of the DNS.
-Studies that aim towards decentralised, often imposing peer-to-peer (P2P) implementation are free from the limitations caused by the hierarchical structure.
-Examples of such solution are Namecoin \cite{loibl2014namecoin} and GNU Name System (GNS) \cite{grothoff2017nsa, wachs2014censorship}.
-
-\subsubsection{Blockchain}
-\textit{Namecoin} \cite{loibl2014namecoin} is described as ``timeline-based system that relies on a P2P network to manage updates and store the timeline \cite{grothoff2017nsa}'', and it settles down any commits related on `key-value mapping' by transactions that are published in an append-only hash chain (a.k.a. blockchain) \cite{kalodner2015empirical}.
-However, preserving user privacy in Namecoin requires ``replication of the full blockchain at the user's end system \cite{grothoff2017nsa}'' and performing such received a criticism that it ``may be impractical for some devices \cite{grothoff2017nsa}.''
-The criticism can be interpreted as applying blockchain did not add significant value, in terms of preserving the privacy of users, as privacy breaches in DNS resolving process could also be addressed if DNS records could be replicated on a client's system even in the existing hierarchical system. 
-
-\subsubsection{Distributed Hash Table}
-\textit{GNU Name system (GNS)} is `privacy-preserving' domain name lookup system which takes a radical deviation from the conventional domain resolvers, by utilising P2P network and Distributed Hash Table (DHT).
-DHT provides ``support for an operation: given a key, it maps the key onto a node \cite{stoica2001chord}'', such property is used in GNS domain lookup (resolving) process. 
-In other words, GNS utilise ``distributed storage of DNS records in P2P overlay networks \cite{wachs2014censorship}''. In addition to the DHT, GNS is built upon a petname system \cite{stiegler2005introduction} and utilise Simple Distributed Security Infrastructure (SDSI).
-
-Authors of the GNS claim that domain resolving process of the GNS is private because ``queries and responses are encrypted \cite{grothoff2017nsa, wachs2014censorship}.''
-However, its confidentiality is vulnerable for `confirmation attack' if ``the adversary knows both the public key of the zone and the specific label \cite{wachs2014censorship}.'' Note that the label refers to an entry in a petname system. 
-
-\subsubsection{Prevalence of hierarchical DNS}
+\subsection{Prevalence of hierarchical DNS}
 Although the primary focus of the study is made on Domain Name resolving part, DNS resolving is only a portion of the entire DNS, as there are diverse actors (such as administrators, domain owners) involved in the system.
 Figure \ref{dnsactors}, which is presented by SUNET \cite{SUNET-DNS}, illustrates the involved machines and servers of the system as a whole.
 
@@ -155,13 +51,13 @@ Legacy of the system are often neglected in attempts of securing the domain name
 
 The naming hierarchy of the DNS ``ties into systems such as the Public Key Infrastructure (PKI) \cite{akamai-dns-architecture}'', and architecture of decentralised DNS, such as NameCoin \cite{loibl2014namecoin}, may have not considered the PKI structure in its design.
 
-\subsection{Constraints}
-Up until the previous section, privacy-enhancing studies were analysed in terms of contribution to privacy enhancements on end-users.
-The following section highlights factors other than the privacy (confidentiality) perspective.
+\subsubsection{Privacy analysis of Namecoin}
+Preserving user privacy in Namecoin requires ``replication of the full blockchain at the user's end system \cite{grothoff2017nsa}'' and performing such received a criticism that it ``may be impractical for some devices \cite{grothoff2017nsa}.''
+The criticism can be interpreted as applying blockchain did not add significant value, in terms of preserving the privacy of users, as privacy breaches in DNS resolving process could also be addressed if DNS records could be replicated on a client's system even in the existing hierarchical system. 
 
-\subsubsection{CIA-triad}
-In information security discussions, threat mitigations of a system are analysed in three perspectives: confidentiality, availability and integrity. These properties as a group are denoted as CIA triad or the security triad.
-Achieving every aspect of CIA-triad often are not feasible, as enhancing one dimension may interfere with the other dimensions \cite{securityincomputing}.
+\subsubsection{Privacy analysis of GNS}
+Authors of the GNS claim that domain resolving process of the GNS is private because ``queries and responses are encrypted \cite{grothoff2017nsa, wachs2014censorship}.''
+However, its confidentiality is vulnerable for `confirmation attack' if ``the adversary knows both the public key of the zone and the specific label \cite{wachs2014censorship}.'' Note that the label refers to an entry in a petname system. 
 
 \subsubsection{The integrity of the DNS records}
 Ensuring the integrity of the DNS record is significant, and it is evident from `phishing attacks \cite{ariyapperuma2007security, ollmann2004phishing}'.
@@ -173,8 +69,20 @@ Sybil attacks are a type of attack scenario where an attacker `subverts the repu
 Interventing the malvaceous records are more challenging than the hierarchical structure of the current DNS system in the decentralised design, and this could lead to concerns of enabling phishing attacks.
 Enhancing confidentiality aspects of DNS security is important but it should not compromise the integrity aspect.
 
+
+
 \subsubsection{The availability of the DNS Service}
 There are several criteria to define availability. The criteria for defining availability introduced by Pfleeger are (1) having a timely response to a given request, (2) ensuring fair allocation of resources and (3) being fault-tolerant \cite{securityincomputing}.
 This report defines availability as a chosen recursive resolver to resolve the queried address and provide the correct IP address promptly.
 
 High availability of DNS is important since web activities cannot be initiated without name resolution (as mentioned in Section \ref{dns-introduction}). High performance (performance refers to having a low latency) of DNS is also an important factor to consider because DNS resolutions are a significant cause of having log Web waits \cite{cohen2003proactive, jung2002dns}, and it has a notable impact on `User-perceived latency'.
+
+
+\subsection{Privacy leaks by Transitive trust}
+Shulman demonstrated that `straightforward application of the encryption alone may not suffice \cite{Shulman:2014}' for protecting DNS Privacy due to possible disruption of DNS Availability and privacy leaks caused by `transitive trust \cite{Ramasubramanian:2005}'.
+Shulman further analysed transtive trust as (1) \textit{fan-out} and (2) \textit{chain-length}.
+Chain-length refers to ``A number of name servers involved in a resolution of a record that initiates the chain'' and fan-out as ``number of (transitive-trust) chains involved in a resolution of a domain name'' \cite{Shulman:2014}.
+
+Transitive trust at authoritative servers possess a potential risk of revealing the query and client. While DNS QName minimisation \cite{bortzmeyer2016dns} limits the scope of the query name leaks, the extensified usage of DNS in Content Delivery Network (CDN) context \cite{WANG2018235} may have increased the chain-length and it leads to the intercoperation issues \cite{Huque-QNAME-Min-analysis}.
+
+\subsection{Observation on packets' size}
