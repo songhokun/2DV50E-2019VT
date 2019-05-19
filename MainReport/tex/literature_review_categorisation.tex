@@ -6,14 +6,23 @@
     \label{dns-methods-classification}
 \end{figure}
 
-Studies that suggested improving the security breach (i.e. DNS Privacy methods) could be sorted to two approaches as Figure \ref{dns-methods-classification} demonstrated: ones which preserve the current hierarchical DNS structure and the other with the radical approach of proposing an architectural change to decentralised DNS.
-Methods with preserving the hierarchical DNS had a tendency to prioritise interoperability with the existing domain infrastructure. Also, it was observed that in the case of applying channel encipherment solutions, methods tended to incapsulating DNS operations with minimal changes to the existing Internet protocols.
+In addition to the classifications made in the above tables, the identified methods were further sorted into two approaches based on the designers' view of the existing DNS model.
+Figure \ref{dns-methods-classification} demonstrated two trees, and of the two trees, the largest tree showed methods which preserve the current hierarchical DNS structure, and the other represented proposals taking a radical approach; suggesting a structural change to decentralised DNS.
 
-\subsubsection{Encipherment of communication channels}
-Communication channel encirpher methods, as presented in Table \ref{content}, attempt to alleviate risks on the wire.
+Figure \ref{dns-methods-classification} resulted in having two labels of (A) and (C). (A) stood for categorisation proposed in this study and leaves with (C)-label were the methods proposed by other research groups.  
+
+\subsection{Encipherment of communication channels}
+Communication channel encrypting methods, as presented in in Table \ref{content}, attempted to alleviate privacy risks on the wire.
+Methods encrypting the data transport channel were sorted into ones utilising current internet standards or the others proposing customised protocols.
+
+\textit{DNS-over-TLS(DoT)} \cite{rfc7858}, \textit{DNS-over-HTTPS(DoH)} \cite{rfc8484} and \textit{DNS-over-DTLS} \cite{rfc8094} are the techniques that reuse the proven Internet standards for securing the connection channel between a stub resolver and a recursive resolver.
+Technologies in this field could be understood as encapsulations of DNS operations with minimal changes to the existing Internet protocols.
+%Methods with preserving the hierarchical DNS had a tendency to prioritise interoperability with the existing domain infrastructure.
+%Also, it was observed that in the case of applying channel encipherment solutions, methods tended to incapsulating DNS operations with minimal changes to the existing Internet protocols.
+
 The methods also partially address the risks of re-identification depends on who the subject of the attacker is.
 
-\subsubsection{Information redactions}
+\subsection{Information redactions}
 Applying the encipherment mechanism on the communications among DNS servers has limitations that these only shifted the trust towards the Recursive resolver.
 In the meanwhile, design enhancements of packets' content reduce the risks of Data in the DNS request and data leaks in the servers.
 Query Name (QNAME) minimisation \cite{bortzmeyer2016dns} and Oblivious DNS \cite{annee-dprive-oblivious-dns-00} are the techniques of this category.
@@ -36,7 +45,7 @@ Figure \ref{odnsoverview} presents an overview of the ODNS and the illustration 
 However, security concerns arise in terms of availability, as ODNS operations require ODNS-stubs and imposing such design creates a new `central point of failure \cite{minutes-102-dprive}'.
 Also, questions concerning assuring confidentiality of the keys used in ODNS and issues with fallback have not been answered \cite{minutes-102-dprive}.
 
-\subsubsection{Architectural shift}
+\subsection{Architectural shift}
 In the previous section, securing recursive-to-auth link is seen challenging due to the hierarchical structure of the DNS.
 Studies that aim towards decentralised, often imposing peer-to-peer (P2P) implementation are free from the limitations caused by the hierarchical structure.
 Examples of such solution are Namecoin \cite{loibl2014namecoin} and GNU Name System (GNS) \cite{grothoff2017nsa, wachs2014censorship}.

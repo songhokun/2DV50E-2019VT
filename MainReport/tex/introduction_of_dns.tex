@@ -22,7 +22,10 @@ Due to the hierarchical structure of the Domain Name System with delegations of 
 \end{figure}
 In the diagram, steps 2 and 3 returns top-level-domain(TLD) from the root servers. The steps 4 and 5 obtain the Authoritative name server of Swedish TLD. The .SE TLD returns name server of Ume\aa\ University in steps 6 and 7. In the last, the name server of umu returns IPv4 address (A record) of the given address, so that recursive resolver can provide the answer to the stub resolver. These steps are performed under the assumption that none of the queries is cached. 
 \subsubsection{EDNS(0) and Client Subnet}
-The extension mechanisms for DNS (EDNS) is specified in RFC 6891. EDNS allows both DNS servers and client to send ``larger DNS packet than the original 512 octet limit \cite{rfc6891}'' so that it benefits of utilising larger size. It makes sending long IPv6 address and possible DNSSEC signatures. As of February 2019, major DNS resolver operators have started not to support non-EDNS compliant servers. 
+The extension mechanisms for DNS (EDNS) is specified in RFC 6891.
+EDNS allows both DNS servers and client to send ``larger DNS packet than the original 512 octet limit \cite{rfc6891}'' so that it benefits of utilising larger size.
+It makes sending long IPv6 address and possible DNSSEC signatures.
+As of February 2019, major DNS resolver operators have started not to support non-EDNS compliant servers \cite{dns-flag-day, spacek-edns-camel-diet}. 
 
 EDNS(0) provides several options, and one of the options is Client Subnet(ECS) feature, as described in RFC 7831 \cite{rfc7871}. When ECS is used, recursive DNS servers provide a truncated client IP address in its DNS queries to the upstream authorities to permit ``topologically localised answers for Content Delivery Networks (CDN) \cite{kintis2016understanding}''.
 \subsubsection{CIA-triad}
