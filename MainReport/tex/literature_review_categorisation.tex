@@ -14,7 +14,8 @@ Figure \ref{dns-methods-classification} resulted in having two labels of (A) and
 \subsection{Encipherment of communication channels}
 Communication channel encrypting methods, as presented in in Table \ref{content}, attempted to alleviate privacy risks on the wire.
 Methods encrypting the data transport channel were sorted into ones utilising current internet standards or the others proposing customised protocols.
-\subsubsection{Reusing the current secure transport protocol}
+
+\subsubsection{Reusing the current secure transport protocols}
 \textit{DNS-over-TLS(DoT)} \cite{rfc7858}, \textit{DNS-over-HTTPS(DoH)} \cite{rfc8484} and \textit{DNS-over-DTLS} \cite{rfc8094} were the techniques that reuse the proven Internet standards for securing the connection channel between a stub resolver and a recursive resolver.
 Technologies in this field could be understood as encapsulations of DNS operations with minimal changes to the existing Internet protocols.
 
@@ -22,7 +23,7 @@ Technologies in this field could be understood as encapsulations of DNS operatio
 
 In the meantime, \textit{DNS-over-DTLS} attempted to apply encryption over User Datagram Protocol (UDP). In other words, it utilises Data Transport Layer Security (DTLS) \cite{rfc4347}.
 
-\subsubsection{Proposal of own transport protocol}
+\subsubsection{Implementing own transport protocols}
 A developing standard of \textit{DNS over Dedicated QUIC} \cite{dnsoquic} also utilised UDP-like connection called QUIC.
 QUIC is ``UDP-Based Multiplexed and Secure Transport \cite{ietf-quic-transport-20}''.
 By the time of the study, QUIC was still in a development phase. However, QUIC is prominent to be the next Internet standard as it is on IETF's standardisation  track, and the specification is actively being discussed.
@@ -53,12 +54,11 @@ The procedure results in creating a unique session key to encrypt its DNS query.
 Figure \ref{odnsoverview} presents an overview of the ODNS and the illustration is fetched from its project page \cite{ODNSwebsite}.
 
 \subsection{Architectural shift}
-In the previous section, securing recursive-to-auth link is seen challenging due to the hierarchical structure of the DNS.
-Studies that aim towards decentralised, often imposing peer-to-peer (P2P) implementation are free from the limitations caused by the hierarchical structure.
-Examples of such solution are Namecoin \cite{loibl2014namecoin} and GNU Name System (GNS) \cite{grothoff2017nsa, wachs2014censorship}.
+%In the previous section, securing recursive-to-auth link is seen challenging due to the hierarchical structure of the DNS.
+Studies that aimed towards decentralised often imposed peer-to-peer (P2P) implementation, and the examples of such solution were Namecoin and GNU Name System (GNS).
 
 \textit{Namecoin} \cite{loibl2014namecoin} is described as ``timeline-based system that relies on a P2P network to manage updates and store the timeline \cite{grothoff2017nsa}'', and it settles down any commits related on `key-value mapping' by transactions that are published in an append-only hash chain (a.k.a. blockchain) \cite{kalodner2015empirical}.
 
-\textit{GNU Name system (GNS)} is `privacy-preserving' domain name lookup system which takes a radical deviation from the conventional domain resolvers, by utilising P2P network and Distributed Hash Table (DHT).
+\textit{GNU Name system (GNS)} \cite{grothoff2017nsa, wachs2014censorship} is `privacy-preserving' domain name lookup system which takes a radical deviation from the conventional domain resolvers, by utilising P2P network and Distributed Hash Table (DHT).
 DHT provides ``support for an operation: given a key, it maps the key onto a node \cite{stoica2001chord}'', such property is used in GNS domain lookup (resolving) process. 
 In other words, GNS utilise ``distributed storage of DNS records in P2P overlay networks \cite{wachs2014censorship}''. In addition to the DHT, GNS is built upon a petname system \cite{stiegler2005introduction} and utilise Simple Distributed Security Infrastructure (SDSI).

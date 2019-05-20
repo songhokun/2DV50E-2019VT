@@ -49,6 +49,9 @@ class DNSCrypt{
 class DNSCurve{
     standarised = "F"
 }
+class DoQUIC{
+    standarised = "Ongoing"
+}
 
 Hierachial -- Encipherment
 Hierachial -- Redaction
@@ -66,6 +69,7 @@ Redaction <|-- QNAMEMinimization
 
 NewChannelMethod <|-- DNSCrypt
 NewChannelMethod <|-- DNSCurve
+NewChannelMethod <|-- DoQUIC
 
 Decentralised <|-- Namecoin
 Decentralised <|-- GNUNet
