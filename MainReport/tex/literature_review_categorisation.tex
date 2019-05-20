@@ -14,22 +14,30 @@ Figure \ref{dns-methods-classification} resulted in having two labels of (A) and
 \subsection{Encipherment of communication channels}
 Communication channel encrypting methods, as presented in in Table \ref{content}, attempted to alleviate privacy risks on the wire.
 Methods encrypting the data transport channel were sorted into ones utilising current internet standards or the others proposing customised protocols.
-
-\textit{DNS-over-TLS(DoT)} \cite{rfc7858}, \textit{DNS-over-HTTPS(DoH)} \cite{rfc8484} and \textit{DNS-over-DTLS} \cite{rfc8094} are the techniques that reuse the proven Internet standards for securing the connection channel between a stub resolver and a recursive resolver.
+\subsubsection{Reusing the current secure transport protocol}
+\textit{DNS-over-TLS(DoT)} \cite{rfc7858}, \textit{DNS-over-HTTPS(DoH)} \cite{rfc8484} and \textit{DNS-over-DTLS} \cite{rfc8094} were the techniques that reuse the proven Internet standards for securing the connection channel between a stub resolver and a recursive resolver.
 Technologies in this field could be understood as encapsulations of DNS operations with minimal changes to the existing Internet protocols.
-%Methods with preserving the hierarchical DNS had a tendency to prioritise interoperability with the existing domain infrastructure.
-%Also, it was observed that in the case of applying channel encipherment solutions, methods tended to incapsulating DNS operations with minimal changes to the existing Internet protocols.
 
-The methods also partially address the risks of re-identification depends on who the subject of the attacker is.
+\textit{DoT} and \textit{DoH} applied encryption on the connection-oriented protocol (i.e. TCP), and by the number of citations and client implementations, these were the most prominent technologies within the DNS Privacy field.
+
+In the meantime, \textit{DNS-over-DTLS} attempted to apply encryption over User Datagram Protocol (UDP). In other words, it utilises Data Transport Layer Security (DTLS) \cite{rfc4347}.
+
+\subsubsection{Proposal of own transport protocol}
+A developing standard of \textit{DNS over Dedicated QUIC} \cite{dnsoquic} also utilised UDP-like connection called QUIC.
+QUIC is ``UDP-Based Multiplexed and Secure Transport \cite{ietf-quic-transport-20}''.
+By the time of the study, QUIC was still in a development phase. However, QUIC is prominent to be the next Internet standard as it is on IETF's standardisation  track, and the specification is actively being discussed.
+
+\textit{DNSCrypt} \cite{denis2015dnscrypt} and \textit{DNSCurve} \cite{dempsky2010dnscurve} are the non-IETF-standardised techniques that use ``elliptic-curve cryptography (e.g. XSalsa20Poly1305 \cite{chacha} for channel encryption and Curve25519 for key exchange) for enciphering communications. \cite{van2018privacy}''
 
 \subsection{Information redactions}
-Applying the encipherment mechanism on the communications among DNS servers has limitations that these only shifted the trust towards the Recursive resolver.
-In the meanwhile, design enhancements of packets' content reduce the risks of Data in the DNS request and data leaks in the servers.
+Applying the encipherment mechanism on stub-recursive communications shifts the trust towards the Recursive resolver.
+Design enhancements of packets' content also reduce the risks of Data in the DNS request and data leaks in the servers.
 Query Name (QNAME) minimisation \cite{bortzmeyer2016dns} and Oblivious DNS \cite{annee-dprive-oblivious-dns-00} are the techniques of this category.
 
 \textit{QNAME minimisation} reduces the query leaks on higher authoritative name server chains, by presenting only relevant part of a domain name for an authoritative server to answer, instead of querying with FQDN.
-It makes only the relevant name server to acquire the full QNAME and query type. Therefore it reduces privacy risks on Phase 2.
-Although the risk of data leaks still present in the last chain of the authoritative NS, this is less likely to happen unless administrators of the domain name have a malicious intent to exploit users' privacy.
+It makes only the relevant name server to acquire the full QNAME and query type. Thus, it reduces privacy risks on the recursive-auth link.
+A distinction of different links of DNS communication is presented in the next chapter.
+The risk of data leak still presents in the last chain of the authoritative NS.
 
 \begin{figure}[h!]
     \begin{center}
@@ -38,12 +46,11 @@ Although the risk of data leaks still present in the last chain of the authorita
     \caption{An overview of Oblivious DNS \cite{ODNSwebsite}}
     \label{odnsoverview}
 \end{figure}
-\textit{Oblivious DNS (ODNS)} aims to decouple any association of a client IP address and DNS query content and no single party should be able to see both \cite{annee-dprive-oblivious-dns-00}.
-For this to work, it requires a special stub resolver and an ODNS authoritative resolver where the client creates a unique session key on each session to encrypt its DNS query and append 'odns' TLD.
+\textit{Oblivious DNS (ODNS)} aimed to decouple any association of a client IP address and DNS query content and no single party should be able to see both \cite{annee-dprive-oblivious-dns-00}.
+To decouple client and query name information, using ODNS required two types of servers: normal recursive resolver and ODNS authoritative resolver.
+A client with a dedicated stub resolver fetches an encryption key by contacting ODNS server without revealing its desired query, but instead, sending a query of `special.odns'.
+The procedure results in creating a unique session key to encrypt its DNS query. The stub resolver appends `odns' TLD to the encrypted query using the key, and the DNS query is sent towards the normal recursive resolver. The recursive resolver queries to one of ODNS authoritative resolvers, which in turn acts as `recursive resolver'.
 Figure \ref{odnsoverview} presents an overview of the ODNS and the illustration is fetched from its project page \cite{ODNSwebsite}.
-
-However, security concerns arise in terms of availability, as ODNS operations require ODNS-stubs and imposing such design creates a new `central point of failure \cite{minutes-102-dprive}'.
-Also, questions concerning assuring confidentiality of the keys used in ODNS and issues with fallback have not been answered \cite{minutes-102-dprive}.
 
 \subsection{Architectural shift}
 In the previous section, securing recursive-to-auth link is seen challenging due to the hierarchical structure of the DNS.
