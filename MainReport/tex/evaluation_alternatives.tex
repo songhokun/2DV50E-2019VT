@@ -1,0 +1,24 @@
+This section provides the result of evaluating possible mitigate options of overcoming limitations by DNS Privacy enhancing methods.
+%Evaluations are made on the solutions that their server and client implementations ready to be used.
+
+Van Heutgen evaluated the combination of using different DNS Privacy techniques in his study \cite{van2018privacy}.
+The combinations were a group of channel-enciphering technologies (e.g. DNSCrypt, DoH, and DoT) and QNAME minimisation.
+The evaluations of attack surface were introduced based on the location of recursive resolvers: using local recursive resolver, private-remote recursive resolver and the public resolver.
+
+The common result of his evaluation showed that ``Eavesdroppers who are close to the last chain of the authoritative servers or close to the recursive resolver will be able to obtain a full frame of DNS packet\cite{van2018privacy}.''
+Using public resolver may result in third parties eavesdropping or logging DNS communication.
+If the cache of the remote-private recursive resolver were not shared among multiple-users, privacy would decrease since the permanent IP address of the remote resolver would be linked to an individual user.
+
+\subsection{Use of Traffic anonymisation}
+Apart from van Heutgen’s evaluation, we further examined the possible combination of using traffic anonymization techniques and the above-mentioned combinations.
+Traffic anonymisation technologies on recursive-to auth link can be applied to circumvent the limitations of channel encryption methods, and examples of such technology are \textit{FreeNet} \cite{clarke2001freenet} or \textit{GNUNet} \cite{grothoff2017gnunet}, and \textit{Tor} \cite{dingledine2004tor}.
+
+\textit{Tor}, the `low-latency' traffic anonymisation tool, encrypts the traffic using multiple envelops and relays the encrypted traffic over three nodes and forwards it to one if its exit nodes. By this method, the traffic is encrypted and makes the traffic relatively anonymous.
+The following scenarios focused on Tor instead of other anonymizing services as for example, FreeNet or GNUNet have higher delay than Tor \cite{anonymousoverdns}.
+
+\subsection{Lack of UDP support from Tor}
+Using Tor over normal DNS resolution traffic may not be feasible since the majority of DNS traffics are sent over UDP and Tor does not support forwarding UDP traffic to its exit-node \cite{udp-over-tor}.
+DNS could also be sent over TCP connection but sending over TCP occurs at limited circumstances where the response exceeds 512 byte-limit \cite{rfc7766}, and the contacted authoritative servers should respect TCP request and reply in TCP packets for the DNS query to work.
+
+\subsection{Tor with channel encipherments}
+\subsection{ISP resolver over Tor without channel encipherment}

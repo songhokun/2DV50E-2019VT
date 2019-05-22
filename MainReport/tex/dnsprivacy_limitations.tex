@@ -53,7 +53,7 @@ This report defines availability as a chosen recursive resolver to resolve the q
 
 High availability of DNS is important since web activities cannot be initiated without name resolution (as mentioned in Section \ref{dns-introduction}). High performance (performance refers to having a low latency) of DNS is also an important factor to consider because DNS resolutions are a significant cause of having log Web waits \cite{cohen2003proactive, jung2002dns}, and it has a notable impact on `User-perceived latency'.
 
-However, security concerns arise in terms of availability for \textit{Oblivious DNS}, as ODNS operations require ODNS-stubs and imposing such design creates a new `central point of failure \cite{minutes-102-dprive}'.
+However, security concerns arise in terms of availability for \textit{Oblivious DNS}, as ODNS operations require ODNS-authoritative servers in addition to the conventional recursive resolvers and imposing such design creates a new `central point of failure \cite{minutes-102-dprive}'.
 Also, questions concerning assuring confidentiality of the keys used in ODNS and issues with fallback have not been answered \cite{minutes-102-dprive}.
 
 \subsection{Prevalence of hierarchical DNS}
