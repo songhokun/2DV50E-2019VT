@@ -22,11 +22,22 @@ The evaluations are focused on Tor instead of other anonymising services because
 Using Tor over normal DNS resolution traffic may not be feasible in a conventional way since the majority of DNS traffics are sent over UDP and Tor does not support forwarding UDP traffic to its exit-node \cite{udp-over-tor, dingledine2004tor}.
 DNS could also be sent over TCP connection but sending over TCP occurs at limited circumstances where the response exceeds 512 byte-limit \cite{rfc7766}, and the contacted authoritative servers should respect TCP request and reply in TCP packets for the DNS query to work.
 
-\subsection{Variation of latency}
+\subsubsection{Variation of latency}
 Tor employs a two-hop circuit of onion relay servers to increase anonymity of TCP connections between a user and the exit node.
 There are several algorithms for selecting relay servers, and Tor by default gives higher weights to relay servers, which are `more longstanding routers and provides higher bandwidth \cite{wacek2013empirical}'.
 Since the choice of the relay servers is made using the criteria as mentioned above, it may result in that relay servers are chosen without geographical relevance.
 Due to the limitation of the physical medium of communication-link \cite{Singla:2014:ISL}, once relay server in a different continent is selected, it results in having higher latency compared to not using the Tor.
-The fact that the choice of relay servers differ on each circuit results in latency variation. In addition to this, ``load-induced queueing contributes significantly to the overall latency variation \cite{Hoiland-Jorgensen:2016}'', and considering that Tor's exit-node process multiple requests, the could be possible bandwidth limitations that result in queueing. 
+The fact that the choice of relay servers differ on each circuit results in latency variation. In addition to this, ``load-induced queueing contributes significantly to the overall latency variation \cite{Hoiland-Jorgensen:2016}'', and considering that Tor's exit-node process multiple requests, the could be possible bandwidth limitations that result in queueing.
+Thus, Applying Tor is considered as latency-expensive.
 
-\subsection{ISP resolver over Tor without channel encipherment}
+\subsubsection{Tor on DNS Query Phase 1}
+There exist DNS Privacy methods with channel encryption. Despite this, if Tor is chosen to be used in Phase 1, it is regarded as the recursive resolver is not trusted for the risks in the servers.
+In this section, evaluations of Tor based on location of recursive resolver follow. Using \textit{local resolver} does not involve Phase 1 over the network, and therefore is not examined.
+
+Using \textit{ISP-provided resolver} over Tor does not add value in protection against attackers near the ISP network, as (1) queries are logged in the servers and (2) DNS transactions on Phase 2 are revealed and (3) although the requester for DNS is diffused the connection can be correlated by session-time observation.
+
+Using \textit{public resolver} over Tor reduces risks of eavesdropping on the wire with Tor's encryption and risks in the servers are also deducted since the recursive resolver only sees the Tor's exit node when ECS is not used.
+Eavesdroppers closed to the last chain of authoritative servers persists, they can only induce user as the exit node of a Tor circuit without ECS.
+However, it is questioned whether the additional benefit of confidentiality in the recursive resolver server overweights the sacrifice of availability.
+
+\subsubsection{Tor on DNS Query Phase 2}
