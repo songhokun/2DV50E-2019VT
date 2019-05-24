@@ -252,9 +252,12 @@ The majority of scientific reports follow in Introduction, Methods, Results, Ana
 The report has presented an analysis of privacy breaching scenarios of different end-user types.
 While the majority of privacy literature focuses on the impact on individuals, the paper has attempted to represent organisational interests.
 
-In addition to the privacy analysis, the report presented a systematic survey of DNS Privacy enhancing techniques. Although there exist other studies of a thorough investigation of DNS Privacy techniques, this report distinct by being transparent of the survey method. 
+In addition to the privacy analysis, the report presented a systematic survey of DNS Privacy enhancing techniques.
+Although there exist other studies of a thorough investigation of DNS Privacy techniques, this report distinct by being transparent of the survey method and having provided approaches to categorise the DNS Privacy methods. 
 
 The end-users, whose interests are analysed in the report, could refer to the analyses of the surveyed methods to meet their interests, and the approach used in the analysis could be referred in examining other emerging innovations in DNS Privacy. 
+
+\subsection{Current milestone}
 
 \subsection{Future work}
 Due to the limitation of the time, the proof of concept proposal made in this study has not throughouly examined. Actual implementation of the proposal can be done as a future study. Appendix presents a draft version of the test code to automate the web traffic generation.
@@ -278,7 +281,7 @@ Due to the limitation of the time, the proof of concept proposal made in this st
 \setcounter{page}{1} % Reset page numbering for Appendix
 \appendix
 
-\section{Appendix 1}
+\section{Appendix 1}\label{scriptcode-appendix}
 The section presents a set of Python script that can potentially used in verifying the proof of concept presented in this sutdy.
 Secetions follow with code for processing a web site list, script to simulate the web traffic and the common base code for above functions to work.
 Analysing and capturing the generated web traffic is not in the scope of the section.
@@ -297,4 +300,8 @@ Python 3.5 and higher, Pip3 is required. It is anticipated that Python packages 
 \subsection{Common based source}
 Below is code for util.py which is a common base script.
 \inputpython{../Selenium/util.py}{1}{110}
+\newpage
+
+\section{Appendix 2}\label{protocol-verification}
+\input{tex/design_of_protocol_verification.tex}
 \end{document}

@@ -29,7 +29,7 @@ As a further explanation of one-to-many relationship being an obstacle, DoH \cit
 Furthermore, authentication mechanisms are missing on Phase 2 \cite{I-D.bortzmeyer-dprive-step-2}, and the lack of authentication of the authoritative server may potentially enable a Man-in-the-middle attack (MITM).
 % There are proposal of utilising TLS 1.3 and 
 
-\subsubsection{Location of Recursive DNS resolvers}
+\subsubsection{Location of Recursive DNS resolvers}\label{rr-location}
 \input{tex/analysis_RR_location.tex}
 \FloatBarrier
 
@@ -92,3 +92,13 @@ Sybil attacks are a type of attack scenario where an attacker `subverts the repu
 
 Interventing the malvaceous records are more challenging than the hierarchical structure of the current DNS system in the decentralised design, and this could lead to concerns of enabling phishing attacks.
 Enhancing confidentiality aspects of DNS security is important but it should not compromise the integrity aspect.
+
+\subsection{Opportunistic security}
+Stenberg, a contributor for client implementation of DNS-over-HTTPS in Firefox, mentioned common Secure-DNS challenges as follows \cite{daniel-doh}: (1) discovery of which recursive resolver to use (2) probing of service (3) opportunistic encryption and (4) blocking force-downgrade.
+
+In the case of Firefox's implementation of DNS-over-HTTPS, the mode of operations are (1) race, (2) Trusted Recursive Resolver (TRR) first, (3) TRR only and (4) shadow mode \cite{firefox-doh-engine}.
+Race and shadow mode stands for issuing DNS queries simultaneously on both conventional (insecure) DNS resolving method and Secure DNS method.
+In DNS privacy's perspective, these modes are excluded for analysis.
+
+Using TRR first mode attempts to resolve DNS query over DoH and when it fails after pre-set limited of counts, it fallbacks to the conventional DNS resolver.
+At the current stage, a preliminary experiment (described in Appendix \ref{protocol-verification}) showed that a limited amount of DNS query still fallbacks to the conventional resolver, and reveals the website a user intended to visit. 
