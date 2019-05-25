@@ -29,6 +29,7 @@ Per each experiments, following steps are done to minimise possible caching-effe
 \end{lstlisting}
 \subsubsection{Hypothesis}
 Regardless of chosen way to generate web traffic and regardless of the mode two or three of Firefox DoH operations, all DNS traffics will not be sent over the clear-text. Therefore, tcpdump and Wireshark packet captures of each experiment set will not reval DNS query by observing UDP 53 port.
+
 \subsection{Results}
 When Selenium was used, configuration (1) with DoH first mode resulted in revealing all DNS queries, and DoH engine was not used.
 When Selenium was used, configuration (2) with DoH only resulted in not being able to fetch any websites.
@@ -41,12 +42,18 @@ The log in debug level contained lines of `D/nsHostResolver TRR lookup url.tld' 
 Of the 638 lines, 407 entries lead to OK and 231 entries indicated FAILED. Approximately, 63.79\% of the queries went through DNS-over-HTTPS.
 
 \subsection{Evaluation}
+This section provides interpretation of the observed results.
+
+\subsubsection{Possible interference caused by web automation}
 Although Appendix \ref{scriptcode-appendix} discussed potential usefulness of the web automation tool, using Selenium with Gecko Firefox webdriver resulted that DNS-over-HTTPS were not being used.
 Since additional software is envolved for a traffics simulation, there is higher a chance that an error in the automation tool may lead to misleading results, considering that bookmark-visit induced method did not show the same result.
 
+\subsubsection{Bootstrap procedure}\label{bootstrap}
 The reason that `DNS-over-HTTPS only mode' failed to load website is assumed as DoH engine failed to initiate the connection to the DoH Server URI of '\url{https://mozilla.cloudflare-dns.com/dns-query}'. It is interpreted as the experiments have not taken into the consideration of setting up the bootstrap procedures.
 
+\subsubsection{Unexplained causes of DoH query failures}
 There is no clear explanation on the reason of having 36.2\% of queries failed when DNS-over-HTTPS resolver was used.
+The author of the DoH engine has not given a clear explanation either for causes leading to the failures \cite{daniel-doh}.
 However, it is northworty to consider that simulation of web visits are made on simultaneous attempts; browing twenty websites were initiated at the same time.
 The simultaneous visit could have been a factor of leading to an over-load situation.
 
