@@ -18,7 +18,7 @@ Tor, the `low-latency' traffic anonymisation tool, encrypts the traffic using mu
 By this method, the traffic is encrypted and makes the traffic relatively anonymous.
 The evaluations are focused on Tor instead of other anonymising services because FreeNet and GNUNet have higher round-trip delay than Tor \cite{anonymousoverdns}.
 
-\subsubsection{Lack of UDP support from Tor}
+\subsubsection{Lack of UDP support from Tor}\label{no-udp-tor}
 Using Tor over normal DNS resolution traffic may not be feasible in a conventional way since the majority of DNS traffics are sent over UDP and Tor does not support forwarding UDP traffic to its exit-node \cite{udp-over-tor, dingledine2004tor}.
 DNS could also be sent over TCP connection but sending over TCP occurs at limited circumstances where the response exceeds 512 byte-limit \cite{rfc7766}, and the contacted authoritative servers should respect TCP request and reply in TCP packets for the DNS query to work.
 
@@ -41,4 +41,12 @@ Eavesdroppers closed to the last chain of authoritative servers persists, they c
 However, it is questioned whether the additional benefit of confidentiality in the recursive resolver server overweights the sacrifice of availability.
 
 \subsubsection{Tor on DNS Query Phase 2}
-Proactive caching \cite{cohen2003proactive} over Tor
+As previously mentioned, applying Tor on DNS queries is costly.
+While DNS channel encryption methods had limitations on Phase 2, applying anonymity which Tor provides on Phase 2 of DNS query could be beneficial.
+However, having control of Phase 2 limits the choice of the recursive resolver.
+For individuals, it indicates using the local recursive resolver.
+For a group of individuals or organisations, it would indicate that outgoing DNS queries from the managed recursive resolver towards authoritative Name servers are anonymised using the Tor network.
+
+Despite the variation of latency imposed by Tor circuit, the performance degradation caused by Tor on Phase 2 could be mitigated by the mean of `Proactive caching \cite{cohen2003proactive}', which is actively managing the cache stored on the recursive resolver rather than relying on passively created caches that dies after their Time-To-Live (TTL) period.
+
+\subsection{Use of multiple trusted recursive resolvers}
