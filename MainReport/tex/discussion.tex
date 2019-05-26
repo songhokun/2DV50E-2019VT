@@ -2,7 +2,7 @@ The project intensively examines securing Domain Name queries as a method of enh
 
 \subsection{Privacy leaking components apart from the DNS}
 A Question may arise why it mainly focuses on securing DNS although there exist other factors which disclose users' privacy.
-To answer the question, let us have an example of a web filter, as it is a commonly found practical example of the large scale monitoring\cite{murdoch2008tools}.
+To answer the question, let us have an example of a web filter, as it is a commonly found practical example of the large scale monitoring \cite{murdoch2008tools}.
 %As web filters require monitoring of users' traffic to enforce its policy of restrictions, understanding the mechanisms of the web filter suits this context.
 
 Web filter, also known as content-control software, is software that restricts access to a content that is delivered on the Web.
@@ -10,14 +10,14 @@ Wazen et. al categorise mechanisms of legacy web-filtering into five techniques:
 Except for the technique based on DNS filtering, the rest methods are regarded as well-mitigated due to recent developments of the web environment. 
 
 Among the various types of filtering techniques mentioned above, methods (a) and (c) are considered less efficient due to changes in the Internet ecosystem in recent decennial;
-Internet firms such as Google, Facebook and Amazon show strong presence\cite{haucap2014google}, and the phenomenon may have reduced the diversity of traffic endpoint's IP addresses.
-Moreover, it has become more common to have web services deployed in cloud environments\cite{clouds2018stat}, and IaaS providers extensively use ``Virtual Host\cite{virtual24host}'', which means various Web servers correspond to the same IP address.
+Internet firms such as Google, Facebook and Amazon show strong presence \cite{haucap2014google}, and the phenomenon may have reduced the diversity of traffic endpoint's IP addresses.
+Moreover, it has become more common to have web services deployed in cloud environments \cite{clouds2018stat}, and IaaS providers extensively use `Virtual Host \cite{virtual24host}', which means various Web servers correspond to the same IP address.
 It also eliminates the need for utilising different ports to co-host services. Thus, port usages are normalised.
 
-Also, another notable change of the Internet is that adoption of HTTPS on the web has increased significantly\cite{felt2017measuring}.
+Also, another notable change of the Internet is that adoption of HTTPS on the web has increased significantly \cite{felt2017measuring}.
 The change has increased costs of performing technique (e) and brought challenges in payload-based traffic classification \cite{xue2013traffic}.
-Also, it has made (f) less applicable, as a proxy does not directly process encrypted traffics\cite{shbair2015efficiently}.
-Furthermore, the combination of wide deployment of HTTPS and Virtual Hosting has made technique (e) inefficient, because ``many companies share the same certificate across different services and domain names\cite{shbair2015efficiently}''.
+Also, it has made (f) less applicable, as a proxy does not directly process encrypted traffics \cite{shbair2015efficiently}.
+Furthermore, the combination of wide deployment of HTTPS and Virtual Hosting has made technique (e) inefficient, because ``many companies share the same certificate across different services and domain names \cite{shbair2015efficiently}''.
 
 However, the trend change of Internet has not brought additional challenges to Domain Name System (DNS) filtering. Therefore, the project studies to remedy the weakest point towards users' privacy, which in this case is DNS.
 
@@ -32,8 +32,21 @@ It is feasible that the perpetrators may use DNS Privacy enhancement methods to 
 In the U.S. or common law jurisdictions, hindering lawful enforcement may be seen as ``Obstruction of justice''.
 In this perspective, hiding DNS query by the means of encryptions could be questioned whether such behaviour is \textit{concealing} or \textit{covering up} with intent to \textit{impede} or \textit{obstruct} the investigation or proper administration as 18 U.S. Code \S 1591 states \cite{Obstructionofjustice}.
 
+M Bay has performed a thought experiment of the relation of civil disobedience and unbreakable encryption \cite{bay2017ethics} based on John Rawls' theory of justice.
+Not all DNS Privacy enhancing methods have direct linkage with the `unbreakable encryption', since encryptions are breakable with `the given sufficient time and computational resources \cite{ellison2000ten,chau2006application}'.
+However, it is noteworty to introduce the aspect as exercising DNS Privacy has similarity in a sense that DNS Privacy methods aim to achieve unbreakable-encryption-like situation.
 
+M Bay had made three assumptions before applying Rawlsian principles to encryption as follows \cite{bay2017ethics}:
+\begin{enumerate}
+  \item Unbreakable/impenetrable encryption is indeed impenetrable
+  \item The encryption in question is available to citizens and is not exclusive to certain institutions within society
+  \item The society examined here can be described as well-ordered \cite{moon_2014, RawlsJohn1973Atoj} in Rawls’ terminology
+\end{enumerate}
+The thought experiment led to the following points: ``In a well-ordered society, an obstruction of law enforcement is at the same time an obstruction of principles of justice agreed upon by the society’s citizens.'' and  ``if society is just, citizens must comply with its institutions in order for it to remain just.''
+However, in case of ``societies are only partially just or in which, say, an unjust war is waged by an otherwise just society. Then, the basic liberties of the individual take precedence, in the push for restoration of justice \cite{RawlsJohn1973Atoj}.''
+However, according to Bay, civil disobedience and conscientious refusal leads to a violation of Rawls’ principles as he hypothesised with the point three: the society is well-ordered.
 
+With regards of applying utilitarian arguments for encryption, M Bay concluded as ``utilitarian reasoning does not provide us with a solution with regard to the conflict between encryption, privacy and enforcement of justice, since it simply becomes a version of the age-old conflict between security and freedom at higher level of abstraction \cite{bay2017ethics}.''
 \subsection{Recursive resolver centralisation}
 E. Nygren from Akamai Technologies expressed concerns in tendency of increased use of \textit{Public resolvers}.
 He claimed that the tendency has `the risk of consolidating key parts of the Internet to rely on few services' and resulting in `significantly impaired Internet performance' for some use cases when ECS information is chosen not to sent \cite{akamai-dns-architecture}.
