@@ -11,7 +11,7 @@ Selection of the location of recursive DNS resolvers leads to different impacts 
     \caption{A simplified network map when using local recursive resolver server}
     \label{localrecursive}
 \end{figure}
-When a user utilises a \textit{local recursive resolver} as illustrated in Figure \ref{localrecursive}, channel encipher methods do not add value to users' privacy considering that operations of phase two are often not encrypted.
+When a user utilises a \textit{local recursive resolver}, as illustrated in Figure \ref{localrecursive}, channel encipher methods do not add value to users' privacy considering that operations of phase two are often not encrypted.
 Supposing that the user does not share local recursive resolver among the others, DNS queries which the user makes will not be fetched from a cache but, instead, from all involved Authoritative Name Servers (NS).
 Sending queries in clear text on phase 2 leaves a possibility for all parties who are involved in the network packet transmission to monitor QNAME, query type and source IP of the traffic towards authoritative NS.
 Referring to the assumption that local recursive resolver is unique for a person, there is no space for obfuscation since no one else is querying from the IP address of the recursive resolver.

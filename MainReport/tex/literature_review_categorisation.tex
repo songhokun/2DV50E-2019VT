@@ -51,11 +51,11 @@ The risk of data leak still presents in the last chain of the authoritative NS.
 To decouple client and query name information, using ODNS required two types of servers: normal recursive resolver and ODNS authoritative resolver.
 A client with a dedicated stub resolver fetches an encryption key by contacting ODNS server without revealing its desired query, but instead, sending a query of `special.odns'.
 The procedure results in creating a unique session key to encrypt its DNS query. The stub resolver appends `odns' TLD to the encrypted query using the key, and the DNS query is sent towards the normal recursive resolver. The recursive resolver queries to one of ODNS authoritative resolvers, which in turn acts as `recursive resolver'.
-Figure \ref{odnsoverview} presents an overview of the ODNS and the illustration is fetched from its project page \cite{ODNSwebsite}.
+Figure \ref{odnsoverview} presents an overview of the ODNS, and the illustration is fetched from its project page \cite{ODNSwebsite}.
 
 \subsection{Architectural shift}
 %In the previous section, securing recursive-to-auth link is seen challenging due to the hierarchical structure of the DNS.
-Studies that aimed towards decentralised often imposed peer-to-peer (P2P) implementation, and the examples of such solution were Namecoin and GNU Name System (GNS).
+Studies that aimed towards decentralised had peer-to-peer (P2P) implementation, and the examples of such solution were Namecoin and GNU Name System (GNS).
 
 \textit{Namecoin} \cite{loibl2014namecoin} is described as ``timeline-based system that relies on a P2P network to manage updates and store the timeline \cite{grothoff2017nsa}'', and it settles down any commits related on `key-value mapping' by transactions that are published in an append-only hash chain (a.k.a. blockchain) \cite{kalodner2015empirical}.
 

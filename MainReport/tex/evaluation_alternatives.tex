@@ -37,7 +37,7 @@ In this section, evaluations of Tor, based on the location of recursive resolver
 Using \textit{ISP-provided resolver} over Tor does not add value in protection against attackers near the ISP network, as (1) queries are logged in the servers and (2) DNS transactions on Phase 2 are revealed and (3) although the requester for DNS is diffused the connection can be correlated by session-time observation.
 
 Using \textit{public resolver} over Tor reduces risks of eavesdropping on the wire with Tor's encryption and risks in the servers are also deducted since the recursive resolver only sees the Tor's exit node when ECS is not used.
-Eavesdroppers closed to the last chain of authoritative servers persists, they can only induce user as the exit node of a Tor circuit without ECS.
+Eavesdroppers closed to the last chain of authoritative servers persists, but they can only induce user as the exit node of a Tor circuit without ECS.
 However, it is questioned whether the additional benefit of confidentiality in the recursive resolver server overweights the sacrifice of availability.
 
 \subsubsection{Tor on DNS Query Phase 2}
@@ -64,7 +64,7 @@ Administrators could prepare a list of the trusted recursive resolver (TRR) base
 Once the list is prepared, they could configure the local server to forward DNS queries outside the organisation to ones from the list of TRRs.
 The selection of designated forwarder could be changed in a certain time interval, such as every six hours.
 
-If it is desired to obfuscate the frequency of visit or temporal information of visiting websites, DNS resolver admin could choose to manage DNS cache actively, by the means of the `proactive caching \cite{cohen2003proactive}'. Alternatively, performing `multi-queries \cite{siby2018dns}' of the frequently visited websites, such as following Alexa Top lists, could be done to maximise cache-sharing effect \cite{wang2013analysis}. Appendix \ref{scriptcode-appendix} could be referred for achieving this.
+If it is desired to obfuscate the frequency of visit or temporal information of visiting websites, DNS resolver admin could choose to manage DNS cache actively, by means of the `proactive caching \cite{cohen2003proactive}'. Alternatively, performing `multi-queries \cite{siby2018dns}' of the frequently visited websites, such as following Alexa Top lists, could be done to maximise cache-sharing effect \cite{wang2013analysis}. Appendix \ref{scriptcode-appendix} could be referred for achieving this.
 
 \subsubsection{Actions required on Network admin}
 DPRIVE workgroup of IETF has on-going standardisation tasks of ``DoT announcements using DHCP or Router Advertisements \cite{peterson-dot-dhcp-00}'' and ``DoH resolver announcement Using DHCP or Router Advertisements \cite{peterson-doh-dhcp-00}''.

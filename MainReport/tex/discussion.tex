@@ -1,8 +1,8 @@
 The project intensively examined securing Domain Name queries as a method of enhancing end-users' privacy towards pervasive monitoring and presented sections for answering the defined objectives. In this chapter, arguments on the current direction of DNS Privacy methods developments are introduced. Arguments of whether it is ethical to empower DNS Privacy also follows.
 
 \subsection{Privacy leaking components apart from the DNS}
-A Question may arise why it mainly focuses on securing DNS although there exist other factors which disclose users' privacy.
-Mechanisms of a web filter is examined to answer the question, as it is a commonly found practical example of the large scale monitoring \cite{murdoch2008tools}.
+A question may arise why it mainly focuses on securing DNS, although there exist other factors which disclose users' privacy.
+Mechanisms of a web filter are examined to answer the question, as it is a commonly found practical example of the large scale monitoring \cite{murdoch2008tools}.
 
 Web filter, also known as content-control software, is software that restricts access to a content that is delivered on the Web.
 Wazen et. al categorise mechanisms of legacy web-filtering into five techniques: (a) Port-based, (b) DNS, (c) IP Address, (d) Certificate, (e) Payload-based (f) HTTP proxy filtering techniques \cite{shbair2015efficiently}.
@@ -18,18 +18,18 @@ The change has increased costs of performing technique (e) and brought challenge
 Also, it has made (f) less applicable, as a proxy does not directly process encrypted traffics \cite{shbair2015efficiently}.
 Furthermore, the combination of wide deployment of HTTPS and Virtual Hosting has made technique (e) inefficient, because ``many companies share the same certificate across different services and domain names \cite{shbair2015efficiently}''.
 
-However, the trend change of Internet has not brought additional challenges to Domain Name System (DNS) filtering. Therefore, the project studies to remedy the weakest point towards users' privacy, which in this case is DNS.
+However, the trend change of Internet has not brought additional challenges to Domain Name System (DNS) filtering. Therefore, the project studies to remedy the weakest point towards users' privacy, which in this case, is DNS.
 
 \subsection{DNS Privacy - possible aids for the criminals}
 At the beginning of the report, the thesis motivated that securing DNS in its architecture is necessary, as the vulnerability cannot only be exploited by the right hand but could also be misused by a malevolent party.
 It is feasible that the perpetrators may use DNS Privacy enhancement methods to hide their activities, and DNS Privacy is in good practice that makes it difficult for investigators to eavesdrop the queries.
 
 In the U.S. or common law jurisdictions, hindering lawful enforcement may be seen as ``Obstruction of justice''.
-In this perspective, hiding DNS query by the means of encryptions could be questioned whether such behaviour is \textit{concealing} or \textit{covering up} with intent to \textit{impede} or \textit{obstruct} the investigation or proper administration as 18 U.S. Code \S 1591 states \cite{Obstructionofjustice}.
+In this perspective, hiding DNS query by means of encryptions could be questioned whether such behaviour is \textit{concealing} or \textit{covering up} with the intent to \textit{impede} or \textit{obstruct} the investigation or proper administration as 18 U.S. Code \S 1591 states \cite{Obstructionofjustice}.
 
 M Bay has performed a thought experiment of the relation of civil disobedience and unbreakable encryption \cite{bay2017ethics} based on John Rawls' theory of justice.
 Not all DNS Privacy enhancing methods have direct linkage with the `unbreakable encryption' since encryptions are breakable with `the given sufficient time and computational resources \cite{ellison2000ten,chau2006application}'.
-However, it is noteworty to introduce the aspect as exercising DNS Privacy has similarity in a sense that DNS Privacy methods aim to achieve unbreakable-encryption-like situation.
+However, it is noteworthy to introduce the aspect as exercising DNS Privacy has similarity in a sense that DNS Privacy methods aim to achieve unbreakable-encryption-like situation.
 
 M Bay had made three assumptions before applying Rawlsian principles to encryption as follows \cite{bay2017ethics}:
 \begin{enumerate}
@@ -38,17 +38,17 @@ M Bay had made three assumptions before applying Rawlsian principles to encrypti
   \item The society examined here can be described as well-ordered \cite{moon_2014, RawlsJohn1973Atoj} in Rawls’ terminology
 \end{enumerate}
 The thought experiment led to the following points: ``In a well-ordered society, an obstruction of law enforcement is at the same time an obstruction of principles of justice agreed upon by the society’s citizens.'' and  ``if society is just, citizens must comply with its institutions in order for it to remain just.''
-However, in case of ``societies are only partially just or in which, say, an unjust war is waged by an otherwise just society. Then, the basic liberties of the individual take precedence, in the push for restoration of justice \cite{RawlsJohn1973Atoj}.''
-However, according to Bay, civil disobedience and conscientious refusal leads to a violation of Rawls’ principles as he hypothesised with the point three: the society is well-ordered.
+However, in the case of ``societies are only partially just or in which, say, an unjust war is waged by an otherwise just society. Then, the basic liberties of the individual take precedence, in the push for the restoration of justice \cite{RawlsJohn1973Atoj}.''
+However, according to Bay, civil disobedience and conscientious refusal lead to a violation of Rawls’ principles as he hypothesised with point three: the society is well-ordered.
 
-With regards of applying utilitarian arguments for encryption, M Bay concluded as ``utilitarian reasoning does not provide us with a solution with regard to the conflict between encryption, privacy and enforcement of justice, since it simply becomes a version of the age-old conflict between security and freedom at higher level of abstraction \cite{bay2017ethics}.''
+With regards to applying utilitarian arguments for encryption, M Bay concluded as ``utilitarian reasoning does not provide us with a solution with regard to the conflict between encryption, privacy and enforcement of justice, since it simply becomes a version of the age-old conflict between security and freedom at a higher level of abstraction \cite{bay2017ethics}.''
 \subsection{Recursive resolver centralisation}
-E. Nygren from Akamai Technologies expressed concerns in tendency of increased use of \textit{Public resolvers}.
+E. Nygren from Akamai Technologies expressed concerns in the tendency of increased use of \textit{Public resolvers}.
 He claimed that the tendency has `the risk of consolidating key parts of the Internet to rely on few services' and resulting in `significantly impaired Internet performance' for some use cases when ECS information is chosen not to sent \cite{akamai-dns-architecture}.
 
 \subsubsection{DNS Privacy promoting the use of Public DNS servers}
-It is however questioned whether the DNS Privacy technologies are encouraging users to chose the public recursive resolver in the favour of the most popular Recursive resolver operators.
-Due to difficulty in manual configuration of TRR, it is likely for users to choose the default TRR, which are the \cite{dnsprivacy-test-servers} for Android 9's DoT implementation \cite{android-pie-dot} and CloudFlare in case of Firefox.
+It is however questioned whether the DNS Privacy technologies are encouraging users to chose the public recursive resolver in favour of the most popular Recursive resolver operators.
+Due to difficulty in the manual configuration of TRR, it is likely for users to choose the default TRR, which are the \cite{dnsprivacy-test-servers} for Android 9's DoT implementation \cite{android-pie-dot} and CloudFlare in case of Firefox.
 On the other hand, if more Internet service providers were supporting DoH or DoT resolvers and if these providers were gaining the users' trust, there is no necessary correlation for users deliberately changing to the public resolvers instead of utilising ISP provided resolvers upon DHCP standardisations \cite{peterson-doh-dhcp-00, peterson-dot-dhcp-00} are finalised and configuration are in practice.
 
 \subsubsection{Allegations on performance decrease}
@@ -56,7 +56,7 @@ Not providing ECS information could lead to impaired performance of the Internet
 
 However, before blaming users choosing ECS-turned-off recursive resolvers or Recursive DNS operators not supporting the ECS, non-availability of clients for opt-outing of ECS from the users' perspective should be addressed.
 According to Kintis et al., ``nearly five years after the ECS draft was proposed, there are still no client-centric tools that empower users to control how much of their IP address is revealed \cite{kintis2016understanding}''.
-It is anticipated once users gain control of how much of their IP to truncate, the decision on whether to sacrifice the availability for confidentiality shall rely on the users. It is not the content provider's obligation to prohibit Internet users from making their choices for the sake of the performance.
+It is anticipated that once users gain control of how much of their IP to truncate, the decision on whether to sacrifice the availability for confidentiality shall rely on the users. It is not the content provider's obligation to prohibit Internet users from making their choices for the sake of the performance.
 
 \subsection{IP as a human identifiable information}
 People against using ECS often argue that ECS may reveal an IP address of the end-user behind the DNS query, and therefore has a chance of revealing the person's privacy.

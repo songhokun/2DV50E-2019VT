@@ -12,11 +12,11 @@ Therefore, sensitiveness of the information cannot be measured on an absolute sc
 
 For natural persons, EU has defined sensitive information as the following: personal data revealing ``(1) ethnic origin, religious or philosophical beliefs, (2) trade-union membership, (3) health-related data, and (4) data concerning a person's sex life \cite{GDPR}''.
 
-For organisations, of their information, assets especially copyright (expression of the idea), trade secret, and privileged information are examples of sensitive information \cite{securityincomputing}.
+For organisations, of their information, assets, especially copyright (expression of the idea), trade secret, and privileged information are examples of sensitive information \cite{securityincomputing}.
 
 \subsection{Controlled disclosure}
 The information has a different characteristic compared to any physical asset; it can be duplicated to an infinite amount at relatively low cost, without harming the asset.
-This special characteristic of information makes a ``propagation problem''.
+This unique characteristic of information makes a ``propagation problem''.
 Affected subjects lose control of the information about themselves after being disclosed.
 
 \subsection{Privacy breaching Scenarios}
@@ -35,7 +35,7 @@ The following sections demonstrate how DNS reveals sensitive information about t
 \subsubsection{Metadata in DNS query}\label{dnsmetadata}
 Figure \ref{privacyobject} identifies relevant metadata created on DNS transaction.
 The metadata created when looking up DNS record includes Query Name (QNAME or Request Name), Query type and client's IP address.
-The aforementioned metadata is the minimum of the data. The client IP address can be linked with WHOIS \cite{whois-icann}, and geographical information of the client and affiliate of the organisation can be derived.
+Contrary to the belief that metadata has only minimal information, the client IP address can be linked with WHOIS \cite{whois-icann}. Furthermore, geographical information of the client and affiliate of the organisation can be derived.
 
 The recursive resolver can see whether the query is answered from its cache or not, and this information provides an insight into the client's behaviour.
 Given a sufficient number of clients sharing the same recursive resolver, ``DNS queries on Chinese Top-Level-Domains(TLD) server had Zipf-like distribution \cite{wang2013analysis}''. If this phenomenon also applies to the rest of the TLDs, administrators of the recursive DNS resolver could infer that a user attempts to visit not-so-frequently-visited web server.
@@ -50,20 +50,20 @@ In such case, when a person visits such website, it may provide sufficient signa
 An employee visiting a certain trade-union's website frequently in a corporative network may indicate to an IT-department that either the person is a member of the union or has a sympathy with the organisation. 
 
 Observing DNS query enables deriving health-condition of a user. If a chronic disease patient bears a smart sensor (such as Continuous Glucose Monitoring) that securely sends the measurement data to medical institutes \cite{carelink-uploading, medtronic-watson}, observing her DNS traffics may infer his health condition.
-If someone actively visits diverse clinics that specialise in a certain disease and relevant medical insurance company's website, consequent DNS queries provide meaningful insight into the person's health status.
+If someone actively visits several clinics that specialise in a particular disease and relevant medical insurance company's website, consequent DNS queries provide meaningful insight into the person's health status.
 
-DNS queries related to online dating sites can be also observed. However, there has not found any evidence of potential sexual activity of individuals based on the frequency of the visit, without considering its sociosexuality \cite{sevi2018exploring}. 
+DNS queries related to online dating sites can also be observed. However, there has not found any evidence of potential sexual activity of individuals based on the frequency of the visit, without considering its sociosexuality \cite{sevi2018exploring}. 
 Although the sexual activity cannot be derived, the sexual orientation of individuals could be induced in case the queried address is mainly visited among sexual minorities such as Grindr - the gay dating app \cite{goedel2015geosocial}.
 
 \subsubsection{Impact on corporates/organisations}
-The section illustrates privacy breaching scenarios for corporates' interest. First, scenarios of a large organisation are described. Common scenario regardless of the size of the organisations follows afterwards.
+The section illustrates privacy breaching scenarios for corporates' interest. First, scenarios of a large organisation are described. A common scenario regardless of the size of the organisations follows afterwards.
 
 Assuming that large-scale enterprises have sophisticated intranet and employees are assigned with managed work laptops, an employee would utilise a web browser's bookmark to add company specific websites on his work computer.
 In this case, although users do not necessarily visit the corporative intranet sites, a web browser may prefetch the bookmarks \cite{firefox-autocomplete-url, chrome-dns-prefectching}, which in its turn leaks the DNS queries.
-If the employee was travelling, the leaked domain names have potentials to reveal employee's identity in public places by any observers, and the domain names can be collected to facilitate sophisticated active attacks in the future.
+If the employee was travelling, the leaked domain names have potentials to reveal employee's identity in public places by any observers, and the domain names can be collected to facilitate sophisticated and active attacks in the future.
 In addition to the leaks caused by bookmarks from the browser, a query value `\textunderscore ldap.\textunderscore tcp.hostname' indicates that a client's dependency of a directory server \cite{Shulman:2014} and reveals the existence of service in the hostname.
 
-Activities on new product development or sensitive assignment may be derived from the DNS query activities originated from the corporative IP address. Section \ref{dnsmetadata} mentioned about WHOIS record of IP addresses. Information on Autonomous System (AS) - administrative entity - might have a heavier impact on identity linking on corporates compared to the individuals, once the information is correlated with the content of DNS Queries and frequency of the queries. Exchanging e-mails among various organisations or clients also involves DNS resolution and in this case Query type matters, since mail exchange server information is fetched by MX record of the DNS.
+Activities on new product development or sensitive assignment may be derived from the DNS query activities originated from the corporative IP address. Section \ref{dnsmetadata} mentioned about WHOIS record of IP addresses. Information on Autonomous System (AS) - administrative entity - might have a more substantial impact on identity linking on corporates compared to the individuals, once the information is correlated with the content of DNS Queries and frequency of the queries. Exchanging e-mails among various organisations or clients also involves DNS resolution and in this case Query type matters, since mail exchange server information is fetched by MX record of the DNS.
 
 \subsection{DNS queries as a digital fingerprint}\label{fingerprint}
 Kirchler et al. discuss possible ``behaviour-based-tracking'' of linking user sessions with the help of unsupervised learning of their DNS traffic patterns \cite{kirchler2016tracked}. Potential usage of such technique may especially be alarming for members of an organisation with critical missions, not only the private individuals.
