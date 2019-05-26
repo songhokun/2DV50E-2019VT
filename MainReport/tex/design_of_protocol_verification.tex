@@ -22,7 +22,7 @@ Following configuration are made on Firefox:
     \\i.e. Use DNS over HTTPS only
 \end{enumerate}
 Per each experiments, following steps are done to minimise possible caching-effect:
-\begin{lstlisting}
+\begin{lstlisting}[basicstyle=\ttfamily]
     # sudo systemd-resolve --flush-caches
     # sudo systemd-resolve --statistics
     $ wireshark -i enp4s0 -k & python3 visitwebsites.py
