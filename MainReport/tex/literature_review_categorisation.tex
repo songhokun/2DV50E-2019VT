@@ -12,11 +12,11 @@ Figure \ref{dns-methods-classification} demonstrated two trees, and of the two t
 Figure \ref{dns-methods-classification} resulted in having two labels of (A) and (C). (A) stood for categorisation proposed in this study and leaves with (C)-label were the methods proposed by other research groups.  
 
 \subsection{Encipherment of communication channels}
-Communication channel encrypting methods, as presented in in Table \ref{content}, attempted to alleviate privacy risks on the wire.
+Communication channel encrypting methods, as presented in Table \ref{content}, attempted to alleviate privacy risks on the wire.
 Methods encrypting the data transport channel were sorted into ones utilising current internet standards or the others proposing customised protocols.
 
 \subsubsection{Reusing the current secure transport protocols}
-\textit{DNS-over-TLS(DoT)} \cite{rfc7858}, \textit{DNS-over-HTTPS(DoH)} \cite{rfc8484} and \textit{DNS-over-DTLS} \cite{rfc8094} were the techniques that reuse the proven Internet standards for securing the connection channel between a stub resolver and a recursive resolver.
+\textit{DNS-over-TLS (DoT)} \cite{rfc7858}, \textit{DNS-over-HTTPS (DoH)} \cite{rfc8484} and \textit{DNS-over-DTLS} \cite{rfc8094} were the techniques that reuse the proven Internet standards for securing the connection channel between a stub resolver and a recursive resolver.
 Technologies in this field could be understood as encapsulations of DNS operations with minimal changes to the existing Internet protocols.
 
 \textit{DoT} and \textit{DoH} applied encryption on the connection-oriented protocol (i.e. TCP), and by the number of citations and client implementations, these were the most prominent technologies within the DNS Privacy field.
@@ -24,9 +24,9 @@ Technologies in this field could be understood as encapsulations of DNS operatio
 In the meantime, \textit{DNS-over-DTLS} attempted to apply encryption over User Datagram Protocol (UDP). In other words, it utilises Data Transport Layer Security (DTLS) \cite{rfc4347}.
 
 \subsubsection{Implementing own transport protocols}
-A developing standard of \textit{DNS over Dedicated QUIC} \cite{dnsoquic} also utilised UDP-like connection called QUIC.
+A developing standard of \textit{DNS over Dedicated QUIC} \cite{dnsoquic} also utilised a UDP-like connection called QUIC.
 QUIC is ``UDP-Based Multiplexed and Secure Transport \cite{ietf-quic-transport-20}''.
-By the time of the study, QUIC was still in a development phase. However, QUIC is prominent to be the next Internet standard as it is on IETF's standardisation  track, and the specification is actively being discussed.
+By the time of the study, QUIC was still in a development phase. However, QUIC is prominent to be the next Internet standard as it is on IETF's standardisation track, and the specification is actively being discussed.
 
 \textit{DNSCrypt} \cite{denis2015dnscrypt} and \textit{DNSCurve} \cite{dempsky2010dnscurve} are the non-IETF-standardised techniques that use ``elliptic-curve cryptography (e.g. XSalsa20Poly1305 \cite{chacha} for channel encryption and Curve25519 for key exchange) for enciphering communications. \cite{van2018privacy}''
 

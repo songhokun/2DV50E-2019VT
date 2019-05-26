@@ -8,7 +8,7 @@ Selection of the location of recursive DNS resolvers leads to different impacts 
     \begin{center}
     \includegraphics*[width=0.9\columnwidth]{img/local-recursive}
     \end{center}
-    \caption{A simplified network map when using local resursive resolver server.}
+    \caption{A simplified network map when using local recursive resolver server}
     \label{localrecursive}
 \end{figure}
 When a user utilises a \textit{local recursive resolver} as illustrated in Figure \ref{localrecursive}, channel encipher methods do not add value to users' privacy considering that operations of phase two are often not encrypted.
@@ -22,7 +22,7 @@ However, utilising the local recursive resolver eliminates the risks of queries 
     \begin{center}
     \includegraphics*[width=0.9\columnwidth]{img/isp-recursive}
     \end{center}
-    \caption{A simplified network map when using ISP-provided resursive resolver server.}
+    \caption{A simplified network map when using the ISP-provided recursive resolver server}
     \label{isprecursive}
 \end{figure}
 Using \textit{ISP provided Recursive resolver} is the most common scenario, as most ISP offer DNS resolver to their users by Dynamic Host Configuration Protocol (DHCP).
@@ -31,13 +31,13 @@ Reusing cache reduces the need of Phase 2 in its response process \cite{wang2013
 Authoritative name servers see the source IP address of ISP's resolver in Phase 2 of DNS resolving, but not IP of the individuals, in case E-DNS Client Subset(ECS) is not in place.
 When ECS is used, the authoritative NS may see truncated IP of clients \cite{kintis2016understanding}, but the IP address does not present additional privacy harm as ISP's recursive resolver is often in the same subnet IP range, and authoritative NS already acquaints source IP of the recursive DNS resolver. 
 Privacy risks incurred by logging may exist in ISP provided resolver, as ISPs may be obliged for log retentions due to legal requirements of the countries they operate in \cite{uk-ipa}.
-Channel encipherment on Phase 1 adds a value of users' privacy to a limited extent, tapping on the wire between the ISP's recursive resolver and a stub resolver is often feasible for ISP itself rather than third parties.
+Channel encipherment on Phase 1 adds a value of users' privacy to a limited extent, as tapping on the wire between the ISP's recursive resolver and a stub resolver is often feasible for ISP itself rather than third parties.
 
 \begin{figure}[h!]
     \begin{center}
     \includegraphics*[width=0.9\columnwidth]{img/public-recursive}
     \end{center}
-    \caption{A simplified network map when using public resursive resolver server.}
+    \caption{A simplified network map when using public recursive resolver server}
     \label{publicrecursive}
 \end{figure}
 

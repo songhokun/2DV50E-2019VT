@@ -119,9 +119,10 @@
 %----------------------------------------------------------------------------------------
 \selectlanguage{english}
 \begin{abstract}
-\noindent Current usage of the DNS system is the most significant loophole of Internet users' privacy, as all queries and answers for resolving web address are not protected in most cases. % Thesis statement, background description
-% Motivation
-Despite a single solution for addressing privacy risks in all stages of the DNS query process does not exist, the report acquaints several Internet standardisations for DNS privacy that are complementary to the existing DNS system and verifies that implementation of these brings significant enhancement of users' privacy.
+\noindent Current usage of the DNS system is the most significant loophole of Internet users' privacy, as all queries and answers for resolving web address are not protected in most cases.
+The report elaborated which Internet users' privacy interests exist, and presented the current technologies to enhance DNS Privacy through a systematic literature review.
+The report also explored the limitations of the current practices and presented several proposals such as DNS-over-Tor and methods to change the trusted recursive resolver to mitigate current limitations periodically.
+%Despite a single solution for addressing privacy risks in all stages of the DNS query process does not exist, the report acquaints several Internet standardisations for DNS privacy that are complementary to the existing DNS system and verifies that implementation of these brings significant enhancement of users' privacy.
 %The report explores existing methods to enhance DNS Privacy and sets up a series of experiments to verify implementations of such methods for privacy enhancement. % Description of problem explored
 \\\\
 \textbf{Keywords: DNS, DNS-over-HTTPS, DNS-over-TLS, DNS Privacy}
@@ -178,7 +179,7 @@ The following research questions are formulated having regards to the privacy br
 \begin{table}[h!]
     \begin{tabular} {|p{1.2cm}|p{12.8cm}|} \hline
         \textbf{RQ1} & Which benefits would DNS Privacy bring to different actors? \\ \hline
-        \textbf{RQ2} & Which are the areas that the exisiting DNS Privacy enhancement methods could not address? \\ \hline
+        \textbf{RQ2} & Which are the areas that the existing DNS Privacy enhancement methods could not address? \\ \hline
         \textbf{RQ3} & Which combination of technologies would be suitable to address the current limitations?\\ \hline
     \end{tabular}
     \caption{Research questions}
@@ -210,7 +211,7 @@ The following objectives are set to answer the research questions and transform 
 RQ1 aims to explore benefits by having DNS privacy on a different group of people.
 As it could be challenging to motivate benefits of having privacy when obscurity prevails, O1 is defined to analyse scenarios when the privacy is violated caused by having insecure or exposed DNS queries.
 
-RQ2 is to find use cases of the existing DNS privacy mitigative methods. However, in order to discuss use cases, the state of these methods need to be examined. Therefore, O2 is set to explore the state of arts of the methods and O3 is set to identify areas for  improvements.
+RQ2 is to find use cases of the existing DNS privacy mitigative methods. However, in order to discuss use cases, the state of these methods need to be examined. Therefore, O2 is set to explore the state of arts of the methods and O3 is set to identify areas for improvements.
 
 RQ3 attempts to provide useful interventions by finding a combination of technologies to overcome the limitation of the current DNS Privacy enhancement. For serving the purpose, O4 discusses possible approaches to using other technologies.
 
@@ -219,10 +220,12 @@ The project has a focus on improving the privacy part, from the security perspec
 
 \subsection{Target group}
 The project aims to provide insight on DNS Privacy for Internet users and recursive resolver providers for improving users' privacy.
+However, it is anticipated that readers have knowledge Internet protocol suite such as TCP/IP \cite{rfc1122}.
 %Here you outline which target group that might be interested in your work. If you, for example, do a project about software architectures, a target group can be professional developers and architects that work with similar software systems as the system you investigated.
 
 \subsection{Outline}
-The majority of scientific reports follow in Introduction, Methods, Results, Analysis and Discussion(IMRaD) pattern. However, the project chose to use a design science method and therefore it has an inverted structure of results and analysis. An analysis is made first to describe the design constraints and results (or design proposal) are presented afterwards. 
+The majority of scientific reports follow in Introduction, Methods, Results, Analysis and Discussion(IMRaD) pattern.
+This report is also in line with the IMRaD pattern. After the method chapter, four chapters follow, and each chapter presents the result of each objective incrementally. In other words, Chapter 4 presents the result of O1, Chapter 5 presents O2 and it follows up to Chapter 6 which describes the result of O4.
 
 \newpage
 \section{Method}\label{Method}
@@ -253,12 +256,12 @@ The majority of scientific reports follow in Introduction, Methods, Results, Ana
 The report presented an overview of privacy breaching scenarios of different end-user types.
 While the majority of privacy literature focuses on the impact on individuals, the paper has attempted to represent organisational interests.
 
-In addition to the investigation of different end-users' privacy interestes, the report also presented a systematic survey of DNS Privacy enhancing techniques.
+In addition to the investigation of different end-users' privacy interests, the report also presented a systematic survey of DNS Privacy enhancing techniques.
 
-The report presented the limitations of the current DNS privacy technologies and explored the alternative approaches to overcome the limitations from the current techniques, which was to use Tor and frequently changing a trusted recursive resolver which DNS privacy method were in use.
+The report presented the limitations of the current DNS privacy technologies and explored the alternative approaches to overcome the limitations from the current techniques, which was to use Tor and frequently changing a trusted recursive resolver.
 
 The end-users, whose interests are analysed in the report, could refer to the report to meet their interests.
-The approach used in the analysis could be referred in examining other emerging innovations in DNS Privacy. 
+The approach used in the analysis could be referred to in examining other emerging innovations in DNS Privacy. 
 
 \subsection{Scientific contribution}
 Although there exist other studies of a thorough investigation of DNS Privacy techniques, this report distinct by being transparent of the survey method and having provided approaches to categorise the DNS Privacy methods.
@@ -268,9 +271,9 @@ The report presented the status of client implementations of different DNS Priva
 Although certain limitations of DNS Privacy methods exist as presented earlier, it is not doubted that DNS Privacy is cruising.
 
 \subsection{Future work}
-Due to the limitation of the time, the proof of concept proposal made in this study has not throughouly examined.
-Actual implementation of the proposal, especially DNS-over-Tor on Phase 2 and examining privacy contribution of using multiple trusted resolver can be done as future studies.
-More specifically, future studies could explore correlation of the privacy contributions and having different intervals for configuring Secure DNS servers (Trusted Recursive Resolvers).
+Due to the limitation of the time, the proof of concept proposal made in this study has not thoroughly examined.
+The actual implementation of the proposal, especially DNS-over-Tor on Phase 2 and examining privacy contribution of using multiple trusted resolver can be done as future studies.
+More specifically, future studies could explore the correlation of the privacy contributions and having different intervals for configuring Secure DNS servers (Trusted Recursive Resolvers).
 \newpage
 
 
@@ -292,19 +295,19 @@ More specifically, future studies could explore correlation of the privacy contr
 \appendix
 
 \section{Appendix 1}\label{scriptcode-appendix}
-The section presents a set of Python script that can potentially used in verifying the proof of concept presented in this sutdy.
-Secetions follow with code for processing a web site list, script to simulate the web traffic and the common base code for above functions to work.
+The section presents a set of Python script that can potentially be used in verifying the proof of concept presented in this study.
+Sections follow with the code for processing a web site list, script to simulate the web traffic and the common base code for the above functions to work.
 Analysing and capturing the generated web traffic is not in the scope of the section.
 
 \subsection{Processing frequently visited web domain list} \label{processweblist}
-The website list is fetched from Alexa top one million global chart and further classified depends on Top-Level-Domains (TLDs).
+The website list is fetched from Alexa top one million global charts and further classified depends on Top-Level-Domains (TLDs).
 Below is code for a script to convert the Alexa list into a dictionary format.
 \inputpython{../Selenium/process_web_list.py}{1}{30}
 
 \subsection{Script for automating the web traffic simulation}
-Selenium is the web automation test tool\cite{holmes2006automating}, which is typically used to test web applications. Selenium can be used to visit a list of websites for simulating DNS queries. In the script below, the selenium was incorporated with Firefox Gecko driver to control the web browser through a Python script.
+Selenium is the web automation test tool \cite{holmes2006automating}, which is typically used to test web applications. Selenium can be used to visit a list of websites for simulating DNS queries. In the script below, the selenium was incorporated with Firefox Gecko driver to control the web browser through a Python script.
 
-Python 3.5 and higher, Pip3 is required. It is anticipated that Python packages such as selenium and json are also installed on the system. A Gecko driver needs to be reachable in OS' PATH environment. This code assumes that Firefox browser is installd on the local PC.
+Python 3.5 and higher, Pip3 is required. It is anticipated that Python packages such as selenium and json are also installed on the system. A Gecko driver needs to be reachable in the OS' PATH environment. This code assumes that the Firefox browser is installed on the local PC.
 
 \inputpython{../Selenium/visitwebsites.py}{1}{70}
 \subsection{Common based source}

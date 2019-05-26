@@ -4,7 +4,7 @@ Pfleeger introduces three aspects of Information security: sensitive data, affec
 Privacy issues related to the DNS on different subjects are analysed in this chapter.
 
 \subsection{Affected subjects}
-We classify subjects as private persons, and organisations. Organisations are further divided into large organisations that operate own directory server with DNS, and the smaller organisations that do not operate DNS resolvers in its network.
+The subjects are classified as private persons, and organisations. Organisations are further divided into large organisations that operate their directory server with DNS, and the smaller organisations that do not operate DNS resolvers in its network.
 
 \subsection{Sensitive information}\label{sensitiveinformation}
 Defining what sensitive information is in a subjective area.
@@ -61,7 +61,7 @@ The section illustrates privacy breaching scenarios for corporates' interest. Fi
 Assuming that large-scale enterprises have sophisticated intranet and employees are assigned with managed work laptops, an employee would utilise a web browser's bookmark to add company specific websites on his work computer.
 In this case, although users do not necessarily visit the corporative intranet sites, a web browser may prefetch the bookmarks \cite{firefox-autocomplete-url, chrome-dns-prefectching}, which in its turn leaks the DNS queries.
 If the employee was travelling, the leaked domain names have potentials to reveal employee's identity in public places by any observers, and the domain names can be collected to facilitate sophisticated active attacks in the future.
-In addition to the leaks caused by bookmarks from the browser, a query value `\textunderscore ldap.\textunderscore tcp.hostname' indicates that a client's dependency of a directory server \cite{Shulman:2014} and revels an existance of a service in the hostname.
+In addition to the leaks caused by bookmarks from the browser, a query value `\textunderscore ldap.\textunderscore tcp.hostname' indicates that a client's dependency of a directory server \cite{Shulman:2014} and reveals the existence of service in the hostname.
 
 Activities on new product development or sensitive assignment may be derived from the DNS query activities originated from the corporative IP address. Section \ref{dnsmetadata} mentioned about WHOIS record of IP addresses. Information on Autonomous System (AS) - administrative entity - might have a heavier impact on identity linking on corporates compared to the individuals, once the information is correlated with the content of DNS Queries and frequency of the queries. Exchanging e-mails among various organisations or clients also involves DNS resolution and in this case Query type matters, since mail exchange server information is fetched by MX record of the DNS.
 

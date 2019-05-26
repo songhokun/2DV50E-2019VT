@@ -2,17 +2,17 @@ This section describes an experimental setup of verifying a DNS-over-HTTPS clien
 
 \subsection{Experiment background}
 Identifying incoming and outgoing traffics around a recursive resolver is the interest, as recursive DNS resolver knows about stub resolver's information and its query.
-The location choice of a recursive resolver leads to different value addition of privacy enhancement as described in Section \ref{rr-location}. In each experiment, it is aimed to verify situations where we anticipate privacy enhancement.
+The location choice of a recursive resolver leads to different value addition of privacy enhancement as described in Section \ref{rr-location}. In each experiment, it is aimed to verify situations where  privacy enhancements are anticipated.
 
 \subsection{Experiment setup}\label{simulation}
-We chose to use the remote recursive resolver (i.e. public DNS server) as the focus of the experiment laid on observing on the wire traffic between the stub client and the resolver (i.e. \textbf{Phase 1}).
+The remote recursive resolver (i.e. public DNS server) is chosen to be used as the focus of the experiment laid on observing on the wire traffic between the stub client and the resolver (i.e. \textbf{Phase 1}).
 
 DoH clients that were available to test are Firefox web browsers later than version 62 \cite{FirefoxDoH}, curl later than 7.62 \cite{CurlDoH} and DNSCrypt-proxy.
 Firefox's DoH client is chosen to be evaluated and DNS traffics are generated in the two ways:
 \begin{enumerate}
     \item Automation of website visit using Selenium over Gecko driver.
-    \\i.e. visiting a list of websites in sequential manner)
-    \item Simultanious visit of the list of websites from the bookmark.
+    \\i.e. sequentially visiting a list of websites
+    \item Simultaneous visit of the list of websites from the bookmark.
 \end{enumerate}
 Following configuration are made on Firefox:
 \begin{enumerate}
@@ -21,14 +21,14 @@ Following configuration are made on Firefox:
     \item Set trr.mode as 3
     \\i.e. Use DNS over HTTPS only
 \end{enumerate}
-Per each experiments, following steps are done to minimise possible caching-effect:
+Per each experiment, the following steps are done to minimise possible caching-effect:
 \begin{lstlisting}[basicstyle=\ttfamily]
     # sudo systemd-resolve --flush-caches
     # sudo systemd-resolve --statistics
     $ wireshark -i enp4s0 -k & python3 visitwebsites.py
 \end{lstlisting}
 \subsubsection{Hypothesis}
-Regardless of chosen way to generate web traffic and regardless of the mode two or three of Firefox DoH operations, all DNS traffics will not be sent over the clear-text. Therefore, tcpdump and Wireshark packet captures of each experiment set will not reval DNS query by observing UDP 53 port.
+Regardless of the chosen way to generate web traffic and regardless of the mode two or three of Firefox DoH operations, all DNS traffics will not be sent over the clear-text. Therefore, tcpdump and Wireshark packet captures of each experiment set will not reveal DNS query by observing UDP 53 port.
 
 \subsection{Results}
 When Selenium was used, configuration (1) with DoH first mode resulted in revealing all DNS queries, and DoH engine was not used.
@@ -38,24 +38,24 @@ When bookmark-method was used, configuration (2) with DoH only resulted in not b
 
 \subsubsection{Firefox's DNS Lookup log}
 While performing the experiments, the DNS related log files from Firefox were collected.
-The log in debug level contained lines of `D/nsHostResolver TRR lookup url.tld' message follwed by 'OK' or 'FAILED'.
+The log in debug level contained lines of `D/nsHostResolver TRR lookup url.tld' message followed by 'OK' or 'FAILED'.
 Of the 638 lines, 407 entries lead to OK and 231 entries indicated FAILED. Approximately, 63.79\% of the queries went through DNS-over-HTTPS.
 
 \subsection{Evaluation}
-This section provides interpretation of the observed results.
+This section provides an interpretation of the observed results.
 
 \subsubsection{Possible interference caused by web automation}
-Although Appendix \ref{scriptcode-appendix} discussed potential usefulness of the web automation tool, using Selenium with Gecko Firefox webdriver resulted that DNS-over-HTTPS were not being used.
-Since additional software is envolved for a traffics simulation, there is higher a chance that an error in the automation tool may lead to misleading results, considering that bookmark-visit induced method did not show the same result.
+Although Appendix \ref{scriptcode-appendix} discussed the potential usefulness of the web automation tool, using Selenium with Gecko Firefox webdriver resulted that DNS-over-HTTPS were not being used.
+Since additional software is involved for a traffics simulation, there is higher a chance that an error in the automation tool may lead to misleading results, considering that bookmark-visit induced method did not show the same result.
 
 \subsubsection{Bootstrap procedure}\label{bootstrap}
-The reason that `DNS-over-HTTPS only mode' failed to load website is assumed as DoH engine failed to initiate the connection to the DoH Server URI of '\url{https://mozilla.cloudflare-dns.com/dns-query}'. It is interpreted as the experiments have not taken into the consideration of setting up the bootstrap procedures.
+The reason that `DNS-over-HTTPS only mode' failed to load any website is assumed as the DoH engine failed to initiate the connection to the DoH Server URI of '\url{https://mozilla.cloudflare-dns.com/dns-query}'. It is interpreted as the experiments have not taken into the consideration of setting up the bootstrap procedures.
 
 \subsubsection{Unexplained causes of DoH query failures}
 There is no clear explanation on the reason of having 36.2\% of queries failed when DNS-over-HTTPS resolver was used.
 The author of the DoH engine has not given a clear explanation either for causes leading to the failures \cite{daniel-doh}.
-However, it is northworty to consider that simulation of web visits are made on simultaneous attempts; browing twenty websites were initiated at the same time.
-The simultaneous visit could have been a factor of leading to an over-load situation.
+However, it is noteworthy to consider that simulation of web visits are made on simultaneous attempts; browsing twenty websites were initiated at the same time.
+The simultaneous visit could have been a factor of leading to an overload situation.
 
 \subsection{Conclusion of the DoH Experiments}
-For the given experiment setups, using DoH over Firefox resulted in that some of DNS queries were leaked over conventional DNS resolver, because DNS resolutions over its DoH engine failed.
+For the given experiment setups, using DoH over Firefox resulted in that some of DNS queries were leaked over conventional DNS resolver because DNS resolutions over its DoH engine failed.

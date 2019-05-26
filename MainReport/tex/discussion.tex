@@ -1,9 +1,8 @@
-The project intensively examines securing Domain Name queries as a method of enhancing end-users' privacy towards pervasive monitoring.
+The project intensively examined securing Domain Name queries as a method of enhancing end-users' privacy towards pervasive monitoring and presented sections for answering the defined objectives. In this chapter, arguments on the current direction of DNS Privacy methods developments are introduced. Arguments of whether it is ethical to empower DNS Privacy also follows.
 
 \subsection{Privacy leaking components apart from the DNS}
 A Question may arise why it mainly focuses on securing DNS although there exist other factors which disclose users' privacy.
-To answer the question, let us have an example of a web filter, as it is a commonly found practical example of the large scale monitoring \cite{murdoch2008tools}.
-%As web filters require monitoring of users' traffic to enforce its policy of restrictions, understanding the mechanisms of the web filter suits this context.
+Mechanisms of a web filter is examined to answer the question, as it is a commonly found practical example of the large scale monitoring \cite{murdoch2008tools}.
 
 Web filter, also known as content-control software, is software that restricts access to a content that is delivered on the Web.
 Wazen et. al categorise mechanisms of legacy web-filtering into five techniques: (a) Port-based, (b) DNS, (c) IP Address, (d) Certificate, (e) Payload-based (f) HTTP proxy filtering techniques \cite{shbair2015efficiently}.
@@ -21,19 +20,15 @@ Furthermore, the combination of wide deployment of HTTPS and Virtual Hosting has
 
 However, the trend change of Internet has not brought additional challenges to Domain Name System (DNS) filtering. Therefore, the project studies to remedy the weakest point towards users' privacy, which in this case is DNS.
 
-%\subsection{Ethical dilemma of privacy enhancement; Liberation of illegal crimes?}
 \subsection{DNS Privacy - possible aids for the criminals}
 At the beginning of the report, the thesis motivated that securing DNS in its architecture is necessary, as the vulnerability cannot only be exploited by the right hand but could also be misused by a malevolent party.
 It is feasible that the perpetrators may use DNS Privacy enhancement methods to hide their activities, and DNS Privacy is in good practice that makes it difficult for investigators to eavesdrop the queries.
 
-%Make it difficult for legal enformcement side to gain information
-%It may mean violation of the law in some area
-%However, 
 In the U.S. or common law jurisdictions, hindering lawful enforcement may be seen as ``Obstruction of justice''.
 In this perspective, hiding DNS query by the means of encryptions could be questioned whether such behaviour is \textit{concealing} or \textit{covering up} with intent to \textit{impede} or \textit{obstruct} the investigation or proper administration as 18 U.S. Code \S 1591 states \cite{Obstructionofjustice}.
 
 M Bay has performed a thought experiment of the relation of civil disobedience and unbreakable encryption \cite{bay2017ethics} based on John Rawls' theory of justice.
-Not all DNS Privacy enhancing methods have direct linkage with the `unbreakable encryption', since encryptions are breakable with `the given sufficient time and computational resources \cite{ellison2000ten,chau2006application}'.
+Not all DNS Privacy enhancing methods have direct linkage with the `unbreakable encryption' since encryptions are breakable with `the given sufficient time and computational resources \cite{ellison2000ten,chau2006application}'.
 However, it is noteworty to introduce the aspect as exercising DNS Privacy has similarity in a sense that DNS Privacy methods aim to achieve unbreakable-encryption-like situation.
 
 M Bay had made three assumptions before applying Rawlsian principles to encryption as follows \cite{bay2017ethics}:
@@ -56,17 +51,21 @@ It is however questioned whether the DNS Privacy technologies are encouraging us
 Due to difficulty in manual configuration of TRR, it is likely for users to choose the default TRR, which are the \cite{dnsprivacy-test-servers} for Android 9's DoT implementation \cite{android-pie-dot} and CloudFlare in case of Firefox.
 On the other hand, if more Internet service providers were supporting DoH or DoT resolvers and if these providers were gaining the users' trust, there is no necessary correlation for users deliberately changing to the public resolvers instead of utilising ISP provided resolvers upon DHCP standardisations \cite{peterson-doh-dhcp-00, peterson-dot-dhcp-00} are finalised and configuration are in practice.
 
-\subsubsection{Allegations on performce decrease}
-Not providing ECS information could lead to impaired performance of the Internet service due to not providing the address to the topologically closest node to the user, due to misleading information of geographical location of users.
-However, before blameing users choosing ECS-turned-off recursive resolvers or Recursive DNS operators not supporting the ECS, non-availability of clients for opt-outing of ECS from the users' prespective should be addressed.
-According to Kintis et al., ``nearly five years after the ECS draft was proposed, there are still no client centric tools that empower users to control how much of their IP address is revealed \cite{kintis2016understanding}''.
-It is anticipated once users gain control of how much of their IP to turncate, decision on whether to sacrifice the availability for confidentiality would rely on the users. It is not the content-provider's obligation to prohibit the Internet users making their choices for the sake of the performance.
+\subsubsection{Allegations on performance decrease}
+Not providing ECS information could lead to impaired performance of the Internet service because insufficient information on the geographical location of users misleads the choice of `topologically localised \cite{kintis2016understanding}' server for serving the client.
 
-\subsection{IP as a human identificable information}
+However, before blaming users choosing ECS-turned-off recursive resolvers or Recursive DNS operators not supporting the ECS, non-availability of clients for opt-outing of ECS from the users' perspective should be addressed.
+According to Kintis et al., ``nearly five years after the ECS draft was proposed, there are still no client-centric tools that empower users to control how much of their IP address is revealed \cite{kintis2016understanding}''.
+It is anticipated once users gain control of how much of their IP to truncate, the decision on whether to sacrifice the availability for confidentiality shall rely on the users. It is not the content provider's obligation to prohibit Internet users from making their choices for the sake of the performance.
+
+\subsection{IP as a human identifiable information}
 People against using ECS often argue that ECS may reveal an IP address of the end-user behind the DNS query, and therefore has a chance of revealing the person's privacy.
-However, it is doubted whether the truncated IP address itself should be seen as a person identifiable factor.
+However, it is an ongoing debate of whether the truncated IP address itself should be seen as a person identifiable factor.
 
 Clent's IP address has a potential to be privacy harm, but main factors that contribute to the privacy infringement may be associated with the distinctness (uniqueness) of the address and whether the IP can be linked with other identifiers.
 
 \subsection{QNAME minimisation}
 Software BIND, the most commonly deployed software for DNS servers, supports QNAME minimisation by default from version 9.14.0 \cite{bind9qname}.
+It is a significant achievement of DNS Privacy field, considering the market dominance of the BIND. Since the technology is enabled by default upon the updates, deploying the privacy technique is seen as ease for the recursive DNS server administrators.
+
+When it comes to choosing which DNS recursive resolver server to use, DNS server operators and literature on DNS Privacy often recommend examining whether the server does not support ECS or not. Since the implementation of QNAME minimisation is officially in place, examining whether an arbitrary DNS Recursive resolver supports QNAME minimisation or not could also be a parameter to consider in choosing the TRR.

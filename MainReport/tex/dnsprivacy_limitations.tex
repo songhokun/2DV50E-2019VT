@@ -1,5 +1,5 @@
-This section provides limitations of the DNS privacy enhancing methods presented in the previous chapter.
-The investigations of the limitations are presented in the same order as the previous categorisation. In the first section, limitations of channel encipherment is introduced.
+This section provides limitations of the DNS privacy-enhancing methods presented in the previous chapter.
+The investigations of the limitations are presented in the same order as the previous categorisation. In the first section, the limitations of channel encipherment are introduced.
 Afterwards, the focus shifts to information redactions and proposals for structural shifts.
 
 \subsection{Risk areas of DNS Privacy}
@@ -17,10 +17,10 @@ For the conciseness of further analysis, the communication channel (transport ch
 \textbf{Phase 1} refers to step 1 and 10 of Figure \ref{queryprocess}. These two steps are performed in the DNS Query process when stub resolver queries a domain name to the recursive resolver and the recursive resolver replies to the stub resolver.
 Channel-wise, it is denoted as a \textbf{stub-to-resolver link}.
 
-\textbf{Phase 2} refers to the steps in the Figure \ref{queryprocess} where a recursive resolver finds the final answer to the queried address, by recursively reaching to concerning authoritative servers. In other words, the channel that the rest of the steps is performed is called \textbf{recursive-to-auth link}.
+\textbf{Phase 2} refers to the steps in Figure \ref{queryprocess}, where a recursive resolver finds the final answer to the queried address, by recursively reaching to concerning authoritative servers. In other words, the channel that the rest of the steps is performed is called \textbf{recursive-to-auth link}.
 
 \subsubsection{Insufficient measurements on recursive-to-auth link}\label{recursive-auth-limitations}
-The distinction of the two phases are noteworthy, as the current implementations that preserve DNS hierarchical structure do not secure all communication paths towards all involved parties of the DNS resolving.
+The distinction of the two phases is noteworthy, as the current implementations that preserve DNS hierarchical structure do not secure all communication paths towards all involved parties of the DNS resolving.
 As an example, the majority of the methods do not encrypt communications on Phase 2 (recursive-to-auth link) in contrast to Phase 1 (stub-to-resolver link).
 The fact that an authoritative server having a one-to-many server-client relationship from the recursive resolvers is the major obstacle of applying encryption on Phase 2.
 
@@ -35,17 +35,17 @@ Furthermore, authentication mechanisms are missing on Phase 2 \cite{I-D.bortzmey
 
 \subsection{Observation on packets' size}
 Siby et al. presented their preliminary study results of observing DNS-over-HTTPS traffics \cite{siby2018dns}.
-They set two types of experiments: single-query and multi-query. Multi-query referes to simulating to load a web page and let the browser makes follow up queries of the embedded contents of a website.
-Their simulation of single-query visit reveals that DNS query-response size tuple results in being distinct per each queried address and when applied multi-query simulation, the number of uniqueness associated to each DNS query-response increased \cite{siby2018dns}.
+They set two types of experiments: single-query and multi-query. Multi-query refers to simulating to load a web page and let the browser makes follow up queries of the embedded contents of a website.
+Their simulation of single-query visit reveals that DNS query-response size tuple results in being distinct per each queried address, and when applied multi-query simulation, the number of uniqueness associated to each DNS query-response increased \cite{siby2018dns}.
 
-If more researchers make similar observations, and if the conclusion holds, it becomes a concern since the result indicates that privacy attackers could observe the encrypted query-response set of packets size and induce the actual query despite of not decrypting the packets.
+If more researchers make similar observations, and if the conclusion holds, it becomes a concern since the result indicates that privacy attackers could observe the encrypted query-response set of packets size and induce the actual query despite not decrypting the packets.
 
 \subsection{Privacy leaks by Transitive trust}
 Shulman demonstrated that `straightforward application of the encryption alone may not suffice \cite{Shulman:2014}' for protecting DNS Privacy due to possible disruption of DNS Availability and privacy leaks caused by `transitive trust \cite{Ramasubramanian:2005}'.
-Shulman further analysed transtive trust as (1) \textit{fan-out} and (2) \textit{chain-length}.
+Shulman further analysed transitive trust as (1) \textit{fan-out} and (2) \textit{chain-length}.
 Chain-length refers to ``A number of name servers involved in a resolution of a record that initiates the chain'' and fan-out as ``number of (transitive-trust) chains involved in a resolution of a domain name'' \cite{Shulman:2014}.
 
-Transitive trust at authoritative servers possess a potential risk of revealing the query and client. While \textit{DNS QName minimisation} \cite{bortzmeyer2016dns} limits the scope of the query name leaks, the extensified usage of DNS in Content Delivery Network (CDN) context \cite{WANG2018235} may have increased the chain-length and it leads to the intercoperation issues \cite{Huque-QNAME-Min-analysis}.
+Transitive trust at authoritative servers possesses a potential risk of revealing the query and client. While \textit{DNS QName minimisation} \cite{bortzmeyer2016dns} limits the scope of the query name leaks, the extensive usage of DNS in Content Delivery Network (CDN) context \cite{WANG2018235} may have increased the chain-length, and it leads to the interoperation issues \cite{Huque-QNAME-Min-analysis}.
 
 \subsection{Availability concerns on Oblivious DNS}
 There are several criteria to define availability. The criteria for defining availability introduced by Pfleeger are (1) having a timely response to a given request, (2) ensuring fair allocation of resources and (3) being fault-tolerant \cite{securityincomputing}.
@@ -81,7 +81,7 @@ The criticism can be interpreted as applying blockchain did not add significant 
 
 \subsection{Privacy limitation of GNS}
 Authors of the GNS claim that domain resolving process of the GNS is private because ``queries and responses are encrypted \cite{grothoff2017nsa, wachs2014censorship}.''
-However, its confidentiality is vulnerable for `confirmation attack' if ``the adversary knows both the public key of the zone and the specific label \cite{wachs2014censorship}.'' Note that the label refers to an entry in a petname system. 
+However, its confidentiality is vulnerable for `confirmation attack' if ``the adversary knows both the public key of the zone and the specific label \cite{wachs2014censorship}.'' In this context, that the label refers to an entry in a petname system. 
 
 \subsection{Integrity limitations on decentralised approaches}
 Ensuring the integrity of the DNS record is significant, and it is evident from `phishing attacks \cite{ariyapperuma2007security, ollmann2004phishing}'.
@@ -91,7 +91,7 @@ Solutions using DHT in its design may put the system vulnerable to possible Sybi
 Sybil attacks are a type of attack scenario where an attacker `subverts the reputation system by creating a considerable amount of pseudonymous identities \cite{TRIFA20141135}' `in the absence of identification authority \cite{douceur2002sybil}.'
 
 Interventing the malvaceous records are more challenging than the hierarchical structure of the current DNS system in the decentralised design, and this could lead to concerns of enabling phishing attacks.
-Enhancing confidentiality aspects of DNS security is important but it should not compromise the integrity aspect.
+Enhancing the confidentiality aspect of DNS security is essential, but it should not compromise the integrity aspect.
 
 \subsection{Opportunistic security}
 Stenberg, a contributor for client implementation of DNS-over-HTTPS in Firefox, mentioned common Secure-DNS challenges as follows \cite{daniel-doh}: (1) discovery of which recursive resolver to use (2) probing of service (3) opportunistic encryption and (4) blocking force-downgrade.
@@ -101,4 +101,5 @@ Race and shadow mode stands for issuing DNS queries simultaneously on both conve
 In DNS privacy's perspective, these modes are excluded for analysis.
 
 Using TRR first mode attempts to resolve DNS query over DoH and when it fails after pre-set limited of counts, it fallbacks to the conventional DNS resolver.
-At the current stage, a preliminary experiment (described in Appendix \ref{protocol-verification}) showed that a limited amount of DNS query still fallbacks to the conventional resolver, and reveals the website a user intended to visit. 
+At the current stage, a preliminary experiment, which is conducted in Appendix \ref{protocol-verification} showed that a limited amount of DNS query still fallbacks to the conventional resolver, and reveals the website a user intended to visit.
+The actual causes of leading to the query leaks are not dissected at the moment.
