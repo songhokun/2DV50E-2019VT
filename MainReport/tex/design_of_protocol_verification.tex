@@ -38,7 +38,7 @@ When bookmark-method was used, configuration (2) with DoH only resulted in not b
 
 \subsubsection{Firefox's DNS Lookup log}
 While performing the experiments, the DNS related log files from Firefox were collected.
-The log in debug level contained lines of `D/nsHostResolver TRR lookup url.tld' message followed by 'OK' or 'FAILED'.
+The log in debug level contained lines of `D/nsHostResolver TRR lookup url.tld' message followed by `OK' or `FAILED'.
 Of the 638 lines, 407 entries lead to OK, and  231 entries indicated FAILED.
 Approximately 63.79\% of the queries went through DNS-over-HTTPS.
 
@@ -50,7 +50,7 @@ Although Appendix \ref{scriptcode-appendix} discussed the potential usefulness o
 Since additional software is involved for a traffics simulation, there is higher a chance that an error in the automation tool may lead to misleading results, considering that bookmark-visit induced method did not show the same result.
 
 \subsubsection{Bootstrap procedure}\label{bootstrap}
-The reason that `DNS-over-HTTPS only mode' failed to load any website is assumed as the DoH engine failed to initiate the connection to the DoH Server URI of '\url{https://mozilla.cloudflare-dns.com/dns-query}'. It is interpreted as the experiments have not taken into the consideration of setting up the bootstrap procedures.
+The reason that `DNS-over-HTTPS only mode' failed to load any website is assumed as the DoH engine failed to initiate the connection to the DoH Server URI of `\url{https://mozilla.cloudflare-dns.com/dns-query}'. It is interpreted as the experiments have not taken into the consideration of setting up the bootstrap procedures.
 
 \subsubsection{Unexplained causes of DoH query failures}
 There is no clear explanation on the reason of having 36.2\% of queries failed when DNS-over-HTTPS resolver was used.
