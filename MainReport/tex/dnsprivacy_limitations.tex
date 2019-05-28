@@ -24,7 +24,7 @@ The distinction of the two phases is noteworthy, as the current implementations 
 As an example, the majority of the methods do not encrypt communications on Phase 2 (recursive-to-auth link) in contrast to Phase 1 (stub-to-resolver link).
 The fact that an authoritative server having a one-to-many server-client relationship from the recursive resolvers is the major obstacle of applying encryption on Phase 2.
 
-As a further explanation of one-to-many relationship being an obstacle, DoH \cite{rfc8484} and DoT \cite{hu2016specification} use Transport Layer Security (TLS) protocol \cite{rfc7858} for encryption. In the case an authoritative server process multiple TLS session, it is likely to end up exhausting its computational resources \cite{bhople2012server}, similar to a Distributed DoS (DDoS) attack situation. The internet draft ``Next step for DPRIVE: resolver-to-auth link \cite{I-D.bortzmeyer-dprive-step-2}'' discusses the aforementioned challenges.
+As a further explanation of one-to-many relationship being an obstacle, DoH \cite{rfc8484} and DoT \cite{rfc7858} use Transport Layer Security (TLS) protocol \cite{rfc7858} for encryption. In the case an authoritative server process multiple TLS session, it is likely to end up exhausting its computational resources \cite{bhople2012server}, similar to a Distributed DoS (DDoS) attack situation. The internet draft ``Next step for DPRIVE: resolver-to-auth link \cite{I-D.bortzmeyer-dprive-step-2}'' discusses the aforementioned challenges.
 
 Furthermore, authentication mechanisms are missing on Phase 2 \cite{I-D.bortzmeyer-dprive-step-2}, and the lack of authentication of the authoritative server may potentially enable a Man-in-the-middle attack (MITM).
 % There are proposal of utilising TLS 1.3 and 
@@ -78,10 +78,6 @@ The naming hierarchy of the DNS ``ties into systems such as the Public Key Infra
 \subsection{Privacy limitations of Namecoin}
 Preserving user privacy in Namecoin requires ``replication of the full blockchain at the user's end system \cite{grothoff2017nsa}'' and performing such received a criticism that it ``may be impractical for some devices \cite{grothoff2017nsa}.''
 The criticism can be interpreted as applying blockchain did not add significant value, in terms of preserving the privacy of users, as privacy breaches in DNS resolving process could also be addressed if DNS records could be replicated on a client's system even in the existing hierarchical system. 
-
-\subsection{Privacy limitation of GNS}
-Authors of the GNS claim that domain resolving process of the GNS is private because ``queries and responses are encrypted \cite{grothoff2017nsa, wachs2014censorship}.''
-However, its confidentiality is vulnerable for `confirmation attack' if ``the adversary knows both the public key of the zone and the specific label \cite{wachs2014censorship}.'' In this context, that the label refers to an entry in a petname system. 
 
 \subsection{Integrity limitations on decentralised approaches}
 Ensuring the integrity of the DNS record is significant, and it is evident from `phishing attacks \cite{ariyapperuma2007security, ollmann2004phishing}'.

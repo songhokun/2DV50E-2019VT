@@ -84,7 +84,7 @@
 \end{sidebar}
 \vspace{3cm}
 \begin{flushleft}
-    \huge Current milestones of DNS Privacy\\ 
+    \huge Current practices for DNS Privacy\\ 
     \it \LARGE - Protection towards pervasive surveillance 
 \end{flushleft}
 \null
@@ -119,9 +119,9 @@
 %----------------------------------------------------------------------------------------
 \selectlanguage{english}
 \begin{abstract}
-\noindent Current usage of the DNS system is the most significant loophole of Internet users' privacy, as all queries and answers for resolving web address are not protected in most cases.
-The report elaborated which Internet users' privacy interests exist, and presented the current technologies to enhance DNS Privacy through a systematic literature review.
-The report also explored the limitations of the current practices and presented several proposals such as DNS-over-Tor and methods to change the trusted recursive resolver to mitigate current limitations periodically.
+\noindent Current usage of the DNS system is a significant loophole of Internet users' privacy, as all queries and answers for resolving web address are not protected in most cases.
+The report elaborates which Internet users' privacy interests exist, and presents the current technologies to enhance DNS Privacy through a systematic literature review.
+The report also explores the limitations of the current practices and presents several proposals such as DNS-over-Tor and methods to change the trusted recursive resolver to mitigate current limitations periodically.
 %Despite a single solution for addressing privacy risks in all stages of the DNS query process does not exist, the report acquaints several Internet standardisations for DNS privacy that are complementary to the existing DNS system and verifies that implementation of these brings significant enhancement of users' privacy.
 %The report explores existing methods to enhance DNS Privacy and sets up a series of experiments to verify implementations of such methods for privacy enhancement. % Description of problem explored
 \\\\
@@ -130,9 +130,9 @@ The report also explored the limitations of the current practices and presented 
 
 \selectlanguage{swedish}
 \begin{abstract}
-\noindent Den nuvarande användningen av DNS-systemet är det mest signifikanta kryphålet för Internetanvändares integritet, eftersom alla frågor och svar som krävs för att konvertera en webbadress till IP-adress inte skyddas i de flesta fall.
-Rapporten identifierade Internetanvändarnas integritetsintressen och presenterade den nuvarande tekniken som syftar till att förbättra DNS-sekretessen genom en systematisk litteraturgranskning.
-Rapporten undersökte också begränsningarna i den nuvarande praxis och redovisade flera förslag såsom DNS-över-Tor och metoder som möjliggör periodiskt ändring av rekursiva resolvrar, och de metoderna förväntas att minimera integritetsläckor.
+\noindent Den nuvarande användningen av DNS-systemet är ett signifikanta kryphål för internetanvändares integritet, eftersom alla frågor och svar som krävs för att konvertera en webbadress till IP-adress inte skyddas i de flesta fall.
+Rapporten identifierar internetanvändarnas integritetsintressen och presenterar den nuvarande tekniken som syftar till att förbättra DNS-sekretessen genom en systematisk litteraturgranskning.
+Rapporten undersöker också begränsningarna i den nuvarande praxis och redovisar flera förslag såsom DNS-över-Tor och metoder som möjliggör periodiskt ändring av rekursiva resolvrar, och de metoderna förväntas att minimera integritetsläckor.
 \\\\
 \textbf{Nyckelord: DNS, DNS-över-HTTPS, DNS-över-TLS, DNS Sekretess}
 \end{abstract}
@@ -143,8 +143,9 @@ Rapporten undersökte också begränsningarna i den nuvarande praxis och redovis
 \newpage
 \textbf{\large{Preface}}\\
 
-\noindent I express my sincere appreciation of the good diplomatic relations between the Kingdom of Sweden and the Republic of Korea that had facilitated human resource exchange, with their agreement on working holiday programme (SÖ 2010:22), and generosity of Swedish legislation regarding the tuition fee as dictated in Ordinance (2010: 543) 2 \S \ bullet 4.
+\noindent I express my sincere appreciation of the good diplomatic relations between the Kingdom of Sweden and the Republic of Korea that had facilitated human resource exchange, with their agreement on working holiday programme (SÖ 2010:22), and generosity of Swedish legislation regarding the tuition fee as dictated in Ordinance (2010: 543) 2 \S \ sub-section 4.
 These circumstances and help from my beloved parents enabled the financing of the studies.
+
 My gratitude also goes to my manager Patrick and colleagues of UMI team during my time at Ericsson, for having supported me when I decided to finish the degree project.
 I cannot forget mentioning my friends and family members who have been emotionally supporting me throughout the process, especially Fangyan, Fengyuan, Jieun and Suryeon. Furthermore, the office door of my supervisor, Ola, has always been open for discussions, and I acknowledge Ola for having helped me whenever I faced difficulties throughout the project.
 
@@ -180,6 +181,8 @@ As of 2019, there are several studies presented to mitigate privacy issues based
 
 P. Werneck and J.H.C. van Heugten presented surveys of DNS privacy-enhancing methods. P. Werneck evaluated approaches to improve the privacy of DNS and stated the limitations of identified approaches \cite{werneck2014dns} in 2014. J. Heugten evaluated existing solutions to enhance DNS Privacy in 2018 in his study \cite{van2018privacy}. As standardisation of DNS-over-HTTPS is recently finalised \cite{rfc8484}, a study from van Heugten reflects more recent changes.
 
+While the current report attempted to describe privacy infringements situations related to the DNS operations in scenarios, the threat model of Pervasive surveillance as a whole is elaborated in RFC 7624 \cite{rfc7624}.
+
 \subsection{Problem formulation}\label{problemformulation}
 Currently, almost all DNS traffic is sent in clear text \cite{rfc7626} over the UDP protocol \cite{tcp2014analysis}, and it makes DNS queries vulnerable to being hijacked or used to filter users' traffic.
 All participants of the DNS query process, as illustrated in Figure \ref{queryprocess}, transmit messages intensively, and these are in plaintext.
@@ -191,7 +194,7 @@ The following research questions are formulated, having regards to the privacy b
 
 \begin{table}[h!]
     \begin{tabular} {|p{1.2cm}|p{12.8cm}|} \hline
-        \textbf{RQ1} & Which benefits would DNS Privacy bring to different actors? \\ \hline
+        \textbf{RQ1} & Which benefits and possible disadvantages would DNS Privacy bring to different actors? \\ \hline
         \textbf{RQ2} & Which are the areas that the existing DNS Privacy enhancement methods could not address? \\ \hline
         \textbf{RQ3} & Which combination of technologies would be suitable to address the current limitations?\\ \hline
     \end{tabular}
@@ -239,6 +242,12 @@ However, it is anticipated that readers comprehend Internet protocol suite such 
 \subsection{Outline}
 The majority of scientific reports follow in Introduction, Methods, Results, Analysis and Discussion(IMRaD) pattern.
 This report is also in line with the IMRaD pattern. After the method chapter, four chapters follow, and each chapter presents the result of each objective incrementally. In other words, Chapter \ref{scenariosresult} presents the result of O1, Chapter \ref{surveyresults} presents O2 and it follows up to Chapter \ref{alternativeresult} which describes the result of the last objective, O4.
+Afterwards, the discussion chapter follows where relevant ethical discussions and consequences of DNS Privacy can be found. In the last, the conclusion chapter summaries the discussions and results of all research questions to which the thesis answered.
+
+There are two appendixes in this report.
+Appendix \ref{scriptcode-appendix} introduces a python script that can be used in the future studies, and Appendix \ref{protocol-verification} presented a controlled experiment conducted during the project to acquaints with one of DNS Privacy enhancing method.
+The conducted experiment, however, does not provide an answer to the objectives set in the study; it provides a reference to one of arguments.
+Therefore, the experiment is presented in the appendix for providing an angle in discussing the limitations of the current practice.
 
 \newpage
 \section{Method}\label{Method}
@@ -268,13 +277,12 @@ This report is also in line with the IMRaD pattern. After the method chapter, fo
 \section{Conclusion}
 The report presented an overview of privacy breaching scenarios of different end-user types.
 While the majority of privacy literature focuses on the impact on individuals, the paper has attempted to represent organisational interests.
-
 In addition to the investigation of different end-users' privacy interests, the report also presented a systematic survey of DNS Privacy enhancing techniques.
-
 The report presented the limitations of the current DNS privacy technologies and explored the alternative approaches to overcome the limitations from the current techniques, which was to use Tor and to change a trusted recursive resolver frequently.
-
 The end-users, whose interests are analysed in the report, could refer to the report to meet their interests.
 The approach used in the analysis could be referred to in examining other emerging innovations in DNS Privacy. 
+
+As of the conclusion of the report's investigations on privacy impacts on different user groups and circumventions of the DNS Privacy technologies, the report recommends the following practices. Private individuals could utilise already standardised techniques of DNS-over-HTTPS and DNS-over-TLS, but changing the trusted recursive resolver over an arbitrary interval is recommended. Corporates or organisations could benefit from utilising already-available QNAME minimisation in its DNS recursive resolver but could consider using DNS-over-Tor as presented in the report. For addressing the privacy infringement scenarios, organisations could configure their managed devices to forward all DNS queries over their trusted recursive resolver for avoiding identity leaks.
 
 \subsection{Scientific contribution}
 Although there exist other studies of a thorough investigation of DNS Privacy techniques, this report distinct by being transparent of the survey method and having provided approaches to categorise the DNS Privacy methods.
@@ -307,7 +315,7 @@ More specifically, future studies could explore the correlation of the privacy c
 \setcounter{page}{1} % Reset page numbering for Appendix
 \appendix
 
-\section{Appendix 1}\label{scriptcode-appendix}
+\section{Appendix: Test script for validating DNS Privacy}\label{scriptcode-appendix}
 The section presents a set of Python script that can potentially be used in verifying the proof of concept presented in this study.
 Sections follow with the code for processing a web site list, script to simulate the web traffic and the common base code for the above functions to work.
 Analysing and capturing the generated web traffic is not in the scope of the section.
@@ -328,6 +336,6 @@ Below is code for util.py which is a common base script.
 \inputpython{../Selenium/util.py}{1}{110}
 \newpage
 
-\section{Appendix 2}\label{protocol-verification}
+\section{Appendix: Experiment of DNS-over-HTTPS}\label{protocol-verification}
 \input{tex/design_of_protocol_verification.tex}
 \end{document}
