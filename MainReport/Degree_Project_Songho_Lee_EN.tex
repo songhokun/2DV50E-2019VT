@@ -130,7 +130,7 @@ The report also explores the limitations of the current practices and presents s
 
 \selectlanguage{swedish}
 \begin{abstract}
-\noindent Den nuvarande användningen av DNS-systemet är ett signifikanta kryphål för internetanvändares integritet, eftersom alla frågor och svar som krävs för att konvertera en webbadress till IP-adress inte skyddas i de flesta fall.
+\noindent Den nuvarande användningen av DNS-systemet är ett signifikant kryphål för internetanvändares integritet, eftersom alla frågor och svar som krävs för att konvertera en webbadress till IP-adress inte skyddas i de flesta fall.
 Rapporten identifierar internetanvändarnas integritetsintressen och presenterar den nuvarande tekniken som syftar till att förbättra DNS-sekretessen genom en systematisk litteraturgranskning.
 Rapporten undersöker också begränsningarna i den nuvarande praxis och redovisar flera förslag såsom DNS-över-Tor och metoder som möjliggör periodiskt ändring av rekursiva resolvrar, och de metoderna förväntas att minimera integritetsläckor.
 \\\\
@@ -163,14 +163,14 @@ I cannot forget mentioning my friends and family members who have been emotional
 %----------------------------------------------------------------------------------------
 
 \section{Introduction}
-This chapter describes what Doname Name System (DNS) is, and how the legacy design of DNS has become a privacy threat. Before discussing the privacy risks of DNS, the background section introduces relevant structure and mechanisms. Knowledgable readers in DNS and Client subnet function may go to section \ref{problemformulation}.
+This chapter describes what Domain Name System (DNS) is, and how the legacy design of DNS has become a privacy threat. Before discussing the privacy risks of DNS, the background section introduces relevant structure and mechanisms. Knowledgable readers in DNS and Client subnet function may go to section \ref{problemformulation}.
 
 \subsection{Background}
 Digital transformation has brought things used to be done in real life decades ago to the online. At work, people have a video conference call instead of a business trip if not necessary. For shopping goods, people fill in credit card numbers for cross-border payments rather than visiting a bank branch to issue paychecks. In other words, the stage where people work now has been shifted to cyberspace in recent decades, and the Internet has become an essential part of everyday life.
 
 Despite the ubiquitousness of the Internet, users' activities online are collected under pervasive monitoring by different actors.
 Pervasive monitoring means ``widespread attack on privacy \cite{rfc7258}.'' Information collected in such action could lead to a breach of users’ privacy, by re-identifying users based on traffic \cite{herrmann2010analyzing}, or could become aids for launching an active form of attacks, such as masquerade and Denial of Service (DoS).
-Unfortunately, the insecure architecture of Domain Name System allows the pervasive monitoring, and thus it should be mitigated.
+Unfortunately, the unsecure architecture of Domain Name System allows pervasive monitoring, and thus it should be mitigated.
 Before discussing the privacy problems of the DNS, DNS and its components are introduced, since these are important to address.
 
 \input{tex/introduction_of_dns.tex}
@@ -179,9 +179,9 @@ Before discussing the privacy problems of the DNS, DNS and its components are in
 The project accredits pioneer research of ``DNS Privacy Considerations (RFC 7626) \cite{rfc7626}'' which has provided theoretical foundations in analysis of DNS privacy. 
 As of 2019, there are several studies presented to mitigate privacy issues based on the analysis. These studies are later presented in Chapter \ref{surveyresults}.
 
-P. Werneck and J.H.C. van Heugten presented surveys of DNS privacy-enhancing methods. P. Werneck evaluated approaches to improve the privacy of DNS and stated the limitations of identified approaches \cite{werneck2014dns} in 2014. J. Heugten evaluated existing solutions to enhance DNS Privacy in 2018 in his study \cite{van2018privacy}. As standardisation of DNS-over-HTTPS is recently finalised \cite{rfc8484}, a study from van Heugten reflects more recent changes.
+P. Werneck and J.H.C. van Heugten presented surveys of DNS privacy-enhancing methods. P. Werneck evaluated approaches to improve the privacy of DNS and stated the limitations of identified approaches \cite{werneck2014dns} in 2014. J. Heugten evaluated existing solutions to enhance DNS Privacy in 2018 in his study \cite{van2018privacy}. As standardisation of DNS-over-HTTPS is recently finalised \cite{rfc8484}, a study from J. Heugten reflects more recent changes.
 
-While the current report attempted to describe privacy infringements situations related to the DNS operations in scenarios, the threat model of Pervasive surveillance as a whole is elaborated in RFC 7624 \cite{rfc7624}.
+While the current report attempted to describe privacy infringements situations related to the DNS operations in scenarios, the threat model of Pervasive surveillance as a whole is elaborated on in RFC 7624 \cite{rfc7624}.
 
 \subsection{Problem formulation}\label{problemformulation}
 Currently, almost all DNS traffic is sent in clear text \cite{rfc7626} over the UDP protocol \cite{tcp2014analysis}, and it makes DNS queries vulnerable to being hijacked or used to filter users' traffic.
@@ -246,7 +246,7 @@ Afterwards, the discussion chapter follows where relevant ethical discussions an
 
 There are two appendixes in this report.
 Appendix \ref{scriptcode-appendix} introduces a python script that can be used in the future studies, and Appendix \ref{protocol-verification} presented a controlled experiment conducted during the project to acquaints with one of DNS Privacy enhancing method.
-The conducted experiment, however, does not provide an answer to the objectives set in the study; it provides a reference to one of arguments.
+The conducted experiment, however, does not provide an answer to the objectives set in the study; it provides a reference to one of the arguments.
 Therefore, the experiment is presented in the appendix for providing an angle in discussing the limitations of the current practice.
 
 \newpage
@@ -275,25 +275,25 @@ Therefore, the experiment is presented in the appendix for providing an angle in
 \newpage
 
 \section{Conclusion}
-The report presented an overview of privacy breaching scenarios of different end-user types.
-While the majority of privacy literature focuses on the impact on individuals, the paper has attempted to represent organisational interests.
-In addition to the investigation of different end-users' privacy interests, the report also presented a systematic survey of DNS Privacy enhancing techniques.
-The report presented the limitations of the current DNS privacy technologies and explored the alternative approaches to overcome the limitations from the current techniques, which was to use Tor and to change a trusted recursive resolver frequently.
-The end-users, whose interests are analysed in the report, could refer to the report to meet their interests.
-The approach used in the analysis could be referred to in examining other emerging innovations in DNS Privacy. 
+As its first research question, the study aimed to explore the benefits and disadvantages of DNS privacy to different actors. The study demonstrated harms caused by lack of DNS privacy both on the individual level and organisational level. Consequently, identifying privacy threats showed the benefits of having DNS Privacy. However, the disadvantage of DNS Privacy has not been found sufficiently.
 
-As of the conclusion of the report's investigations on privacy impacts on different user groups and circumventions of the DNS Privacy technologies, the report recommends the following practices. Private individuals could utilise already standardised techniques of DNS-over-HTTPS and DNS-over-TLS, but changing the trusted recursive resolver over an arbitrary interval is recommended. Corporates or organisations could benefit from utilising already-available QNAME minimisation in its DNS recursive resolver but could consider using DNS-over-Tor as presented in the report. For addressing the privacy infringement scenarios, organisations could configure their managed devices to forward all DNS queries over their trusted recursive resolver for avoiding identity leaks.
+For the second research question of identifying areas that the existing DNS Privacy enhancement methods could not address, the study demonstrated the limitations of DNS Privacy technologies based on the categorisation the study made. Channel encipher methods were not sufficient on Phase 2, and information redaction approaches raised availability concern while proposing architecture change of DNS showed integrity issue. 
+
+As of answering the last research question, which is to identify a suitable combination of technologies to overcome the limitations, the study evaluated using Tor and potential usage of ongoing DHCP standardisation for frequently changing trusted recursive resolver.
+The end-users, whose interests are analysed in the report, could refer to the report to meet their interests, and the approach used in the analysis could be referred to in examining other emerging innovations in DNS Privacy. 
+
+As for the conclusion of the report's investigations on privacy impacts on different user groups and circumventions of the DNS Privacy technologies, the report recommends the following practices. Private individuals could utilise already standardised techniques of DNS-over-HTTPS and DNS-over-TLS, but changing the trusted recursive resolver over an arbitrary interval is recommended. Corporates or organisations could benefit from utilising already-available QNAME minimisation in its DNS recursive resolver but could consider using DNS-over-Tor as presented in the report. For addressing the privacy infringement scenarios, organisations could configure their managed devices to forward all DNS queries over their trusted recursive resolver for avoiding identity leaks.
 
 \subsection{Scientific contribution}
-Although there exist other studies of a thorough investigation of DNS Privacy techniques, this report distinct by being transparent of the survey method and having provided approaches to categorise the DNS Privacy methods.
+Although there exist other studies of DNS Privacy techniques, this report distinguishes itself by being transparent of the survey method and having provided approaches to categorise the DNS Privacy methods.
 
 \subsection{Current milestone}
 The report presented the status of client implementations of different DNS Privacy techniques and progress on the internet standardisations.
 Although certain limitations of DNS Privacy methods exist as presented earlier, there is no doubt that DNS Privacy is cruising.
 
 \subsection{Future work}
-Due to the limitation of the time, the proof of concept proposal made in this study has not thoroughly examined.
-The actual implementation of the proposal, especially DNS-over-Tor on Phase 2 and examining privacy contribution of using multiple trusted resolver can be done as future studies.
+Due to the limitation of the time, the proof of concept proposal made in this study has not been thoroughly examined.
+The actual implementation of the proposal, especially DNS-over-Tor in Phase 2 and examining privacy contribution of using multiple trusted resolver can be done as future studies.
 More specifically, future studies could explore the correlation of the privacy contributions and having different intervals for configuring Secure DNS servers (Trusted Recursive Resolvers).
 \newpage
 

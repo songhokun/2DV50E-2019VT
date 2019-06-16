@@ -1,4 +1,4 @@
-The project intensively examined securing Domain Name queries as a method of enhancing end-users' privacy towards pervasive monitoring and presented sections for answering the defined objectives. In this chapter, arguments on the current direction of DNS Privacy methods developments are introduced. Arguments of whether it is ethical to empower DNS Privacy also follows.
+The project examined securing Domain Name queries as a method of enhancing end-users' privacy towards pervasive monitoring and presented sections for answering the defined objectives. In this chapter, arguments on the current direction of DNS Privacy methods developments are introduced. Arguments of whether it is ethical to empower DNS Privacy also follows.
 
 \subsection{Privacy leaking components apart from the DNS}
 A question may arise why it mainly focuses on securing DNS, although there exist other factors which disclose users' privacy.
@@ -6,7 +6,7 @@ Mechanisms of a web filter are examined to answer the question, as it is a commo
 
 Web filter, also known as content-control software, is software that restricts access to a content that is delivered on the Web.
 Wazen et. al categorise mechanisms of legacy web-filtering into five techniques: (a) Port-based, (b) DNS, (c) IP Address, (d) Certificate, (e) Payload-based (f) HTTP proxy filtering techniques \cite{shbair2015efficiently}.
-Except for the technique based on DNS filtering, the rest methods are regarded as well-mitigated due to recent developments of the web environment. 
+Except for the technique based on DNS filtering, the other methods are regarded as well-mitigated due to recent developments of the web environment. 
 
 Among the various types of filtering techniques mentioned above, methods (a) and (c) are considered less efficient due to changes in the Internet ecosystem in recent decennial;
 Internet firms such as Google, Facebook and Amazon show strong presence \cite{haucap2014google}, and the phenomenon may have reduced the diversity of traffic endpoint's IP addresses.
@@ -21,8 +21,8 @@ Furthermore, the combination of wide deployment of HTTPS and Virtual Hosting has
 However, the trend change of Internet has not brought additional challenges to Domain Name System (DNS) filtering. Therefore, the project studies to remedy the weakest point towards users' privacy, which in this case, is DNS.
 
 \subsection{DNS Privacy - possible aids for the criminals}
-At the beginning of the report, the thesis motivated that securing DNS in its architecture is necessary, as the vulnerability cannot only be exploited by the right hand but could also be misused by a malevolent party.
-It is feasible that the perpetrators may use DNS Privacy enhancement methods to hide their activities, and DNS Privacy is in good practice that makes it difficult for investigators to eavesdrop the queries.
+At the beginning of the report, the thesis motivated that securing architecture of DNS is necessary, as the vulnerability cannot only be exploited by the right hand but could also be misused by a malevolent party.
+It is feasible that the perpetrators may use DNS Privacy enhancement methods to hide their activities, and DNS Privacy is in good practice that makes it difficult for investigators to eavesdrop on queries.
 
 In the U.S. or common law jurisdictions, hindering lawful enforcement may be seen as ``Obstruction of justice''.
 In this perspective, hiding DNS query by means of encryptions could be questioned whether such behaviour is \textit{concealing} or \textit{covering up} with the intent to \textit{impede} or \textit{obstruct} the investigation or proper administration as 18 U.S. Code \S 1591 states \cite{Obstructionofjustice}.
@@ -68,7 +68,7 @@ However, it is an ongoing debate of whether the truncated IP address itself shou
 Clent's IP address has a potential to be privacy harm, but main factors that contribute to the privacy infringement may be associated with the distinctness (uniqueness) of the address and whether the IP can be linked with other identifiers.
 
 \subsection{QNAME minimisation}
-Software BIND, the most commonly deployed software for DNS servers, supports QNAME minimisation by default from version 9.14.0 \cite{bind9qname}.
+BIND, the most commonly deployed software for DNS servers, supports QNAME minimisation by default from version 9.14.0 \cite{bind9qname}.
 It is a significant achievement of DNS Privacy field, considering the market dominance of the BIND. Since the technology is enabled by default upon the updates, deploying the privacy technique is seen as ease for the recursive DNS server administrators.
 
 When it comes to choosing which DNS recursive resolver server to use, DNS server operators and literature on DNS Privacy often recommend examining whether the server does not support ECS or not. Since the implementation of QNAME minimisation is officially in place, examining whether an arbitrary DNS Recursive resolver supports QNAME minimisation or not could also be a parameter to consider in choosing the TRR.

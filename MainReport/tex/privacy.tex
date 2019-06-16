@@ -1,16 +1,16 @@
-Privacy is seen as having an access control in confidentiality in a security domain.
-In everyday language, Privacy means ``the right to control who knows certain things about you \cite{securityincomputing}''.
-Pfleeger introduces three aspects of Information security: sensitive data, affected parties, and controlled disclosure.
+Privacy means having an access control of confidentiality.
+In everyday language, Privacy means ``the right to control who knows certain things about you'', according to Pfleeger \cite{securityincomputing}.
+He introduces three aspects of Information security: affected parties, sensitive data and controlled disclosure.
 Privacy issues related to the DNS on different subjects are analysed in this chapter.
 
 \subsection{Affected subjects}
 The subjects were classified as private persons, and organisations. Organisations were further divided into large organisations that operate their directory server with DNS, and the smaller organisations that do not operate DNS resolvers in its network.
 
 \subsection{Sensitive information}\label{sensitiveinformation}
-Defining what sensitive information is in a subjective area.
-Therefore, sensitiveness of the information cannot be measured on an absolute scale. However, several common areas of sensitive information follow.
+Defining the extent of what information should be considered as sensitive is in a subjective area, and the sensitivity of the information cannot be measured on an absolute scale.
+However, several common areas of sensitive information follow.
 
-For natural persons, EU has defined sensitive information as the following: personal data revealing ``(1) ethnic origin, religious or philosophical beliefs, (2) trade-union membership, (3) health-related data, and (4) data concerning a person's sex life \cite{GDPR}''.
+For natural persons, EU \cite{GDPR} has defined sensitive information as the following: personal data revealing ``(1) ethnic origin, religious or philosophical beliefs, (2) trade-union membership, (3) health-related data, and (4) data concerning a person's sex life.''
 
 For organisations, of their information, assets, especially copyright (expression of the idea), trade secret, and privileged information are examples of sensitive information \cite{securityincomputing}.
 
@@ -33,7 +33,7 @@ The following sections demonstrate how DNS reveals sensitive information about t
 \end{figure}
 
 \subsubsection{Metadata in DNS query}\label{dnsmetadata}
-Figure \ref{privacyobject} identified relevant metadata created on DNS transaction.
+Figure \ref{privacyobject} identifies relevant metadata created on DNS transaction.
 The metadata created when looking up DNS record includes Query Name (QNAME or Request Name), Query type and client's IP address.
 Contrary to the belief that metadata has only minimal information, the client IP address can be linked with WHOIS \cite{whois-icann}. Furthermore, geographical information of the client and affiliate of the organisation can be derived.
 
@@ -49,10 +49,10 @@ In such case, when a person visits such website, it may provide sufficient signa
 
 An employee visiting a certain trade-union's website frequently in a corporative network may indicate to an IT-department that either the person is a member of the union or has a sympathy with the organisation. 
 
-Observing DNS query enabled deriving health-condition of a user. If a chronic disease patient bears a smart sensor (such as Continuous Glucose Monitoring) that securely sends the measurement data to medical institutes \cite{carelink-uploading, medtronic-watson}, observing her DNS traffics may infer his health condition.
+Observing DNS query enabled deriving health-condition of a user. If a chronic disease patient bears a smart sensor (such as Continuous Glucose Monitoring) that securely sends the measurement data to medical institutes \cite{carelink-uploading, medtronic-watson}, observing her DNS traffics may infer her health condition.
 If someone actively visits several clinics that specialise in a particular disease and relevant medical insurance company's website, accompanied DNS queries provide meaningful insight into the person's health status.
 
-DNS queries related to online dating sites could also be observed. However, there has not found any evidence of potential sexual activity of individuals based on the frequency of the visit, without considering its sociosexuality \cite{sevi2018exploring}. 
+DNS queries related to online dating sites could also be observed. However, there has no evidence has been found of potential sexual activity of individuals based on the frequency of the visit, without considering its sociosexuality \cite{sevi2018exploring}. 
 Although the sexual activity cannot be derived, the sexual orientation of individuals could be induced in case the queried address is mainly visited among sexual minorities such as Grindr - the gay dating app \cite{goedel2015geosocial}.
 
 \subsubsection{Impact on corporates/organisations}

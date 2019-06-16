@@ -6,7 +6,7 @@ DNS servers consist of four types: Stub resolver, Recursive resolver, Authoritat
 
 Stub resolver is a resolver that serves as an entry-point of querying DNS from applications and directs search request to the nearest recursive resolver \cite{rfc1123}. As it cannot complete domain name resolution by itself, stub resolver is dependant on a recursive resolver \cite{rfc8499}.
 
-The recursive resolver is a server which receives a DNS query from a stub resolver and gets the final answer to the query, by (1) answering from its local cache or (2) sending queries to other DNS servers \cite{rfc8499}. After a recursive resolver has sent a query request to other authoritative name servers, it is expected for the resolver to store the answer as a \textbf{local cache}. It is the first server in DNS query flow that contacts other servers to get the answer for the client. 
+The recursive resolver is a server which receives a DNS query from a stub resolver and gets the final answer to the query, by (1) answering from its \textbf{local cache} or (2) sending queries to other DNS servers \cite{rfc8499}. After a recursive resolver has sent a query request to other authoritative name servers, it is expected for the resolver to store the answer in a local cache. It is the first server in DNS query flow that contacts other servers to get the answer for the client. 
 
 Authoritative (name) server is a server that has ``authority over one or more DNS zones \cite{rfc8499}'' and ``can answer queries without needing to query on other servers as it knows the content of the queried DNS zone by local knowledge \cite{rfc2182}.''
 
@@ -26,11 +26,11 @@ In the diagram, steps two and three returns top-level-domain(TLD) from the root 
 \subsubsection{EDNS(0) and Client Subnet}
 The extension mechanisms for DNS (EDNS) is specified in RFC 6891.
 EDNS allows both DNS servers and the client to send ``larger DNS packet than the original 512 octet limit \cite{rfc6891}'' so that it benefits of utilising larger size.
-It makes sending long IPv6 address and possible DNSSEC signatures.
+It makes sending long IPv6 address and possible Domain Name System Security Extensions (DNSSEC) signatures.
 As of February 2019, major DNS resolver operators requires authoritative servers to support EDNS \cite{dns-flag-day, spacek-edns-camel-diet}. 
 
 EDNS(0) provides several options, and one of the options is Client Subnet(ECS) feature, as described in RFC 7831 \cite{rfc7871}. When ECS is used, recursive DNS servers provide a truncated client IP address in its DNS queries to the upstream authorities to permit ``topologically localised answers for Content Delivery Networks (CDN) \cite{kintis2016understanding}''.
 
 \subsubsection{CIA-triad}
-In information security discussions, threat mitigations of a system are analysed in three perspectives: confidentiality, availability and integrity. These properties as a group are denoted as CIA triad or the security triad.
-Achieving every aspect of CIA-triad often are not feasible, as enhancing one dimension may interfere with the other dimensions \cite{securityincomputing}.
+In information security discussions, threat mitigations of a system are analysed from three perspectives: confidentiality, integrity and availability. These properties as a group are denoted as CIA triad or the security triad.
+Achieving every aspect of CIA-triad often is not feasible, as enhancing one dimension may interfere with the other dimensions \cite{securityincomputing}.

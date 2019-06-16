@@ -1,9 +1,9 @@
-This section provides limitations of the DNS privacy-enhancing methods presented in the previous chapter.
+This section discusses limitations of the DNS privacy-enhancing methods presented in the previous chapter.
 The investigations of the limitations are presented in the same order as the previous categorisation. In the first section, the limitations of channel encipherment are introduced.
 Afterwards, the focus shifts to information redactions and proposals for structural shifts.
 
 \subsection{Risk areas of DNS Privacy}
-DNS Privacy methods could further be analysed based on the which privacy risk these address. S. Bortzmeyer identified risk area of DNS privacy in RFC 7626 as the followings \cite{rfc7626}: 
+DNS Privacy methods could further be analysed based on which privacy risk they address. S. Bortzmeyer identified risk area of DNS privacy in RFC 7626 as the following \cite{rfc7626}: 
 \begin{enumerate}
     \item Data in the DNS request
     \item On the wire
@@ -14,15 +14,16 @@ DNS Privacy methods could further be analysed based on the which privacy risk th
 \subsection{Two phases of DNS Query process}
 For the conciseness of further analysis, the communication channel (transport channel) of DNS are abstracted into two phases or paths based on the DNS Query process.
 
-\textbf{Phase 1} refers to step 1 and 10 of Figure \ref{queryprocess}. These two steps are performed in the DNS Query process when stub resolver queries a domain name to the recursive resolver and the recursive resolver replies to the stub resolver.
-Channel-wise, it is denoted as a \textbf{stub-to-resolver link}.
+Phase 1 refers to steps 1 and 10 of Figure \ref{queryprocess}. These two steps are performed in the DNS Query process when stub resolver queries a domain name to the recursive resolver and the recursive resolver replies to the stub resolver.
+Phase 1 is also denoted as a stub-to-resolver link.
 
-\textbf{Phase 2} refers to the steps in Figure \ref{queryprocess}, where a recursive resolver finds the final answer to the queried address, by recursively reaching to concerning authoritative servers. In other words, the channel that the rest of the steps is performed is called \textbf{recursive-to-auth link}.
+Phase 2 refers to steps 2 to 9 in Figure \ref{queryprocess}, where a recursive resolver finds the final answer to the queried address, by recursively reaching to concerning authoritative servers.
+In other words, Phase 2 is called recursive-to-auth link.
 
 \subsubsection{Insufficient measurements on recursive-to-auth link}\label{recursive-auth-limitations}
 The distinction of the two phases is noteworthy, as the current implementations that preserve DNS hierarchical structure do not secure all communication paths towards all involved parties of the DNS resolving.
 As an example, the majority of the methods do not encrypt communications on Phase 2 (recursive-to-auth link) in contrast to Phase 1 (stub-to-resolver link).
-The fact that an authoritative server having a one-to-many server-client relationship from the recursive resolvers is the major obstacle of applying encryption on Phase 2.
+The fact that an authoritative server is having a one-to-many server-client relationship from the recursive resolvers is the major obstacle of applying encryption on Phase 2.
 
 As a further explanation of one-to-many relationship being an obstacle, DoH \cite{rfc8484} and DoT \cite{rfc7858} use Transport Layer Security (TLS) protocol \cite{rfc7858} for encryption. In the case an authoritative server process multiple TLS session, it is likely to end up exhausting its computational resources \cite{bhople2012server}, similar to a Distributed DoS (DDoS) attack situation. The internet draft ``Next step for DPRIVE: resolver-to-auth link \cite{I-D.bortzmeyer-dprive-step-2}'' discusses the aforementioned challenges.
 
@@ -69,15 +70,15 @@ Figure \ref{dnsactors}, which is presented by SUNET \cite{SUNET-DNS}, illustrate
 \end{figure}
 
 In the figure, sections are vertically divided.
-The figure in the first column represents organisations or individuals that desire to acquire a new domain name.
-The third column of the figure demonstrates administrators of delegation on each autonomous domain hierarchy.
+The first column represents organisations or individuals that desire to acquire a new domain name.
+The third column demonstrates administrators of delegation on each autonomous domain hierarchy.
 Legacy of the system is often neglected in attempts of securing the domain name resolution process, which is presented in green colour in the figure. 
 
 The naming hierarchy of the DNS ``ties into systems such as the Public Key Infrastructure (PKI) \cite{akamai-dns-architecture}'', and architecture of decentralised DNS, such as NameCoin \cite{loibl2014namecoin}, may not have considered the PKI structure in its design.
 
 \subsection{Privacy limitations of Namecoin}
-Preserving user privacy in Namecoin requires ``replication of the full blockchain at the user's end system \cite{grothoff2017nsa}'' and performing such received a criticism that it ``may be impractical for some devices \cite{grothoff2017nsa}.''
-The criticism can be interpreted as applying blockchain did not add significant value, in terms of preserving the privacy of users, as privacy breaches in DNS resolving process could also be addressed if DNS records could be replicated on a client's system even in the existing hierarchical system. 
+Preserving user privacy in Namecoin requires ``replication of the full blockchain at the user's end system \cite{grothoff2017nsa}'' and performing such received criticism that it ``may be impractical for some devices \cite{grothoff2017nsa}.''
+The criticism can be interpreted as applying blockchain does not add significant value, in terms of preserving the privacy of users, as privacy breaches in DNS resolving process could also be addressed if DNS records could be replicated on a client's system even in the existing hierarchical system. 
 
 \subsection{Integrity limitations on decentralised approaches}
 Ensuring the integrity of the DNS record is significant, and it is evident from `phishing attacks \cite{ariyapperuma2007security, ollmann2004phishing}'.

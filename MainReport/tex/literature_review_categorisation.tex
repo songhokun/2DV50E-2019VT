@@ -55,10 +55,10 @@ Figure \ref{odnsoverview} presents an overview of the ODNS, and the illustration
 
 \subsection{Architectural shift}
 %In the previous section, securing recursive-to-auth link is seen challenging due to the hierarchical structure of the DNS.
-Studies that aimed towards decentralised had peer-to-peer (P2P) implementation, and the examples of such solution were Namecoin and GNU Name System (GNS).
+Studies that aimed towards decentralised DNS system utilised peer-to-peer (P2P) implementation, and the examples of such solution were Namecoin and GNU Name System (GNS).
 
 \textit{Namecoin} \cite{loibl2014namecoin} is described as ``timeline-based system that relies on a P2P network to manage updates and store the timeline \cite{grothoff2017nsa}'', and it settles down any commits related on `key-value mapping' by transactions that are published in an append-only hash chain (a.k.a. blockchain) \cite{kalodner2015empirical}.
 
-\textit{GNU Name system (GNS)} \cite{grothoff2017nsa, wachs2014censorship} is `privacy-preserving' domain name lookup system which takes a radical deviation from the conventional domain resolvers, by utilising P2P network and Distributed Hash Table (DHT).
+\textit{GNS} \cite{grothoff2017nsa, wachs2014censorship} is `privacy-preserving' domain name lookup system which takes a radical deviation from the conventional domain resolvers, by utilising P2P network and Distributed Hash Table (DHT).
 DHT provides ``support for an operation: given a key, it maps the key onto a node \cite{stoica2001chord}'', such property is used in GNS domain lookup (resolving) process. 
-In other words, GNS utilise ``distributed storage of DNS records in P2P overlay networks \cite{wachs2014censorship}''. In addition to the DHT, GNS is built upon a petname system \cite{stiegler2005introduction} and utilise Simple Distributed Security Infrastructure (SDSI).
+In other words, GNS utilises ``distributed storage of DNS records in P2P overlay networks \cite{wachs2014censorship}''. In addition to the DHT, GNS is built upon a petname system \cite{stiegler2005introduction} and utilise Simple Distributed Security Infrastructure (SDSI).

@@ -2,7 +2,7 @@ This section provides the result of evaluating a possible mitigate option of ove
 DNS Privacy methods that require architectural shift was excluded in the evaluation.
 %Evaluations are made on the solutions that their server and client implementations ready to be used.
 
-Van Heutgen evaluated the combination of using different DNS Privacy techniques in his study \cite{van2018privacy}.
+J. Heugten evaluated the combination of using different DNS Privacy techniques in his study \cite{van2018privacy}.
 The combinations were a group of channel-enciphering technologies (e.g. DNSCrypt, DoH, and DoT) and QNAME minimisation.
 The evaluations of attack surface were introduced based on the location of recursive resolvers: using local recursive resolver, private-remote recursive resolver and the public resolver.
 
@@ -10,7 +10,7 @@ The collective result of his evaluation showed that ``Eavesdroppers who are clos
 If the cache of the remote-private recursive resolver were not shared among multiple-users, privacy would decrease since the permanent IP address of the remote resolver would be linked to an individual user.
 
 \subsection{Use of Traffic anonymisation}
-Apart from van Heutgen’s evaluation, this report further examined the possible combination of using traffic anonymisation techniques and Tor and the combinations as mentioned earlier.
+Apart from J. Heugten’s evaluation, this report further examined the possible combination of using traffic anonymisation techniques and Tor and the combinations as mentioned earlier.
 Traffic anonymisation technologies on recursive-to auth link can be applied to circumvent the limitations of channel encryption methods, and examples of such technology are \textit{FreeNet} \cite{clarke2001freenet}, \textit{GNUNet} \cite{grothoff2017gnunet} and \textit{Tor} \cite{dingledine2004tor}.
 
 Tor, the `low-latency' traffic anonymisation tool, encrypts the traffic using multiple envelops and relays the encrypted traffic over three nodes and forwards it to one if its exit nodes.
@@ -23,11 +23,11 @@ DNS could also be sent over TCP connection but sending over TCP occurs at limite
 
 \subsubsection{Variation of latency}
 Tor employs a two-hop circuit of onion relay servers to increase anonymity of TCP connections between a user and the exit node.
-There are several algorithms for selecting relay servers, and Tor by default gives higher weights to relay servers, which are `more longstanding routers and provides higher bandwidth \cite{wacek2013empirical}'.
-Since the choice of the relay servers is made using the criteria as mentioned above, it may result in that relay servers are chosen without geographical relevance.
+There are several algorithms for selecting relay servers, but by default, Tor gives higher weights to relay servers, which are ``more longstanding routers and providing higher bandwidth \cite{wacek2013empirical}.''
+Since the choice of the relay servers is made using the criteria mentioned above, it may result in that relay servers are chosen without geographical relevance.
 Due to the limitation of the physical medium of communication-link \cite{Singla:2014:ISL}, once relay server of a different continent are selected, it results in having higher latency compared to not using the Tor.
 The fact that the choice of relay servers differ on each circuit results in latency variation. In addition to this, ``load-induced queueing contributes significantly to the overall latency variation \cite{Hoiland-Jorgensen:2016}'', and considering that Tor's exit-node process multiple requests, the could be possible bandwidth limitations that result in queueing.
-Thus, Applying Tor is considered as latency-expensive.
+Thus, applying Tor is considered as latency-expensive.
 
 \subsubsection{Tor on DNS Query Phase 1}
 There exist DNS Privacy methods with channel encryption. Despite this, if Tor is chosen to be used in Phase 1, it is regarded as the recursive resolver is not trusted for the risks in the servers.
@@ -46,13 +46,13 @@ However, having control of Phase 2 limits the choice of the recursive resolver.
 For individuals, it indicates using the local recursive resolver.
 For a group of individuals or organisations, it would indicate that outgoing DNS queries from the managed recursive resolver towards authoritative Name servers are anonymised using the Tor network.
 
-Despite the variation of latency imposed by Tor circuit, the performance degradation caused by Tor on Phase 2 could be mitigated by the mean of `Proactive caching \cite{cohen2003proactive}', which is actively managing the cache stored on the recursive resolver rather than relying on passively created caches that dies after their Time-to-Live (TTL) period.
+Despite the variation of latency imposed by Tor circuit, the performance degradation caused by Tor in Phase 2 could be mitigated by the means of `Proactive caching \cite{cohen2003proactive}', which is actively managing the cache stored on the recursive resolver rather than relying on passively created caches that die after their Time-to-Live (TTL) period.
 
 \subsection{Use of multiple trusted recursive resolvers}
-Following sections describe a proposal to address the privacy risk of reidentification and other interferences.
+This section describes a proposal to address the privacy risk of reidentification and other interferences.
 Regarding the reidentification risk, section \ref{fingerprint} introduced a potential privacy violation caused by `behaviour-based tracking' which is proposed by Kirchler et al. \cite{kirchler2016tracked}.
 
-Kirchler's study had a focus on introducing tracking methods using an unsupervised learning technique and suggested that users could circumvent from such tracking attempts by changing their IP address frequently.
+Kirchler's study had a focus on introducing tracking methods using an unsupervised learning technique and suggested that users could circumvent such tracking attempts by changing their IP address frequently.
 Although their study did not mention in specific how the researchers obtained the logs related to the DNS queries of various clients, it is anticipated that once DNS privacy-enhancing methods are in place, the most probable site of privacy violation would be inside the DNS recursive resolver.
 
 To overcome the risks, this section delegate tasks into two group of administrators: DNS Resolver admin and local network admin.
@@ -63,10 +63,10 @@ Administrators could prepare a list of the trusted recursive resolver (TRR) base
 Once the list is prepared, they could configure the local server to forward DNS queries outside the organisation to ones from the list of TRRs.
 The selection of designated forwarder could be changed in a certain time interval, such as every six hours.
 
-If it is desired to obfuscate the frequency of visit or temporal information of visiting websites, DNS resolver admin could choose to manage DNS cache actively, by means of the `proactive caching \cite{cohen2003proactive}'. Alternatively, performing `multi-queries \cite{siby2018dns}' of the frequently visited websites, such as following Alexa Top lists, could be done to maximise cache-sharing effect \cite{wang2013analysis}. Appendix \ref{scriptcode-appendix} could be referred for achieving this.
+If it is desirable to obfuscate the frequency of visit or temporal information of visiting websites, DNS resolver admin could choose to manage DNS cache actively, by means of the `proactive caching \cite{cohen2003proactive}'. Alternatively, performing `multi-queries \cite{siby2018dns}' of the frequently visited websites, such as following Alexa Top lists, could be done to maximise cache-sharing effect \cite{wang2013analysis}. Appendix \ref{scriptcode-appendix} could be referred for achieving this.
 
 \subsubsection{Actions required on Network admin}
 DPRIVE workgroup of IETF has on-going standardisation tasks of ``DoT announcements using DHCP or Router Advertisements \cite{peterson-dot-dhcp-00}'' and ``DoH resolver announcement Using DHCP or Router Advertisements \cite{peterson-doh-dhcp-00}''.
 Once the standardisation process is finalised and the networking industries implement the new standards in their products, local network administrators can configure in the DHCP server to direct which Secure DNS resolver to use.
 
-Once network administrators change DHCP configuration to redirect clients to use different sets of TRR at a certain time interval of choice, it is anticipated that end-clients' TRR configurations would be changed according to the pre-set DHCP lease time. The network administrators could consider the lease time for periodically changing the trusted DNS recursive resolver. However, there is no study at the moment which verified the current proposal.
+Once network administrators change DHCP configuration to redirect clients to use different sets of TRR at a certain time interval of choice, it is anticipated that end-clients' TRR configurations would be changed according to the pre-set DHCP lease time. The network administrators could consider the lease time for periodically changing the trusted DNS recursive resolver. However, there is no study at the moment that has verified the current proposal.
